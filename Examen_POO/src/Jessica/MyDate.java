@@ -1,4 +1,4 @@
-package Degand;
+package Jessica;
 
 public class MyDate {
 	private int jour;
