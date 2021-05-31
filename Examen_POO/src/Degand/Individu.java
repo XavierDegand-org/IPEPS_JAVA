@@ -53,5 +53,5 @@ public class Individu {
 	  public String toString() {
 			return String.format("%s %s sexe : %s date de naissance : %d-%d-%d."
 					,nom,prenom,sexe,dateNaissance.getJour(),dateNaissance.getMois(),dateNaissance.getAnnee());
-
+	  }
 }
