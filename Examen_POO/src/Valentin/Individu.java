@@ -1,4 +1,4 @@
-package Degand;
+package Valentin;
 
 public class Individu {
 	 private String nom;
