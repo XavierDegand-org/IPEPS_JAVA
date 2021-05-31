@@ -1,4 +1,4 @@
-package Degand;
+package yacineFrimi;
 
 public class Individu {
 	 private String nom;

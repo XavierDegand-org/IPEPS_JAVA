@@ -1,4 +1,4 @@
-package Degand;
+package yacineFrimi;
 
 public class MyDate {
 	private int jour;

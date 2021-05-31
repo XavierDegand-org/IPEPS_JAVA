@@ -1,4 +1,4 @@
-package Degand;
+package yacineFrimi;
 
 public enum Sexe {
 	 HOMME("Garçon"),
