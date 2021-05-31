@@ -1,4 +1,4 @@
-package Degand;
+package Dorian;
 
 public class MyDate {
 	private int jour;

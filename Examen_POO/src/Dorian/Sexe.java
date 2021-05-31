@@ -1,4 +1,4 @@
-package Degand;
+package Dorian;
 
 public enum Sexe {
 	 HOMME("Garçon"),

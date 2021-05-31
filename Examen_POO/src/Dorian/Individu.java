@@ -1,4 +1,4 @@
-package Degand;
+package Dorian;
 
 public class Individu {
 	 private String nom;
