@@ -1,4 +1,4 @@
-package Degand;
+package StainierEdwin;
 
 public class Individu {
 	 private String nom;
