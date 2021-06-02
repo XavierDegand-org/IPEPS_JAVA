@@ -1,4 +1,4 @@
-package Degand;
+package NathanaëlDuyck;
 
 public enum Sexe {
 	 HOMME("GarÃ§on"),

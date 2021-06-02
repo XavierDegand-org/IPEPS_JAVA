@@ -1,4 +1,4 @@
-package Degand;
+package NathanaëlDuyck;
 
 public class Individu {
 	 private String nom;

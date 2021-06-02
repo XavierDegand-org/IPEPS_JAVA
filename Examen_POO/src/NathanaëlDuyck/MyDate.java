@@ -1,4 +1,4 @@
-package Degand;
+package NathanaëlDuyck;
 
 public class MyDate {
 	private int jour;
