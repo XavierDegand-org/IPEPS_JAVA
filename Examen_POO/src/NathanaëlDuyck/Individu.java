@@ -1,4 +1,4 @@
-package NathanaëlDuyck;
+package NathanaÃ«lDuyck;
 
 public class Individu {
 	 private String nom;
