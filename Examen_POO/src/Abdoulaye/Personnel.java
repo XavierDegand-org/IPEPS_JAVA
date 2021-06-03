@@ -34,6 +34,12 @@ public class Personnel extends Individu{
     }
 
     public void setEmail(String email) {
+        if ( email == null ) {
+            throw new NullPointerException( "email cannot be null" );
+        }
+        if ( ! EMAIL_PATTERN.matcher( email ).matches() ) {
+            throw new RuntimeException( "Le format de l'email ne correspond pas aux patterns." );
+        }
         this.email = email;
     }
 
