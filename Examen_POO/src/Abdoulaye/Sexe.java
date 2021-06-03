@@ -2,7 +2,7 @@ package Abdoulaye;
 
 public enum Sexe {
 	 HOMME("Garçon"),
-	 FEMME("Fille"),;
+	 FEMME("Fille");
 	 private final String label;
 	
 	 Sexe(String label) {
