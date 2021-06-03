@@ -1,4 +1,4 @@
-package Degand;
+package master;
 
 public enum Sexe {
 	 HOMME("Garçon"),

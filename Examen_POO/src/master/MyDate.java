@@ -1,4 +1,4 @@
-package Degand;
+package master;
 
 public class MyDate {
 	private int jour;
