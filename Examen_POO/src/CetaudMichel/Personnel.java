@@ -2,9 +2,9 @@ package CetaudMichel;
 
 public class Personnel {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public Personnel(){
+		System.out.println("Load Personnel");
+		
 	}
 
 }
