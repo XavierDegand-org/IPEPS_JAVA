@@ -1,4 +1,4 @@
-package master;
+package Xavier;
 
 public class Individu {
 	 private String nom;

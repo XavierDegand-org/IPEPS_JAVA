@@ -1,4 +1,4 @@
-package master;
+package Xavier;
 
 public class ClassMain {
 
