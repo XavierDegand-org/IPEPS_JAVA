@@ -6,11 +6,11 @@ public class Personnel extends Individu {
 	
 	  private static int id = 1;
 	  private int IdPersonnel;
-	  private String Departement;
+	  private Departement Departement;
 	  private String email;
 	  private static final Pattern EMAIL_PATTERN = Pattern.compile("^[\\w.-]+@[\\w.-]+[a-z]{2,}$");
 	
-	 public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, int IdPersonnel, String Departement, String email) {
+	 public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, int IdPersonnel, Departement Departement, String email) {
 	    	super(nom, prenom, sexe, dateNaissance);
 	    	this.IdPersonnel = id++;
 	    	this.Departement = Departement;
@@ -41,7 +41,7 @@ public class Personnel extends Individu {
 
 	  @Override
 	  public String toString() {
-			return String.format(
+			return String.format("Departement : %s",
 	                this.Departement,
 	                this.IdPersonnel,
 	                this.email );
