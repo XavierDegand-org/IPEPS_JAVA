@@ -15,11 +15,12 @@ public class GestionJFrame extends JFrame {
 	 private JButton btnClose = new JButton("Fermer");
 	 
 	 public GestionJFrame() {
-		super();
+		super("Gestion personnel & emprunt matériel");
 		this.setDefaultCloseOperation( DISPOSE_ON_CLOSE );
 		
 		JPanel contentPane = (JPanel) this.getContentPane();
 		
+		/* Mise en place des boutons */
 		contentPane.add(btnLoad);
 		contentPane.add(btnAffichage);
 		contentPane.add(btnMag);
@@ -30,19 +31,31 @@ public class GestionJFrame extends JFrame {
 		contentPane.add(btnClose);
 		contentPane.setLayout(null);
 		
+		/* 1re ligne */
 		btnLoad.setBounds(0, 10, 250, 100);
 		btnAffichage.setBounds(250, 10, 250, 100);
 		btnMag.setBounds(500, 10, 250, 100);
 		
+		/* 2e ligne */
 		btnPret.setBounds(0, 110, 250, 100);
 		btnRetour.setBounds(250, 110, 250, 100);
 		btnPersonnel.setBounds(500, 110, 250, 100);
 		
+		/* 3e ligne */
 		btnSauvegarde.setBounds(0, 210, 250, 100);
 		btnClose.setBounds(250, 210, 250, 100);
 		
+		/* Utilisation de Lambda pour les évènements liés aux boutons */
+		btnLoad.addActionListener( (e) -> System.out.println("En cours"));
+		btnAffichage.addActionListener( (e) -> System.out.println("En cours"));
+		btnMag.addActionListener( (e) -> System.out.println("En cours"));
+		btnPret.addActionListener( (e) -> System.out.println("En cours"));
+		btnRetour.addActionListener( (e) -> System.out.println("En cours"));
+		btnPersonnel.addActionListener( (e) -> System.out.println("En cours"));
+		btnSauvegarde.addActionListener( (e) -> System.out.println("En cours"));
+		btnClose.addActionListener( (e) -> dispose());
      
-		this.setSize(770, 350);
+		this.setSize(770, 360);
 		this.setLocationRelativeTo(null);
 	 }
 }
