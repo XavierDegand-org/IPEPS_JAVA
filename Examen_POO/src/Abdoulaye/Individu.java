@@ -1,10 +1,13 @@
 package Abdoulaye;
 
+import java.text.SimpleDateFormat;
+
 public class Individu {
 	 private String nom;
 	  private String prenom;
 	  private Sexe sexe;
 	  private MyDate dateNaissance;
+	  //protected static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
 
 	  public Individu(String nom, String prenom, Sexe sexe, MyDate dateNaissance) {
 			this.nom = nom;

@@ -1,5 +1,6 @@
 package Abdoulaye;
 
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class Personnel extends Individu{
@@ -20,7 +21,7 @@ public class Personnel extends Individu{
 
     public void setIdPersonnel( int idPersonnel ) {
         if ( idPersonnel < 0 )  {
-            throw new RuntimeException( "l'identification doit être possitive." );
+            throw new RuntimeException( "l'identification doit être positive." );
         }
         this.idPersonnel = idPersonnel;
     }
