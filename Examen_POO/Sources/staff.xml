@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<company>
+    <staff id="1001">
+        <firstname>yong</firstname>
+        <lastname>mook kim</lastname>
+        <nickname>mkyong</nickname>
+        <salary currency="USD">100000</salary>
+    </staff>
+    <staff id="2001">
+        <firstname>low</firstname>
+        <lastname>yin fong</lastname>
+        <nickname>fong fong</nickname>
+        <salary currency="INR">200000</salary>
+    </staff>
+    <staff id="3001">
+        <firstname>peter</firstname>
+        <lastname>parker</lastname>
+        <nickname>spiderman</nickname>
+        <salary currency="EUR">20000000</salary>
+    </staff>
+</company>
