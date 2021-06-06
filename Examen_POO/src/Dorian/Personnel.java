@@ -39,10 +39,7 @@ public abstract class Personnel {
 	    @Override 
 	    public String toString() {
 	        return String.format( "%d : %s %s nais le %s  @mail :  %s",
-	                this.identification,
-	                this.nom,
-	                this.prenom,
-	                dateFormat.format(this.dateNaissance),
+	                this.identification,        
 	                this.email );
 	    }
 	    

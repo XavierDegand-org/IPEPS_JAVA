@@ -8,8 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 public class JFrameInterface extends JFrame 
 {
+  //mise en place des Jbutton
 	
   private JButton btnload       = new JButton( "Chargement du personnel");
   private JButton btnAffichage  = new JButton( "Affichage liste du personnel" );
@@ -29,6 +31,7 @@ public class JFrameInterface extends JFrame
 	
 	// Un FlowLayout permet de positionner les boutons les uns  la suite des autres.
 	        contentPane.setLayout(null);
+	        //position des Button
 	        btnload.setBounds      (0,0,250,125);
 	        btnAffichage.setBounds (250,0,250,125); 
 	        btnMag.setBounds       (500,0,250,125);
@@ -38,7 +41,6 @@ public class JFrameInterface extends JFrame
 	        btnSauvegarde.setBounds(0,250,250,125);
 	        btnClose.setBounds     (250,250,250,125);
 	        
-	        
 			contentPane.add( btnload       );
 			contentPane.add( btnAffichage  );
 			contentPane.add( btnMag        );
@@ -47,6 +49,16 @@ public class JFrameInterface extends JFrame
 			contentPane.add( btnPersonnel  );
 			contentPane.add( btnSauvegarde );
 			contentPane.add( btnClose      );
+			
+			btnload.addActionListener      (new btnloadListener());
+			btnAffichage.addActionListener (new btnAffichageListener());
+			btnMag.addActionListener       (new btnMagListener());
+			btnpret.addActionListener      (new btnpretListener());
+			btnRetour.addActionListener    (new btnRetourListener());
+			btnPersonnel.addActionListener (new btnPersonnelListener());
+			btnSauvegarde.addActionListener(new btnSauvegardeListener());
+			btnClose.addActionListener     (new btnCloseListener());
+			
 			
 			this.setSize( 765, 415 );
 			this.setLocationRelativeTo( null );
