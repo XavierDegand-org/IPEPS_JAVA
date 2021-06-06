@@ -1,4 +1,4 @@
-package master;
+package Rida;
 
 public enum Sexe {
 	 HOMME("Garçon"),

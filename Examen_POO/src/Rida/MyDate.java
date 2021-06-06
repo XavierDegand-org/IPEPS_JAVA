@@ -1,4 +1,4 @@
-package master;
+package Rida;
 
 public class MyDate {
 	private int jour;

@@ -1,4 +1,4 @@
-package master;
+package Rida;
 
 public class Individu {
 	 private String nom;
