@@ -1,10 +1,16 @@
 package CetaudMichel;
 
+import java.util.Scanner;
+
 public class InputData {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public static String InputData() {
+		
+		Scanner input = new Scanner(System.in);
+		String x = input.nextLine();
+		
+		return x;
+		
 	}
-
 }
+
+
