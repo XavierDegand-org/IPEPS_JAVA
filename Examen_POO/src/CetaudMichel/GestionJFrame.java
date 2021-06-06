@@ -3,18 +3,27 @@ package CetaudMichel;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
-public class GestionJFrame extends JFrame{
+import java.io.*;
+
+
+
+public class GestionJFrame extends JFrame {
 	
+	
+	String [][] Values;
 	
 	public GestionJFrame(){
 		
+		//Personnel test = new Personnel();
+		
 		JButton btnLoad = new JButton("Chargement du personnel");
 		btnLoad.setBounds(5,5,250,50);
-		btnLoad.addActionListener(e -> new Personnel());
+		btnLoad.addActionListener(e -> Load());
 		this.add(btnLoad);
 		
 		JButton btnAffichage = new JButton("Affichage liste du personnel");
 		btnAffichage.setBounds(255,5,250,50);
+		btnAffichage.addActionListener(e -> Affiche());
 		this.add(btnAffichage);
 		
 		JButton btnMag = new JButton("Création du magasin");
@@ -49,14 +58,39 @@ public class GestionJFrame extends JFrame{
 		this.setSize(760,180);
 		this.setLocation(350, 250);
 		this.setVisible(true);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+	}
 	
+	public void Load() {
+		
+
+		Values = Personnel.getValues();
+		System.out.println("Chargement complet.");
 		
 	}
 
 
+	public void Affiche() {
+		
+		//Charge avant d'afficher si pas appuyer sur load
+		if(Values==null) {
+			Load();
+		}
+		
+		System.out.println("+------+----------------+----------------+------+----------------+-------------------------+");
+		System.out.println("|Depar.|       Nom      |     Prénom     | Sex  |    Naissance   |          Email          |");
+		System.out.println("+------+----------------+----------------+------+----------------+-------------------------+");
+		
+		for(int i = 0;i<Values[0].length;i++) {
+		
+			System.out.printf("|%-6s|%-16s|%-16s|%-6s|%-16s|%-25s|\n",Values[0][i],Values[1][i],Values[2][i],Values[3][i],Values[4][i],Values[5][i]);
+		}
+		System.out.println("+------+----------------+----------------+------+----------------+-------------------------+");
+ }
 	
+		
 }
-
 
 
 
