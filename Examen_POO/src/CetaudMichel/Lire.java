@@ -1,10 +1,17 @@
 package CetaudMichel;
 
+import java.util.Scanner;
+
 public class Lire {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	
+	public static String getString() {
+		
+		Scanner input = new Scanner(System.in);
+		String Nom = input.nextLine();
+		
+		return Nom;
+		
 	}
 
 }

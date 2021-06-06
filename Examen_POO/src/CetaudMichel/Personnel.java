@@ -4,7 +4,7 @@ public class Personnel {
 	
 
 	
-	public static String[] Departement = {"RH","CP","P"};
+	public static String[] Departement = {"Resources Humaines","Comptabilité","Production"};
 	public static String[] Nom = {"Michel","Francis","Oliver"};
 	public static String[] Prenom = {"Cétaud","Marie","Thomas"};
 	public static String[] Sexe = {"H","H","F"};
