@@ -22,4 +22,6 @@ public class MyDate {
 	public int getAnnee() {
 	   return this.annee;
 	}
+
+	
 }
