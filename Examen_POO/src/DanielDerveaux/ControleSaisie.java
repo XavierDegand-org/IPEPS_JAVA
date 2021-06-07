@@ -29,7 +29,7 @@ public class ControleSaisie {
 	 
 	 /* Controle mail */
 
-	private static final String EMAIL_PATTERN
+	 private static final String EMAIL_PATTERN
 	         = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";	         
 	
 	private static Pattern pattern_email = Pattern.compile(EMAIL_PATTERN);
@@ -40,13 +40,25 @@ public class ControleSaisie {
 	}
 	
 	/* Controle nom fichier */
-	
-	private static final String FILE_TXT_PATTERN = "^[a-zA-A0-9]+[.txt]+$";
-	
-	private static Pattern pattern_file = Pattern.compile(FILE_TXT_PATTERN);
 
-	public static boolean valideFichier(final String file) {
-		Matcher matcher = pattern_file.matcher(file);
-		return matcher.matches();
+	public static boolean valideFichier(String text) {
+		 String nullString = null;
+		 String vide = new String();
+		 boolean estNull = text.equals(nullString);
+		 boolean estVide = text.equals(vide);
+		 Pattern rule = Pattern.compile("\\p{L}*(-\\p{L}*)*");
+		 if(estNull || estVide){
+			System.out.println("Valeur null ou vide !");
+			 return false;
+		 } 
+		else{
+			if (text.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-])+[.txt]$")) { 
+				return true;
+			}
+			else {
+				System.out.println("Valeur hors contraintes !");
+			}
+		}
+		return false;
 	}
 }

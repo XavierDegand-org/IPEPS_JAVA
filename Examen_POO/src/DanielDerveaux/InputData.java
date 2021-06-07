@@ -41,7 +41,6 @@ public class InputData {
 	
 	public static String inputNomFichier() {
 		boolean arret = false;
-		// String nomfichier = null;
 		while(!arret) {
 			System.out.println("Introduire le nom du fichier extension .txt !\n");
 			if (ControleSaisie.valideFichier(nomfichier)) {
