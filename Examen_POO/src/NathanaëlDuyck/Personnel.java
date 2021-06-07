@@ -20,7 +20,8 @@ public class Personnel extends Individu {
 
 	@Override
 	public String toString() {
-		return getDepartement()+getPrenom()+getNom()+getSexe()+getDateNaissance()+getEmail();
+		return String.format(" %s %s %s %s %d-%d-%d %s"
+				,getDepartement(),getPrenom(),getNom(),getSexe(),getDateNaissance().getJour(),getDateNaissance().getMois(),getDateNaissance().getAnnee(),getEmail());
 	}
 
 	public int getIdPersonnel() {

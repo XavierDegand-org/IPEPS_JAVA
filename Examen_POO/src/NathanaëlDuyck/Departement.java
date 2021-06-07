@@ -5,7 +5,7 @@ public enum Departement {
 	Compta("Comptabilité"),
 	HR("Ressources Humaines"),
 	Prod("Prodution"),
-	SEC("Section"),;
+	SEC("Securité"),;
 	
 	
 	 private final String deptNom; 
@@ -17,5 +17,5 @@ public enum Departement {
 	public String getDeptNom() {
 		return deptNom;
 	}
-
+	
 }
