@@ -1,6 +1,6 @@
 package Valentin;
 
-public class Individu {
+public class Individu  {
 	 private String nom;
 	  private String prenom;
 	  private Sexe sexe;
