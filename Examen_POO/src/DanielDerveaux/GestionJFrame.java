@@ -1,6 +1,10 @@
 package DanielDerveaux;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +19,8 @@ public class GestionJFrame extends JFrame {
 	 private JButton btnPersonnel = new JButton("Modification données Personnel");
 	 private JButton btnSauvegarde = new JButton("Sauvegarde");
 	 private JButton btnClose = new JButton("Fermer");
+	 
+	 private static String fichier = null;
 	 
 	 public GestionJFrame() {
 		super("Gestion personnel & matériel");
@@ -75,7 +81,13 @@ public class GestionJFrame extends JFrame {
 	 }
 		
 		public static void Sauvegarde() throws IOException {
-			InputData.inputNomFichier();
-			System.out.println("Sauvegarde réussie !");
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			fichier = InputData.inputNomFichier();
+			try(BufferedWriter bufWrite = new BufferedWriter(new FileWriter(new File("./src/DanielDerveaux/" + fichier)))) {
+				bufWrite.write("DTG de la sauvegarde : " + timestamp);
+				System.out.println("Sauvegarde réussie !");
+			} catch (IOException io) {
+				System.err.println("Une erreur est survenue : " + io.getMessage());
+			}
 		}
 }
