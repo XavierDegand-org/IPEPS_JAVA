@@ -76,5 +76,6 @@ public class GestionJFrame extends JFrame {
 		
 		public static void Sauvegarde() throws IOException {
 			InputData.inputNomFichier();
+			System.out.println("Sauvegarde réussie !");
 		}
 }

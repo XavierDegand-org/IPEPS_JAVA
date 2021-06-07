@@ -43,6 +43,7 @@ public class InputData {
 		boolean arret = false;
 		while(!arret) {
 			System.out.println("Introduire le nom du fichier extension .txt !\n");
+			nomfichier = Lire.texte();
 			if (ControleSaisie.valideFichier(nomfichier)) {
 				return nomfichier;
 			} else {
