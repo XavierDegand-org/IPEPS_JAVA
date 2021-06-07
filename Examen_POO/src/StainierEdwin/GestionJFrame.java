@@ -3,8 +3,12 @@ package StainierEdwin;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -21,6 +25,9 @@ public class GestionJFrame extends JFrame {
 	private JButton btnPersonnel = new JButton("Modification données Personnel");
 	private JButton btnSauvegarde = new JButton("Sauvegarde");
 	private JButton btnClose = new JButton("Fermer");
+	
+	private ArrayList<Individu> listIndividu = new ArrayList<>();
+	private boolean isPersonnelLoad = false;
 	
 	public GestionJFrame()
 	{
@@ -50,9 +57,9 @@ public class GestionJFrame extends JFrame {
 		btnLoad.addActionListener(new ActionListener()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println(((JButton)e.getSource()).getText());
+				LoadPersonnel();
 			}
 		});
 		
@@ -62,7 +69,7 @@ public class GestionJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println(((JButton)e.getSource()).getText());
+				AffichagePersonnel();
 			}
 		});
 		
@@ -122,11 +129,44 @@ public class GestionJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println(((JButton)e.getSource()).getText());
-				System.exit(0);
+				Close();
 			}
 		});
-		
+				
+	}
+	
+	// Fermer la JFrame
+	private void Close()
+	{
+		super.dispose();
+	}
+	
+	// Charger le personnel
+	private void LoadPersonnel()
+	{
+		listIndividu.add(new Individu("Collon", "Albert", Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be", Departement.HR));
+		listIndividu.add(new Individu("Peeters", "Marie", Sexe.FEMME, new MyDate(1, 5, 1985), "Peeters_M@@test.be", Departement.HR));
+		listIndividu.add(new Individu("Janssens", "Sarah", Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Janssens@test", Departement.COMPTA));
+		listIndividu.add(new Individu("Maes", "Henri", Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri#test.be", Departement.COMPTA));
+	
+		isPersonnelLoad = true;
+	}
+	
+	// Afficher personnel
+	private void AffichagePersonnel()
+	{
+		if (isPersonnelLoad)
+		{
+			System.out.println("+---------------" + "+---------------" + "+---------------" + "+---------------" + "+---------------" + "+---------------+");
+			System.out.println("| Département   " + "| Prénom        " + "| Nom           " + "| Sexe          " + "| Naissance     " + "| Email         |");
+			System.out.println("+---------------" + "+---------------" + "+---------------" + "+---------------" + "+---------------" + "+---------------+");
+			for (Individu individu : listIndividu)
+			{
+				System.out.println(individu.personnel.GetDepartement() + " " + individu.getPrenom() + " " + individu.getNom() + " " + individu.getSexe() + " " + individu.getDateddMMyyyy() + " " + individu.personnel.GetEmail());
+			}
+		}
+		else
+			System.out.println("Affichage impossible, pas de personnel !");
 	}
 	
 }

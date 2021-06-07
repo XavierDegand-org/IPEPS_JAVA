@@ -5,12 +5,14 @@ public class Individu {
 	  private String prenom;
 	  private Sexe sexe;
 	  private MyDate dateNaissance;
+	  Personnel personnel;
 
-	  public Individu(String nom, String prenom, Sexe sexe, MyDate dateNaissance) {
+	  public Individu(String nom, String prenom, Sexe sexe, MyDate dateNaissance, String email, Departement dept) {
 			this.nom = nom;
 			this.prenom = prenom;
 			this.sexe = sexe;
 			this.dateNaissance = dateNaissance;
+			personnel = new Personnel(email, dept);
 	  }
 
 	  public String getNom() {
