@@ -1,16 +1,18 @@
 package CetaudMichel;
 
 public class Individu {
-	 private String nom;
+	  private String nom;
 	  private String prenom;
 	  private Sexe sexe;
 	  private MyDate dateNaissance;
+
 
 	  public Individu(String nom, String prenom, Sexe sexe, MyDate dateNaissance) {
 			this.nom = nom;
 			this.prenom = prenom;
 			this.sexe = sexe;
 			this.dateNaissance = dateNaissance;
+
 	  }
 
 	  public String getNom() {
@@ -48,10 +50,13 @@ public class Individu {
 	  public String getDateddMMyyyy() {
 			return String.format("%d-%d-%d", dateNaissance.getJour(),dateNaissance.getMois(),dateNaissance.getAnnee());
 	  }
-
+	  
 	  @Override
 	  public String toString() {
-			return String.format("%s %s sexe : %s date de naissance : %d-%d-%d."
-					,nom,prenom,sexe,dateNaissance.getJour(),dateNaissance.getMois(),dateNaissance.getAnnee());
+		 
+		  
+		  return String.format(" %-20s","toString individu !");
+
+			
 	  }
 }

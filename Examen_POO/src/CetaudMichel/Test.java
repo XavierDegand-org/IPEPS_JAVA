@@ -1,20 +1,36 @@
 package CetaudMichel;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class Test {
-	
-	static String[] Departement = {"RH","CP","P"};
-	static String[] Nom = {"Michel","Francis","Oliver"};
-	static String[] Prenom = {"Cétaud","Marie","Thomas"};
-	static String[] Sexe = {"H","H","F"};
-	static String[] Naissance = {"10-08-1990","03-05-1996","12-12-2012"};
-	static String[] Email = {"Michel@gmail.com","Francis@hotmail.com","Oliver@skeynet.be"};
-	
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 	
-
 		
 	}
+	
+	public void Read() throws FileNotFoundException {
+		File file = new File("/Users/Cetaud/Desktop/test.txt");
+		Scanner scan = new Scanner(file);
+		
+		while(scan.hasNextLine()) {
+			System.out.println(scan.nextLine());
+		}
+	}
+	
+	public void Write() throws IOException{
+		
+		String[] filecontent = {"test","de","fou"};
+		
+		FileWriter writer = new FileWriter("/Users/Cetaud/Desktop/yo.txt");
+		writer.write(filecontent);
+		writer.close();
+	}
+	
+
 }

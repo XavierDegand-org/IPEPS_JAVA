@@ -1,10 +1,21 @@
 package CetaudMichel;
 
-public class Departement {
+public enum Departement{
+		HR("Resources Humaines"),
+		Compta("Comptabilité"),
+		Securité("Sécurité"),
+		Prod("Production"),;
+	
+private final String label;
+	
+	 Departement(String label) {
+	        this.label = label;
+	 }
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+	 public String getLabel() {
+	        return label;
+	 }
 }
+
+
+
