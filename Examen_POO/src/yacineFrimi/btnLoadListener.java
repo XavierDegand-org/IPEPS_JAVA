@@ -46,9 +46,9 @@ public void actionPerformed(ActionEvent e) {
     		System.out.println(e1.getMessage());
         } 
 
-	    for (Personnel p : listePersonnel) {
+	    /*for (Personnel p : listePersonnel) {
 	    	System.out.println(p);
-	    }
+	    }*/
 }
 
 
