@@ -1,5 +1,7 @@
 package DanielDerveaux;
 
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,7 +17,7 @@ public class GestionJFrame extends JFrame {
 	 private JButton btnClose = new JButton("Fermer");
 	 
 	 public GestionJFrame() {
-		super("Gestion personnel & emprunt matériel");
+		super("Gestion personnel & matériel");
 		this.setDefaultCloseOperation( DISPOSE_ON_CLOSE );
 		
 		JPanel contentPane = (JPanel) this.getContentPane();
@@ -47,15 +49,32 @@ public class GestionJFrame extends JFrame {
 		
 		/* Utilisation de Lambda pour les évènements liés aux boutons */
 		btnLoad.addActionListener( (e) -> System.out.println("En cours"));
+		
 		btnAffichage.addActionListener( (e) -> System.out.println("En cours"));
+		
 		btnMag.addActionListener( (e) -> System.out.println("En cours"));
+		
 		btnPret.addActionListener( (e) -> System.out.println("En cours"));
+		
 		btnRetour.addActionListener( (e) -> System.out.println("En cours"));
+		
 		btnPersonnel.addActionListener( (e) -> System.out.println("En cours"));
-		btnSauvegarde.addActionListener( (e) -> System.out.println("En cours"));
+		
+		btnSauvegarde.addActionListener( (e) -> {
+			try {
+				Sauvegarde();
+			} catch (IOException io) {
+				System.err.println("Une erreur est survenue : " + io.getMessage());
+			}
+		});
+		
 		btnClose.addActionListener( (e) -> dispose());
      
 		this.setSize(770, 360);
 		this.setLocationRelativeTo(null);
 	 }
+		
+		public static void Sauvegarde() throws IOException {
+			InputData.inputNomFichier();
+		}
 }
