@@ -28,8 +28,8 @@ public void actionPerformed(ActionEvent e) {
         
         while ((ligne = br.readLine()) != null){
         	
-            String tokens[] = ligne.split(",");
-            String date[] =  tokens[3].split("/");
+            String champs[] = ligne.split(",");
+            String date[] =  champs[3].split("/");
             
             int j = Integer.parseInt(date[0].trim());
             int m = Integer.parseInt(date[1].trim());
@@ -37,7 +37,7 @@ public void actionPerformed(ActionEvent e) {
             
             MyDate dateNaiss = new MyDate(j,m,a);
             
-            listePersonnel.add(new Personnel(id,(tokens[0]),(tokens[1]), Sexe.valueOf(tokens[2]),dateNaiss,(tokens[4]),(tokens[5])));
+            listePersonnel.add(new Personnel(id,(champs[0]),(champs[1]), Sexe.valueOf(champs[2]),dateNaiss,(champs[4]),(champs[5])));
             id++;
         }
         	System.out.println("Liste personnel chargée.");
@@ -46,9 +46,6 @@ public void actionPerformed(ActionEvent e) {
     		System.out.println(e1.getMessage());
         } 
 
-	    /*for (Personnel p : listePersonnel) {
-	    	System.out.println(p);
-	    }*/
 }
 
 

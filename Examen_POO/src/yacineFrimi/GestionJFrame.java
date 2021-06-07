@@ -19,9 +19,9 @@ import javax.swing.JButton;
 
 public class GestionJFrame extends JFrame {
 	
-	static Path pathPersonnel = Paths.get("C:\\Users\\yacin\\git\\IPEPS_JAVA\\Examen_POO\\src\\yacineFrimi\\Personnel.txt");
+	
 	static File fichierPersonnel = new File("C:\\Users\\yacin\\git\\IPEPS_JAVA\\Examen_POO\\src\\yacineFrimi\\Personnel.txt");
-	static Path pathProduits = Paths.get("C:\\Users\\yacin\\git\\IPEPS_JAVA\\Examen_POO\\src\\yacineFrimi\\produits.txt");
+	
 	static File fichierProduits = new File("C:\\Users\\yacin\\git\\IPEPS_JAVA\\Examen_POO\\src\\yacineFrimi\\produits.txt");
 	
 	
@@ -56,10 +56,7 @@ public class GestionJFrame extends JFrame {
 		this.setLocationRelativeTo(null);
 		
 		btnLoad.addActionListener(new btnLoadListener());
-		
-		
 		btnAffichage.addActionListener(new btnAffichageListener());
-		
 		btnClose.addActionListener((e) -> dispose());
 		
 		
@@ -68,49 +65,11 @@ public class GestionJFrame extends JFrame {
 		
 		
 	}
-	
-	
-	
-	/*public void LoadPersonnel() throws IOException {
-		
-		List<Personnel> listePersonnel = new ArrayList<Personnel>();
-		
-		BufferedReader br = null;
-        try{
-            br = new BufferedReader(new FileReader(fichierPersonnel));
-            String ligne;
-            int id = 0;
-            while ((ligne = br.readLine()) != null){
-                String tokens[] = ligne.split(",");
-                String date[] =  tokens[3].split("/");
-                
-                int j = Integer.parseInt(date[0].trim());
-                int m = Integer.parseInt(date[1].trim());
-                int a = Integer.parseInt(date[2].trim());
-                
-                MyDate dateNaiss = new MyDate(j,m,a);
-             
-                
-                
-             
-       
-                listePersonnel.add(new Personnel(id,(tokens[0]),(tokens[1]), Sexe.valueOf(tokens[2]),dateNaiss,(tokens[4]),(tokens[5])));
-                id++;
-            }
-        }  catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
-            } finally {
-            	System.out.println("Liste personnel chargée.");
-            }*/
-
-		    /*for (Personnel p : listePersonnel) {
-		    	System.out.println(p);
-		    }*/
 		    
 
 		       
 		    
-		}
+}
 
 	
 	
