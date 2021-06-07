@@ -1,11 +1,14 @@
-package Abdoulaye.Buttons;
+package Abdoulaye;
 
 import Abdoulaye.Buttons.Listeners.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MonMenu extends JFrame {
+public class GestionJFrame extends JFrame {
 
     private JButton btnLoad = new JButton("Chargement du Personnel");
     private JButton btnAffichage = new JButton("Affichage liste du Personnel");
@@ -16,14 +19,14 @@ public class MonMenu extends JFrame {
     private JButton btnSauvegarde = new JButton("Sauvegarde");
     private JButton btnClose = new JButton("Fermer");
 
-    public MonMenu(){
+    public GestionJFrame() {
         super("Gestion du Personnel et prêt du matériel");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         JPanel contentPane = (JPanel) this.getContentPane();
 
         // Un FlowLayout permet de positionner les boutons les uns à la suite des autres.
-        contentPane.setLayout( new FlowLayout() );
+        contentPane.setLayout(new GridLayout(3,3));
 
         contentPane.add(btnLoad);
         contentPane.add(btnAffichage);
@@ -34,6 +37,9 @@ public class MonMenu extends JFrame {
         contentPane.add(btnSauvegarde);
         contentPane.add(btnClose);
 
+        this.setSize(800, 400);
+        this.setLocationRelativeTo(null);
+
         btnLoad.addActionListener(new btnLoadListener());
         btnAffichage.addActionListener(new btnAffichageListener());
         btnMag.addActionListener(new btnMagListener());
@@ -43,9 +49,24 @@ public class MonMenu extends JFrame {
         btnSauvegarde.addActionListener(new btnSauvegardeListener());
         btnClose.addActionListener(new btnCloseListener());
 
-        this.setSize(800, 600);
-        this.setLocationRelativeTo( null);
+    }
+}
+        /*try{
+        Personnel personnel = new Personnel("Paul", "Mc Artur",  Sexe.HOMME, new MyDate(12, 02, 1975),"acisse@test.be", Departement.HR);
+        List<Personnel> Personnel = new ArrayList<Personnel>();
+        Personnel.add(personnel);
 
+        for(Personnel personnel1 : Personnel){
+            System.out.println(Personnel.getClass().toString());
+            System.out.println(personnel);
+        }
+
+    } catch (NullPointerException e){
+        e.printStackTrace();
     }
 
-}
+      	System.out.println();
+}*/
+
+
+

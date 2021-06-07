@@ -2,32 +2,22 @@ package Abdoulaye;
 
 import jdk.nashorn.internal.objects.NativeDebug;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+
 
 public class ClassMain {
 
 
 	public static void main(String[] args) {
 
-	/*	try{
-			SimpleDateFormat monFormatDate = new SimpleDateFormat("dd/MM/YYY");
-			Personnel personnel = new Personnel("Paul", "Mc Artur",  Sexe.HOMME, new MyDate(12, 02, 1975),"acisse@test.be", Departement.HR);
-			List<Personnel> Personnel = new ArrayList<Personnel>();
-			Personnel.add(personnel);
-
-			for(Personnel personnel1 : Personnel){
-				System.out.println(Personnel.getClass().toString());
-				System.out.println(personnel);
-			}
-
-		} catch (NullPointerException e){
+		try {
+			UIManager.setLookAndFeel( new NimbusLookAndFeel());
+		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
-		System.out.println();
-	}*/
+		//start GestionJFrame
+		GestionJFrame gestionJFrame = new GestionJFrame();
+		gestionJFrame.setVisible(true);
 	}
 }
