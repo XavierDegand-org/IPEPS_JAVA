@@ -10,18 +10,18 @@ public class Personnel extends Individu {
 	  private String email;
 	  private static final Pattern EMAIL_PATTERN = Pattern.compile("^[\\w.-]+@[\\w.-]+[a-z]{2,}$");
 	
-	 public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, int IdPersonnel, Departement Departement, String email) {
+	 public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, String email, Departement Departement) {
 	    	super(nom, prenom, sexe, dateNaissance);
 	    	this.IdPersonnel = id++;
-	    	this.Departement = Departement;
 	    	this.email = email;
+	    	this.Departement = Departement;
 	    }
 	 
 	 public int getIdPersonnel() {
 			return IdPersonnel;
 	  }
-
-	  public String getDepartement() {
+	 
+	 public String getDepartement() {
 			return Departement.getDeptNom();
 	  }
 	  
@@ -41,9 +41,12 @@ public class Personnel extends Individu {
 
 	  @Override
 	  public String toString() {
-			return String.format("Departement : %s",
-	                this.Departement,
-	                this.IdPersonnel,
+			return String.format("%s %s %s %s %s %s",
+	                this.getDepartement(),
+	                this.getPrenom(),
+	                this.getNom(),
+	                this.getSexe(),
+	                this.getDateddMMyyyy(),
 	                this.email );
 	  }
 
