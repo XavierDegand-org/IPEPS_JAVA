@@ -1,4 +1,4 @@
-package master;
+package michael;
 
 public class Individu {
 	 private String nom;

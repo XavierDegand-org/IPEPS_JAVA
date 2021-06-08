@@ -1,4 +1,4 @@
-package master;
+package michael;
 
 public enum Sexe {
 	 HOMME("Garçon"),
