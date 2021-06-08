@@ -12,13 +12,15 @@ import java.util.List;
 
 public  class btnLoadListener implements ActionListener {
 
-
+static List<Personnel> listePersonnel = new ArrayList<Personnel>();
 
 @Override
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
 	File fichierPersonnel = new File("C:\\Users\\yacin\\git\\IPEPS_JAVA\\Examen_POO\\src\\yacineFrimi\\Personnel.txt");
-	List<Personnel> listePersonnel = new ArrayList<Personnel>();
+	
+	
+	
 	
 	BufferedReader br = null;
     try{
@@ -37,19 +39,33 @@ public void actionPerformed(ActionEvent e) {
             
             MyDate dateNaiss = new MyDate(j,m,a);
             
-            listePersonnel.add(new Personnel(id,(champs[0]),(champs[1]), Sexe.valueOf(champs[2]),dateNaiss,(champs[4]),(champs[5])));
+            
+            listePersonnel.add(new Personnel(id,(champs[0]),(champs[1]), Sexe.valueOf(champs[2]),dateNaiss,(champs[4]),Departement.valueOf(champs[5])));
             id++;
+            
         }
-        	System.out.println("Liste personnel chargée.");
+        
+        	br.close();
+        	
+        	if (listePersonnel.size() == 0) {
+        		System.out.println("Affichage impossible, pas de personnel !");
+        	}
+        	else {
+        		System.out.println("Liste personnel chargée.");
+        	}
         
     	}catch (NumberFormatException | IOException e1) {
     		System.out.println(e1.getMessage());
         } 
+    
 
 }
 
+static List<Personnel> getList() {
+	return listePersonnel;
 
-
+}
 	
 
 }
+

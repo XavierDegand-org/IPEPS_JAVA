@@ -9,5 +9,5 @@ O'Neil,Shan,HOMME,01/07/2001,ONeil.sh@test.be,Prod
 Goossen,Stéphanie,FEMME,25/10/2008,NieNieG@test.be,HR
 Dumont,Charles,HOMME,01/04/1969,dumont.c@test.be,HR
 Van Moore,Wilfrid,HOMME,25/02/1998,vanmoore.w@test.te,Compta
-Herman,Nathalie,FEMME,26/07/2001,herman.n@test,be,Prod
+Herman,Nathalie,FEMME,26/07/2001,herman.n@test.be,Prod
 Bontemps,Annie,FEMME,23/09/1998,bontemps.a@test.be,Prod

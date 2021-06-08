@@ -3,14 +3,16 @@ package yacineFrimi;
 public class Personnel extends Individu {
 	private int idPersonnel;
 	private String email;
-	private String departement;
+	private Departement departement;
 	
 	
 
-	public Personnel(int idPersonnel, String nom, String prenom, Sexe sexe, MyDate dateNaissance,  String email, String departement) {
+	public Personnel(int idPersonnel, String nom, String prenom, Sexe sexe, MyDate dateNaissance,  String email, Departement departement) {
 		super(nom, prenom, sexe, dateNaissance);
 		// TODO Auto-generated constructor stub
-		
+		this.idPersonnel = idPersonnel;
+		this.email = email;
+		this.departement = departement;
 		}
 
 
@@ -39,14 +41,21 @@ public class Personnel extends Individu {
 
 
 
-	public String getDepartement() {
+	public Departement getDepartement() {
 		return departement;
 	}
 
 
 
-	public void setDepartement(String departement) {
+	public void setDepartement(Departement departement) {
 		this.departement = departement;
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString()+"email : "+email+" département : "+departement;
+	}
+
+
 
 }
