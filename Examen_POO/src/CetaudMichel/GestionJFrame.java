@@ -4,6 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,6 +60,14 @@ public class GestionJFrame extends JFrame {
 		this.add(btnPersonnel);
 				
 		btnSauvegarde.setBounds(5,105,250,50);
+		btnSauvegarde.addActionListener(e -> {
+			try {
+				Sauvegarde();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 		this.add(btnSauvegarde);
 		
 		btnClose.setBounds(255,105,250,50);
@@ -85,7 +97,7 @@ public class GestionJFrame extends JFrame {
 		while(scan.hasNextLine()) {
 			
 			tab = scan.nextLine().split(",");
-			date = tab[3].split("/");
+			date = tab[3 ].split("/");
 	
 			int jour = Integer.parseInt(date[0].trim());
 			int mois = Integer.parseInt(date[1].trim());
@@ -95,7 +107,9 @@ public class GestionJFrame extends JFrame {
 					new MyDate(jour,mois,annee),tab[4],Departement.valueOf(tab[5])));
 			
 			id++;
-		}
+				
+			}
+			
 	}
 		
 	public void Affichage() {
@@ -126,12 +140,9 @@ public class GestionJFrame extends JFrame {
 			System.out.println("Introduire le nom de la personne à modifier :");
 			System.out.print("Quel est le nom ? : ");
 			
-			String input = InputData.InputData();
-
-			
 			for(int i=0;i<personnel.size();i++){
 				
-				if(personnel.get(i).getNom().equals(input)){
+				if(personnel.get(i).getNom().equals(InputData.InputData())){
 					
 					System.out.println(personnel.get(i).toString());
 					
@@ -157,6 +168,42 @@ public class GestionJFrame extends JFrame {
 			System.out.println("Nom introuvable !");
 
 		}
+	
+	public void Sauvegarde() throws IOException {
+		
+		if(personnel.isEmpty()) {
+			System.out.println("Le fichier n'a pas été modifié !");
+			return;
+		}
+		
+		System.out.print("Introduire le nom du fichier ! : ");
+		String name = InputData.InputData();
+		
+		FileWriter writer = new FileWriter(System.getProperty("user.dir") + "/" + name + ".txt");
+		
+		SimpleDateFormat format = new SimpleDateFormat();
+		Date date = new Date();
+		
+		writer.write("DTC de la sauvegarde : " + format.format(date));
+		writer.write(System.getProperty( "line.separator" ));
+		writer.write("+--------------------+----------------+----------------+------+----------------+-------------------------+");
+		writer.write(System.getProperty( "line.separator" ));
+		writer.write("|    Département     |    Prénom      |       nom      | Sex  |    Naissance   |          Email          |");
+		writer.write(System.getProperty( "line.separator" ));
+		writer.write("+--------------------+----------------+----------------+------+----------------+-------------------------+");
+		writer.write(System.getProperty( "line.separator" ));
+		
+		for(int i=0;i<personnel.size();i++) {
+			
+			writer.write(personnel.get(i).toString());
+			writer.write(System.getProperty( "line.separator" ));
+			
+		}
+		
+		writer.close();
+		
+		System.out.println("Fichier '" + name + ".txt' a bien été créé ! ");
+	}
 }
 
 
