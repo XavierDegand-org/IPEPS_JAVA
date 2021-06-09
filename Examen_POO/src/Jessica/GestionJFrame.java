@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +24,23 @@ public class GestionJFrame extends JFrame {
 	 private JButton btnSauvegarde = new JButton( "Sauvegarde" );
 	 private JButton btnClose = new JButton( "Fermer" );
 	 
+	// arraylist personnel accessible à toute la classe
+	private static ArrayList<Personnel> Person = new ArrayList<>();
+					
+	Personnel Collon = new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR);
+	Personnel Peeters = new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@@test.be", Departement.HR);
+	Personnel Janssens = new Personnel("Janssens","Sarah",Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Janssens@test",Departement.Compta);
+	Personnel Maes = new Personnel("Maes","Henri",Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri#test.be",Departement.Compta);
+	Personnel Jacobs = new Personnel("Jacobs","Charles",Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j#test.be",Departement.SEC);
+	Personnel Mertens = new Personnel("Mertens","Floriane",Sexe.FEMME, new MyDate(20, 8, 1996), "FloFlo.M@test.be",Departement.SEC);
+	Personnel Willems = new Personnel("Willems","Francois-Xavier",Sexe.HOMME, new MyDate(28, 10, 1996), "Willems.F-X@test.be", Departement.Prod);
+	Personnel ONeil = new Personnel("O'Neil","Shan",Sexe.HOMME, new MyDate(1, 7, 2001), "ONeil.sh@test.be",Departement.Prod);
+	Personnel Goossen = new Personnel("Goossen","Stéphanie",Sexe.FEMME, new MyDate(25, 10, 2008), "NieNieG@test.be",Departement.HR);
+	Personnel Dumont = new Personnel("Dumont","Charles",Sexe.HOMME, new MyDate(1, 4, 1969), "dumont.c@test.be",Departement.HR);
+	Personnel VanMoore = new Personnel("Van Moore","Wilfrid",Sexe.HOMME,new MyDate(25, 2, 1998), "vanmoore.w@test.te",Departement.Compta);
+	Personnel Herman = new Personnel("Herman","Nathalie",Sexe.FEMME, new MyDate(26, 7, 2001), "herman.n@test,be",Departement.Prod);
+	Personnel Bontemps = new Personnel("Bontemps","Annie",Sexe.FEMME, new MyDate(23,9,1998), "bontemps.a@test.be",Departement.Prod);
+	
 	public GestionJFrame() {
 		
 		//***************************** PARTIE BOUTONS *****************************//
@@ -67,41 +85,36 @@ public class GestionJFrame extends JFrame {
 	        return btnLoad;
 	     }
 	
-	private class LoadPersonnel implements ActionListener {
+	public class LoadPersonnel implements ActionListener {
 		
 		@Override
-		public void actionPerformed (ActionEvent e) {
+		public void actionPerformed (ActionEvent e) {	
+			
+			// charger l'arraylist personnel
 			try{
-				ArrayList<Personnel> Person = new ArrayList<>();
-				
-				Person.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
-				Person.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@@test.be", Departement.HR));
-				Person.add(new Personnel("Janssens","Sarah",Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Janssens@test",Departement.Compta));
-				Person.add(new Personnel("Maes","Henri",Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri#test.be",Departement.Compta));
-				Person.add(new Personnel("Jacobs","Charles",Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j#test.be",Departement.SEC));
-				Person.add(new Personnel("Mertens","Floriane",Sexe.FEMME, new MyDate(20, 8, 1996), "FloFlo.M@test.be",Departement.SEC));
-				Person.add(new Personnel("Willems","Francois-Xavier",Sexe.HOMME, new MyDate(28, 10, 1996), "Willems.F-X@test.be", Departement.Prod));
-				Person.add(new Personnel("O'Neil","Shan",Sexe.HOMME, new MyDate(1, 7, 2001), "ONeil.sh@test.be",Departement.Prod));
-				Person.add(new Personnel("Goossen","Stéphanie",Sexe.FEMME, new MyDate(25, 10, 2008), "NieNieG@test.be",Departement.HR));
-				Person.add(new Personnel("Dumont","Charles",Sexe.HOMME, new MyDate(1, 4, 1969), "dumont.c@test.be",Departement.HR));
-				Person.add(new Personnel("Van Moore","Wilfrid",Sexe.HOMME,new MyDate(25, 2, 1998), "vanmoore.w@test.te",Departement.Compta));
-				Person.add(new Personnel("Herman","Nathalie",Sexe.FEMME, new MyDate(26, 7, 2001), "herman.n@test,be",Departement.Prod));
-				Person.add(new Personnel("Bontemps","Annie",Sexe.FEMME, new MyDate(23,9,1998), "bontemps.a@test.be",Departement.Prod));
-
-					//pour d'abord tester si liste bien chargée/créée, ira ensuite dans "affichage"
-					for(Personnel Pers : Person) {
-						System.out.println(Pers);
-					}
-					
-				}
-				catch (NullPointerException err) {
-					err.printStackTrace(); //- if the given pattern is null
-				}
-				catch (IllegalArgumentException err) {
-					err.printStackTrace(); //- if the given pattern is invalid)
-				}
-		}
+			Person.add(Collon);
+			Person.add(Peeters);
+			Person.add(Janssens);
+			Person.add(Maes);
+			Person.add(Jacobs);
+			Person.add(Mertens);
+			Person.add(Mertens);
+			Person.add(Willems);
+			Person.add(ONeil);
+			Person.add(Goossen);
+			Person.add(Dumont);
+			Person.add(VanMoore);
+			Person.add(Herman);
+			Person.add(Bontemps);
+			}
+			catch (NullPointerException err) {
+				err.printStackTrace(); //- if the given pattern is null
+			}
+			catch (IllegalArgumentException err) {
+				err.printStackTrace(); //- if the given pattern is invalid)
+			}
 		
+		}
 	}
 	
 	//***************************** PARTIE AFFICHAGE *****************************//
@@ -110,13 +123,25 @@ public class GestionJFrame extends JFrame {
         return btnAffichage;
         }
 	
-	private class Affichage implements ActionListener {
+	public class Affichage implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
+			
+			//si liste personnel est vide/strictement inférieure à 1
+			if(Person.size() < 1) {
+				System.out.println("Il n'y a aucun membre du personnel, affichage impossible.");
+			}
+			else {
+			
 			System.out.println("+---------------------+-----------------------+----------------------+------------+----------------+---------------------+");
 			System.out.println("| Département         | Prénom                | Nom                  | Sexe       | Naissance      | Email               |");
 			System.out.println("+---------------------+-----------------------+----------------------+------------+----------------+---------------------+");
+			for(Personnel Pers : Person) {
+				System.out.println(Pers);
+			}
+			}
+			
 		}
 		
 	}
@@ -127,7 +152,7 @@ public class GestionJFrame extends JFrame {
         return btnMag;
         }
 	
-	private class Magasin implements ActionListener {
+	public class Magasin implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
@@ -142,7 +167,7 @@ public class GestionJFrame extends JFrame {
         return btnPret;
         }
 	
-	private class Emprunt implements ActionListener {
+	public class Emprunt implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
@@ -157,7 +182,7 @@ public class GestionJFrame extends JFrame {
         return btnRetour;
         }
 	
-	private class RetourEmprunt implements ActionListener {
+	public class RetourEmprunt implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
@@ -172,7 +197,7 @@ public class GestionJFrame extends JFrame {
         return btnPersonnel;
         }
 	
-	private class GestionPersonnel implements ActionListener {
+	public class GestionPersonnel implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
@@ -187,7 +212,7 @@ public class GestionJFrame extends JFrame {
         return btnSauvegarde;
         }
 	
-	private class Sauvegarde implements ActionListener {
+	public class Sauvegarde implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
