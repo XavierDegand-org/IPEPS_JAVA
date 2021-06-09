@@ -26,6 +26,8 @@ public class GestionJFrame extends JFrame {
 	 
 	// arraylist personnel accessible à toute la classe
 	private static ArrayList<Personnel> Person = new ArrayList<>();
+	
+	private static int tailleNom = 30;
 					
 	public GestionJFrame() {
 		
@@ -112,25 +114,44 @@ public class GestionJFrame extends JFrame {
 	public class Affichage implements ActionListener {
 		
 		@Override
-		public void actionPerformed (ActionEvent e) {
-			
+		public void actionPerformed (ActionEvent e) {	
 			//si liste personnel est vide/strictement inférieure à 1
 			if(Person.size() < 1) {
-				System.out.println("Il n'y a aucun membre du personnel, affichage impossible.");
+				System.out.println("Affichage impossible, pas de personnel !");
 			}
 			else {
-			
-			System.out.println("+---------------------+-----------------------+----------------------+------------+----------------+---------------------+");
-			System.out.println("| Département         | Prénom                | Nom                  | Sexe       | Naissance      | Email               |");
-			System.out.println("+---------------------+-----------------------+----------------------+------------+----------------+---------------------+");
-			for(Personnel Pers : Person) {
-				System.out.println(Pers);
+			System.out.println("+-----------------------+------------------------+------------------------+------------------------+------------------------+------------------------+");
+			System.out.println("| Département           | Prénom                 | Nom                    | Sexe                   | Naissance              | Email                  |");
+			System.out.println("+-----------------------+------------------------+------------------------+------------------------+------------------------+------------------------+");
+			StringBuilder sb = new StringBuilder();
+			    for (int temp = 0; temp < Person.size(); temp++) {
+			    	sb.append(setFixedLength(Person.get(temp).getDepartement()));
+			    	sb.append(setFixedLength(Person.get(temp).getPrenom()));
+			    	sb.append(setFixedLength(Person.get(temp).getNom()));
+			    	sb.append(setFixedLength(Person.get(temp).getSexe()));
+			    	sb.append(setFixedLength(Person.get(temp).getDateddMMyyyy()));
+			    	sb.append(setFixedLength(Person.get(temp).getEmail()));
+	                sb.append("\n");
+			    		}		
+			    // on affiche le contenu
+			    System.out.println(sb.toString());
+			    	}
 			}
 			}
+		// fonction permettant de calbrer la taille des strings
+		public String setFixedLength(String s){
+		        StringBuilder ss = new StringBuilder(s);
+		        // tant que la taille de ss est inférieure à 25 on ajoute un caractère blanc
+		        while (ss.length() < 25) {
+		                String d = " ";
+		                char c1 = d.charAt(0);
+		                ss.insert(s.length(),c1);
+		            }
+		        String c = ss.substring(0, 25);
+		        return c;
+
+		    }
 			
-		}
-		
-	}
 	
 	//***************************** PARTIE MAGASIN *****************************//
 	
