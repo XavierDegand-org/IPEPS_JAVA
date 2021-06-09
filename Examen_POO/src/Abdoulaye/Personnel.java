@@ -51,9 +51,9 @@ public class Personnel extends Individu{
 
     @Override
     public String toString() {
-        return "Personnel{" +
-                "idPersonnel=" + idPersonnel +
-                ", email='" + email + '\'' +
-                '}';
+        return "id : " + idPersonnel +" "+
+                super.toString()+
+                " Email : " + email +
+                " Département : "+ departement;
     }
 }

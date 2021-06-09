@@ -1,7 +1,5 @@
 package Abdoulaye;
 
-import jdk.nashorn.internal.objects.NativeDebug;
-
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
@@ -20,4 +18,5 @@ public class ClassMain {
 		GestionJFrame gestionJFrame = new GestionJFrame();
 		gestionJFrame.setVisible(true);
 	}
+
 }
