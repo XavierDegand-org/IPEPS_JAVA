@@ -24,7 +24,7 @@ public class GestionJFrame extends JFrame {
 	 private static String nom;
 	 private static String fichier;
 	 private static int tailleNom = 30;
-	
+	 
 	 private static ArrayList<Personnel> Person = new ArrayList<>();
 	 
 	 public GestionJFrame() {
@@ -52,33 +52,6 @@ public class GestionJFrame extends JFrame {
 		 contentPane.add( btnSauvegarde );
 		 contentPane.add( btnClose );
 		 
-		 MyDate DateNaissanceCollon = new MyDate(10,8,1990);
-		 Personnel Collon = new Personnel("Collon","Albert",Sexe.HOMME,DateNaissanceCollon,"Collon.a@test.be",Departement.HR);
-		 MyDate DateNaissancePeeters = new MyDate(1,5,1995);
-		 Personnel Peeters = new Personnel("Peeters","Marie",Sexe.FEMME,DateNaissancePeeters,"Peeters_M@@test.be",Departement.HR);
-		 MyDate DateNaissanceJanssens = new MyDate(23,5,1999);
-		 Personnel Janssens = new Personnel("Janssens","Sarah",Sexe.FEMME,DateNaissanceJanssens,"Sarah.Janssens@test",Departement.Compta);
-		 MyDate DateNaissanceMaes = new MyDate(14,9,2009);
-		 Personnel Maes = new Personnel("Maes","Henri",Sexe.HOMME,DateNaissanceMaes,"MaesHenri#test.be",Departement.Compta);
-		 MyDate DateNaissanceJacobs = new MyDate(10,8,1990);
-		 Personnel Jacobs = new Personnel("Jacobs","Charles",Sexe.HOMME,DateNaissanceJacobs,"Charles.j#test.be",Departement.SEC);
-		 MyDate DateNaissanceMertens = new MyDate(20,8,1996);
-		 Personnel Mertens = new Personnel("Mertens","Floriane",Sexe.FEMME,DateNaissanceMertens,"FloFlo.M@test.be",Departement.SEC);
-		 MyDate DateNaissanceWillems = new MyDate(28,10,1996);
-		 Personnel Willems = new Personnel("Willems","Francois-Xavier",Sexe.HOMME,DateNaissanceWillems,"Willems.F-X@test.be",Departement.Prod);
-		 MyDate DateNaissanceONeil = new MyDate(01,07,2001);
-		 Personnel ONeil = new Personnel("O'Neil","Shan",Sexe.HOMME,DateNaissanceONeil,"ONeil.sh@test.be",Departement.Prod);
-		 MyDate DateNaissanceGoossen= new MyDate(25,10,2008);
-		 Personnel Goossen = new Personnel("Goossen","Stéphanie",Sexe.FEMME,DateNaissanceGoossen,"NieNieG@test.be",Departement.HR);
-		 MyDate DateNaissanceDumont = new MyDate(01,04,1969);
-		 Personnel Dumont = new Personnel("Dumont","Charles",Sexe.HOMME,DateNaissanceDumont,"dumont.c@test.be",Departement.HR);
-		 MyDate DateNaissanceVanMoore = new MyDate(25,02,1998);
-		 Personnel VanMoore = new Personnel("Moore","Wilfrid",Sexe.HOMME,DateNaissanceVanMoore,"vanmoore.w@test.te",Departement.Compta);
-		 MyDate DateNaissanceHerman = new MyDate(26,07,2001);
-		 Personnel Herman = new Personnel("Herman","Nathalie",Sexe.FEMME,DateNaissanceHerman,"herman.n@test,be",Departement.Prod);
-		 MyDate DateNaissanceBontemps = new MyDate(23,9,1998);
-		 Personnel Bontemps = new Personnel("Bontemps","Annie",Sexe.FEMME,DateNaissanceBontemps,"bontemps.a@test.be",Departement.Prod);
-		 
 		 btnLoad.addActionListener(new ActionListener(){
 
 			@Override
@@ -91,22 +64,8 @@ public class GestionJFrame extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if(Person.size() ==0) {
-						System.out.println("Affichage impossible, pas de personnel !");
-					}
-					else {
-						System.out.println("+--------------------+--------------+--------------+--------+---------------+---------------------+");
-						System.out.println("| Département        | Prénom       | Nom          | Sexe   | Naissance     | Email               |");
-						System.out.println("+--------------------+--------------+--------------+--------+---------------+---------------------+");
-						
-						for (Personnel personnel : Person) {
-							
-							System.out.println(personnel.toString());
-						}
-							
-						}
-					}
-				
+					Affichage();
+				}
 		 });
 		 
 		 btnMag.addActionListener(new ActionListener(){
@@ -212,49 +171,57 @@ public class GestionJFrame extends JFrame {
 	}
 
 	public static void LoadPersonnel() {
-			
-		 MyDate DateNaissanceCollon = new MyDate(10,8,1990);
-		 Personnel Collon = new Personnel("Collon","Albert",Sexe.HOMME,DateNaissanceCollon,"Collon.a@test.be",Departement.HR);
-		 MyDate DateNaissancePeeters = new MyDate(1,5,1995);
-		 Personnel Peeters = new Personnel("Peeters","Marie",Sexe.FEMME,DateNaissancePeeters,"Peeters_M@@test.be",Departement.HR);
-		 MyDate DateNaissanceJanssens = new MyDate(23,5,1999);
-		 Personnel Janssens = new Personnel("Janssens","Sarah",Sexe.FEMME,DateNaissanceJanssens,"Sarah.Janssens@test",Departement.Compta);
-		 MyDate DateNaissanceMaes = new MyDate(14,9,2009);
-		 Personnel Maes = new Personnel("Maes","Henri",Sexe.HOMME,DateNaissanceMaes,"MaesHenri#test.be",Departement.Compta);
-		 MyDate DateNaissanceJacobs = new MyDate(10,8,1990);
-		 Personnel Jacobs = new Personnel("Jacobs","Charles",Sexe.HOMME,DateNaissanceJacobs,"Charles.j#test.be",Departement.SEC);
-		 MyDate DateNaissanceMertens = new MyDate(20,8,1996);
-		 Personnel Mertens = new Personnel("Mertens","Floriane",Sexe.FEMME,DateNaissanceMertens,"FloFlo.M@test.be",Departement.SEC);
-		 MyDate DateNaissanceWillems = new MyDate(28,10,1996);
-		 Personnel Willems = new Personnel("Willems","Francois-Xavier",Sexe.HOMME,DateNaissanceWillems,"Willems.F-X@test.be",Departement.Prod);
-		 MyDate DateNaissanceONeil = new MyDate(01,07,2001);
-		 Personnel ONeil = new Personnel("O'Neil","Shan",Sexe.HOMME,DateNaissanceONeil,"ONeil.sh@test.be",Departement.Prod);
-		 MyDate DateNaissanceGoossen= new MyDate(25,10,2008);
-		 Personnel Goossen = new Personnel("Goossen","Stéphanie",Sexe.FEMME,DateNaissanceGoossen,"NieNieG@test.be",Departement.HR);
-		 MyDate DateNaissanceDumont = new MyDate(01,04,1969);
-		 Personnel Dumont = new Personnel("Dumont","Charles",Sexe.HOMME,DateNaissanceDumont,"dumont.c@test.be",Departement.HR);
-		 MyDate DateNaissanceVanMoore = new MyDate(25,02,1998);
-		 Personnel VanMoore = new Personnel("Moore","Wilfrid",Sexe.HOMME,DateNaissanceVanMoore,"vanmoore.w@test.te",Departement.Compta);
-		 MyDate DateNaissanceHerman = new MyDate(26,07,2001);
-		 Personnel Herman = new Personnel("Herman","Nathalie",Sexe.FEMME,DateNaissanceHerman,"herman.n@test,be",Departement.Prod);
-		 MyDate DateNaissanceBontemps = new MyDate(23,9,1998);
-		 Personnel Bontemps = new Personnel("Bontemps","Annie",Sexe.FEMME,DateNaissanceBontemps,"bontemps.a@test.be",Departement.Prod);
-		 Person.add(Collon);
-		 Person.add(Peeters);
-		 Person.add(Janssens);
-		 Person.add(Maes);
-		 Person.add(Jacobs);
-		 Person.add(Mertens);
-		 Person.add(Mertens);
-		 Person.add(Willems);
-		 Person.add(ONeil);
-		 Person.add(Goossen);
-		 Person.add(Dumont);
-		 Person.add(VanMoore);
-		 Person.add(Herman);
-		 Person.add(Bontemps);
+		
+		 Person.add(new Personnel("Collon","Albert",Sexe.HOMME,new MyDate(10,8,1990),"Collon.a@test.be",Departement.HR));
+		 Person.add(new Personnel("Peeters","Marie",Sexe.FEMME,new MyDate(1,5,1995),"Peeters_M@@test.be",Departement.HR));
+		 Person.add(new Personnel("Janssens","Sarah",Sexe.FEMME,new MyDate(23,5,1999),"Sarah.Janssens@test",Departement.Compta));
+		 Person.add(new Personnel("Maes","Henri",Sexe.HOMME,new MyDate(14,9,2009),"MaesHenri#test.be",Departement.Compta));
+		 Person.add(new Personnel("Jacobs","Charles",Sexe.HOMME,new MyDate(10,8,1990),"Charles.j#test.be",Departement.SEC));
+		 Person.add(new Personnel("Mertens","Floriane",Sexe.FEMME,new MyDate(20,8,1996),"FloFlo.M@test.be",Departement.SEC));
+		 Person.add(new Personnel("Willems","Francois-Xavier",Sexe.HOMME,new MyDate(28,10,1996),"Willems.F-X@test.be",Departement.Prod));
+		 Person.add(new Personnel("O'Neil","Shan",Sexe.HOMME,new MyDate(01,07,2001),"ONeil.sh@test.be",Departement.Prod));
+		 Person.add(new Personnel("Goossen","Stéphanie",Sexe.FEMME,new MyDate(25,10,2008),"NieNieG@test.be",Departement.HR));
+		 Person.add(new Personnel("Dumont","Charles",Sexe.HOMME,new MyDate(01,04,1969),"dumont.c@test.be",Departement.HR));
+		 Person.add(new Personnel("Van Moore","Wilfrid",Sexe.HOMME,new MyDate(25,02,1998),"vanmoore.w@test.te",Departement.Compta));
+		 Person.add(new Personnel("Herman","Nathalie",Sexe.FEMME,new MyDate(26,07,2001),"herman.n@test,be",Departement.Prod));
+		 Person.add(new Personnel("Bontemps","Annie",Sexe.FEMME,new MyDate(23,9,1998),"bontemps.a@test.be",Departement.Prod));
 		}
-		 	 
-	 }
+	
+	public static String setFixedLength(String s) {
+		StringBuilder ss = new StringBuilder(s);
+		while(ss.length() < tailleNom) {
+			String d =" ";
+			char c1 = d.charAt(0);
+			ss.insert(s.length(),c1);
+		}
+		String c = ss.substring(0,tailleNom);
+		return c;
+	}
+	public static void Affichage() {
+		if(Person.size() ==0) {
+			System.out.println("Affichage impossible, pas de personnel !");
+		}
+		else {
+			System.out.println("+----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
+			System.out.println("| Département                | Prénom                      | Nom                         | Sexe                        | Naissance                   | Email                       |");
+			System.out.println("+----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
+			StringBuilder sb = new StringBuilder();
+			for (int temp = 0; temp < Person.size();temp++) {
+				sb.append(" ");
+				sb.append(setFixedLength(Person.get(temp).getDepartement()));
+				sb.append(setFixedLength(Person.get(temp).getPrenom()));
+				sb.append(setFixedLength(Person.get(temp).getNom()));		
+				sb.append(setFixedLength(Person.get(temp).getSexe()));
+				sb.append(setFixedLength(Person.get(temp).getDateddMMyyyy()));
+				sb.append(setFixedLength(Person.get(temp).getEmail()));
+				sb.append("\n");
+				
+				}	
+			System.out.println(sb.toString());
+			}
+		}
+
+
+}
 	 
 
