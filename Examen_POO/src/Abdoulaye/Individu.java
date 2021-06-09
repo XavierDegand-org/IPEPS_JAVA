@@ -1,7 +1,5 @@
 package Abdoulaye;
 
-import java.text.SimpleDateFormat;
-
 public class Individu {
 	 private String nom;
 	  private String prenom;
