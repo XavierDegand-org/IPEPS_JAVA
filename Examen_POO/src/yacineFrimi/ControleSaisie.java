@@ -13,7 +13,6 @@ public class ControleSaisie {
 		 boolean estNull = text.equals(nullString);
 		 boolean estVide = text.equals(vide);
 		 
-		 Pattern rule = Pattern.compile("\\p{L}*(-\\p{L}*)*");
 		 
 		 if(estNull || estVide){
 			System.out.println("Valeur null ou vide !");
@@ -36,7 +35,7 @@ public class ControleSaisie {
 	
 	private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 	
-	public static boolean valideEmail(final String hex) {
+	public static boolean valideEmail(String hex) {
 	
 	     Matcher matcher = pattern.matcher(hex);
 	     return matcher.matches();

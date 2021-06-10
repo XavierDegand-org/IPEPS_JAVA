@@ -19,17 +19,18 @@ public class InputData {
 	}
 	
 	public static String inputEmail() {
-		String email = null;
+		String Email = null;
 		boolean arret = false;
 		while (!arret) {
-			 email = Lire.texte();
-			if (ControleSaisie.valideEmail(email)){
-				return email;
+			 Email = Lire.texte();
+			if (ControleSaisie.valideEmail(Email)){
+				arret = true;
 			}else {
 				arret = false;
+				System.out.println("Email incorrect. Veuillez réessayer : ");
 			}
 		}
-		return email.toLowerCase();
+		return Email.toLowerCase();
 	}
 	public static String inputNomFichier() {
 		boolean arret = false;

@@ -49,13 +49,14 @@ public class btnPersonnelListener implements ActionListener {
 				
 				listePersonnel.get(i).setNom(InputData.miseEnForme(Nom));
 				listePersonnel.get(i).setPrenom(InputData.miseEnForme(Prenom));
-				listePersonnel.get(i).setEmail(InputData.miseEnForme(Email));
+				listePersonnel.get(i).setEmail(Email);
 				System.out.println(listePersonnel.get(i));
 				arret = true;
 			}else {
 				arret = false;
 			}
 		}
+		System.out.println("Aucune personne trouvée. Veuillez réessayer : ");
 		}
 		
 
