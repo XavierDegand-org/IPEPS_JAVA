@@ -6,13 +6,13 @@ public enum Departement {
 	Securité("Sécurité"),
 	Prod("Production");
 
-	
+
 
 	private final String deptNom; 
-	
+
 	Departement(String deptNom) {
-        this.deptNom = deptNom;
- }
+		this.deptNom = deptNom;
+	}
 
 	public String getDeptNom() {
 		return deptNom;

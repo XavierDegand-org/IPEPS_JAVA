@@ -4,8 +4,8 @@ public class Personnel extends Individu {
 	private int idPersonnel;
 	private String email;
 	private Departement departement;
-	
-	
+
+
 
 	public Personnel(int idPersonnel, String nom, String prenom, Sexe sexe, MyDate dateNaissance,  String email, Departement departement) {
 		super(nom, prenom, sexe, dateNaissance);
@@ -13,7 +13,7 @@ public class Personnel extends Individu {
 		this.idPersonnel = idPersonnel;
 		this.email = email;
 		this.departement = departement;
-		}
+	}
 
 
 
@@ -50,7 +50,7 @@ public class Personnel extends Individu {
 	public void setDepartement(Departement departement) {
 		this.departement = departement;
 	}
-	
+
 	@Override
 	public String toString() {
 		return super.toString()+"email : "+email+" département : "+departement;

@@ -24,16 +24,21 @@ import java.util.Scanner;
 import javax.swing.JButton;
 
 public class GestionJFrame extends JFrame {
-	
-	
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	static File fichierPersonnel = new File("C:\\Users\\yacin\\git\\IPEPS_JAVA\\Examen_POO\\src\\yacineFrimi\\Personnel.txt");
-	
+
 	static File fichierProduits = new File("C:\\Users\\yacin\\git\\IPEPS_JAVA\\Examen_POO\\src\\yacineFrimi\\produits.txt");
-	
-	
-	
-	
-	
+
+
+
+
+
 	private JButton btnLoad = new JButton("Chargement du personnel");
 	private JButton btnAffichage = new JButton("Affichage liste du personnel");
 	private JButton btnPersonnel = new JButton("Modification données personnel");
@@ -42,13 +47,13 @@ public class GestionJFrame extends JFrame {
 	private JButton btnRetour = new JButton("Retour de matériel");
 	private JButton btnSauvegarde = new JButton("Sauvegarde");
 	private JButton btnClose = new JButton("Fermer");
-	
+
 	public GestionJFrame() {
 		super("Gestion personnel & prêt matériel.");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		JPanel ecranPrincipal = (JPanel) this.getContentPane();
 		ecranPrincipal.setLayout(new GridLayout(2,2,2,2));
-		
+
 		ecranPrincipal.add(btnLoad);
 		ecranPrincipal.add(btnAffichage);
 		ecranPrincipal.add(btnPersonnel);
@@ -57,21 +62,21 @@ public class GestionJFrame extends JFrame {
 		ecranPrincipal.add(btnRetour);
 		ecranPrincipal.add(btnSauvegarde);
 		ecranPrincipal.add(btnClose);
-		
+
 		this.setSize(800, 400);
 		this.setLocationRelativeTo(null);
-		
+
 		btnLoad.addActionListener(new btnLoadListener());
 		btnAffichage.addActionListener(new btnAffichageListener());
 		btnPersonnel.addActionListener(new btnPersonnelListener());
 		btnMag.addActionListener(new btnMagListener());
 		btnClose.addActionListener((e) -> dispose());
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 	}
 	
 	
