@@ -1,4 +1,4 @@
-package yacineFrimi;
+package boutons;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +10,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import yacineFrimi.Departement;
+import yacineFrimi.MyDate;
+import yacineFrimi.Personnel;
+import yacineFrimi.Sexe;
+
 public  class btnLoadListener implements ActionListener {
 
 static List<Personnel> listePersonnel = new ArrayList<Personnel>();
+
 
 @Override
 public void actionPerformed(ActionEvent e) {
@@ -47,12 +53,9 @@ public void actionPerformed(ActionEvent e) {
         
         	br.close();
         	
-        	if (listePersonnel.size() == 0) {
-        		System.out.println("Affichage impossible, pas de personnel !");
-        	}
-        	else {
-        		System.out.println("Liste personnel chargée.");
-        	}
+        	
+        	System.out.println("Liste personnel chargée.");
+        	
         
     	}catch (NumberFormatException | IOException e1) {
     		System.out.println(e1.getMessage());
@@ -61,7 +64,7 @@ public void actionPerformed(ActionEvent e) {
 
 }
 
-static List<Personnel> getList() {
+static List<Personnel> getListPersonnel() {
 	return listePersonnel;
 
 }

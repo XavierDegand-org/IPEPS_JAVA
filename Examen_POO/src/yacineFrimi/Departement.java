@@ -6,20 +6,16 @@ public enum Departement {
 	Securité("Sécurité"),
 	Prod("Production");
 
-	private final String label;
+	
 
-	Departement(String label) {
-		// TODO Auto-generated constructor stub
-		this.label = label;
-	}
+	private final String deptNom; 
 	
-	public String getLabel() {
-		return label;
-	}
-	
-	@Override
-	public String toString() {
-		return this.label;
+	Departement(String deptNom) {
+        this.deptNom = deptNom;
+ }
+
+	public String getDeptNom() {
+		return deptNom;
 	}
 
 }

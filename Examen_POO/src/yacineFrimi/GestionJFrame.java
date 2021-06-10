@@ -2,6 +2,12 @@ package yacineFrimi;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import boutons.btnAffichageListener;
+import boutons.btnLoadListener;
+import boutons.btnMagListener;
+import boutons.btnPersonnelListener;
+
 import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,10 +36,10 @@ public class GestionJFrame extends JFrame {
 	
 	private JButton btnLoad = new JButton("Chargement du personnel");
 	private JButton btnAffichage = new JButton("Affichage liste du personnel");
-	private JButton btnPersonnel = new JButton("Création du magasin");
-	private JButton btnMag = new JButton("Prêt de matériel");
-	private JButton btnPret = new JButton("Retour de matériel");
-	private JButton btnRetour = new JButton("Modification données personnel");
+	private JButton btnPersonnel = new JButton("Modification données personnel");
+	private JButton btnMag = new JButton("Création du magasin");
+	private JButton btnPret = new JButton("Prêt de matériel");
+	private JButton btnRetour = new JButton("Retour de matériel");
 	private JButton btnSauvegarde = new JButton("Sauvegarde");
 	private JButton btnClose = new JButton("Fermer");
 	
@@ -57,6 +63,8 @@ public class GestionJFrame extends JFrame {
 		
 		btnLoad.addActionListener(new btnLoadListener());
 		btnAffichage.addActionListener(new btnAffichageListener());
+		btnPersonnel.addActionListener(new btnPersonnelListener());
+		btnMag.addActionListener(new btnMagListener());
 		btnClose.addActionListener((e) -> dispose());
 		
 		

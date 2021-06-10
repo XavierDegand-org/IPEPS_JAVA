@@ -4,13 +4,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ControleSaisie {
+	 
 	
 	public static boolean valideNom(String text,int taille) {
-		
+		 
 		 String nullString = null;
 		 String vide = new String();
 		 boolean estNull = text.equals(nullString);
 		 boolean estVide = text.equals(vide);
+		 
 		 Pattern rule = Pattern.compile("\\p{L}*(-\\p{L}*)*");
 		 
 		 if(estNull || estVide){
@@ -22,20 +24,12 @@ public class ControleSaisie {
 				return true;
 			}
 			else {
-				System.out.println("Valeur hors contraintes !");
+				System.out.println("Nom incorrect. Veuillez réessayer : ");
 			}
 		}
 		return false;
 	  }
 	
-	public static boolean valideAge(int min, int max, int age) {
-		if ( age >= min && age >= max ) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 
 	private static final String EMAIL_PATTERN
 	         = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";	         
@@ -47,5 +41,24 @@ public class ControleSaisie {
 	     Matcher matcher = pattern.matcher(hex);
 	     return matcher.matches();
 	}
+	
+	public static boolean valideNomFichier(String text) {
+		 String nullString = null;
+		 String vide = new String();
+		 boolean estNull = text.equals(nullString);
+		 boolean estVide = text.equals(vide);
+		 if(estNull || estVide) {
+			 System.out.println("Valeure null ou vide !");
+	}
+		 else {
+			 if(text.matches("^[^*&%\s]+$")) {
+				 return true;
+			 }
+			 else {
+				 System.out.println("Nom fichier incorrect. Veuillez réessayer : ");
+			 }
+		 }
+		 return false;
 
+	}
 }
