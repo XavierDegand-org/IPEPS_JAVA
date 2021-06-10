@@ -24,9 +24,11 @@ public class InputData {
 		while (!arret) {
 			 email = Lire.texte();
 			if (ControleSaisie.valideEmail(email)){
+				arret = true;
 				return email;
 			}else {
 				arret = false;
+				System.out.println("Email incorrect. Veuillez réessayer : ");
 			}
 		}
 		return email.toLowerCase();

@@ -24,11 +24,12 @@ public class btnPersonnelListener implements ActionListener {
 		}
 	
 		
-		System.out.println("Introduire le nom de la personne à modifier :");
 		
+		System.out.println("Introduire le nom de la personne à modifier :");
 		boolean arret = false;
 		while (!arret) {
-		String input = InputData.miseEnForme(InputData.inputNomPrenom());
+			
+			String input = InputData.miseEnForme(InputData.inputNomPrenom());
 		
 		for(int i=0;i<listePersonnel.size();i++){
 			
@@ -49,13 +50,17 @@ public class btnPersonnelListener implements ActionListener {
 				
 				listePersonnel.get(i).setNom(InputData.miseEnForme(Nom));
 				listePersonnel.get(i).setPrenom(InputData.miseEnForme(Prenom));
-				listePersonnel.get(i).setEmail(InputData.miseEnForme(Email));
+				listePersonnel.get(i).setEmail(Email.toLowerCase());
 				System.out.println(listePersonnel.get(i));
 				arret = true;
 			}else {
 				arret = false;
+				
+				
+				
 			}
 		}
+		System.out.println("Aucune personne trouvée. Veuillez réessayer : ");
 		}
 		
 
