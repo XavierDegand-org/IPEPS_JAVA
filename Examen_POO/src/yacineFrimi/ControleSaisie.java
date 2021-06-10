@@ -31,13 +31,12 @@ public class ControleSaisie {
 	
 
 	private static final String EMAIL_PATTERN
-	         = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";	         
+	         = "^[A-Za-z0-9+_.-]+@(.+)$\", ^[A-Za-z0-9+_.-]";	         
 	
 	private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 	
 	public static boolean valideEmail(String hex) {
-	
-	     Matcher matcher = pattern.matcher(hex);
+		 Matcher matcher = pattern.matcher(hex);
 	     return matcher.matches();
 	}
 	
@@ -47,7 +46,7 @@ public class ControleSaisie {
 		 boolean estNull = text.equals(nullString);
 		 boolean estVide = text.equals(vide);
 		 if(estNull || estVide) {
-			 System.out.println("Valeure null ou vide !");
+			 System.out.println("Valeur null ou vide !");
 	}
 		 else {
 			 if(text.matches("^[^*&%\s]+$")) {

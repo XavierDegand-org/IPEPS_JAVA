@@ -8,7 +8,7 @@ public class InputData {
 		while (!arret) {
 			nomPrenom = Lire.texte();
 			if (ControleSaisie.valideNom(nomPrenom,30)){
-				return nomPrenom;
+				arret = true;
 			}else {
 				arret = false;
 			}
@@ -22,7 +22,7 @@ public class InputData {
 		String Email = null;
 		boolean arret = false;
 		while (!arret) {
-			 Email = Lire.texte();
+			Email = Lire.texte();
 			if (ControleSaisie.valideEmail(Email)){
 				arret = true;
 			}else {
@@ -38,7 +38,7 @@ public class InputData {
 		while (!arret) {
 			nomFichier = Lire.texte();
 			if (ControleSaisie.valideNomFichier(nomFichier)){
-				return nomFichier;
+				arret = true;
 			}else {
 				arret = false;
 			}
