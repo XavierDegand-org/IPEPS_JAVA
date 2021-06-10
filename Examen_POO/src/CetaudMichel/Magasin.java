@@ -1,19 +1,35 @@
 package CetaudMichel;
 
-public class Magasin {
-	
-	public static String [][] Values = Produit.getProduit();
+import java.util.HashMap;
+import java.util.Map;
 
-public static void Magasin() {
-	// ASK peut on créer un magasin sans charger le personnel ?
+public class Magasin{
+	
+
+public Magasin() {
 	
 	
-	System.out.println("Le magasin est composé de " + Values[0].length + " Articles");
+}
+
+public void AjouterProduit() {
 	
-	for(int i=0;i<Values[0].length;i++){
+}
+
+public static void listeMap() {
+	Map<Integer,Produit> listProduit = new HashMap<>();
+
+	listProduit.put(1,new Produit("Nom","Description"));
+	listProduit.put(2,new Produit("Nom","Description"));
 	
-		System.out.println("Id_" + i + " --- Produit [nom = " + Values[0][i] + ", Description = " + Values[1][i] + "]");
+	for(int i = 0;i<listProduit.size();i++) {
+		System.out.println("Id_" + i + " --- Produit " + listProduit.get(i));
 	}
+	
+	
+}
+
+public String getProduit() {
+	return "hh";
 }
 
 }
