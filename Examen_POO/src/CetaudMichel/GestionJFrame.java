@@ -44,11 +44,18 @@ public class GestionJFrame extends JFrame {
 		this.add(btnAffichage);
 
 		btnMag.setBounds(505, 5, 250, 50);
-		btnMag.addActionListener(e -> Magasin());
+		btnMag.addActionListener(e -> {
+			try {
+				Magasin();
+			} catch (FileNotFoundException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		});
 		this.add(btnMag);
 
 		btnPret.setBounds(5, 55, 250, 50);
-		btnPret.addActionListener(e -> Emprunt.getValues());
+		btnPret.addActionListener(e -> Enprunt());
 		this.add(btnPret);
 
 		btnRetour.setBounds(255, 55, 250, 50);
@@ -107,6 +114,7 @@ public class GestionJFrame extends JFrame {
 			id++;
 
 		}
+		scan.close();
 
 	}
 
@@ -211,8 +219,12 @@ public class GestionJFrame extends JFrame {
 		System.out.println("Fichier '" + name + ".txt' a bien été créé ! ");
 	}
 
-	public void Magasin() {
-		Magasin.listeMap();
+	public void Magasin() throws FileNotFoundException {
+		if(personnel.isEmpty()) {
+			System.out.println("Veuilliez d'abord Charger le personnel !");
+			return;
+		}
+		new Magasin();
 	}
 
 	public String setFixedLength(String string, int size) {
@@ -226,5 +238,18 @@ public class GestionJFrame extends JFrame {
 
 		String c = fullString.substring(0, size);
 		return c;
+	}
+	
+	public void Enprunt() {
+		if(Magasin.getProduit().isEmpty()) {
+			System.out.println("Veuilliez d'abord créer le magasin !");
+			return;
+		}else if(personnel.isEmpty()) {
+			System.out.println("Veuilliez d'abord Charger le personnel !");
+			return;
+		}
+		System.out.println("Id : "+1+" "+personnel.get(1).getNom()+" "+personnel.get(1).getPrenom()+" sexe : "+personnel.get(1).getSexe()+" date de naissance : "+personnel.get(1).getDateddMMyyyy()+". Email : "+personnel.get(1).getEmail()+" Département : "+personnel.get(1).getDepartement()+"   Produit " + Magasin.getProduit().get(2));
+				
+		
 	}
 }

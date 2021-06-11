@@ -31,7 +31,7 @@ public class Produit {
 	@Override
 	public String toString() {
 		
-		return String.format("Id_%-5i %-10s  %-10s test",nom,description);
+		return String.format(" --- Produit [nom = %s, description = %s]",nom,description);
 	}
 
 	

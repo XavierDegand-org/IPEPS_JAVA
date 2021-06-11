@@ -32,19 +32,18 @@ public class InputData {
 
 	}
 
-
 	public static String inputNomFichier() {
-	
+
 		boolean stop = true;
-	
+
 		String Fichier = null;
 		while (stop) {
 			Fichier = Lire.texte();
-			if (ControleSaisie.valideNomFichier(Fichier,30)) {
+			if (ControleSaisie.valideNomFichier(Fichier, 30)) {
 				stop = false;
 			}
 		}
 		return Fichier;
-	
+
 	}
 }
