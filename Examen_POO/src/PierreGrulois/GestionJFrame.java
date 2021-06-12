@@ -2,12 +2,14 @@ package PierreGrulois;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GestionJFrame extends JFrame {
 	
+ 	 private static final long serialVersionUID = 1L;
 	 private JButton btnLoad = new JButton( "Chargement du personnel" );  // Création et texte des bouttons
 	 private JButton btnAffichage = new JButton( "Affichage liste du personnel" );
 	 private JButton btnMag = new JButton( "Création du magasin" );
@@ -76,9 +78,9 @@ public class GestionJFrame extends JFrame {
 			}
 	 }
 	 
-	 /*************************************************
-	  ************Boutton création du magasin**********
-	  *************************************************/
+	 /**************************************************
+	  ************Boutton création du magasin***********
+	  **************************************************/
 	 
 	 public JButton Magasin(){
 		 return btnMag;
