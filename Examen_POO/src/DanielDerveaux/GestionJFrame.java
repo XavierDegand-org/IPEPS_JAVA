@@ -61,7 +61,13 @@ public class GestionJFrame extends JFrame {
 		btnClose.setBounds(250, 210, 250, 100);
 		
 		/* Utilisation de Lambda pour les évènements liés aux boutons */
-		btnLoad.addActionListener( (e) -> System.out.println("En cours"));
+		btnLoad.addActionListener( (e) -> {
+			try {
+				LoadPersonnel();
+			} catch (IOException io) {
+				System.err.println("Une erreur est survenue : " + io.getMessage());
+			}
+		});
 		
 		btnAffichage.addActionListener( (e) -> {
 			System.err.println("Affichage impossible, pas de personnel !");
@@ -89,6 +95,10 @@ public class GestionJFrame extends JFrame {
 		this.setLocationRelativeTo(null);
 	 }
 		
+		private void LoadPersonnel() throws IOException {
+			System.out.println("En cours");
+		}
+
 		public static void Sauvegarde() throws IOException {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			fichier = InputData.inputNomFichier();
