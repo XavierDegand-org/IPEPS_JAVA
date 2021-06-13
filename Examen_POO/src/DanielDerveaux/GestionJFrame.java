@@ -98,7 +98,7 @@ public class GestionJFrame extends JFrame {
 			}
 			
 			Path path = Paths.get("./src", "DanielDerveaux", fichier);
-			List<String> Lignes = Files.readAllLines(path,Charset.forName("windows-1252"));
+			List<String> Lignes = Files.readAllLines(path,Charset.forName("utf-8"));
 			for (String element : Lignes) {
 				System.out.println(element);
 			}
