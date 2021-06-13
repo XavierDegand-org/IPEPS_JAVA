@@ -62,9 +62,4 @@ public class ControleSaisie {
 		}
 		return false;
 	}
-
-	public static boolean valideFichier(File nomfichier) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
