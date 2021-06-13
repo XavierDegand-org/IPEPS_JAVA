@@ -7,14 +7,16 @@ public enum Departement {
         Prod("Production"),
         Sec("Sécurité");
 
-        private final String label;
+        private final String deptNom;
 
-        Departement(String label) {
-            this.label = label;
+        Departement(String deptNom) {
+            this.deptNom = deptNom;
         }
 
-        public String getLabel() {
-            return label;
+        public String getDeptNom() {
+            return deptNom;
         }
+
+
     }
 
