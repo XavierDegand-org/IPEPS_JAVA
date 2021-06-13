@@ -1,5 +1,7 @@
 package DanielDerveaux;
 
+import java.io.File;
+
 public class InputData {
 	private static String nom;
 	private static String prenom;

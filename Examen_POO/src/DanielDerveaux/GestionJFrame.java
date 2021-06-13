@@ -1,10 +1,17 @@
 package DanielDerveaux;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -85,9 +92,16 @@ public class GestionJFrame extends JFrame {
 			fichier = InputData.inputNomFichier();
 			try(BufferedWriter bufWrite = new BufferedWriter(new FileWriter(new File("./src/DanielDerveaux/" + fichier)))) {
 				bufWrite.write("DTG de la sauvegarde : " + timestamp);
-				System.out.println("Sauvegarde réussie !");
+				System.out.println("Sauvegarde réussie !\n");
 			} catch (IOException io) {
 				System.err.println("Une erreur est survenue : " + io.getMessage());
 			}
+			
+			Path path = Paths.get("./src", "DanielDerveaux", fichier);
+			List<String> Lignes = Files.readAllLines(path,Charset.forName("windows-1252"));
+			for (String element : Lignes) {
+				System.out.println(element);
+			}
+			
 		}
 }
