@@ -63,7 +63,9 @@ public class GestionJFrame extends JFrame {
 		/* Utilisation de Lambda pour les évènements liés aux boutons */
 		btnLoad.addActionListener( (e) -> System.out.println("En cours"));
 		
-		btnAffichage.addActionListener( (e) -> System.out.println("En cours"));
+		btnAffichage.addActionListener( (e) -> {
+			System.err.println("Affichage impossible, pas de personnel !");
+		});
 		
 		btnMag.addActionListener( (e) -> System.out.println("En cours"));
 		

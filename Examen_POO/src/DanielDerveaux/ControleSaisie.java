@@ -53,7 +53,7 @@ public class ControleSaisie {
 			 return false;
 		 } 
 		else{
-			if (nomfichier.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-])+[.txt]+$")) { 
+			if (nomfichier.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-])+(\\.(?i)(txt))+$")) { 
 				return true;
 			}
 			else {
