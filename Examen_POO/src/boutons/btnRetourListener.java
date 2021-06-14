@@ -24,28 +24,26 @@ public class btnRetourListener implements ActionListener {
 						+ listeEmprunt.get(i).getProduit().getDescription());
 			}
 			System.out.println("Introduire le numéro d'umprunt à annuler :");
-			
+
 			boolean testEntree = true;
 			while (testEntree)
-			try {
-			int input =Lire.nbre();
-			listeEmprunt.remove(input-1);
-			testEntree = false;
-			}catch (IndexOutOfBoundsException e1) {
-				System.out.println("Index incorrect !");
-				
-			}
-			
+				try {
+					int input = Lire.nbre();
+					listeEmprunt.remove(input - 1);
+					testEntree = false;
+				} catch (IndexOutOfBoundsException e1) {
+					System.out.println("Index incorrect ! Veuillez réessayer : ");
+
+				}
+
 			for (int i = 0; i < listeEmprunt.size(); i++) {
 				System.out.println("N°" + (i + 1) + " " + listeEmprunt.get(i).getEmprunteur().getNom() + " "
 						+ listeEmprunt.get(i).getProduit().getNom() + " "
 						+ listeEmprunt.get(i).getProduit().getDescription());
-			
-		
-			
-		}
 
-	}
+			}
+
+		}
 	}
 
 }

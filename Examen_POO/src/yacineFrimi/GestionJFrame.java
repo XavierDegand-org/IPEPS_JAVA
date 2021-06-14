@@ -1,5 +1,8 @@
 package yacineFrimi;
 
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -11,33 +14,9 @@ import boutons.btnPretListener;
 import boutons.btnRetourListener;
 import boutons.btnSauvegardeListener;
 
-import java.awt.GridLayout;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import javax.swing.JButton;
-
 public class GestionJFrame extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-	static File fichierPersonnel = new File(
-			"C:\\Users\\yacin\\git\\IPEPS_JAVA\\Examen_POO\\src\\yacineFrimi\\Personnel.txt");
-
-	static File fichierProduits = new File(
-			"C:\\Users\\yacin\\git\\IPEPS_JAVA\\Examen_POO\\src\\yacineFrimi\\produits.txt");
 
 	private JButton btnLoad = new JButton("Chargement du personnel");
 	private JButton btnAffichage = new JButton("Affichage liste du personnel");

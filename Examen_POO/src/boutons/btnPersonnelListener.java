@@ -4,9 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import yacineFrimi.ControleSaisie;
 import yacineFrimi.InputData;
-import yacineFrimi.Lire;
 import yacineFrimi.Personnel;
 
 public class btnPersonnelListener implements ActionListener {
@@ -17,8 +15,12 @@ public class btnPersonnelListener implements ActionListener {
 
 		List<Personnel> listePersonnel = btnLoadListener.getListPersonnel();
 		if (listePersonnel.isEmpty()) {
+
 			System.out.println("Veuilliez charger le fichier !");
-		} else {
+
+		}
+
+		else {
 
 			System.out.println("Introduire le nom de la personne à modifier :");
 			boolean arret = false;
@@ -31,8 +33,9 @@ public class btnPersonnelListener implements ActionListener {
 					if (listePersonnel.get(index).getNom().equals(input)) {
 
 						System.out.println(index + 1 + "  " + listePersonnel.get(index).getNom() + " -- "
-								+ listePersonnel.get(index).getPrenom() + " -- " + listePersonnel.get(index).getSexe() + " -- "
-								+ listePersonnel.get(index).getEmail() + " -- " + listePersonnel.get(index).getDepartement());
+								+ listePersonnel.get(index).getPrenom() + " -- " + listePersonnel.get(index).getSexe()
+								+ " -- " + listePersonnel.get(index).getEmail() + " -- "
+								+ listePersonnel.get(index).getDepartement());
 						System.out.println("Introduisez les nouvelles valeurs.");
 
 						System.out.println("Entrez un nom : ");
@@ -49,6 +52,7 @@ public class btnPersonnelListener implements ActionListener {
 						System.out.println("Nouvelles données pour " + listePersonnel.get(index).getPrenom() + " "
 								+ listePersonnel.get(index).getNom() + "\n" + listePersonnel.get(index));
 						arret = true;
+
 						return;
 					} else {
 						arret = false;
@@ -57,7 +61,6 @@ public class btnPersonnelListener implements ActionListener {
 				}
 				System.out.println("Aucune personne trouvée. Veuillez réessayer : ");
 			}
-			
 
 		}
 

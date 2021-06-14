@@ -3,7 +3,6 @@ package yacineFrimi;
 import javax.swing.UIManager;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
-
 public class ClassMain {
 
 	public static void main(String[] args) throws Exception {
@@ -11,7 +10,7 @@ public class ClassMain {
 
 		UIManager.setLookAndFeel(new NimbusLookAndFeel());
 
-		GestionJFrame demo=new GestionJFrame();
+		GestionJFrame demo = new GestionJFrame();
 		demo.setVisible(true);
 
 	}

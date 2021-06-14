@@ -2,8 +2,10 @@ package boutons;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -77,16 +79,19 @@ public class btnSauvegardeListener implements ActionListener {
 
 			}
 
-			FileWriter writer;
+			Writer writer;
 			try {
-				writer = new FileWriter(
-						System.getProperty("user.dir") + "/src/" + "/fichiersTexte/" + nomFichier + ".txt");
+				writer = new BufferedWriter(new FileWriter(
+						System.getProperty("user.dir") + "/src/" + "/fichiersTexte/" + nomFichier + ".txt", true));
 
 				writer.append("DTG de la sauvegarde : " + LocalDateTime.now());
 				writer.append("\n");
 				writer.append((sb).toString());
+				writer.append(
+						"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+				writer.append("\n\n\n");
 				writer.close();
-				
+
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
