@@ -73,13 +73,37 @@ public class GestionJFrame extends JFrame {
 			System.err.println("Affichage impossible, pas de personnel !");
 		});
 		
-		btnMag.addActionListener( (e) -> System.out.println("En cours"));
+		btnMag.addActionListener( (e) -> {
+			try {
+				Magasin();
+			} catch (IOException io) {
+				System.err.println("Une erreur est survenue : " + io.getMessage());
+			}
+		});
 		
-		btnPret.addActionListener( (e) -> System.out.println("En cours"));
+		btnPret.addActionListener( (e) -> {
+			try {
+				Emprunt();
+			} catch (IOException io) {
+				System.err.println("Une erreur est survenue : " + io.getMessage());
+			}
+		});
 		
-		btnRetour.addActionListener( (e) -> System.out.println("En cours"));
+		btnRetour.addActionListener( (e) -> {
+			try {
+				RetourEmprunt();
+			} catch (IOException io) {
+				System.err.println("Une erreur est survenue : " + io.getMessage());
+			}
+		});
 		
-		btnPersonnel.addActionListener( (e) -> System.out.println("En cours"));
+		btnPersonnel.addActionListener( (e) -> {
+			try {
+				GestionPersonnel();
+			} catch (IOException io) {
+				System.err.println("Une erreur est survenue : " + io.getMessage());
+			}
+		});
 		
 		btnSauvegarde.addActionListener( (e) -> {
 			try {
@@ -96,6 +120,22 @@ public class GestionJFrame extends JFrame {
 	 }
 		
 		private void LoadPersonnel() throws IOException {
+			System.out.println("En cours");
+		}
+		
+		private void Magasin() throws IOException {
+			System.out.println("En cours");
+		}
+		
+		private void Emprunt() throws IOException {
+			System.out.println("En cours");
+		}
+		
+		private void RetourEmprunt() throws IOException {
+			System.out.println("En cours");
+		}
+		
+		private void GestionPersonnel() throws IOException {
 			System.out.println("En cours");
 		}
 
