@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,6 +24,7 @@ public class GestionJFrame extends JFrame {
 	private JButton btnClose = new JButton("Fermer");
 
 	static ArrayList<Personnel> personnel = new ArrayList<Personnel>();
+	static ArrayList<Emprunt> emprunt = new ArrayList<Emprunt>();
 
 	public GestionJFrame() {
 
@@ -59,6 +61,7 @@ public class GestionJFrame extends JFrame {
 		this.add(btnPret);
 
 		btnRetour.setBounds(255, 55, 250, 50);
+		btnRetour.addActionListener(e -> RetourEmprunt());
 		this.add(btnRetour);
 
 		btnPersonnel.setBounds(505, 55, 250, 50);
@@ -87,6 +90,11 @@ public class GestionJFrame extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+	}
+
+	private Object RetourEmprunt() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public void LoadPersonnel() throws FileNotFoundException {
@@ -220,11 +228,23 @@ public class GestionJFrame extends JFrame {
 	}
 
 	public void Magasin() throws FileNotFoundException {
-		if(personnel.isEmpty()) {
+		if (personnel.isEmpty()) {
 			System.out.println("Veuilliez d'abord Charger le personnel !");
+			return;
+		} else if (!emprunt.isEmpty()) {
+			System.out.println("Magasin déjà créé !");
 			return;
 		}
 		new Magasin();
+
+		Map<Integer, Produit> listProduit = Magasin.listProduit;
+
+		emprunt.add(new Emprunt(personnel.get(0), listProduit.get(2)));
+		emprunt.add(new Emprunt(personnel.get(1), listProduit.get(3)));
+		emprunt.add(new Emprunt(personnel.get(2), listProduit.get(4)));
+		emprunt.add(new Emprunt(personnel.get(4), listProduit.get(6)));
+		emprunt.add(new Emprunt(personnel.get(6), listProduit.get(7)));
+
 	}
 
 	public String setFixedLength(String string, int size) {
@@ -239,17 +259,19 @@ public class GestionJFrame extends JFrame {
 		String c = fullString.substring(0, size);
 		return c;
 	}
-	
+
 	public void Enprunt() {
-		if(Magasin.getProduit().isEmpty()) {
+		if (Magasin.getProduit().isEmpty()) {
 			System.out.println("Veuilliez d'abord créer le magasin !");
 			return;
-		}else if(personnel.isEmpty()) {
+		} else if (personnel.isEmpty()) {
 			System.out.println("Veuilliez d'abord Charger le personnel !");
 			return;
 		}
-		System.out.println("Id : "+1+" "+personnel.get(1).getNom()+" "+personnel.get(1).getPrenom()+" sexe : "+personnel.get(1).getSexe()+" date de naissance : "+personnel.get(1).getDateddMMyyyy()+". Email : "+personnel.get(1).getEmail()+" Département : "+personnel.get(1).getDepartement()+"   Produit " + Magasin.getProduit().get(2));
-				
-		
+
+		for (int i = 0; i < emprunt.size(); i++) {
+			System.out.println(emprunt.get(i).toString());
+		}
+
 	}
 }

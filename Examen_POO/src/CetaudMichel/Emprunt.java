@@ -1,17 +1,35 @@
 package CetaudMichel;
 
-import java.util.Arrays;
+
 
 public class Emprunt {
-
-
-
-	public static void getValues() {
+	
+	Personnel personnel;
+	Produit listProduit;
+	
+	public Emprunt(Personnel personnel,Produit produit) {
 		
-		String[] Pret1 = {Personnel.getValues()[2][0],Personnel.getValues()[1][0]};
-			
-		System.out.println(Arrays.toString(Pret1));
+		this.personnel = personnel;
+		this.listProduit = produit;
 		
-		}
+	}
+	
+	public Produit getNom() {
+		return listProduit;
+	}
+	
+	public Personnel getEmprunteur() {
+		return personnel;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("Id : %s %s %s sexe : %s date de naissance : %s. Email : %s Département : %s Produit : %s", 
+				personnel.getIdPersonnel() +1,personnel.getNom(),personnel.getPrenom(),
+				personnel.getSexe(),
+				personnel.getDateddMMyyyy(),personnel.getEmail(),personnel.getDepartement(),
+				listProduit.toString());
+	}
+
 
 }
