@@ -1,13 +1,14 @@
 package DanielDerveaux;
 
-public class Personnel {
+public class Personnel extends Individu {
 	public int IdPersonnel;
 	public String email;
 	public Departement departement;
-	private static final String EMAIL_PATTERN = 
-			"^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+	/*private static final String EMAIL_PATTERN = 
+			"^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";*/
 	
 	public Personnel(int IdPersonnel, String nom, String prenom, Sexe sexe, MyDate dateNaissance, String email, Departement departement) {
+		super(nom, prenom, sexe, dateNaissance);
 		this.IdPersonnel = IdPersonnel;
 		this.email = email;
 		this.departement = departement;
@@ -21,8 +22,8 @@ public class Personnel {
 		this.IdPersonnel = IdPersonnel;
 	}
 	
-	public Departement getDepartement() {
-		return departement;
+	public String getDepartement() {
+		return departement.getDeptNom();
 	}
 	
 	public String getEmail() {

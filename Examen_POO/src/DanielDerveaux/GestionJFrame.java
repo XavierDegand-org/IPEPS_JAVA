@@ -26,6 +26,8 @@ public class GestionJFrame extends JFrame {
 	 private JButton btnSauvegarde = new JButton("Sauvegarde");
 	 private JButton btnClose = new JButton("Fermer");
 	 
+	 List<Personnel> Person = new ArrayList<Personnel>();
+	 
 	 private static String fichier = null;
 	 
 	 public GestionJFrame() {
@@ -123,9 +125,7 @@ public class GestionJFrame extends JFrame {
 	 }
 		
 	 	/* Chargement du personnel */
-		private void LoadPersonnel() throws IOException {
-			List<Personnel> Person = new ArrayList<Personnel>();
-		
+		private void LoadPersonnel() throws IOException {		
 			Person.add(new Personnel(1, "Collon", "Albert", Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be", Departement.HR));
 			Person.add(new Personnel(2, "Peeters", "Marie", Sexe.FEMME, new MyDate(1, 5, 1985), "Peeters_M@test.be", Departement.HR));
 			Person.add(new Personnel(3, "Janssens", "Sarah", Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Jannssens@test.be", Departement.Compta));
@@ -139,6 +139,8 @@ public class GestionJFrame extends JFrame {
 			Person.add(new Personnel(11, "Van Moore", "Wilfrid", Sexe.HOMME, new MyDate(25, 2, 1998), "vanmoore.w@test.be", Departement.Compta));
 			Person.add(new Personnel(12, "Herman", "Nathalie", Sexe.FEMME, new MyDate(26, 7, 2001), "herman.n@test.be", Departement.Prod));
 			Person.add(new Personnel(13, "Bontemps", "Annie", Sexe.FEMME, new MyDate(23, 9, 1998), "bontemps.a@test.be", Departement.Prod));
+			
+			System.out.println("Chargement du personnel réussi !");
 		}
 
 		/* Création du magasin */
@@ -148,7 +150,16 @@ public class GestionJFrame extends JFrame {
 		
 		/* Affichage personnel */
 		private void Affichage() throws IOException {
-			/* System.err.println("Affichage impossible, pas de personnel !");*/
+			if (Person.isEmpty()) {
+				System.err.println("Affichage impossible, pas de personnel !");
+			} else {
+				System.out.println("+-------------+--------+-----+------+-----------+-------+");
+				System.out.println("| Département | Prénom | Nom | Sexe | Naissance | Email |");
+				System.out.println("+-------------+--------+-----+------+-----------+-------+");
+				for (Personnel id : Person) {
+					System.out.println(id.getDepartement());
+				}
+			}
 		}
 		
 		/* Prêt de matériel */
