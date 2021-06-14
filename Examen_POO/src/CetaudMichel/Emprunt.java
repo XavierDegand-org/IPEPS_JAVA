@@ -22,6 +22,7 @@ public class Emprunt {
 		return personnel;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return String.format("Id : %s %s %s sexe : %s date de naissance : %s. Email : %s Département : %s Produit : %s", 

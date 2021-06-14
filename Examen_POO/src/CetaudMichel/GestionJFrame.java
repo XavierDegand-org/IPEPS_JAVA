@@ -258,6 +258,7 @@ public class GestionJFrame extends JFrame {
 
 		String c = fullString.substring(0, size);
 		return c;
+		
 	}
 
 	public void Enprunt() {
