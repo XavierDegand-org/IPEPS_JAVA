@@ -27,9 +27,10 @@ public class Produit {
 
     @Override
     public String toString() {
-        return "Produit{" +
-                "nom='" + nom + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+
+        return "Produit [" +
+                "nom= " + nom +
+                ", description = " + description  +
+                ']';
     }
 }

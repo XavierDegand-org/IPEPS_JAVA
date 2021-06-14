@@ -18,6 +18,9 @@ public class GestionJFrame extends JFrame {
     private JButton btnSauvegarde = new JButton("Sauvegarde");
     private JButton btnClose = new JButton("Fermer");
     private static ArrayList<Personnel> Person = new ArrayList<>();
+    private static ArrayList<Produit> produit = new ArrayList<>();
+    private static final Magasin magasin = new Magasin();
+
 
     public GestionJFrame() {
         super("Gestion du Personnel et prêt du matériel");
@@ -39,8 +42,8 @@ public class GestionJFrame extends JFrame {
 
         btnLoad.addActionListener(new LoadPersonnel());
         btnAffichage.addActionListener(new Affichage());
-        /*btnMag.addActionListener(new Magasin());
-        btnPret.addActionListener(new Emprunt());
+        btnMag.addActionListener(new Magasin());
+        /*btnPret.addActionListener(new Emprunt());
         btnRetour.addActionListener(new RetourEmprunt());
         btnPersonnel.addActionListener(new GestionPersonnel());
         btnSauvegarde.addActionListener(new Sauvegarde());
@@ -89,6 +92,7 @@ public class GestionJFrame extends JFrame {
                 for (Personnel person : Person) {
                     System.out.println(person);
                 }
+
             } catch (NullPointerException | IllegalArgumentException e1) {
                 e1.printStackTrace();
             }
@@ -157,7 +161,33 @@ public class GestionJFrame extends JFrame {
     //Création du Magasin
     public JButton getBtnMag() {
         return btnMag;
+    }
 
+    public static class Magasin implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Magasin magasin = new Magasin();
+
+            try {
+                produit.add(new Produit("Lenovo", "ThinkPad E15 G2"));
+                produit.add(new Produit("Dell", "IdeaPad 3 14IIL05 81WD00B2MH"));
+                produit.add(new Produit("Dell", "XPS 13"));
+                produit.add(new Produit("Dell", "XPS 15"));
+                produit.add(new Produit("HP", "Elitebook 830 G7 X360"));
+                produit.add(new Produit("Dell", "Inspiron 15 3000"));
+                produit.add(new Produit("HP", "Elitebook 850 G7"));
+
+                for (Produit produit : produit) {
+                    System.out.println(produit);
+                }
+
+
+            } catch (NullPointerException | IllegalArgumentException e1) {
+                e1.printStackTrace();
+            }
+
+        }
     }
     //Prêt matériel
     public JButton getBtnPret() {
