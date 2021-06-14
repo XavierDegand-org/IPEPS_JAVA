@@ -14,17 +14,33 @@ public class Emprunt {
 		
 	}
 	
-	public Produit getNom() {
-		return listProduit;
+	public String getPrenom() {
+		return personnel.getPrenom();
 	}
 	
-	public Personnel getEmprunteur() {
-		return personnel;
+	public String getEmprunteur() {
+		return personnel.getNom();
+	}
+	
+	public void setEmprunteur() {
+		
+		
+	}
+	
+	public String getArticles() {
+		
+		return listProduit.getNom();
+	}
+	
+public String getProduit() {
+		
+		return listProduit.getDescription();
 	}
 	
 	
 	@Override
 	public String toString() {
+	
 		return String.format("Id : %s %s %s sexe : %s date de naissance : %s. Email : %s Département : %s Produit : %s", 
 				personnel.getIdPersonnel() +1,personnel.getNom(),personnel.getPrenom(),
 				personnel.getSexe(),

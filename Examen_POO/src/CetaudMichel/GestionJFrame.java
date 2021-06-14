@@ -29,7 +29,6 @@ public class GestionJFrame extends JFrame {
 	public GestionJFrame() {
 
 		btnLoad.setBounds(5, 5, 250, 50);
-
 		btnLoad.addActionListener(e -> {
 			try {
 				LoadPersonnel();
@@ -83,6 +82,7 @@ public class GestionJFrame extends JFrame {
 		btnClose.addActionListener(e -> System.exit(0));
 		this.add(btnClose);
 
+		this.setTitle("Gestion de Personnel & Prêt de matériel");
 		this.setLayout(null);
 		this.setResizable(false);
 		this.setSize(760, 180);
@@ -92,12 +92,41 @@ public class GestionJFrame extends JFrame {
 
 	}
 
-	private Object RetourEmprunt() {
-		// TODO Auto-generated method stub
-		return null;
+	private void RetourEmprunt() {
+		System.out.println("Liste des emprunts");
+		int item;
+		for (item = 0; item < emprunt.size(); item++) {
+			System.out.printf("N° %d %s\t%s %s\n", item + 1, emprunt.get(item).getEmprunteur(),
+					emprunt.get(item).getArticles(), emprunt.get(item).getProduit());
+		}
+		System.out.print("Entroduire le numero d'emprunt à annuler : ");
+		boolean stop = true;
+		while (stop) {
+
+			int input = Lire.nbre();
+
+			if (input < item + 1) {
+				emprunt.remove(input - 1);
+
+				for (item = 0; item < emprunt.size(); item++) {
+					System.out.printf("N° %d %s\t%s %s\n", item + 1, emprunt.get(item).getEmprunteur(),
+							emprunt.get(item).getArticles(), emprunt.get(item).getProduit());
+				}
+				stop = false;
+
+			} else {
+				System.out.print("Données invalide !\nEntroduire le numero d'emprunt à annuler : ");
+			}
+		}
+
 	}
 
 	public void LoadPersonnel() throws FileNotFoundException {
+
+		if (!personnel.isEmpty()) {
+			System.out.println("La liste personnel est déjà chargée !");
+			return;
+		}
 
 		File file = new File(System.getProperty("user.dir") + "/Sources/Personnel.txt");
 		Scanner scan = new Scanner(file);
@@ -135,14 +164,11 @@ public class GestionJFrame extends JFrame {
 		}
 
 		tab.append(
-				"+--------------------+------------------------------+------------------------------+--------+-----------+------------------------------+");
-		tab.append("\n");
+				"+--------------------+------------------------------+------------------------------+--------+-----------+------------------------------+\n");
 		tab.append(
-				"|    Département     |             Prénom           |              nom             |  Sex   | Naissance |             Email            |");
-		tab.append("\n");
+				"|    Département     |             Prénom           |              nom             |  Sex   | Naissance |             Email            |\n");
 		tab.append(
-				"+--------------------+------------------------------+------------------------------+--------+-----------+------------------------------+");
-		tab.append("\n");
+				"+--------------------+------------------------------+------------------------------+--------+-----------+------------------------------+\n");
 
 		for (int i = 0; i < personnel.size(); i++) {
 			tab.append("  ");
@@ -210,6 +236,7 @@ public class GestionJFrame extends JFrame {
 			return;
 		}
 
+		// Afichage Personnels
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
 		Date date = new Date();
 
@@ -222,6 +249,28 @@ public class GestionJFrame extends JFrame {
 		writer.append("DTG de la sauvegarde : " + format.format(date));
 		writer.append("\n");
 		writer.append(Affichage());
+
+		// Retour pret
+		StringBuilder tab = new StringBuilder();
+		String nomPrenom;
+
+		tab.append("+-----------+--------------------------+-------------------------+\n");
+		tab.append("|    N°     |       Nom - Prénom       |        Matériel         |\n");
+		tab.append("+-----------+--------------------------+-------------------------+\n");
+
+		for (int i = 0; i < emprunt.size(); i++) {
+
+			nomPrenom = emprunt.get(i).getEmprunteur() + " " + emprunt.get(i).getPrenom();
+
+			tab.append("  ");
+			tab.append(setFixedLength(String.valueOf(i + 1), 12));
+			tab.append(setFixedLength(nomPrenom, 27));
+			tab.append(setFixedLength(emprunt.get(i).getProduit(), 26));
+			tab.append("\n");
+		}
+		writer.append("\n\n\n");
+		writer.append(tab);
+
 		writer.close();
 
 		System.out.println("Fichier '" + name + ".txt' a bien été créé ! ");
@@ -258,7 +307,7 @@ public class GestionJFrame extends JFrame {
 
 		String c = fullString.substring(0, size);
 		return c;
-		
+
 	}
 
 	public void Enprunt() {

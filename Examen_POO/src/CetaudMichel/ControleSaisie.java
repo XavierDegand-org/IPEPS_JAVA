@@ -26,7 +26,7 @@ public class ControleSaisie {
 	}
 
 	public static boolean valideEmail(final String hex) {
-		String EMAIL_PATTERN = "^(.+)@(.+)$";
+		String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
 		Matcher matcher = pattern.matcher(hex);

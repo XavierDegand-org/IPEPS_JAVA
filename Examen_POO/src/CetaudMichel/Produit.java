@@ -20,7 +20,7 @@ public class Produit {
 		this.nom = nom;
 	}
 	
-	public String description() {
+	public String getDescription() {
 		return description;
 	}
 
