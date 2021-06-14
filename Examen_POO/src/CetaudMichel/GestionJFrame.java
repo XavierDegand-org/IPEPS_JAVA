@@ -237,18 +237,42 @@ public class GestionJFrame extends JFrame {
 		}
 
 		// Afichage Personnels
-		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date date = new Date();
 
 		System.out.print("Introduire le nom du fichier ! : ");
 		String name = InputData.inputNomFichier();
-
+		
+		if(name.contains(".txt")) {
+			 name = name.replaceAll(".txt","");
+			 
+		}
+		
+		File file = new File(System.getProperty("user.dir") + "/Saves/Log.txt");
+		Scanner scan = new Scanner(file);
+		
+		StringBuilder oldFiles = new StringBuilder();
+		
+		while (scan.hasNextLine()) {
+			oldFiles.append(scan.nextLine()+"\n");
+		}
+		
+		
 		FileWriter writer = new FileWriter(
-				System.getProperty("user.dir") + "/Saves/" + name + " " + format.format(date) + ".txt");
+				System.getProperty("user.dir") + "/Saves/" + name + ".txt");
+		
+		FileWriter writerLog = new FileWriter(
+				System.getProperty("user.dir") + "/Saves/Log.txt");
+		
+		writerLog.append(oldFiles);
+		writerLog.append("\n\n\n");
 
 		writer.append("DTG de la sauvegarde : " + format.format(date));
 		writer.append("\n");
 		writer.append(Affichage());
+		writerLog.append("DTG de la sauvegarde : " + format.format(date));
+		writerLog.append("\n");
+		writerLog.append(Affichage());
 
 		// Retour pret
 		StringBuilder tab = new StringBuilder();
@@ -270,8 +294,11 @@ public class GestionJFrame extends JFrame {
 		}
 		writer.append("\n\n\n");
 		writer.append(tab);
+		writerLog.append("\n\n\n");
+		writerLog.append(tab);
 
 		writer.close();
+		writerLog.close();
 
 		System.out.println("Fichier '" + name + ".txt' a bien été créé ! ");
 	}
