@@ -1,9 +1,7 @@
 package DanielDerveaux;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -11,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -125,9 +124,23 @@ public class GestionJFrame extends JFrame {
 		
 	 	/* Chargement du personnel */
 		private void LoadPersonnel() throws IOException {
-			System.out.println("En cours");
-		}
+			List<Personnel> Person = new ArrayList<Personnel>();
 		
+			Person.add(new Personnel(1, "Collon", "Albert", Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be", Departement.HR));
+			Person.add(new Personnel(2, "Peeters", "Marie", Sexe.FEMME, new MyDate(1, 5, 1985), "Peeters_M@test.be", Departement.HR));
+			Person.add(new Personnel(3, "Janssens", "Sarah", Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Jannssens@test.be", Departement.Compta));
+			Person.add(new Personnel(4, "Maes", "Henri", Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri@test.be", Departement.Compta));
+			Person.add(new Personnel(5, "Jacobs", "Charles", Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j@test.be", Departement.SEC));
+			Person.add(new Personnel(6, "Mertens", "Floriane", Sexe.FEMME, new MyDate(20, 8, 1996), "FloFlo@test.be", Departement.SEC));
+			Person.add(new Personnel(7, "Willems", "François-Xavier", Sexe.HOMME, new MyDate(28, 10, 1996), "Willems.F-X@test.be", Departement.Prod));
+			Person.add(new Personnel(8, "O'Neil", "Shan", Sexe.HOMME, new MyDate(1, 7, 2001), "ONeil.sh@test.be", Departement.Prod));
+			Person.add(new Personnel(9, "Goossen", "Stéphanie", Sexe.FEMME, new MyDate(25, 10, 2008), "NieNieG@test.be", Departement.HR));
+			Person.add(new Personnel(10, "Dumont", "Charles", Sexe.HOMME, new MyDate(1, 4, 1969), "dumont.c@test.be", Departement.HR));
+			Person.add(new Personnel(11, "Van Moore", "Wilfrid", Sexe.HOMME, new MyDate(25, 2, 1998), "vanmoore.w@test.be", Departement.Compta));
+			Person.add(new Personnel(12, "Herman", "Nathalie", Sexe.FEMME, new MyDate(26, 7, 2001), "herman.n@test.be", Departement.Prod));
+			Person.add(new Personnel(13, "Bontemps", "Annie", Sexe.FEMME, new MyDate(23, 9, 1998), "bontemps.a@test.be", Departement.Prod));
+		}
+
 		/* Création du magasin */
 		private void Magasin() throws IOException {
 			System.out.println("En cours");
@@ -135,7 +148,7 @@ public class GestionJFrame extends JFrame {
 		
 		/* Affichage personnel */
 		private void Affichage() throws IOException {
-			System.err.println("Affichage impossible, pas de personnel !");
+			/* System.err.println("Affichage impossible, pas de personnel !");*/
 		}
 		
 		/* Prêt de matériel */
