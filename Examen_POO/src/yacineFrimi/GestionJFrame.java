@@ -7,6 +7,8 @@ import boutons.btnAffichageListener;
 import boutons.btnLoadListener;
 import boutons.btnMagListener;
 import boutons.btnPersonnelListener;
+import boutons.btnPretListener;
+import boutons.btnRetourListener;
 
 import java.awt.GridLayout;
 import java.io.BufferedReader;
@@ -70,6 +72,9 @@ public class GestionJFrame extends JFrame {
 		btnAffichage.addActionListener(new btnAffichageListener());
 		btnPersonnel.addActionListener(new btnPersonnelListener());
 		btnMag.addActionListener(new btnMagListener());
+		btnPret.addActionListener(new btnPretListener());
+		btnRetour.addActionListener(new btnRetourListener());
+		btnSauvegarde.addActionListener(new btnSauvegardeListener());
 		btnClose.addActionListener((e) -> dispose());
 
 

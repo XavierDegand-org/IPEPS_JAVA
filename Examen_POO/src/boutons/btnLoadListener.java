@@ -64,7 +64,7 @@ public  class btnLoadListener implements ActionListener {
 
 	}
 
-	static List<Personnel> getListPersonnel() {
+	public static List<Personnel> getListPersonnel() {
 		return listePersonnel;
 
 	}
