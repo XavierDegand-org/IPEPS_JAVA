@@ -11,21 +11,20 @@ public class InputData {
 	private static int tailleNom = 30;
 
 	public static void main( String [] args ) {
-	/*InputData saisie = new InputData();
+	InputData saisie = new InputData();
 	ArrayList<Personnel> Person = new ArrayList<>();
 	
-	for (int i = 0; i < nbrePersonne; i++) {
-		nom = InputData.inputNomPrenom("Nom");
-		prenom = saisie.inputNomPrenom("Prenom");
+	for (int i = 0; i < Person.size(); i++) {
+		nom = InputData.inputNomPrenom("nom :");
+		prenom = InputData.inputNomPrenom("prénom :");
 		Lire.vider();
 		saisie.inputEmail();
-		Person.add(new Personnel(nom,prenom,sexe, i, email, email));
 		
 	}
 	
 	for(Personnel Pers : Person) {
 		System.out.println(Pers);
-	}*/
+	}
 }
 
 	public static String inputNomPrenom(String libelle) {

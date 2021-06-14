@@ -2,13 +2,21 @@ package Jessica;
 
 public class Produit {
 	
+	  private static int id = 1;
+	  private int IdProduit;
 	  private String nom;
 	  private String description;
 
 	  public Produit(String nom, String description) {
+		    this.IdProduit = id++;
 			this.nom = nom;
 			this.description = description;
 	  }
+	  
+	  public int getIdProduit() {
+			return IdProduit;
+	  }
+	 
 
 	  public String getNom() {
 			return nom;
@@ -28,9 +36,9 @@ public class Produit {
 
 	  @Override
 	  public String toString() {
-			return String.format(
+			return String.format("Produit [nom = %s, description = %s]",
 					this.nom,
-	                this.description );
+					this.description);
 	  }
 
 

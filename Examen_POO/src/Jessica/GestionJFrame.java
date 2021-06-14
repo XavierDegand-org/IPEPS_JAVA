@@ -26,8 +26,11 @@ public class GestionJFrame extends JFrame {
 	 
 	// arraylist personnel accessible à toute la classe
 	private static ArrayList<Personnel> Person = new ArrayList<>();
+	private static ArrayList<Produit> mag = new ArrayList<>();
 	
 	private static int tailleNom = 30;
+	
+	//***************************** DEBUT GESTIONJFRAME *****************************//
 					
 	public GestionJFrame() {
 		
@@ -50,7 +53,7 @@ public class GestionJFrame extends JFrame {
 		contentPane.add( btnClose );
 		
 		btnLoad.addActionListener(new LoadPersonnel());
-		btnAffichage.addActionListener(new Affichage());
+		btnAffichage.addActionListener(new btnAffichageListener());
 		btnMag.addActionListener(new Magasin());
 		btnPret.addActionListener(new Emprunt());
 		btnRetour.addActionListener(new RetourEmprunt());
@@ -82,10 +85,10 @@ public class GestionJFrame extends JFrame {
 			try{
 			Person.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
 			Person.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
-			Person.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@@test.be", Departement.HR));
+			Person.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@test.be", Departement.HR));
 			Person.add(new Personnel("Janssens","Sarah",Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Janssens@test",Departement.Compta));
-			Person.add(new Personnel("Maes","Henri",Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri#test.be",Departement.Compta));
-			Person.add(new Personnel("Jacobs","Charles",Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j#test.be",Departement.SEC));
+			Person.add(new Personnel("Maes","Henri",Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri@test.be",Departement.Compta));
+			Person.add(new Personnel("Jacobs","Charles",Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j@test.be",Departement.SEC));
 			Person.add(new Personnel("Mertens","Floriane",Sexe.FEMME, new MyDate(20, 8, 1996), "FloFlo.M@test.be",Departement.SEC));
 			Person.add(new Personnel("Willems","Francois-Xavier",Sexe.HOMME, new MyDate(28, 10, 1996), "Willems.F-X@test.be", Departement.Prod));
 			Person.add(new Personnel("O'Neil","Shan",Sexe.HOMME, new MyDate(1, 7, 2001), "ONeil.sh@test.be",Departement.Prod));
@@ -101,6 +104,7 @@ public class GestionJFrame extends JFrame {
 			catch (IllegalArgumentException err) {
 				err.printStackTrace(); //- if the given pattern is invalid)
 			}
+			System.out.println("Personnel bien chargé");
 		
 		}
 	}
@@ -111,35 +115,16 @@ public class GestionJFrame extends JFrame {
         return btnAffichage;
         }
 	
-	public class Affichage implements ActionListener {
+	public class btnAffichageListener implements ActionListener {
 		
 		@Override
-		public void actionPerformed (ActionEvent e) {	
-			//si liste personnel est vide/strictement inférieure à 1
-			if(Person.size() < 1) {
-				System.out.println("Affichage impossible, pas de personnel !");
-			}
-			else {
-			System.out.println("+-----------------------+------------------------+------------------------+------------------------+------------------------+------------------------+");
-			System.out.println("| Département           | Prénom                 | Nom                    | Sexe                   | Naissance              | Email                  |");
-			System.out.println("+-----------------------+------------------------+------------------------+------------------------+------------------------+------------------------+");
-			StringBuilder sb = new StringBuilder();
-			    for (int temp = 0; temp < Person.size(); temp++) {
-			    	sb.append(setFixedLength(Person.get(temp).getDepartement()));
-			    	sb.append(setFixedLength(Person.get(temp).getPrenom()));
-			    	sb.append(setFixedLength(Person.get(temp).getNom()));
-			    	sb.append(setFixedLength(Person.get(temp).getSexe()));
-			    	sb.append(setFixedLength(Person.get(temp).getDateddMMyyyy()));
-			    	sb.append(setFixedLength(Person.get(temp).getEmail()));
-	                sb.append("\n");
-			    		}		
-			    // on affiche le contenu
-			    System.out.println(sb.toString());
-			    	}
-			}
-			}
-		// fonction permettant de calbrer la taille des strings
-		public String setFixedLength(String s){
+		public void actionPerformed (ActionEvent e) {
+			Affichage();
+		}
+	}
+	
+	//fonction permettant de calibrer la taille des strings
+	public static String setFixedLength(String s){
 		        StringBuilder ss = new StringBuilder(s);
 		        // tant que la taille de ss est inférieure à 25 on ajoute un caractère blanc
 		        while (ss.length() < 25) {
@@ -151,6 +136,30 @@ public class GestionJFrame extends JFrame {
 		        return c;
 
 		    }
+	
+	public static void Affichage() {
+		//si liste personnel est vide/strictement inférieure à 1
+		if(Person.size() < 1) {
+			System.out.println("Affichage impossible, pas de personnel !");
+		}
+		else {
+		System.out.println("+-----------------------+------------------------+------------------------+------------------------+------------------------+------------------------+");
+		System.out.println("| Département           | Prénom                 | Nom                    | Sexe                   | Naissance              | Email                  |");
+		System.out.println("+-----------------------+------------------------+------------------------+------------------------+------------------------+------------------------+");
+		StringBuilder sb = new StringBuilder();
+		    for (int temp = 0; temp < Person.size(); temp++) {
+		    	sb.append(setFixedLength(Person.get(temp).getDepartement()));
+		    	sb.append(setFixedLength(Person.get(temp).getPrenom()));
+		    	sb.append(setFixedLength(Person.get(temp).getNom()));
+		    	sb.append(setFixedLength(Person.get(temp).getSexe()));
+		    	sb.append(setFixedLength(Person.get(temp).getDateddMMyyyy()));
+		    	sb.append(setFixedLength(Person.get(temp).getEmail()));
+                sb.append("\n");
+		    		}		
+		    // on affiche le contenu
+		    System.out.println(sb.toString());
+		    	}
+	}
 			
 	
 	//***************************** PARTIE MAGASIN *****************************//
@@ -163,7 +172,29 @@ public class GestionJFrame extends JFrame {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			System.out.println("test");
+		
+		// charger l'arraylist magasin/produit
+			try{
+				mag.add(new Produit("HP1","Elitebook 850 G7"));
+				mag.add(new Produit("HP2","Elitebook 830 G7 X360"));
+				mag.add(new Produit("Dell1","Inspiron 15 3000"));
+				mag.add(new Produit("Dell2","XPS 13"));
+				mag.add(new Produit("Dell3","XPS 15"));
+				mag.add(new Produit("Lenovo1","Thinkpad E15 G2"));
+				mag.add(new Produit("Lenovo2","IdeaPad 3 14IIL05 81WD00B2MH"));
+				
+				}
+			catch (NullPointerException err) {
+				err.printStackTrace(); //- if the given pattern is null
+				}
+			catch (IllegalArgumentException err) {
+				err.printStackTrace(); //- if the given pattern is invalid)
+				}
+			
+			//pour d'abord tester si liste bien chargée/créée
+			for(Produit Prod : mag) {
+				System.out.println(Prod);
+		}
 		}
 		
 	}
@@ -178,7 +209,7 @@ public class GestionJFrame extends JFrame {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			System.out.println("test");
+			System.out.println("Prêt de matériel");
 		}
 		
 	}
@@ -193,7 +224,7 @@ public class GestionJFrame extends JFrame {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			System.out.println("test");
+			System.out.println("Retour matériel");
 		}
 		
 	}
@@ -208,9 +239,22 @@ public class GestionJFrame extends JFrame {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			System.out.println("test");
+			Affichage();
+			
+			if(Person.size() < 1) {
+				System.out.println(" ");
+			}
+			else {
+			System.out.println("\n");
+			System.out.println("Introduire le nom de la personne à modifier :");
+			System.out.println("Entrer un nom :");
+			System.out.println("Introduire les nouvelles valeurs :");
+			System.out.println("Entrer un nom :");
+			System.out.println("Entrer un prénom :");
+			System.out.println("Entrer une adresse mail :");
 		}
 		
+		}
 	}
 	
 	//***************************** PARTIE SAUVEGARDE *****************************//
@@ -223,7 +267,7 @@ public class GestionJFrame extends JFrame {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			System.out.println("test");
+			System.out.println("Sauvegarde");
 		}
 		
 	}

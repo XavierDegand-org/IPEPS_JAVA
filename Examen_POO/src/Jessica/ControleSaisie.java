@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class ControleSaisie {
 	
 	 public static boolean valideNom(String text,int taille) {
+		 taille = 30;
 		 String nullString = null;
 		 String vide = new String();
 		 boolean estNull = text.equals(nullString);
