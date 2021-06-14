@@ -70,7 +70,11 @@ public class GestionJFrame extends JFrame {
 		});
 		
 		btnAffichage.addActionListener( (e) -> {
-			System.err.println("Affichage impossible, pas de personnel !");
+			try {
+				Affichage();
+			} catch (IOException io) {
+				System.err.println("Une erreur est survenue : " + io.getMessage());
+			}
 		});
 		
 		btnMag.addActionListener( (e) -> {
@@ -119,27 +123,38 @@ public class GestionJFrame extends JFrame {
 		this.setLocationRelativeTo(null);
 	 }
 		
+	 	/* Chargement du personnel */
 		private void LoadPersonnel() throws IOException {
 			System.out.println("En cours");
 		}
 		
+		/* Création du magasin */
 		private void Magasin() throws IOException {
 			System.out.println("En cours");
 		}
 		
+		/* Affichage personnel */
+		private void Affichage() throws IOException {
+			System.err.println("Affichage impossible, pas de personnel !");
+		}
+		
+		/* Prêt de matériel */
 		private void Emprunt() throws IOException {
 			System.out.println("En cours");
 		}
 		
+		/* Retour de matériel */
 		private void RetourEmprunt() throws IOException {
 			System.out.println("En cours");
 		}
 		
+		/* Modification données Personnel */
 		private void GestionPersonnel() throws IOException {
 			System.out.println("En cours");
 		}
 
-		public static void Sauvegarde() throws IOException {
+		/* Sauvegarde */
+		private static void Sauvegarde() throws IOException {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			fichier = InputData.inputNomFichier();
 			try(BufferedWriter bufWrite = new BufferedWriter(new FileWriter(new File("./src/DanielDerveaux/" + fichier)))) {
