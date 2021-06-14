@@ -40,8 +40,8 @@ public class GestionJFrame extends JFrame {
         btnLoad.addActionListener(new LoadPersonnel());
         btnAffichage.addActionListener(new Affichage());
         /*btnMag.addActionListener(new Magasin());
-        btnPret.addActionListener(new Pret());
-        btnRetour.addActionListener(new Retour());
+        btnPret.addActionListener(new Emprunt());
+        btnRetour.addActionListener(new RetourEmprunt());
         btnPersonnel.addActionListener(new GestionPersonnel());
         btnSauvegarde.addActionListener(new Sauvegarde());
         btnClose.addActionListener(new ActionListener(){
@@ -56,10 +56,12 @@ public class GestionJFrame extends JFrame {
         this.setLocationRelativeTo(null);
 
     }
+
     //Chargement liste personnel
     public JButton getBtnLoad() {
         return btnLoad;
     }
+
     public class LoadPersonnel implements ActionListener {
 
         @Override
@@ -68,7 +70,6 @@ public class GestionJFrame extends JFrame {
             //La liste du personnel à charger
 
             try {
-                ArrayList<Personnel> Person = new ArrayList<>();
 
                 Person.add(new Personnel("Collon", "Albert", Sexe.HOMME, new MyDate(10, 8, 1990), "collon.a@test.be", Departement.HR));
                 Person.add(new Personnel("Peeters", "Marie", Sexe.FEMME, new MyDate(1, 5, 1985), "peeters.m@test.be", Departement.HR));
@@ -100,25 +101,26 @@ public class GestionJFrame extends JFrame {
     public JButton getBtnAffichage() {
         return btnAffichage;
     }
+
     public static class Affichage implements ActionListener {
 
         @Override
-        public void actionPerformed (ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {
 
             //si la liste personnel ne contient aucune ligne
-            if(Person.size() < 1) {
+            if (Person.size() < 1) {
                 System.out.println("Une erreur est survenue pendant l'affichage du personnel !");
-            }
-            else {
-                System.out.println("+-----------------------+------------------------+------------------------+------------------------+------------------------+------------------------+");
-                System.out.println("| Département           | Prénom                 | Nom                    | Sexe                   | Naissance              | Email                  |");
-                System.out.println("+-----------------------+------------------------+------------------------+------------------------+------------------------+------------------------+");
+            } else {
+                System.out.println("+-----------------------+---------------------+-----------------------+---------------------+------------------------+------------------------+");
+                System.out.println("| Département           |    Prénom           |    Nom                |       Sexe          |    Naissance           |    Email               |");
+                System.out.println("+-----------------------+---------------------+-----------------------+---------------------+------------------------+------------------------+");
 
                 StringBuilder stringBuilder = new StringBuilder();
-
                 for (Personnel person : Person) {
+
                     stringBuilder.append(" ");
                     stringBuilder.append(setFixedLength(person.getDepartement().getDeptNom()));
+                    stringBuilder.append("\t");
                     stringBuilder.append("\t");
                     stringBuilder.append(setFixedLength(person.getPrenom()));
                     stringBuilder.append("\t");
@@ -136,17 +138,21 @@ public class GestionJFrame extends JFrame {
             }
         }
     }
+
     // calibrage de la taille des caractères
-    static String setFixedLength (String s){
+    static String setFixedLength(String s) {
         StringBuilder ss = new StringBuilder(s);
         //tant que la taille de ss est inférieur à 20 on ajoute un caractère blanc
-        // while (ss.length() < 20) {
-        String d = " ";
-        char cl = d.charAt(0);
-        ss.insert(s.length(), cl);
-        String c = ss.substring(0, 20);
+        while (ss.length() < 20) {
+            String d = " ";
+            char c1 = d.charAt(0);
+            ss.insert(s.length(), c1);
+        }
+            String c = ss.substring(0, 20);
         return c;
-    }
+        }
+
+
 
     //Création du Magasin
     public JButton getBtnMag() {
