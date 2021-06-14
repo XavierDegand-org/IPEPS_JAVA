@@ -1,9 +1,5 @@
 package Abdoulaye;
 
-import sun.java2d.pipe.SpanShapeRenderer;
-
-import java.text.SimpleDateFormat;
-
 public class MyDate {
 	private int jour;
 	private int mois;
