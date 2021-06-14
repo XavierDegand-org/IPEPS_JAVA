@@ -28,20 +28,20 @@ public class btnAffichageListener implements ActionListener {
 
 		StringBuilder sb = new StringBuilder ();
 
-		for (int cpt = 0; cpt < listePersonnel.size(); cpt++) {
+		for (int index = 0; index < listePersonnel.size(); index++) {
 
 			sb.append(" ");
-			sb.append(setFixedLength(listePersonnel.get(cpt).getDepartement().getDeptNom()));
+			sb.append(setFixedLength(listePersonnel.get(index).getDepartement().getDeptNom()));
 			sb.append("\t");
-			sb.append(setFixedLength(listePersonnel.get(cpt).getPrenom()));
+			sb.append(setFixedLength(listePersonnel.get(index).getPrenom()));
 			sb.append("\t");
-			sb.append(setFixedLength(listePersonnel.get(cpt).getNom()));
+			sb.append(setFixedLength(listePersonnel.get(index).getNom()));
 			sb.append("\t");
-			sb.append(setFixedLength(listePersonnel.get(cpt).getSexe().toString()));
+			sb.append(setFixedLength(listePersonnel.get(index).getSexe().toString()));
 			sb.append("\t");
-			sb.append(setFixedLength(listePersonnel.get(cpt).getDateddMMyyyy()));
+			sb.append(setFixedLength(listePersonnel.get(index).getDateddMMyyyy()));
 			sb.append("\t");
-			sb.append(setFixedLength(listePersonnel.get(cpt).getEmail()));
+			sb.append(setFixedLength(listePersonnel.get(index).getEmail()));
 			sb.append("\n");
 
 

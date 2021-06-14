@@ -23,7 +23,10 @@ public  class btnLoadListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		File fichierPersonnel = new File("C:\\Users\\yacin\\git\\IPEPS_JAVA\\Examen_POO\\src\\yacineFrimi\\Personnel.txt");
+		
+		
+		
+		File fichierPersonnel = new File(System.getProperty("user.dir") + "/src/fichiersTexte/Personnel.txt");
 
 
 

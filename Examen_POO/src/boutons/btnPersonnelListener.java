@@ -26,13 +26,13 @@ public class btnPersonnelListener implements ActionListener {
 
 				String input = InputData.miseEnForme(InputData.inputNomPrenom());
 
-				for (int i = 0; i < listePersonnel.size(); i++) {
+				for (int index = 0; index < listePersonnel.size(); index++) {
 
-					if (listePersonnel.get(i).getNom().equals(input)) {
+					if (listePersonnel.get(index).getNom().equals(input)) {
 
-						System.out.println(i + 1 + "  " + listePersonnel.get(i).getNom() + " -- "
-								+ listePersonnel.get(i).getPrenom() + " -- " + listePersonnel.get(i).getSexe() + " -- "
-								+ listePersonnel.get(i).getEmail() + " -- " + listePersonnel.get(i).getDepartement());
+						System.out.println(index + 1 + "  " + listePersonnel.get(index).getNom() + " -- "
+								+ listePersonnel.get(index).getPrenom() + " -- " + listePersonnel.get(index).getSexe() + " -- "
+								+ listePersonnel.get(index).getEmail() + " -- " + listePersonnel.get(index).getDepartement());
 						System.out.println("Introduisez les nouvelles valeurs.");
 
 						System.out.println("Entrez un nom : ");
@@ -42,12 +42,12 @@ public class btnPersonnelListener implements ActionListener {
 						System.out.println("Entrez un email : ");
 						String Email = InputData.inputEmail();
 
-						listePersonnel.get(i).setNom(Nom);
-						listePersonnel.get(i).setPrenom(Prenom);
-						listePersonnel.get(i).setEmail(Email);
+						listePersonnel.get(index).setNom(Nom);
+						listePersonnel.get(index).setPrenom(Prenom);
+						listePersonnel.get(index).setEmail(Email);
 
-						System.out.println("Nouvelles données pour " + listePersonnel.get(i).getPrenom() + " "
-								+ listePersonnel.get(i).getNom() + "\n" + listePersonnel.get(i));
+						System.out.println("Nouvelles données pour " + listePersonnel.get(index).getPrenom() + " "
+								+ listePersonnel.get(index).getNom() + "\n" + listePersonnel.get(index));
 						arret = true;
 						return;
 					} else {
