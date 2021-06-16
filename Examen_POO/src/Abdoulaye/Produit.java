@@ -3,6 +3,7 @@ package Abdoulaye;
 public class Produit {
     private String nom="";
     private String description ="";
+    private boolean Pret;
 
     public Produit(String nom, String description) {
         this.nom = nom;

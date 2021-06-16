@@ -6,7 +6,8 @@ import java.util.HashMap;
 
         HashMap<String,Produit> liste;
 
-        public Magasin() {liste = new HashMap<>(); }
+        public Magasin() {
+            liste = new HashMap<>(); }
 
         public void listeMap() {
 

@@ -22,6 +22,7 @@ public class GestionJFrame extends JFrame {
     private static final Magasin magasin = new Magasin();
 
 
+
     public GestionJFrame() {
         super("Gestion du Personnel et prêt du matériel");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -156,8 +157,6 @@ public class GestionJFrame extends JFrame {
         return c;
         }
 
-
-
     //Création du Magasin
     public JButton getBtnMag() {
         return btnMag;
@@ -167,7 +166,6 @@ public class GestionJFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Magasin magasin = new Magasin();
 
             try {
                 produit.add(new Produit("Lenovo", "ThinkPad E15 G2"));
@@ -193,6 +191,18 @@ public class GestionJFrame extends JFrame {
     public JButton getBtnPret() {
         return btnPret;
     }
+    public static class Pret implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnPret works");
+
+
+
+            }
+
+        }
+
 
     //Retour matériel
     public JButton getBtnRetour() {
