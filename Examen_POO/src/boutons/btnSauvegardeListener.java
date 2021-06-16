@@ -69,7 +69,7 @@ public class btnSauvegardeListener implements ActionListener {
 			for (int index = 0; index < listeEmprunt.size(); index++) {
 
 				sb.append(" ");
-				sb.append(btnAffichageListener.setFixedLength(String.valueOf(index))); // ajouter setFixedLength
+				sb.append(btnAffichageListener.setFixedLength(String.valueOf(index)));
 				sb.append("\t");
 				sb.append(btnAffichageListener.setFixedLength(listeEmprunt.get(index).getEmprunteur().getNom() + " "
 						+ listeEmprunt.get(index).getEmprunteur().getPrenom()));
