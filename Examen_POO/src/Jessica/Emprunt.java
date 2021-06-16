@@ -19,12 +19,16 @@ public class Emprunt extends Personnel {
 			this.nom = nom;
 	  }
 
-	  public String getDescription() {
-			return description;
+	  public String getMateriel() {
+			return Materiel;
 	  }
-
-	  public void setDescription(String description) {
-			this.description = description;
+	  
+	  public String getArticle() {
+			return Article;
+	  }
+	  
+	  public String getNombre() {
+			return nombre;
 	  }
 
 	  @Override

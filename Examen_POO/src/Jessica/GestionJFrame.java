@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -24,9 +25,8 @@ public class GestionJFrame extends JFrame {
 	 private JButton btnSauvegarde = new JButton( "Sauvegarde" );
 	 private JButton btnClose = new JButton( "Fermer" );
 	 
-	// arraylist personnel accessible à toute la classe
 	private static ArrayList<Personnel> Person = new ArrayList<>();
-	private static ArrayList<Produit> mag = new ArrayList<>();
+	private static HashMap<Integer,Produit> produits = new HashMap<>();
 	
 	private static int tailleNom = 30;
 	
@@ -173,17 +173,18 @@ public class GestionJFrame extends JFrame {
 		@Override
 		public void actionPerformed (ActionEvent e) {
 		
-		// charger l'arraylist magasin/produit
+			Magasin mag = new Magasin();
+			
+			// charger le magasin/les produits
 			try{
-				mag.add(new Produit("HP1","Elitebook 850 G7"));
-				mag.add(new Produit("HP2","Elitebook 830 G7 X360"));
-				mag.add(new Produit("Dell1","Inspiron 15 3000"));
-				mag.add(new Produit("Dell2","XPS 13"));
-				mag.add(new Produit("Dell3","XPS 15"));
-				mag.add(new Produit("Lenovo1","Thinkpad E15 G2"));
-				mag.add(new Produit("Lenovo2","IdeaPad 3 14IIL05 81WD00B2MH"));
-				
-				}
+			produits.put(1, new Produit("HP", "Elitebook 850 G7"));
+			produits.put(2, new Produit("HP", "Elitebook 830 G7 X360"));
+			produits.put(3, new Produit("Dell","Inspiron 15 3000"));
+			produits.put(4, new Produit("Dell","XPS 13"));
+			produits.put(5, new Produit("Dell","XPS 15"));
+			produits.put(6, new Produit("Lenovo","Thinkpad E15 G2"));
+			produits.put(7, new Produit("Lenovo","IdeaPad 3 14IIL05 81WD00B2MH"));
+			}
 			catch (NullPointerException err) {
 				err.printStackTrace(); //- if the given pattern is null
 				}
@@ -191,16 +192,17 @@ public class GestionJFrame extends JFrame {
 				err.printStackTrace(); //- if the given pattern is invalid)
 				}
 			
-			//pour d'abord tester si liste bien chargée/créée
-			for(Produit Prod : mag) {
-				System.out.println(Prod);
-		}
-		}
+			
+			// afficher les produits
+			for (int i = 1; i <= produits.size(); i++) {
+				System.out.println("Id_" + i +" --- " + produits.get(i));
+			}
 		
+	}
 	}
 	
 	//***************************** PARTIE PRÊT *****************************//
-	
+
 	public JButton getBtnPret() {
         return btnPret;
         }
