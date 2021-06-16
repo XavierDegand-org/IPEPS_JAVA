@@ -1,13 +1,13 @@
 Collon,Albert,HOMME, 10/8/1990,Collon.a@test.be,HR
-Peeters,Marie,FEMME,01/05/1985,Peeters_M@@test.be,HR
-Janssens,Sarah,FEMME,23/05/1999,Sarah.Janssens@test,Compta
-Maes,Henri,HOMME,14/09/2009,MaesHenri#test.be,Compta
-Jacobs,Charles,HOMME,12/12/2009,Charles.j#test.be,Securité
+Peeters,Marie,FEMME,01/05/1985,Peeters_M@test.be,HR
+Janssens,Sarah,FEMME,23/05/1999,Sarah.Janssens@test.be,Compta
+Maes,Henri,HOMME,14/09/2009,MaesHenri@test.be,Compta
+Jacobs,Charles,HOMME,12/12/2009,Charles.j@test.be,Securité
 Mertens,Floriane,FEMME,20/08/1996,FloFlo.M@test.be,Securité
 Willems,Francois-Xavier,HOMME,28/10/1996,Willems.F-X@test.be,Prod
 O'Neil,Shan,HOMME,01/07/2001,ONeil.sh@test.be,Prod
 Goossen,Stéphanie,FEMME,25/10/2008,NieNieG@test.be,HR
 Dumont,Charles,HOMME,01/04/1969,dumont.c@test.be,HR
-Van Moore,Wilfrid,HOMME,25/02/1998,vanmoore.w@test.te,Compta
+Van Moore,Wilfrid,HOMME,25/02/1998,vanmoore.w@test.be,Compta
 Herman,Nathalie,FEMME,26/07/2001,herman.n@test.be,Prod
 Bontemps,Annie,FEMME,23/09/1998,bontemps.a@test.be,Prod

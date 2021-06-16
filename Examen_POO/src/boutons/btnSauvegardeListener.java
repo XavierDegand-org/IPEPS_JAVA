@@ -59,17 +59,17 @@ public class btnSauvegardeListener implements ActionListener {
 
 			}
 
-			sb.append("+------+-----------------------+-----------------------+");
+			sb.append("+----------------------+-----------------------+-----------------------+");
 			sb.append("\n");
-			sb.append("| N°   | Nom - Prénom          |  Matériel             |");
+			sb.append("| N°                   | Nom - Prénom          |  Matériel             |");
 			sb.append("\n");
-			sb.append("+------+-----------------------+-----------------------+");
+			sb.append("+----------------------+-----------------------+-----------------------+");
 			sb.append("\n");
 
 			for (int index = 0; index < listeEmprunt.size(); index++) {
 
 				sb.append(" ");
-				sb.append(index); //ajouter setFixedLength
+				sb.append(btnAffichageListener.setFixedLength(String.valueOf(index))); // ajouter setFixedLength
 				sb.append("\t");
 				sb.append(btnAffichageListener.setFixedLength(listeEmprunt.get(index).getEmprunteur().getNom() + " "
 						+ listeEmprunt.get(index).getEmprunteur().getPrenom()));
