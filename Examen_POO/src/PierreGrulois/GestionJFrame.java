@@ -2,6 +2,7 @@ package PierreGrulois;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,7 +10,6 @@ import javax.swing.JPanel;
 
 public class GestionJFrame extends JFrame {
 	
- 	 private static final long serialVersionUID = 1L;
 	 private JButton btnLoad = new JButton( "Chargement du personnel" );  // Création et texte des bouttons
 	 private JButton btnAffichage = new JButton( "Affichage liste du personnel" );
 	 private JButton btnMag = new JButton( "Création du magasin" );
@@ -74,13 +74,28 @@ public class GestionJFrame extends JFrame {
 		 
 		 @Override
 			public void actionPerformed (ActionEvent e) {
-			 System.exit(0);
+			 
+			 ArrayList<Personnel> Pers = new ArrayList<Personnel>();
+			 
+			 Pers.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
+			 Pers.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@@test.be", Departement.HR));	
+			 Pers.add(new Personnel("Janssens","Sarah",Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Janssens@test",Departement.Compta));
+			 Pers.add(new Personnel("Maes","Henri",Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri#test.be",Departement.Compta));
+			 Pers.add(new Personnel("Jacobs","Charles",Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j#test.be",Departement.SEC));
+			 Pers.add(new Personnel("Mertens","Floriane",Sexe.FEMME, new MyDate(20, 8, 1996), "FloFlo.M@test.be",Departement.SEC));
+			 Pers.add(new Personnel("Willems","Francois-Xavier",Sexe.HOMME, new MyDate(28, 10, 1996), "Willems.F-X@test.be", Departement.Prod));
+			 Pers.add(new Personnel("O'Neil","Shan",Sexe.HOMME, new MyDate(1, 7, 2001), "ONeil.sh@test.be",Departement.Prod));
+			 Pers.add(new Personnel("Goossen","Stéphanie",Sexe.FEMME, new MyDate(25, 10, 2008), "NieNieG@test.be",Departement.HR));
+			 Pers.add(new Personnel("Dumont","Charles",Sexe.HOMME, new MyDate(1, 4, 1969), "dumont.c@test.be",Departement.HR));
+			 Pers.add(new Personnel("Van Moore","Wilfrid",Sexe.HOMME,new MyDate(25, 2, 1998), "vanmoore.w@test.te",Departement.Compta));
+			 Pers.add(new Personnel("Herman","Nathalie",Sexe.FEMME, new MyDate(26, 7, 2001), "herman.n@test,be",Departement.Prod));
+			 Pers.add(new Personnel("Bontemps","Annie",Sexe.FEMME, new MyDate(23,9,1998), "bontemps.a@test.be",Departement.Prod));
 			}
 	 }
 	 
-	 /**************************************************
-	  ************Boutton création du magasin***********
-	  **************************************************/
+	 /*************************************************
+	  ************Boutton création du magasin**********
+	  *************************************************/
 	 
 	 public JButton Magasin(){
 		 return btnMag;
