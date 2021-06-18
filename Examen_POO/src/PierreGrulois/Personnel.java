@@ -4,16 +4,17 @@ import java.util.regex.Pattern;
 
 public class Personnel extends Individu{
 	private int idPersonnel;
-	private int id;
+	private int id=1;
 	private String email;
 	private Departement departement;
 	private static final Pattern EMAIL_PATTERN = Pattern.compile("^[\\w.-]+@[\\w.-]+[a-z]{2,}$");
 		
 	public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, String email, Departement departement) {
 		super (nom, prenom, sexe, dateNaissance);
-		this.id= id++;
+		this.idPersonnel= id;
 		this.email= email;
 		this.departement = departement;
+		id++;
 		
 		
 	}
@@ -28,7 +29,7 @@ public class Personnel extends Individu{
                 this.getNom(),
                 this.getSexe(),
                 this.getDateNaissance(),
-                this.email );
+                this.getEmail() );
 		/*}catch(java.util.IllegalFormatException e) {
 			System.out.println("Une ou plusieurs entrées ne sont pas valide.");
 		} */

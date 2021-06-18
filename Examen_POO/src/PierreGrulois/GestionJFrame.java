@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 
 public class GestionJFrame extends JFrame {
 	
+	private static ArrayList<Personnel> Pers = new ArrayList<Personnel>();
+	private int listeCharger = 0;
+	
 	 private JButton btnLoad = new JButton( "Chargement du personnel" );  // Création et texte des bouttons
 	 private JButton btnAffichage = new JButton( "Affichage liste du personnel" );
 	 private JButton btnMag = new JButton( "Création du magasin" );
@@ -57,8 +60,12 @@ public class GestionJFrame extends JFrame {
 			btnSauvegarde.addActionListener(new Sauvegarde());
 			btnClose.addActionListener(new Close());
 				
+			this.setSize( 775, 496 );
 	 }
+
 	 public void getnombre() {
+		 
+		  
 		 
 	 }
 	 
@@ -75,7 +82,7 @@ public class GestionJFrame extends JFrame {
 		 @Override
 			public void actionPerformed (ActionEvent e) {
 			 
-			 ArrayList<Personnel> Pers = new ArrayList<Personnel>();
+			 
 			 
 			 Pers.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
 			 Pers.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@@test.be", Departement.HR));	
@@ -90,7 +97,8 @@ public class GestionJFrame extends JFrame {
 			 Pers.add(new Personnel("Van Moore","Wilfrid",Sexe.HOMME,new MyDate(25, 2, 1998), "vanmoore.w@test.te",Departement.Compta));
 			 Pers.add(new Personnel("Herman","Nathalie",Sexe.FEMME, new MyDate(26, 7, 2001), "herman.n@test,be",Departement.Prod));
 			 Pers.add(new Personnel("Bontemps","Annie",Sexe.FEMME, new MyDate(23,9,1998), "bontemps.a@test.be",Departement.Prod));
-			}
+			 listeCharger = 1;
+		 }
 	 }
 	 
 	 /*************************************************
@@ -121,13 +129,48 @@ public class GestionJFrame extends JFrame {
 		 
 		 @Override
 			public void actionPerformed (ActionEvent e) {
-			 System.exit(0);
-			}
+			 
+			 switch (listeCharger) {
+			 
+			 case 0:
+				 System.out.println("Veuillez charger la liste du personnel pour effectuer cette action! ");
+				 break;
+			 case 1:
+				 System.out.println("+-------------------+-------------------+-------------------+-------------------+-------------------+---------------------+");
+				 System.out.println("| Département       | Prénom            | Nom               | Sexe              | Naissance         | Email               |");
+				 System.out.println("+-------------------+-------------------+-------------------+-------------------+-------------------+---------------------+");
+				 StringBuilder Afficher = new StringBuilder();
+				 for(int cpt=0 ; cpt<Pers.size(); cpt++) {
+					 
+					 Afficher.append(setFixedLenght(Pers.get(cpt).getDepartement()));
+					 Afficher.append(setFixedLenght(Pers.get(cpt).getPrenom()));
+					 Afficher.append(setFixedLenght(Pers.get(cpt).getNom()));
+					 Afficher.append(setFixedLenght(Pers.get(cpt).getSexe()));
+					 Afficher.append(setFixedLenght(Pers.get(cpt).getDateddMMyyyy()));
+					 Afficher.append(setFixedLenght(Pers.get(cpt).getEmail()));
+					 Afficher.append("\n");
+					 
+				 }
+				 System.out.println(Afficher.toString());
+				 
+				}
+			 
+			 }
+			 
 	 }
 
-	 public void setFixedLenght() {
+	 static String setFixedLenght(String element) {  //fonction permettant de calibrer la taille des strings à 20 caractères
 		 
-	 }
+		 StringBuilder ss= new StringBuilder(element);
+	        while (ss.length() < 20) {  
+	                String d = " ";
+	                char c1 = d.charAt(0);
+	                ss.insert(element.length(),c1);
+	            }
+	        String c = ss.substring(0, 20);
+	        return c;
+		 
+	 } 
 	 
 	 /**********************************************
 	  ************Boutton pret de materiel**********
