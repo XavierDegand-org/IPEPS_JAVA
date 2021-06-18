@@ -15,12 +15,12 @@ public class Personnel extends Individu {
 		this.email = email;
 	}
 	
-	public int idPersonel() {
+	public int getIdPersonel() {
 		return idPersonel;
 	}
 	
-	public Departement getDepartement() {
-		return departement;
+	public String getDepartement() {
+		return departement.getDeptNom();
 	}
 	
 	public String getEmail() {

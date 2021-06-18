@@ -1,7 +1,7 @@
 package Valentin;
 
 public class Individu  {
-	 private String nom;
+	  private String nom;
 	  private String prenom;
 	  private Sexe sexe;
 	  private MyDate dateNaissance;
