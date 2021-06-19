@@ -160,7 +160,7 @@ public class GestionJFrame extends JFrame {
 		private StringBuilder Affichage() throws IOException {
 			StringBuilder builder = new StringBuilder();
 			if (Person.isEmpty()) {
-				System.err.println("Affichage impossible, pas de personnel !");
+				return builder.append("Affichage impossible, pas de personnel !");
 			} else {
 				builder.append("+-----------------------+------------------------+------------------------+---------+--------------+--------------------------+\n");
 				builder.append("| Département           | Prénom                 | Nom                    | Sexe    | Naissance    | Email                    |\n");
@@ -176,8 +176,8 @@ public class GestionJFrame extends JFrame {
 					builder.append(setFixedLength(person.getEmail(), 30));
 					builder.append("\n");
 				}
+				return builder;
 			}
-			return builder;
 		}
 		
 	    static String setFixedLength(String s, int tailleNom) {
