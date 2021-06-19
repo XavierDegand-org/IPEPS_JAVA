@@ -1,8 +1,8 @@
 package DanielDerveaux;
 
 public class Individu {
-	 private String nom;
-	  private String prenom;
+	 public String nom;
+	 public String prenom;
 	  private Sexe sexe;
 	  private MyDate dateNaissance;
 
