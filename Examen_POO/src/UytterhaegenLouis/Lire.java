@@ -11,7 +11,7 @@ public class Lire {
 	static Scanner clavier = new Scanner(System.in);
 	
 	public static String texte() {
-		String texte = "Erreur";
+		String texte = ""; // Variable pour éviter la double saisie
 		try {
 			texte = clavier.nextLine();
 		} catch (NoSuchElementException e) {
@@ -26,16 +26,16 @@ public class Lire {
 	}	
 	 
 	public static int nbre() {
-		int result = 0;
+		int result = 0; // Variable pour éviter la double saisie
 		boolean loop = false;						
-		do {										
+		while (!loop) {										
 			try {									
 				result = clavier.nextInt();
 				loop = true;
 			}
 			catch(InputMismatchException e) {		
 				vider();
-				System.out.println("Erreur, veuillez recommencer ! Veuillez entrer un chiffre s.v.p !");
+				System.out.println("Error, Enter a new number please !");
 			}		
 			catch (NoSuchElementException e) {
 				vider();
@@ -45,7 +45,7 @@ public class Lire {
 				System.out.println("This scanner is closed");
 			}
 			
-		}while(!loop);
+		}
 		return result;
 										
 	}

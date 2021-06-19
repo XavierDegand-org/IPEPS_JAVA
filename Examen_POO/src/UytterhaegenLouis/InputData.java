@@ -2,9 +2,8 @@ package UytterhaegenLouis;
 
 public class InputData {
 	
-	private static int tailleNom = 30;
 	private static String email;
-	
+	private static int taillenom = 30;
 	
 	private String inputEmail() {
 		boolean arret = false;
@@ -26,7 +25,7 @@ public class InputData {
 		while (!arret) {
 			System.out.print("Entrer un "+libelle+"  :  ");
 			result = Lire.texte();
-			if (ControleSaisie.valideNom(result, tailleNom)){
+			if (ControleSaisie.valideNom(result, taillenom)){
 				return result;
 			}else {
 				System.out.print("Erreur de saisie !  ");

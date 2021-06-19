@@ -5,11 +5,16 @@ public class Personnel extends Individu {
 	private String Email;
 	private static int id;
 	private Departement Departement;
+	
 
-	public Personnel( String nom, String prenom, Sexe sexe, MyDate dateNaissance, String Email, Departement Departement) {
+	public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, String Email, Departement Departement) {
 		super(nom, prenom, sexe, dateNaissance);
-		//this.IdPersonnel = id++;
-		this.Email = Email;
+		this.IdPersonnel = id++;
+		if ( ControleSaisie.valideEmail(Email)) {
+			this.Email = Email;
+		} else {
+			this.Email = nom+"."+prenom +"@test.be";
+		}
 		this.Departement= Departement;
 		
 	}
@@ -29,7 +34,14 @@ public class Personnel extends Individu {
 	  }
 	  @Override
 		public String toString() {
-			return super.toString()+" %s "+ Email;
+		  return String.format( "%s %s %s %s %s %s",
+					
+	                this.getDepartement(),
+	                this.getPrenom(),
+	                this.getNom(),
+	                this.getSexe(),
+	                this.getDateNaissance(),
+	                this.Email );
 		}
 	  
 

@@ -13,7 +13,7 @@ public class ControleSaisie {
 		 boolean estNull = text.equals(nullString);
 		 boolean estVide = text.equals(vide);
 		 if(estNull || estVide){
-			System.out.println("Valeur null ou vide !");
+			System.out.println("Value is null or empty !");
 			 return false;
 		 } 
 		else{
@@ -21,7 +21,7 @@ public class ControleSaisie {
 				return true;
 			}
 			else {
-				System.out.println("Valeur hors contraintes !");
+				System.out.println("Value Out of bound !");
 			}
 		}
 		return false;
@@ -34,7 +34,7 @@ public class ControleSaisie {
 	
 	private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 	
-	public static boolean valideEmail(final String hex) {
+	public static boolean valideEmail( String hex) {
 	
 	     Matcher matcher = pattern.matcher(hex);
 	     return matcher.matches();
