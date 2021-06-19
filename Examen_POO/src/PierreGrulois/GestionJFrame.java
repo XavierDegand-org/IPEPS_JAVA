@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 
 public class GestionJFrame extends JFrame {
 	
+	
+	private static final long serialVersionUID = 8342878258434229124L;
 	private static ArrayList<Personnel> Pers = new ArrayList<Personnel>();
 	private int listeCharger = 0;
 	
