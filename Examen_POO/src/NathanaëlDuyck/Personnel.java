@@ -11,11 +11,12 @@ public class Personnel extends Individu {
 			"^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
 	private Departement departement;
 	
-	public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, String email,Departement depart) {
+	public Personnel(int idPersonnel,String nom, String prenom, Sexe sexe, MyDate dateNaissance, String email,Departement depart) {
 		super(nom, prenom, sexe, dateNaissance);
-		this.IdPersonnel = id++;
+		this.IdPersonnel = idPersonnel;
 		this.email = email;
 		this.departement=depart;
+		id++;
 	}
 
 	@Override
