@@ -14,6 +14,9 @@ public class ClassMain {
       JFrameInterface demo = new JFrameInterface ();
 				demo.setVisible(true);
 				
+				
+				
+				
 			}	
 		
 	}

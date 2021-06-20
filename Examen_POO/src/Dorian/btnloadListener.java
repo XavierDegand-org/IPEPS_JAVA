@@ -1,6 +1,5 @@
 package Dorian;
 
-
 import java.util.*;
 import java.awt.event.*;
 //import java.awt.event.ActionListener;
@@ -14,18 +13,21 @@ import java.io.*;
 
 public class btnloadListener implements ActionListener 
 {
-	static ArrayList<String> Tableau_personal_name = new ArrayList<String>(0);
-	static ArrayList<String> Tableau_personal_surname = new ArrayList<String>(0);
-	static ArrayList<String> Tableau_personal_sex = new ArrayList<String>(0);
-	static ArrayList<String> Tableau_personal_brihday = new ArrayList<String>(0);
-	static ArrayList<String> Tableau_personal_email = new ArrayList<String>(0);
-	static ArrayList<String> Tableau_personal_prod = new ArrayList<String>(0);
+	
+	static ArrayList<String> Tableau_personal_name      = new ArrayList<String>(0);
+	static ArrayList<String> Tableau_personal_surname   = new ArrayList<String>(0);
+	static ArrayList<String> Tableau_personal_sex       = new ArrayList<String>(0);
+	static ArrayList<String> Tableau_personal_brihday_j = new ArrayList<String>(0);
+	static ArrayList<String> Tableau_personal_brihday_m = new ArrayList<String>(0);
+	static ArrayList<String> Tableau_personal_brihday_y = new ArrayList<String>(0);
+	static ArrayList<String> Tableau_personal_email     = new ArrayList<String>(0);
+	static ArrayList<String> Tableau_personal_prod      = new ArrayList<String>(0);
+	
+	static Individu[] Personne = new Individu[13];
 	
 	static String pwd = System.getProperty("user.dir");
 	static File file_personal = new File(pwd + "/" +"src"+ "/" + "Dorian" + "/" +  "Personnel.txt");
 
-	
-	
 	public void actionPerformed(ActionEvent e) 
 	{
 		try 
@@ -50,8 +52,30 @@ public class btnloadListener implements ActionListener
 		    			Tableau_personal_sex.add( mots[i]);
 		    			break;
 		    		case 3:
-		    			Tableau_personal_brihday.add( mots[i]);
-		    			break;
+
+		  		        	final String separateur2 = "/";
+		  		    		String date[] = mots[i].split(separateur2);
+		  		    		
+		  		    		for (int j = 0; j < date.length; j++)
+		  		    		{ 
+		  		    			
+		  		    			switch ( j ) 
+		  			    		{
+		  		    			case 0:
+		  		    				Tableau_personal_brihday_j.add(date[j]) ;
+		  			    			break;
+		  			    			
+		  			    		case 1:
+		  			    			Tableau_personal_brihday_m.add(date[j]) ;
+		  			    			break;
+		  		    		
+		  		    			case 2:
+		  		    				Tableau_personal_brihday_y.add(date[j]) ;
+		  		    				break; 
+		  			    	    }
+		  		    		}
+
+		       			break;
 		    		case 4:
 		    			Tableau_personal_email.add( mots[i]);
 		    			break;
@@ -62,24 +86,39 @@ public class btnloadListener implements ActionListener
 		    	}
 		    }
 		    scanner.close(); 
-		    System.out.println("le ficher " +file_personal+" est chargé en mémoire\n");
-			
+		   
+
+		  for(int i= 0; i < btnloadListener.Tableau_personal_name.size(); i++)
+		  {
+			  
+			  int ID = i ; 
+			  
+		Personne[i] = new Individu
+				(
+				  
+				  Departement.valueOf( btnloadListener.Tableau_personal_prod.get(ID) ),
+				  btnloadListener.Tableau_personal_surname.get(ID),
+				  btnloadListener.Tableau_personal_name.get(ID),
+				  Sexe.valueOf(btnloadListener.Tableau_personal_sex.get(ID) ),
+				  new MyDate(
+						  Integer.parseInt(btnloadListener.Tableau_personal_brihday_j.get(ID) ),
+						  Integer.parseInt(btnloadListener.Tableau_personal_brihday_m.get(ID) ),
+					      Integer.parseInt(btnloadListener.Tableau_personal_brihday_y.get(ID) ) 
+						  ),			  
+		  		 btnloadListener.Tableau_personal_email.get(ID)
+		  		 
+				  );
+		
+		  }
+		  
+
+		    System.out.println("le ficher est chargé en mémoire\n");
+
+ 
 		} catch (IOException e1) 
 		{
 			
-			System.out.println("le ficher " +file_personal+" ne peut etre ouvert\n");
+         	System.out.println("le ficher  ne peut etre ouvert\n");
 		}
-		
-		
     }
-	
-
-	
 }
-/*
-public Individu(String nom, String prenom, Sexe sexe, MyDate dateNaissance) {
-	this.nom = nom;
-	this.prenom = prenom;
-	this.sexe = sexe;
-	this.dateNaissance = dateNaissance;
-*/

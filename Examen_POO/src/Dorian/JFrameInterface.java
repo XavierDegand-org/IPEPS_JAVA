@@ -29,9 +29,8 @@ public class JFrameInterface extends JFrame
 	this.setDefaultCloseOperation( DISPOSE_ON_CLOSE );    
 	JPanel contentPane = (JPanel) this.getContentPane();
 	
-	// Un FlowLayout permet de positionner les boutons les uns  la suite des autres.
 	        contentPane.setLayout(null);
-	        //position des Button
+	        //position des Button Fixe 
 	        btnload.setBounds      (0,0,250,125);
 	        btnAffichage.setBounds (250,0,250,125); 
 	        btnMag.setBounds       (500,0,250,125);

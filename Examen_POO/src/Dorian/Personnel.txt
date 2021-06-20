@@ -1,8 +1,8 @@
-Collon,Albert,HOMME, 10/8/1990,Collon.a@test.be,HR
-Peeters,Marie,FEMME,01/05/1985,Peeters_M@@test.be,HR
-Janssens,Sarah,FEMME,23/05/1999,Sarah.Janssens@test,Compta
-Maes,Henri,HOMME,14/09/2009,MaesHenri#test.be,Compta
-Jacobs,Charles,HOMME,12/12/2009,Charles.j#test.be,Securité
+Collon,Albert,HOMME,10/8/1990,Collon.a@test.be,HR
+Peeters,Marie,FEMME,01/05/1985,Peeters_M@test.be,HR
+Janssens,Sarah,FEMME,23/05/1999,Sarah.Janssens@test.be,Compta
+Maes,Henri,HOMME,14/09/2009,MaesHenri@test.be,Compta
+Jacobs,Charles,HOMME,12/12/2009,Charles.j@test.be,Securité
 Mertens,Floriane,FEMME,20/08/1996,FloFlo.M@test.be,Securité
 Willems,Francois-Xavier,HOMME,28/10/1996,Willems.F-X@test.be,Prod
 O'Neil,Shan,HOMME,01/07/2001,ONeil.sh@test.be,Prod
