@@ -10,10 +10,10 @@ public class Personnel extends Individu {
 	public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, String Email, Departement Departement) {
 		super(nom, prenom, sexe, dateNaissance);
 		this.IdPersonnel = id++;
-		if ( ControleSaisie.valideEmail(Email)) {
+		if ( ControleSaisie.valideEmail(Email)) { // Permet qu'en cas de mauvaise écriture de l'email, d'automatiquement écrire le mail dans un bon format
 			this.Email = Email;
 		} else {
-			this.Email = nom+"."+prenom +"@test.be";
+			this.Email = nom+"."+prenom.charAt(0) +"@test.be";
 		}
 		this.Departement= Departement;
 		
