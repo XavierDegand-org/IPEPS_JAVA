@@ -27,7 +27,6 @@ public class InputData {
 			if (ControleSaisie.valideNom(result, GestionJFrame.tailleNom)){
 				return result;
 			}else {
-				System.out.print("Erreur de saisie !  ");
 				arret = false;
 			}
 		}

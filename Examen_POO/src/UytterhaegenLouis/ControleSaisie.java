@@ -21,7 +21,7 @@ public class ControleSaisie {
 				return true;
 			}
 			else {
-				System.out.println("Value Out of bound !");
+				System.out.println("Texte Invalide!");
 			}
 		}
 		return false;
