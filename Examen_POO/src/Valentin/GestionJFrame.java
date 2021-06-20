@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,9 +30,9 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 	private static int tailleNom = 30;
 	
 	private static ArrayList<Personnel> Person = new ArrayList<>();
+	private static final Magasin mag = new Magasin();
 	
-	
-	
+		
 	// Création du constructeur GestionJFrame
 	public GestionJFrame() {
 		super("Gestion Personnel & prêt matériel"); // permet de mettre un titre pour la fenetre 
@@ -53,6 +54,7 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 		btnLoad.addActionListener(new LoadPersonnel());
 		btnAffichage.addActionListener(new btnAffichageListener());
 		btnPersonnel.addActionListener(new GestionPersonnel());
+		btnMag.addActionListener(new btnMagListener());
 		btnClose.addActionListener(new ActionListener() {
 			
 			@Override
@@ -67,6 +69,11 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 		this.setLocationRelativeTo(null); // cela va nous permettre de centrer la fenêtre sur l'écran
 		
 	}
+	
+	/****************************************
+	 ********Chargement du personnel********* 
+	 ****************************************/
+	
 	
 	public JButton getBtnLoad() {
 		return btnLoad;
@@ -94,7 +101,9 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 										
 	}
 		
-	
+	/****************************************
+	 *********Affichage Personnel************ 
+	 ****************************************/
 	public class btnAffichageListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -147,20 +156,51 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 		return c;
 	}
 	
+	/****************************************
+	 ****************Magasin***************** 
+	 ****************************************/
+	
+	
+	public JButton getBtnMag() {
+		return btnMag;
+	}
+	
+	
+	
+	public class btnMagListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Magasin();
+		}
+	}
+	
+	public static void Magasin(){
+
+			mag.AjouterProduit(1, "HP", "Elitebook 850 G7");
+			mag.AjouterProduit(2, "HP", "Elitebook 830 G7 X360");
+			mag.AjouterProduit(3, "Dell", "Inspiron 15 3000");
+			mag.AjouterProduit(4, "Dell", "XPS 15");
+			mag.AjouterProduit(5, "Dell", "XPS 17");
+			mag.AjouterProduit(6, "Lenovo", "Thinkpad E15 G2");
+			mag.AjouterProduit(7, "Lenovo", "IdeaPad 3 14IIL05 81WD00B2MH");
+			
+			mag.listeMap();
+			
+			
+		}
+	
+	
+	/****************************************
+	 *********Modification Personnel********* 
+	 ****************************************/
+	
 	public JButton getBtnPersonnel() {
 		return btnPersonnel;
 	}
 	
 
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	
-	public class GestionPersonnel implements ActionListener{
+	public static class GestionPersonnel implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -204,11 +244,18 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 					System.out.println("Erreur, le nom n'est pas dans la liste, veuillez réessayer ");
 				}while((!arret));
 			}
+		
 		}
 		
-	}
+			
 		
-	
+
+		}
 
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
