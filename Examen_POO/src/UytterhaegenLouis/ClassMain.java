@@ -13,8 +13,8 @@ public class ClassMain {
 		
 		
 		// Démarre la présentation
-		GestionJFrame demo = new  GestionJFrame();
-		demo.setVisible(true);
+		GestionJFrame Gestion = new  GestionJFrame();
+		Gestion.setVisible(true);
 	}
 
 }

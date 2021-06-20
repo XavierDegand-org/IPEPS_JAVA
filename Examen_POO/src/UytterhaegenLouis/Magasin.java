@@ -4,29 +4,33 @@ import java.util.HashMap;
 
 public class Magasin  {
 	
-	private HashMap<Integer,Produit> liste;
+	private HashMap<Integer,Produit> listeProduit;
 
 	public Magasin() {
-		this.liste = new HashMap <Integer,Produit>();
+		this.listeProduit = new HashMap <Integer,Produit>();
 	}
 	
 	public void ajouterProduit (String nom,String description) {
 		Produit produit = new Produit(nom, description);
-		liste.put(liste.size()+1, produit);
+		listeProduit.put(listeProduit.size()+1, produit);
 	}
 	
 
 	
 	public void listeMap() {
 		
-		System.out.println("Le magasin est composé de : " + liste.size() + " articles");
-		for (int CompteurListe=1;CompteurListe<=liste.size();CompteurListe++) {
-			System.out.println(""+ CompteurListe +" "+  liste.get(CompteurListe).toString());
+		System.out.println("Le magasin est composé de : " + listeProduit.size() + " articles");
+		for (int CompteurListe=1;CompteurListe<=listeProduit.size();CompteurListe++) {
+			System.out.println(""+ CompteurListe +" "+  listeProduit.get(CompteurListe).toString());
 		}
 		
 	}
+	
+	public void getProduit () {
+		
+	}
 	public boolean isEmpty () {
-		if (liste.size()== 0 ) {
+		if (listeProduit.size()== 0 ) {
 			return true;
 		}
 		return false;
