@@ -78,11 +78,11 @@ public class GestionJFrame extends JFrame  {
 		btnClose.addActionListener(new Close());
 
 	}
-
+	
 	/* ******************************************************************
 	 *******************Bouton Chargement Personnel***********************/								
 
-	private class LoadPersonnel implements ActionListener{
+	private class LoadPersonnel implements ActionListener{ // Mise en place d'une classe interne 
 
 		@Override
 		public void actionPerformed (ActionEvent e) {
@@ -130,7 +130,7 @@ public class GestionJFrame extends JFrame  {
 
 		return SB;
 	}
-	// Mise en place de classes Anonymes pour les actions des boutons
+	
 	private class Affichage implements ActionListener{
 
 		@Override
