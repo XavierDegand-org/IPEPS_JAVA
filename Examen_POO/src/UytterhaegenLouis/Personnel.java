@@ -3,7 +3,7 @@ package UytterhaegenLouis;
 public class Personnel extends Individu {
 	private int IdPersonnel;
 	private String Email;
-	private static int id;
+	private static int id=1;
 	private Departement Departement;
 	
 
@@ -12,12 +12,13 @@ public class Personnel extends Individu {
 		this.IdPersonnel = id++;
 		if ( ControleSaisie.valideEmail(Email)) { // Permet qu'en cas de mauvaise écriture de l'email, d'automatiquement écrire le mail dans un bon format
 			this.Email = Email;
-		} else {
+			} else {
 			this.Email = nom+"."+prenom.charAt(0) +"@test.be";
-		}
+					}
 		this.Departement= Departement;
+		}
 		
-	}
+	
 	 public int getIdPersonnel() {
 			return IdPersonnel;
 	  }
@@ -35,7 +36,6 @@ public class Personnel extends Individu {
 	  @Override
 		public String toString() {
 		  return String.format( "%s %s %s %s %s %s",
-					
 	                this.getDepartement(),
 	                this.getPrenom(),
 	                this.getNom(),

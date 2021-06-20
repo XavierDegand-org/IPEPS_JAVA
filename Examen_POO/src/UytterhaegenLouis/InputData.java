@@ -3,9 +3,8 @@ package UytterhaegenLouis;
 public class InputData {
 	
 	private static String email;
-	private static int taillenom = 30;
 	
-	private String inputEmail() {
+	public static String inputEmail() {
 		boolean arret = false;
 		while (!arret) {
 			System.out.print("Entrer une adresse mail  :  ");
@@ -25,7 +24,7 @@ public class InputData {
 		while (!arret) {
 			System.out.print("Entrer un "+libelle+"  :  ");
 			result = Lire.texte();
-			if (ControleSaisie.valideNom(result, taillenom)){
+			if (ControleSaisie.valideNom(result, GestionJFrame.tailleNom)){
 				return result;
 			}else {
 				System.out.print("Erreur de saisie !  ");

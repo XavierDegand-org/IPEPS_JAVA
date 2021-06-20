@@ -12,7 +12,11 @@ import java.util.ArrayList;
 
 public class GestionJFrame extends JFrame  {
 	
-	// Création des boutons et des textes des bouton
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// Création des boutons et des textes des boutons
 	private JButton btnLoad = new JButton( "Chargement du personnel" );  
 	 private JButton btnAffichage = new JButton( "Affichage liste du Personnel" );
 	 private JButton btnMag = new JButton( "Création du magasin" );
@@ -22,7 +26,8 @@ public class GestionJFrame extends JFrame  {
 	 private JButton btnSauvegarde = new JButton( "Sauvegarde" );
 	 private JButton btnClose = new JButton( "Fermer" );
 	 
-	private static int tailleNom = 20;
+	public static final int tailleNom = 30;
+	private static ArrayList<Personnel> Person = new ArrayList<Personnel>();
 
 	public GestionJFrame() {
 		/* Mise en place de l'affichage des boutons et de la disposition*/
@@ -73,20 +78,18 @@ public class GestionJFrame extends JFrame  {
 			 return btnPersonnel;
 		 }
 		 
-		 ArrayList<Personnel> Person = new ArrayList<>();
+		
 		 
 		private class LoadPersonnel implements ActionListener{
 			 
 			 @Override
 				public void actionPerformed (ActionEvent e) {
-				 
-				 
-				 
+				 				 
 				 Person.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
-				 Person.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@@test.be", Departement.HR));	
+				 Person.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@test.be", Departement.HR));	
 				 Person.add(new Personnel("Janssens","Sarah",Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Janssens@test",Departement.Compta));
-				 Person.add(new Personnel("Maes","Henri",Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri#test.be",Departement.Compta));
-				 Person.add(new Personnel("Jacobs","Charles",Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j#test.be",Departement.SEC));
+				 Person.add(new Personnel("Jacobs","Charles",Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j@test.be",Departement.SEC));
+				 Person.add(new Personnel("Maes","Henri",Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri@test.be",Departement.Compta));
 				 Person.add(new Personnel("Mertens","Floriane",Sexe.FEMME, new MyDate(20, 8, 1996), "FloFlo.M@test.be",Departement.SEC));
 				 Person.add(new Personnel("Willems","Francois-Xavier",Sexe.HOMME, new MyDate(28, 10, 1996), "Willems.F-X@test.be", Departement.Prod));
 				 Person.add(new Personnel("O'Neil","Shan",Sexe.HOMME, new MyDate(1, 7, 2001), "ONeil.sh@test.be",Departement.Prod));
@@ -104,29 +107,25 @@ public class GestionJFrame extends JFrame  {
 		 public JButton Affichage() {
 			 return btnAffichage;
 		 }
-		 
-		 
-		 private class Affichage implements ActionListener{
-			// Mise en place de classes Anonymes pour les actions des boutons
-			 @Override
-				public void actionPerformed (ActionEvent e) {
-				if (Person.isEmpty()) {
+		 private static void Affichage1() {
+			 
+			 if (Person.isEmpty()) {
 					System.out.println("Affichage impossible, pas de personnel !");
 				}
 					else {
-					System.out.println("+---------------------+-----------------------+-----------------------+---------------+---------------+------------------------+");
-					System.out.println("| Département         | Prénom                | Nom                   | Sexe   	      | Naissance     | Email                  |");
-					System.out.println("+---------------------+-----------------------+-----------------------+---------------+---------------+------------------------+");
+					System.out.println("+---------------------+-------------------------------+-------------------------------+---------------+---------------+---------------------------+");
+					System.out.println("| Département         | Prénom                        | Nom                           | Sexe   	      | Naissance     | Email                     |");
+					System.out.println("+---------------------+-------------------------------+-------------------------------+---------------+---------------+---------------------------+");
 					StringBuilder SB = new StringBuilder(); // Permet de concaténer les String
 						for (Personnel person : Person) {
 							SB.append("  ");
-							SB.append(setFixedLength(person.getDepartement(),tailleNom));
+							SB.append(setFixedLength(person.getDepartement(),20));
 							SB.append("\t");
-							SB.append(setFixedLength(person.getPrenom(),tailleNom));
+							SB.append(setFixedLength(person.getPrenom(),30));
 							SB.append("\t");
-							SB.append(setFixedLength(person.getNom(),tailleNom));
+							SB.append(setFixedLength(person.getNom(),30));
 							SB.append("\t");
-							SB.append(setFixedLength(person.getSexe(),10));
+							SB.append(setFixedLength(person.getSexe(),8));
 							SB.append("\t");
 							SB.append(setFixedLength(person.getDateddMMyyyy(),10));
 							SB.append("\t");
@@ -135,7 +134,15 @@ public class GestionJFrame extends JFrame  {
 							}
 						System.out.println(SB);
 						}
-				}
+				
+		 }
+		// Mise en place de classes Anonymes pour les actions des boutons
+		 private class Affichage implements ActionListener{
+			
+			 @Override
+				public void actionPerformed (ActionEvent e) {
+				 Affichage1();
+			 }
 		 }
 		 
 			/* ******************************************************************
@@ -207,11 +214,47 @@ public class GestionJFrame extends JFrame  {
 		 
 		 private class GestionPersonnel implements ActionListener{
 			 
+			
 			 @Override
 				public void actionPerformed (ActionEvent e) {
-				
-				}
-		 }
+				 if (Person.isEmpty())
+				 {
+					 System.out.println("Vous ne pouvez pas modifier le personnel tant que vous n'avez pas charger celui-ci");
+				 }
+				 else
+				 {
+				 		Affichage1();
+							System.out.println("Introduire le nom de la personne à modifier :");
+							// On demande le nom de la personne à modifier
+							String s = InputData.inputNomPrenom("Nom");
+							Boolean loop = false;
+							int indice = 0;
+							while (!loop) {
+								for (int CompteurList=0;CompteurList<Person.size();CompteurList++){
+									if (Person.get(CompteurList).getNom().equals(s)){
+										loop = true;
+									    indice = CompteurList;
+									}
+								}
+								if (!loop) {
+									System.out.println("Il n'existe personne ayant ce nom. Veuillez entrer un nom correct existant");
+									s = InputData.inputNomPrenom("Nom");
+								}
+							}
+							Personnel Pers = Person.get(indice);
+							System.out.println(Pers.getIdPersonnel()+"   "+Pers.getNom()+" -- "+Pers.getPrenom()+" -- "+Pers.getSexe()+" -- "+Pers.getEmail()+" -- "+Pers.getDepartement());
+							System.out.println("Introduire les nouvelles valeurs :");
+							// On Demande le Nom
+							Pers.setNom(InputData.inputNomPrenom("Nom"));
+							// On Demande le Prénom
+							Pers.setPrenom(InputData.inputNomPrenom("Prénom"));
+							// On Demande l'adresse mail
+							Pers.setEmail(InputData.inputEmail());
+							
+							}
+			 			}
+			 }
+		 
 		 
 			/* ******************************************************************
 			*************************Bouton Sauvegarde***************************/
