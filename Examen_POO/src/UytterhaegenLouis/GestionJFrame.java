@@ -31,7 +31,7 @@ public class GestionJFrame extends JFrame  {
 	private JButton btnClose = new JButton( "Fermer" );
 
 	public final static int tailleNom = 30;
-	private static ArrayList<Personnel> ListePersonnel = new ArrayList<Personnel>();
+	private  ArrayList<Personnel> ListePersonnel = new ArrayList<Personnel>();
 	private Magasin magasin =  new Magasin(); ;
 
 
@@ -110,7 +110,7 @@ public class GestionJFrame extends JFrame  {
 	/* ******************************************************************
 	 ********************Bouton Affichage Personnel***********************/
 
-	private static StringBuilder  Affichage() {
+	private  StringBuilder  Affichage() {
 		StringBuilder SB = new StringBuilder();
 		SB.append("+---------------------+------------------------------+------------------------------+-------+------------+---------------------------+\n");
 		SB.append("| Département         | Prénom                       | Nom                          | Sexe  | Naissance  | Email                     |\n");
@@ -148,7 +148,7 @@ public class GestionJFrame extends JFrame  {
 
 	/* ******************************************************************
 	 **************Permet de calibrer la taille des Strings***************/
-	public static String setFixedLength(String s, int taille) {
+	private String setFixedLength(String s, int taille) {
 		StringBuilder stringtest= new StringBuilder(s);
 		while (stringtest.length()< taille) { 	// Rajouter des espaces jusqu'à ce qu'on atteigne le nombre de caractères demandés pour l'affichage 									
 			stringtest.insert(s.length(),' ');
