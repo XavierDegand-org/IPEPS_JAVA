@@ -29,6 +29,9 @@ public class GestionJFrame extends JFrame {
 	private ArrayList<Individu> listIndividu = new ArrayList<>();
 	private boolean isPersonnelLoad = false;
 	
+	Magasin mag;
+	
+	
 	public GestionJFrame()
 	{
 		super("Implementation GestionJFrame");
@@ -82,7 +85,7 @@ public class GestionJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println(((JButton)e.getSource()).getText());
+				CreationMagasin();
 			}
 		});
 		
@@ -302,6 +305,7 @@ public class GestionJFrame extends JFrame {
 		boolean isEqual = false;
 		int pass = 0;
 		String texte = "";
+		int individuActuel = 0;
 		
 		while(!isEqual)
 		{
@@ -313,23 +317,68 @@ public class GestionJFrame extends JFrame {
 			texte = Lire.texte();
 			System.out.println(texte);
 			
+			
 			for (Individu individu : listIndividu)
 			{
-				if (individu.getNom() != texte)
-				{
-					System.out.println(individu.getNom() + "+");	
-				}		
-				else
+				if (individu.getNom().equals(texte))
 				{
 					isEqual = true;
-					System.out.println(individu.getNom() + " -- " + individu.getPrenom() + " -- " + individu.getSexe() + " -- " + individu.personnel.GetEmail() + " -- " + individu.personnel.GetDepartement());
-				}
+					System.out.println(individu.getNom() + " -- " + individu.getPrenom() + " -- " + individu.getSexe() + " -- " + individu.personnel.GetEmail() + " -- " + individu.personnel.GetDepartement());			
+
+					System.out.println("Introduire les nouvelles valeurs : ");
+					texte = "";					
+					boolean isInput = false;
+					
+					while (!ControleSaisie.ValideNom(texte, isInput))
+					{
+						isInput = true;
+						System.out.println("Entrer un nom : ");
+						texte = Lire.texte();
+					}
+					individu.setNom(texte);
+					texte = "";
+					isInput = false;
+					
+					while(!ControleSaisie.ValideNom(texte, isInput))
+					{
+						isInput = true;
+						System.out.println("Entrer un prénom : ");
+						texte = Lire.texte();
+					}
+					individu.setPrenom(texte);
+					texte = "";
+					isInput = false;
+
+					while (!ControleSaisie.valideEmail(texte, isInput))
+					{
+						isInput = true;
+						System.out.println("Entrer une adresse mail : ");
+						texte = Lire.texte();
+					}
+					individu.personnel.SetEmail(texte);					
+				}	
+				individuActuel++;
 			}
 			pass++;
-		}
-		
-		pass = 0;
-				
+		}						
 	}
+	
+	// Créer le magasin	
+	public void CreationMagasin()
+	{	
+		// Créer le magasin si il n'existe pas
+		if (mag == null)
+			mag = new Magasin();
+		
+		// Afficher le magasin
+		if (mag != null)
+		{
+			System.out.println("Le magasin est composé de " + mag.listProduit.size() + " articles");
+			for (int i = 0; i < mag.listProduit.size(); i++)
+				System.out.println("ID_" + i + " --- Produit [nom = " + mag.listProduit.get(i).GetNom() + ", description = " + mag.listProduit.get(i).GetDescription() + " ]");
+		}
+	}
+	
+	
 	
 }
