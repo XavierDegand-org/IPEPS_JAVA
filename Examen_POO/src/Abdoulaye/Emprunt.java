@@ -8,9 +8,14 @@ public class Emprunt {
         this.emprunt = true;
     }
 
+    void Retour(){
+        this.emprunt = false;
+    }
+
     public int getNombre() {
         return nombre;
     }
+
     public void getEmprunteur(){
 
     }

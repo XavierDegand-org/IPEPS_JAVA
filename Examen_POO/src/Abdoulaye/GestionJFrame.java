@@ -47,14 +47,14 @@ public class GestionJFrame extends JFrame {
         /*btnPret.addActionListener(new Emprunt());
         btnRetour.addActionListener(new RetourEmprunt());
         btnPersonnel.addActionListener(new GestionPersonnel());
-        btnSauvegarde.addActionListener(new Sauvegarde());
+        btnSauvegarde.addActionListener(new Sauvegarde());*/
         btnClose.addActionListener(new ActionListener(){
 
             @Override
         public void actionPerformed (ActionEvent e){
             System.exit(0);
         }
-    });*/
+    });
 
         this.setSize(800, 400);
         this.setLocationRelativeTo(null);
@@ -177,6 +177,8 @@ public class GestionJFrame extends JFrame {
                 produit.add(new Produit("HP", "Elitebook 850 G7"));
 
                 for (Produit produit : produit) {
+                    /*for (int i = 1; i <= produits.size(); i++) {
+                        System.out.println("Id_" + i +" --- " + produits.get(i));*/
                     System.out.println(produit);
                 }
 
@@ -198,7 +200,6 @@ public class GestionJFrame extends JFrame {
             System.out.println("btnPret works");
 
 
-
             }
 
         }
@@ -207,6 +208,13 @@ public class GestionJFrame extends JFrame {
     //Retour matériel
     public JButton getBtnRetour() {
         return btnRetour;
+    }
+    public static class RetourPret implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
     }
 
     // Modification Personnel

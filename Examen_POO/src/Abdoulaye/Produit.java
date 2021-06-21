@@ -1,11 +1,13 @@
 package Abdoulaye;
 
 public class Produit {
-    private String nom="";
-    private String description ="";
-    private boolean Pret;
+    public static int id = 1;
+     private String nom =" ";
+     private String description = " ";
+     private int identifiant = 0;
 
     public Produit(String nom, String description) {
+        this.identifiant = id++;
         this.nom = nom;
         this.description = description;
     }
@@ -26,10 +28,11 @@ public class Produit {
         this.description = description;
     }
 
+
     @Override
     public String toString() {
 
-        return "Produit [" +
+        return "Id_"+identifiant +" --- Produit [" +
                 "nom= " + nom +
                 ", description = " + description  +
                 ']';
