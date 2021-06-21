@@ -69,7 +69,10 @@ public class GestionJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				AffichagePersonnel();
+				if (isPersonnelLoad)
+					AffichagePersonnel();
+				else
+					System.out.println("Impossible, pas de personnel !");
 			}
 		});
 		
@@ -109,7 +112,13 @@ public class GestionJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println(((JButton)e.getSource()).getText());
+				if (isPersonnelLoad)
+				{					
+					AffichagePersonnel();
+					GestionPersonnel();
+				}					
+				else
+					System.out.println("Impossible, pas de personnel !");
 			}
 		});
 		
@@ -148,25 +157,179 @@ public class GestionJFrame extends JFrame {
 		listIndividu.add(new Individu("Peeters", "Marie", Sexe.FEMME, new MyDate(1, 5, 1985), "Peeters_M@@test.be", Departement.HR));
 		listIndividu.add(new Individu("Janssens", "Sarah", Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Janssens@test", Departement.COMPTA));
 		listIndividu.add(new Individu("Maes", "Henri", Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri#test.be", Departement.COMPTA));
+		listIndividu.add(new Individu("Jacobs", "Charles", Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j#test.be", Departement.SEC));
+		listIndividu.add(new Individu("Mertens", "Floriane", Sexe.FEMME, new MyDate(20, 8, 1996), "FloFlo.M@test", Departement.SEC));
+		listIndividu.add(new Individu("Willems", "Francois-Xavier", Sexe.HOMME, new MyDate(28, 10, 1996), "Willems.F-X@test.be", Departement.PROD));
+		listIndividu.add(new Individu("O'Neil", "Shan", Sexe.HOMME, new MyDate(1, 7, 2001), "ONeil.sh@test.be", Departement.PROD));
+		listIndividu.add(new Individu("Goossen", "Stéphanie", Sexe.FEMME, new MyDate(25, 10, 2008), "NieNie@test.be", Departement.HR));
+		listIndividu.add(new Individu("Dumont", "Charles", Sexe.HOMME, new MyDate(1, 4, 1969), "dumont.c@test.be", Departement.HR));
+		listIndividu.add(new Individu("Van Moore", "Wilfrid", Sexe.HOMME, new MyDate(25, 2, 1998), "vanmoore.w@test.be", Departement.COMPTA));
+		listIndividu.add(new Individu("Herman", "Nathalie", Sexe.FEMME, new MyDate(26, 7, 2001), "herman.n@test.be", Departement.PROD));
+		listIndividu.add(new Individu("Bontemps", "Annie", Sexe.FEMME, new MyDate(23, 9, 1998), "bontemps.a@test.be", Departement.PROD));		
 	
 		isPersonnelLoad = true;
 	}
 	
 	// Afficher personnel
 	private void AffichagePersonnel()
-	{
-		if (isPersonnelLoad)
+	{		
+		// Définir la taille des string dans la list pour l'affichage
+		int dptLength = 17;
+		int prenomLength = 17;
+		int nomLength = 0;
+		int sexeLength = 8;
+		int naissanceLength = 11;
+		int mailLength = 0;
+		
+		int prenomTemp = 0;
+		int nomTemp = 0;
+		int mailTemp = 0;
+		
+		for (int i = 0; i < listIndividu.size() - 1; i++)
 		{
-			System.out.println("+---------------" + "+---------------" + "+---------------" + "+---------------" + "+---------------" + "+---------------+");
-			System.out.println("| Département   " + "| Prénom        " + "| Nom           " + "| Sexe          " + "| Naissance     " + "| Email         |");
-			System.out.println("+---------------" + "+---------------" + "+---------------" + "+---------------" + "+---------------" + "+---------------+");
-			for (Individu individu : listIndividu)
+			if (listIndividu.get(i+1).getPrenom().length() > listIndividu.get(i).getPrenom().length())
 			{
-				System.out.println(individu.personnel.GetDepartement() + " " + individu.getPrenom() + " " + individu.getNom() + " " + individu.getSexe() + " " + individu.getDateddMMyyyy() + " " + individu.personnel.GetEmail());
+				prenomLength = listIndividu.get(i+1).getPrenom().length();
+				if (prenomLength > prenomTemp)
+					prenomTemp = prenomLength;
+			}
+			
+			if (listIndividu.get(i+1).getNom().length() > listIndividu.get(i).getNom().length())
+			{
+				nomLength = listIndividu.get(i+1).getNom().length();
+				if (nomLength > nomTemp)
+					nomTemp = nomLength;
+			}
+			
+			if (listIndividu.get(i+1).personnel.GetEmail().length() > listIndividu.get(i).personnel.GetEmail().length())
+			{
+				mailLength = listIndividu.get(i+1).personnel.GetEmail().length();
+				if (mailLength > mailTemp)
+					mailTemp = mailLength;
 			}
 		}
-		else
-			System.out.println("Affichage impossible, pas de personnel !");
+		prenomLength = prenomTemp;	
+		nomLength = nomTemp;
+		mailLength = mailTemp;
+		
+		
+		String tiret = "----------------------------------------------";
+		String espace = "                                              ";
+		
+		StringBuilder buildTab = new StringBuilder();
+		
+		try {
+			// Ligne 1
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, dptLength + 1);
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, prenomLength + 1);
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, nomLength + 1);		
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, sexeLength + 1);
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, naissanceLength + 1);
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, mailLength + 1);
+			buildTab.append("+\n");	
+				
+			// Ligne 2
+			buildTab.append("| ");
+			buildTab.append("Département");
+			buildTab.append(espace, 0, dptLength-11);
+			buildTab.append("| ");
+			buildTab.append("Prénom");
+			buildTab.append(espace, 0, prenomLength-6);
+			buildTab.append("| ");
+			buildTab.append("Nom");
+			buildTab.append(espace, 0, nomLength-3);
+			buildTab.append("| ");
+			buildTab.append("Sexe");
+			buildTab.append(espace, 0, sexeLength-4);
+			buildTab.append("| ");
+			buildTab.append("Naissance");
+			buildTab.append(espace, 0, naissanceLength-9);
+			buildTab.append("| ");
+			buildTab.append("Email");
+			buildTab.append(espace, 0, mailLength-5);
+			buildTab.append("| \n");
+			
+			// Ligne 3
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, dptLength + 1);
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, prenomLength + 1);
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, nomLength + 1);		
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, sexeLength + 1);
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, naissanceLength + 1);
+			buildTab.append("+");	
+			buildTab.append(tiret, 0, mailLength + 1);
+			buildTab.append("+\n");	
+			
+			// Afficher la liste
+			for (Individu individu : listIndividu)
+			{
+				buildTab.append(" " + individu.personnel.GetDepartement());
+				buildTab.append(espace, 0, dptLength - individu.personnel.GetDepartement().length() + 2);
+				buildTab.append(individu.getPrenom());
+				buildTab.append(espace, 0, prenomLength - individu.getPrenom().length() + 2);
+				buildTab.append(individu.getNom());
+				buildTab.append(espace, 0, nomLength - individu.getNom().length() + 2);
+				buildTab.append(individu.getSexe());
+				buildTab.append(espace, 0, sexeLength - individu.getSexe().length() + 2);
+				buildTab.append(individu.getDateddMMyyyy());
+				buildTab.append(espace, 0, naissanceLength - individu.getDateddMMyyyy().length() + 2);
+				buildTab.append(individu.personnel.GetEmail());
+				buildTab.append("\n");
+			}
+			System.out.println(buildTab.toString());
+		}
+		catch (IndexOutOfBoundsException ex)
+		{
+			System.out.println(ex.toString());
+		}
+		// Afficher le tableau
+		
+	}
+	
+	// Modifier le personnel
+	private void GestionPersonnel()
+	{						
+		boolean isEqual = false;
+		int pass = 0;
+		String texte = "";
+		
+		while(!isEqual)
+		{
+			if (pass > 0)
+				System.out.println("\nAucun nom correspondant trouvé");
+						
+			System.out.println("\nIntroduire le nom de la personne à modifier : ");
+			System.out.println("Entrer un nom : ");
+			texte = Lire.texte();
+			System.out.println(texte);
+			
+			for (Individu individu : listIndividu)
+			{
+				if (individu.getNom() != texte)
+				{
+					System.out.println(individu.getNom() + "+");	
+				}		
+				else
+				{
+					isEqual = true;
+					System.out.println(individu.getNom() + " -- " + individu.getPrenom() + " -- " + individu.getSexe() + " -- " + individu.personnel.GetEmail() + " -- " + individu.personnel.GetDepartement());
+				}
+			}
+			pass++;
+		}
+		
+		pass = 0;
+				
 	}
 	
 }

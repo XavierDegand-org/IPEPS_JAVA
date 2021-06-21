@@ -1,7 +1,7 @@
 package StainierEdwin;
 
 public enum Sexe {
-	 HOMME("GarÃ§on"),
+	 HOMME("Garçon"),
 	 FEMME("Fille"),;
 	 private final String label;
 	
