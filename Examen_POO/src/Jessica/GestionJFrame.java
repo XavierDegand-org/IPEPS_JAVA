@@ -26,7 +26,8 @@ public class GestionJFrame extends JFrame {
 	 private JButton btnClose = new JButton( "Fermer" );
 	 
 	private static ArrayList<Personnel> Person = new ArrayList<>();
-	private static HashMap<Integer,Produit> produits = new HashMap<>();
+	private static ArrayList<Magasin> mag = new ArrayList<>();
+	private static Magasin magasin = new Magasin();
 	
 	private static int tailleNom = 30;
 	
@@ -52,9 +53,9 @@ public class GestionJFrame extends JFrame {
 		contentPane.add( btnSauvegarde );
 		contentPane.add( btnClose );
 		
-		btnLoad.addActionListener(new LoadPersonnel());
+		btnLoad.addActionListener(new btnLoadListener());
 		btnAffichage.addActionListener(new btnAffichageListener());
-		btnMag.addActionListener(new Magasin());
+		btnMag.addActionListener(new btnMagasinListener());
 		btnPret.addActionListener(new Emprunt());
 		btnRetour.addActionListener(new RetourEmprunt());
 		btnPersonnel.addActionListener(new GestionPersonnel());
@@ -76,13 +77,16 @@ public class GestionJFrame extends JFrame {
 	        return btnLoad;
 	     }
 	
-	public class LoadPersonnel implements ActionListener {
+	public class btnLoadListener implements ActionListener {
 		
 		@Override
-		public void actionPerformed (ActionEvent e) {	
+		public void actionPerformed (ActionEvent e) {
+			LoadPersonnel();
+		}
 			
-			// charger l'arraylist personnel
-			try{
+	public void LoadPersonnel() {
+		// charger l'arraylist personnel
+		try{
 			Person.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
 			Person.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
 			Person.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@test.be", Departement.HR));
@@ -105,8 +109,9 @@ public class GestionJFrame extends JFrame {
 				err.printStackTrace(); //- if the given pattern is invalid)
 			}
 			System.out.println("Personnel bien chargé");
+			
+			}
 		
-		}
 	}
 	
 	//***************************** PARTIE AFFICHAGE *****************************//
@@ -137,7 +142,7 @@ public class GestionJFrame extends JFrame {
 
 		    }
 	
-	public static void Affichage() {
+	public void Affichage() {
 		//si liste personnel est vide/strictement inférieure à 1
 		if(Person.size() < 1) {
 			System.out.println("Affichage impossible, pas de personnel !");
@@ -168,37 +173,38 @@ public class GestionJFrame extends JFrame {
         return btnMag;
         }
 	
-	public class Magasin implements ActionListener {
+	public class btnMagasinListener implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
-		
-			Magasin mag = new Magasin();
 			
-			// charger le magasin/les produits
-			try{
-			produits.put(1, new Produit("HP", "Elitebook 850 G7"));
-			produits.put(2, new Produit("HP", "Elitebook 830 G7 X360"));
-			produits.put(3, new Produit("Dell","Inspiron 15 3000"));
-			produits.put(4, new Produit("Dell","XPS 13"));
-			produits.put(5, new Produit("Dell","XPS 15"));
-			produits.put(6, new Produit("Lenovo","Thinkpad E15 G2"));
-			produits.put(7, new Produit("Lenovo","IdeaPad 3 14IIL05 81WD00B2MH"));
+			Magasin();
+		}
+	
+	public void Magasin() {
+	
+		// charger le magasin/les produits
+		try{
+		magasin.AjouterProduit(1,"HP","Elitebook 850 G7");
+		magasin.AjouterProduit(2,"HP","Elitebook 830 G7 X360");
+		magasin.AjouterProduit(3,"Dell","Inspiron 15 3000");
+		magasin.AjouterProduit(4,"Dell","XPS 13");
+		magasin.AjouterProduit(5,"Dell","XPS 15");
+		magasin.AjouterProduit(6,"Lenovo","Thinkpad E15 G2");
+		magasin.AjouterProduit(7,"Lenovo","IdeaPad 3 14IIL05 81WD00B2MH ");
+		}
+		catch (NullPointerException err) {
+			err.printStackTrace(); //- if the given pattern is null
 			}
-			catch (NullPointerException err) {
-				err.printStackTrace(); //- if the given pattern is null
-				}
-			catch (IllegalArgumentException err) {
-				err.printStackTrace(); //- if the given pattern is invalid)
-				}
-			
-			
-			// afficher les produits
-			for (int i = 1; i <= produits.size(); i++) {
-				System.out.println("Id_" + i +" --- " + produits.get(i));
+		catch (IllegalArgumentException err) {
+			err.printStackTrace(); //- if the given pattern is invalid)
 			}
 		
+		// afficher listeMap dans l'ordre
+		magasin.listeMap();
 	}
+			
+		
 	}
 	
 	//***************************** PARTIE PRÊT *****************************//
@@ -280,5 +286,4 @@ public class GestionJFrame extends JFrame {
         return btnClose;
         }
 
-	
-}
+	}
