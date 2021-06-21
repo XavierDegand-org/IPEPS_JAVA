@@ -24,4 +24,9 @@ public class Produit {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	  @Override
+	  public String toString() {
+			return String.format("nom : %s, description : %s", nom, description);
+	  }
 }

@@ -162,12 +162,12 @@ public class GestionJFrame extends JFrame {
 			if (Person.isEmpty()) {
 				return builder.append("Affichage impossible, pas de personnel !");
 			} else {
-				builder.append("+-----------------------+------------------------+------------------------+---------+--------------+--------------------------+\n");
-				builder.append("| Département           | Prénom                 | Nom                    | Sexe    | Naissance    | Email                    |\n");
-				builder.append("+-----------------------+------------------------+------------------------+---------+--------------+--------------------------+\n");
+				builder.append("+------------------------+------------------------+------------------------+---------+--------------+--------------------------+\n");
+				builder.append("| Département            | Prénom                 | Nom                    | Sexe    | Naissance    | Email                    |\n");
+				builder.append("+------------------------+------------------------+------------------------+---------+--------------+--------------------------+\n");
 				
 				for(Personnel person : Person) {
-					builder.append(" ");
+					builder.append("  ");
 					builder.append(setFixedLength(person.getDepartement(), 25));
 					builder.append(setFixedLength(person.getPrenom(), 25));
 					builder.append(setFixedLength(person.getNom(), 25));
@@ -207,19 +207,18 @@ public class GestionJFrame extends JFrame {
 			if(Person.isEmpty()) {
 				System.out.println("Veuillez charger le personnel !");
 			} else {
-				Affichage();
-				System.out.println("\nIntroduire le nom de la personne à modifier :\nEntrer un nom : ");
+				System.out.println(Affichage());
+				System.out.println("Introduire le nom de la personne à modifier :\nEntrer un nom : ");
 				nom = Lire.texte();
 				for(int i = 1; i < Person.size(); i++) {
 					if(nom.equals(Person.get(i).getNom())) {
 						System.out.println(Person.get(i).getIdPersonnel() + " -- " + Person.get(i).getNom() + " -- " + Person.get(i).getPrenom() + " -- " + Person.get(i).getSexe() + " -- " + Person.get(i).getEmail() + " -- " + Person.get(i).getDepartement());
 						System.out.println("Introduire les nouvelles valeurs :");
-						//System.out.println("Entrer un nom : ");
 						Person.get(i).setNom(InputData.inputNomPrenom("nom"));
-						//System.out.println("Entrer un prénom : ");
 						Person.get(i).setPrenom(InputData.inputNomPrenom("prénom"));
-						//System.out.println("Entrer une adresse mail : ");
 						Person.get(i).setEmail(InputData.inputEmail());
+						System.out.println("Modification réussie !");
+						System.out.println(Person.get(i).getIdPersonnel() + " -- " + Person.get(i).getNom() + " -- " + Person.get(i).getPrenom() + " -- " + Person.get(i).getSexe() + " -- " + Person.get(i).getEmail() + " -- " + Person.get(i).getDepartement());
 						return;
 					}
 				}
