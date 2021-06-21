@@ -155,7 +155,7 @@ public class GestionJFrame extends JFrame  {
 	}
 
 	/* ******************************************************************
-	 **************Permet de calibrer la taille des Strings***************/
+	 **************Permet de calibrer la taille des Strings************ */
 	private String setFixedLength(String s, int taille) { // fonction permettant de mettre une taille fixe pour un String
 		StringBuilder stringtest= new StringBuilder(s);
 		while (stringtest.length()< taille) { 	// Rajouter des espaces jusqu'à ce qu'on atteigne le nombre de caractères demandés pour l'affichage 									
@@ -257,10 +257,7 @@ public class GestionJFrame extends JFrame  {
 			else {
 				System.out.println("   Liste des emprunts   ");
 				System.out.println("------------------------");
-				for (int CompteurList = 0 ; CompteurList < ListeEmprunt.size(); CompteurList++) {
-					Emprunt emprunteur = ListeEmprunt.get(CompteurList); // création d'un objet de type Emprunt pour récupérer les informations dans la liste
-					System.out.println("N° "+(CompteurList+1)+" "+emprunteur.getEmprunteur()+" "+emprunteur.getMateriel()+" "+emprunteur.getArticle());
-				}
+				AffichageListeEmprunt();
 				System.out.println("Introduire le numéro d'emprunt à annuler");
 				int InputEmpruntToCancel=-1; // j'initialise la variable pour ne pas qu'elle garde la dernière valeure enregistrée
 				Boolean loop = false;
@@ -274,20 +271,27 @@ public class GestionJFrame extends JFrame  {
 						ListeEmprunt.remove(InputEmpruntToCancel-1);
 					}
 				}
-				for (int CompteurList = 0 ; CompteurList < ListeEmprunt.size(); CompteurList++) {
-					Emprunt emprunteur = ListeEmprunt.get(CompteurList); // création d'un objet de type Emprunt pour récupérer les informations dans la liste
-					System.out.println("N° "+(CompteurList+1)+" "+emprunteur.getEmprunteur()+" "+emprunteur.getMateriel()+" "+emprunteur.getArticle());
-				}
+				AffichageListeEmprunt();
 				System.out.println("--------------------------");
 				System.out.println("  Modifications validées  ");
 			}
+		}
+	}
+	
+	/* ******************************************************************
+	 ********Fonction Affichage Emprunt pour le retour matériel******** */
+	
+	private void AffichageListeEmprunt() { 
+		for (int CompteurList = 0 ; CompteurList < ListeEmprunt.size(); CompteurList++) {
+			Emprunt emprunteur = ListeEmprunt.get(CompteurList); // création d'un objet de type Emprunt pour récupérer les informations dans la liste
+			System.out.println("N° "+(CompteurList+1)+" "+emprunteur.getEmprunteur().getNom()+" "+emprunteur.getMateriel()+" "+emprunteur.getArticle());
 		}
 	}
 
 	/* ******************************************************************
 	 ********Fonction Affichage Emprunt pour la sauvegarde************* */
 
-	private StringBuilder AffichageEmprunt () {
+	private StringBuilder AffichageEmpruntSauvegarde () {
 		StringBuilder SB = new StringBuilder(); 
 		SB.append("+------+------------------------------------------------------------+----------------------------------------------+\n");
 		SB.append("| N°   | Nom-Prénom                                                 | Matériel                                     |\n");
@@ -296,7 +300,8 @@ public class GestionJFrame extends JFrame  {
 			Emprunt emprunteur = ListeEmprunt.get(CompteurList); // création d'un objet de type Personnel pour récupérer les informations dans la liste
 			SB.append("  ");
 			SB.append((CompteurList+1) + "      ");
-			SB.append(setFixedLength(emprunteur.getEmprunteur(),60)+ " ");
+			SB.append(setFixedLength(emprunteur.getEmprunteur().getNom(),30)+ " ");
+			SB.append(setFixedLength(emprunteur.getEmprunteur().getPrenom(),30)+ " ");
 			SB.append(setFixedLength(emprunteur.getMateriel(),8 )+ " ");
 			SB.append(setFixedLength(emprunteur.getArticle(),30)+ " ");
 			SB.append("\n");
@@ -305,7 +310,7 @@ public class GestionJFrame extends JFrame  {
 	}
 
 	/* ******************************************************************
-	 ********************Bouton Modification Personnel********************/
+	 ********************Bouton Modification Personnel***************** */
 
 	private class GestionPersonnel implements ActionListener{
 
@@ -354,7 +359,7 @@ public class GestionJFrame extends JFrame  {
 
 
 	/* ******************************************************************
-	 *************************Bouton Sauvegarde***************************/
+	 *************************Bouton Sauvegarde************************ */
 
 
 	private class Sauvegarde implements ActionListener{
@@ -376,7 +381,7 @@ public class GestionJFrame extends JFrame  {
 					bufWrite.write(Affichage().toString());
 					bufWrite.newLine();
 					bufWrite.newLine();
-					bufWrite.write(AffichageEmprunt().toString());
+					bufWrite.write(AffichageEmpruntSauvegarde().toString());
 					bufWrite.newLine();
 
 				} catch (IOException io) {
@@ -389,7 +394,7 @@ public class GestionJFrame extends JFrame  {
 	}
 
 	/* ******************************************************************
-	 ***************************Bouton Fermeture**************************/
+	 ***************************Bouton Fermeture*********************** */
 
 
 	private class Close implements ActionListener{
