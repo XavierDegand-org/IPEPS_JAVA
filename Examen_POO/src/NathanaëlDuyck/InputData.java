@@ -11,14 +11,14 @@ public class InputData {
 			if (ControleSaisie.valideNom(result)){
 				return result;
 			}else {
-				System.out.print("Erreur de saisie !  ");
+				System.out.print("Erreur de saisie !  \n");
 				arret = false;
 			}
 		}
 		return result;
 	}
 	
-	private String inputEmail() {
+	public static String inputEmail() {
 		String email = null;
 		boolean arret = false;
 		//String result = null;

@@ -3,16 +3,22 @@ package NathanaëlDuyck;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GestionJFrame extends JFrame {
-	 
-	 private JButton btnLoad = new JButton( "Chargement du personnel" );
+	
+	private static final long serialVersionUID = 1L;
+	private JButton btnLoad = new JButton( "Chargement du personnel" );
 	 private JButton btnAffichage = new JButton( "Affichage liste du  personnel" );
 	 private JButton btnMag = new JButton( "Création du magasin" );
 	 private JButton btnPret = new JButton( "Prêt de matériel" );
@@ -28,6 +34,8 @@ public class GestionJFrame extends JFrame {
 	 private static ArrayList<Personnel> Person = new ArrayList<>();
 	 private static ArrayList<Emprunt> pret = new ArrayList<>();
 	 private static ArrayList<Magasin> mag = new ArrayList<>();
+	 private static boolean initialisation = false;
+	 
 	 public GestionJFrame() {
 		 super( "Gestion Personnel & prêt matériel" );
 		 this.setDefaultCloseOperation( DISPOSE_ON_CLOSE );
@@ -86,18 +94,19 @@ public class GestionJFrame extends JFrame {
 		 });
 		 
 		 btnRetour.addActionListener(new ActionListener(){
+				
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					RetourEmprunt();		
-				} 
+					RetourEmprunt();
+				} 	
 		 });
 		 
 		 btnPersonnel.addActionListener(new ActionListener(){
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Personnel");		
+					GestionPersonnel();		
 				} 
 		 });
 		 
@@ -105,7 +114,7 @@ public class GestionJFrame extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Sauvegarde");		
+					System.out.println("sauvegarde");		
 				} 
 		 });
 		 
@@ -192,12 +201,18 @@ public class GestionJFrame extends JFrame {
 		if((Person.isEmpty()) || (mag.isEmpty())) {
 			System.out.println("Veuillez charger le personnel et créer le magasin\n");
 		}
-		else {
+		else if ((pret.isEmpty())&& (!initialisation)) {
 			pret.add(new Emprunt(1,new Personnel(1,"Collon","Albert",Sexe.HOMME,new MyDate(10,8,1990),"Collon.a@test.be",Departement.HR),new Produit("HP","Elitebook 850 G7")));	
 			pret.add(new Emprunt(2,new Personnel(2,"Peeters","Marie",Sexe.FEMME,new MyDate(1,5,1995),"Peeters_M@@test.be",Departement.HR),new Produit("Dell","Inspiron 15 3000")));	
 			pret.add(new Emprunt(3,new Personnel(3,"Janssens","Sarah",Sexe.FEMME,new MyDate(23,5,1999),"Sarah.Janssens@test",Departement.Compta),new Produit("Dell","XPS 13")));	
 			pret.add(new Emprunt(4,new Personnel(4,"Jacobs","Charles",Sexe.HOMME,new MyDate(10,8,1990),"Charles.j#test.be",Departement.SEC),new Produit("Lenovo","Thinkpad E15 G2")));	
 			pret.add(new Emprunt(5,new Personnel(7,"Willems","Francois-Xavier",Sexe.HOMME,new MyDate(28,10,1996),"Willems.F-X@test.be",Departement.Prod),new Produit("Lenovo","IdeaPad 3 14IIL05 81WD00B2MH ")));	
+			initialisation = true;
+			for (Emprunt emprunt : pret)
+			{
+			System.out.println(emprunt);
+			}
+		} else {
 			for (Emprunt emprunt : pret)
 			{
 			System.out.println(emprunt);
@@ -206,23 +221,28 @@ public class GestionJFrame extends JFrame {
 	}
 	public static void RetourEmprunt() {
 	boolean nombreValide =false;
-		if(pret.isEmpty()) {
-		System.out.println("Vous n'avez pas enore fait de prêt\n");
+	int compteur;
+	if(pret.isEmpty()) {
+		System.out.println("La liste des prêt est vide donc il n'y a rien à rendre\n");
 	}
 	else {
 		System.out.println("Liste des emprunts");
+		compteur=1;
 		for (Emprunt emprunt : pret)
 		{
-		System.out.println("N° "+emprunt.getNombre()+" "+emprunt.getEmprunteur().getNom()+" "+emprunt.getMateriel().getNom()+" "+emprunt.getMateriel().getDescription());
+		System.out.println("N° "+compteur+" "+emprunt.getEmprunteur().getNom()+" "+emprunt.getMateriel().getNom()+" "+emprunt.getMateriel().getDescription());
+		compteur++;
 		}
 		System.out.println("Introduire le numéro d'emprunt à annuler : ");
 		while(!nombreValide) {
-		try {
-			 int nbemprunt = Lire.nbre()-1;
+		try { 
+			int nbemprunt = Lire.nbre()-1;
 			 pret.remove(nbemprunt);
+			 compteur=1;
 			 for (Emprunt emprunt : pret)
 				{
-				System.out.println("N° "+emprunt.getNombre()+" "+emprunt.getEmprunteur().getNom()+" "+emprunt.getMateriel().getNom()+" "+emprunt.getMateriel().getDescription());
+				 System.out.println("N° "+compteur+" "+emprunt.getEmprunteur().getNom()+" "+emprunt.getMateriel().getNom()+" "+emprunt.getMateriel().getDescription());
+				compteur++;
 				}
 			 nombreValide=true;
 		}
@@ -233,6 +253,65 @@ public class GestionJFrame extends JFrame {
 	}
 	}
 	
-}
+	public static void GestionPersonnel() {
+		boolean nomValide = false;
+		String nomChangement;
+		String prenomChangement;
+		String mailChangement;
+		if(Person.size() ==0) {
+			System.out.println("Affichage impossible, pas de personnel !");
+		}
+		else {
+			System.out.println("+----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
+			System.out.println("| Département                | Prénom                      | Nom                         | Sexe                        | Naissance                   | Email                       |");
+			System.out.println("+----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
+			StringBuilder sb = new StringBuilder();
+			for (int temp = 0; temp < Person.size();temp++) {
+				sb.append(" ");
+				sb.append(setFixedLength(Person.get(temp).getDepartement()));
+				sb.append(setFixedLength(Person.get(temp).getPrenom()));
+				sb.append(setFixedLength(Person.get(temp).getNom()));		
+				sb.append(setFixedLength(Person.get(temp).getSexe()));
+				sb.append(setFixedLength(Person.get(temp).getDateddMMyyyy()));
+				sb.append(setFixedLength(Person.get(temp).getEmail()));
+				sb.append("\n");
+				
+				}	
+			System.out.println(sb.toString());
+			System.out.println("Introduire le nom de la personne à modifier :");
+			System.out.println("Entrer un nom : ");
+			nom=Lire.texte();
+			while(!nomValide) {
+			for (Personnel personnel : Person) {
+				if(nom.equals(personnel.getNom())) {
+					System.out.println(personnel.getIdPersonnel()+"  "+personnel.getNom()+"--"+personnel.getPrenom()+"--"+personnel.getSexe()+"--"+personnel.getEmail()+"--"+personnel.getDepartement());
+					nomValide=true;
+				}
+			}
+			if(!nomValide) {
+				System.out.println("Le nom que vous avez taper n'est pas dans la liste du personnel ");
+				System.out.println("Introduire le nom de la personne à modifier :");
+				System.out.println("Ressayer d'entrer un nom : ");
+				nom=Lire.texte();
+			}
+			}
+			System.out.println("Introduire les nouvelles valeurs:");
+			nomChangement = InputData.inputNomPrenom("Nom");
+			prenomChangement = InputData.inputNomPrenom("Prénom");
+			mailChangement = InputData.inputEmail();
+			for (Personnel personnel : Person) {
+				if(nom.equals(personnel.getNom())) {
+					personnel.setNom(nomChangement);
+					personnel.setPrenom(prenomChangement);
+					personnel.setEmail(mailChangement);
+				}
+				
+			}
+		}
+	}
+	
+	}
+
+
 	 
 
