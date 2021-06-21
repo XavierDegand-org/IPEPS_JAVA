@@ -5,9 +5,9 @@ public class Produit {
 	private String description;
 
 
-	public Produit( String description, String nom) {
-		this.description = description;
+	public Produit( String nom, String description) {
 		this.nom = nom;
+		this.description = description;
 	}
 	
 	public String getNom () {
