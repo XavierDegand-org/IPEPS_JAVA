@@ -2,15 +2,17 @@ package UytterhaegenLouis;
 
 public class Emprunt {
 	
-	int nombre;
+	private int nombre;
+	private static int nbre =1;
 	Produit produit;
 	Personnel personnel;
 
 	public Emprunt(Personnel personnel, Produit produit) {
 		this.personnel = personnel;
 		this.produit = produit;
+		this.nombre=nbre++;
 	}
-	  public String getEmprunteur(String nom) {
+	  public String getEmprunteur() {
 			return personnel.getNom();
 	  }
 
