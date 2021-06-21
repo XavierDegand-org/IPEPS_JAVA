@@ -3,17 +3,15 @@ package UytterhaegenLouis;
 public class Emprunt {
 	
 	private int nombre;
-	private static int nbre =1;
 	Produit produit;
 	Personnel personnel;
 
 	public Emprunt(Personnel personnel, Produit produit) {
 		this.personnel = personnel;
 		this.produit = produit;
-		this.nombre=nbre++;
 	}
 	  public String getEmprunteur() {
-			return personnel.getNom();
+			return personnel.getNom()+" "+personnel.getPrenom();
 	  }
 
 	  public void setEmprunteur(String nom) {
