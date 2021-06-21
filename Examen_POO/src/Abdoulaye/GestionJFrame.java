@@ -177,8 +177,6 @@ public class GestionJFrame extends JFrame {
                 produit.add(new Produit("HP", "Elitebook 850 G7"));
 
                 for (Produit produit : produit) {
-                    /*for (int i = 1; i <= produits.size(); i++) {
-                        System.out.println("Id_" + i +" --- " + produits.get(i));*/
                     System.out.println(produit);
                 }
 
