@@ -124,15 +124,15 @@ public class GestionJFrame extends JFrame  {
 		}
 		else { // si la liste du personnel n'est pas vide
 
-			SB.append("+---------------------+------------------------------+------------------------------+-------+------------+---------------------------+\n");
-			SB.append("| Département         | Prénom                       | Nom                          | Sexe  | Naissance  | Email                     |\n");
-			SB.append("+---------------------+------------------------------+------------------------------+-------+------------+---------------------------+\n");
+			SB.append("+---------------------+------------------------------+------------------------------+--------+------------+---------------------------+\n");
+			SB.append("| Département         | Prénom                       | Nom                          | Sexe   | Naissance  | Email                     |\n");
+			SB.append("+---------------------+------------------------------+------------------------------+--------+------------+---------------------------+\n");
 			for (Personnel personne : ListePersonnel) { // Boucle pour afficher les membres du personnel avec leurs attributs / Type objet   objet courant  : Arraylist 
 				SB.append("  ");
-				SB.append(setFixedLength(personne.getDepartement(),20) + " ");
+				SB.append(setFixedLength(personne.getDepartement(),20) + "  ");
 				SB.append(setFixedLength(personne.getPrenom(),30)+ " ");
 				SB.append(setFixedLength(personne.getNom(),30)+ " ");
-				SB.append(setFixedLength(personne.getSexe(),7)+ " ");
+				SB.append(setFixedLength(personne.getSexe(),8)+ " ");
 				SB.append(setFixedLength(personne.getDateddMMyyyy(),12)+ " ");
 				SB.append(setFixedLength(personne.getEmail(),30)+ " ");
 				SB.append("\n");
@@ -195,7 +195,7 @@ public class GestionJFrame extends JFrame  {
 
 
 	/* *******************************************************************
-	 ***********************Bouton Prêt du Matériel********************* */
+	 ***************Fonction Affichage prêt du matériel***************** */
 
 	private void Emprunt () { // Fonction permettant l'affichage des différents emprunts
 		System.out.println("   Prêt de Matériel   ");
@@ -206,15 +206,19 @@ public class GestionJFrame extends JFrame  {
 		System.out.println("\n");
 	}
 
+	
+	/* *******************************************************************
+	 ***********************Bouton Prêt du Matériel********************* */
+	
 	private class LoadEmprunt implements ActionListener{  // Lorsque l'on appuie sur le bouton prêt matériel
 
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			if (magasin.isEmpty()) {
-				System.out.println("Le magasin n'a pas encore été chargé. Veuillez le charger d'abord !");
-			}
-			else if(ListePersonnel.isEmpty()){
+			if (ListePersonnel.isEmpty()){
 				System.out.println("Le personnel n'a pas encore été chargé. Veuillez le charger d'abord !");
+			}
+			else if(magasin.isEmpty()) {
+				System.out.println("Le magasin n'a pas encore été chargé. Veuillez le charger d'abord !");
 			}
 			else if (ListeEmprunt.isEmpty()) {
 
@@ -241,11 +245,11 @@ public class GestionJFrame extends JFrame  {
 
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			if (magasin.isEmpty()) {
-				System.out.println("Le magasin n'a pas encore été chargé. Veuillez le charger d'abord !");
-			}
-			else if(ListePersonnel.isEmpty()){
+			if (ListePersonnel.isEmpty()){
 				System.out.println("Le personnel n'a pas encore été chargé. Veuillez le charger d'abord !");
+			}
+			else if(magasin.isEmpty()) {
+				System.out.println("Le magasin n'a pas encore été chargé. Veuillez le charger d'abord !");
 			}
 			else if(ListeEmprunt.isEmpty()) {
 				System.out.println("Aucun prêt n'a été chargé !");
@@ -254,13 +258,28 @@ public class GestionJFrame extends JFrame  {
 				System.out.println("   Liste des emprunts   ");
 				System.out.println("------------------------");
 				for (int CompteurList = 0 ; CompteurList < ListeEmprunt.size(); CompteurList++) {
-					Emprunt emprunteur = ListeEmprunt.get(CompteurList);
-					System.out.println("N° "+emprunteur.getNombre()+" "+emprunteur.getEmprunteur()+" "+emprunteur.getMateriel()+" "+emprunteur.getArticle());
+					Emprunt emprunteur = ListeEmprunt.get(CompteurList); // création d'un objet de type Emprunt pour récupérer les informations dans la liste
+					System.out.println("N° "+(CompteurList+1)+" "+emprunteur.getEmprunteur()+" "+emprunteur.getMateriel()+" "+emprunteur.getArticle());
 				}
 				System.out.println("Introduire le numéro d'emprunt à annuler");
-				int InputEmpruntToCancel = Lire.nbre();
-
-
+				int InputEmpruntToCancel=-1; // j'initialise la variable pour ne pas qu'elle garde la dernière valeure enregistrée
+				Boolean loop = false;
+				while (!loop) {
+					InputEmpruntToCancel = Lire.nbre();
+					if (InputEmpruntToCancel <1 || InputEmpruntToCancel> ListeEmprunt.size()) { // Si le numéro d'emprunt à annuler n'existe pas
+						System.out.println("Veuillez entrer un numéro d'emprunt existant");
+					}
+					else {
+						loop = true;
+						ListeEmprunt.remove(InputEmpruntToCancel-1);
+					}
+				}
+				for (int CompteurList = 0 ; CompteurList < ListeEmprunt.size(); CompteurList++) {
+					Emprunt emprunteur = ListeEmprunt.get(CompteurList); // création d'un objet de type Emprunt pour récupérer les informations dans la liste
+					System.out.println("N° "+(CompteurList+1)+" "+emprunteur.getEmprunteur()+" "+emprunteur.getMateriel()+" "+emprunteur.getArticle());
+				}
+				System.out.println("--------------------------");
+				System.out.println("  Modifications validées  ");
 			}
 		}
 	}
@@ -276,7 +295,7 @@ public class GestionJFrame extends JFrame  {
 		for (int CompteurList = 0 ; CompteurList < ListeEmprunt.size(); CompteurList++) { // Boucle pour afficher les différents emprunts
 			Emprunt emprunteur = ListeEmprunt.get(CompteurList); // création d'un objet de type Personnel pour récupérer les informations dans la liste
 			SB.append("  ");
-			SB.append(emprunteur.getNombre() + "      ");
+			SB.append((CompteurList+1) + "      ");
 			SB.append(setFixedLength(emprunteur.getEmprunteur(),60)+ " ");
 			SB.append(setFixedLength(emprunteur.getMateriel(),8 )+ " ");
 			SB.append(setFixedLength(emprunteur.getArticle(),30)+ " ");
@@ -307,7 +326,7 @@ public class GestionJFrame extends JFrame  {
 				int indice = 0;
 				while (!loop) { // Boucle pour trouver dans la boucle si le nom se trouve dans la liste et à quel indice
 					for (int CompteurList=0;CompteurList<ListePersonnel.size();CompteurList++){
-						if (ListePersonnel.get(CompteurList).getNom().equals(s)){ // Si le nom à l'indice X correspond au nom introduit 
+						if (ListePersonnel.get(CompteurList).getNom().equals(s)){ // Si le nom à l'indice X est égal au nom introduit 
 							loop = true;
 							indice = CompteurList;
 						}
@@ -342,10 +361,10 @@ public class GestionJFrame extends JFrame  {
 
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			if (magasin.isEmpty()) {
+			if (ListePersonnel.isEmpty()) {
 				System.out.println("Le personnel n'a pas encore été chargé. Veuillez le charger d'abord !");
 			}
-			else if(ListePersonnel.isEmpty()){
+			else if(magasin.isEmpty()){
 				System.out.println("Le magasin n'a pas encore été chargé. Veuillez le charger d'abord !");
 			}
 			else if(ListeEmprunt.isEmpty()) {
@@ -363,6 +382,8 @@ public class GestionJFrame extends JFrame  {
 				} catch (IOException io) {
 					System.err.println("Une erreur est survenue : "+io.getMessage());
 				}
+				System.out.println("---------------------------");
+				System.out.println("   Sauvegarde réussite !   ");
 			}
 		}
 	}
