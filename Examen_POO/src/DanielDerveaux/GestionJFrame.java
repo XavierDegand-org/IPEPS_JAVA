@@ -28,6 +28,8 @@ public class GestionJFrame extends JFrame {
 	 private JButton btnClose = new JButton("Fermer");
 	 
 	 List<Personnel> Person = new ArrayList<Personnel>();
+	 Magasin mag = new Magasin();
+	 List<Emprunt> pret = new ArrayList<Emprunt>();
 	 
 	 private static String nom = null;
 	 private static String fichier = null;
@@ -152,9 +154,7 @@ public class GestionJFrame extends JFrame {
 		}
 
 		/* Création du magasin */
-		private void Magasin() throws IOException {
-			Magasin mag = new Magasin();
-			
+		private void Magasin() throws IOException {			
 			mag.ajouterProduit(1, "HP", "Elitebook 850 G7");
 			mag.ajouterProduit(2, "HP", "Elitebook 830 G7 X360");
 			mag.ajouterProduit(3, "Dell", "Inspiron 15 3000");
@@ -204,12 +204,26 @@ public class GestionJFrame extends JFrame {
 		
 		/* Prêt de matériel */
 		private void Emprunt() throws IOException {
-			System.out.println("En cours");
+			if(Person.isEmpty() && mag.isEmpty()) {
+				System.out.println("Veuillez charger le personnel et le magasin !");
+			} else if(Person.isEmpty() && mag.isEmpty() == false) {
+				System.out.println("Veuillez charger le personnel !");
+			} else if(Person.isEmpty() == false && mag.isEmpty()) {
+				System.out.println("Veuillez charger le magasin !");
+			} else if(pret.isEmpty()) {
+				pret.add(new Emprunt(1, Person.get(1), mag.produits.get(1)));
+			} else {
+				System.out.println("Les emprunts ont déjà été chargés !");
+			}
 		}
 		
 		/* Retour de matériel */
 		private void RetourEmprunt() throws IOException {
-			System.out.println("En cours");
+			if(pret.isEmpty()) {
+				System.out.println("Veuillez charger les emprunts !");
+			} else {
+				System.out.println("En cours");
+			}
 		}
 		
 		/* Modification données Personnel */

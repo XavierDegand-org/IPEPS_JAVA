@@ -13,6 +13,11 @@ public class Personnel extends Individu {
 		this.email = email;
 		this.departement = departement;
 	}
+	/*
+	@Override
+	  public String toString() {
+			return String.format();
+	  }*/
 	
 	public int getIdPersonnel() {
 		return IdPersonnel;

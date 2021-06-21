@@ -4,10 +4,11 @@ public class Emprunt {
 	public int nombre;
 	public Personnel emprunteur;
 	public Produit materiel;
-	public String article;
 	
-	public Emprunt() {
-		
+	public Emprunt(int nombre, Personnel emprunteur, Produit materiel) {
+		this.nombre = nombre;
+		this.emprunteur = emprunteur;
+		this.materiel = materiel;
 	}
 	
 	public Personnel getEmprunteur() {
@@ -20,15 +21,23 @@ public class Emprunt {
 
 	  @Override
 	  public String toString() {
-			return String.format("emprunteur : ", emprunteur);
+			return String.format("Id : %i %s %s sexe : %s date de naissance : %s. Email : %s Département : %s",
+					getEmprunteur().getIdPersonnel(),
+					getEmprunteur().getNom(),
+					getEmprunteur().getPrenom(),
+					getEmprunteur().getSexe(),
+					getEmprunteur().getDateddMMyyyy(),
+					getEmprunteur().getEmail(),
+					getEmprunteur().getDepartement()
+					);
 	  }
 	  
-	  public Produit getMateriel() {
-		  return materiel;
+	  public String getMateriel() {
+		  return materiel.getNom();
 	  }
 	  
 	  public String getArticle() {
-		  return article;
+		  return materiel.getDescription();
 	  }
 	  
 	  public int getNombre() {
