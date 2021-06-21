@@ -10,12 +10,12 @@ public class Emprunt {
 		this.personnel = personnel;
 		this.produit = produit;
 	}
-	  public String getEmprunteur() {
-			return personnel.getNom()+" "+personnel.getPrenom();
+	  public Personnel getEmprunteur() {
+			return personnel;
 	  }
 
-	  public void setEmprunteur(String nom) {
-			
+	  public void setEmprunteur(Personnel personnel) {
+		  	this.personnel= personnel;
 	  }
 	  @Override
 		public String toString() {
