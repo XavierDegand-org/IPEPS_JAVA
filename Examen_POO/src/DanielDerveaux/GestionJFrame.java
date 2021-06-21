@@ -153,7 +153,17 @@ public class GestionJFrame extends JFrame {
 
 		/* Création du magasin */
 		private void Magasin() throws IOException {
-			System.out.println("En cours");
+			Magasin mag = new Magasin();
+			
+			mag.ajouterProduit(1, "HP", "Elitebook 850 G7");
+			mag.ajouterProduit(2, "HP", "Elitebook 830 G7 X360");
+			mag.ajouterProduit(3, "Dell", "Inspiron 15 3000");
+			mag.ajouterProduit(4, "Dell", "XPS 13");
+			mag.ajouterProduit(5, "Dell", "XPS 15");
+			mag.ajouterProduit(6, "Lenovo", "Thinkpad E15 G2");
+			mag.ajouterProduit(7, "Lenovo", "IdeaPad 3 14IIL05");
+
+			mag.listeMap();
 		}
 		
 		/* Affichage personnel */

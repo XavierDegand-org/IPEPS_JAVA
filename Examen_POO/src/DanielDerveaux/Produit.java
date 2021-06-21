@@ -27,6 +27,6 @@ public class Produit {
 
 	  @Override
 	  public String toString() {
-			return String.format("nom : %s, description : %s", nom, description);
+			return String.format("Produit [nom = %s, description = %s]", nom, description);
 	  }
 }
