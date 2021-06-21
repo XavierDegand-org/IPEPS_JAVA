@@ -16,18 +16,17 @@ public class Produit {
         return nom;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     @Override
     public String toString() {

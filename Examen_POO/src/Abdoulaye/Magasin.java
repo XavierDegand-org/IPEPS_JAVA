@@ -5,19 +5,14 @@ import java.util.HashMap;
 
         HashMap<String, Produit> liste;
 
-        public void ajouterProduit(String nom, String description) {
-            Produit produit = new Produit(nom, description);
-            liste.put(nom, produit);
-        }
-
         public Magasin() {
-            liste = new HashMap<String, Produit>(); }
+            liste = new HashMap<>();
+        }
 
         public void listeMap() {
-            System.out.println("Le magasin est composé de " + liste.size()+"articles");
+            System.out.println("Le magasin est composé de " + liste.size() + "articles");
             System.out.println("Produits =" + liste.values());
         }
-
 
         public void getProduit() {
 
