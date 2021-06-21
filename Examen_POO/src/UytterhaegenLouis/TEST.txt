@@ -15,3 +15,12 @@
   Production           Nathalie                       Herman                         Fille   26-7-2001    Herman.N@test.be               
   Production           Annie                          Bontemps                       Fille   23-9-1998    bontemps.a@test.be             
 
++------+------------------------------------------------------------------------------------------------------------------------+
+| N°   | Nom-Prénom                                                 | Matériel                                                  |
++------+------------------------------------------------------------+-----------------------------------------------------------+
+  1      Collon                                                       HP1      Elitebook 850 G7               
+  2      Peeters                                                      Dell1    Inspiron 15 3000               
+  3      Janssens                                                     Dell2    XPS 13                         
+  4      Jacobs                                                       Lenovo   Thinkpad E15 G2                
+  5      Willems                                                      Lenovo   IdeaPad 3 14IIL05 81WD00B2MH   
+
