@@ -30,7 +30,7 @@ public class ControleSaisie {
 	
 
 	private static final String EMAIL_PATTERN
-	         = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";	         
+	         = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";	         
 	
 	private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 	
