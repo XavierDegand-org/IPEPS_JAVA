@@ -1,42 +1,52 @@
 package Jessica;
 
-public class Emprunt extends Personnel {
+import java.util.HashMap;
+
+public class Emprunt {
 
 	private int nombre;
+	private Personnel emprunteur;
+	private Produit materiel;
 
-	public Emprunt(String nom, String prenom, Sexe sexe, MyDate dateNaissance, int IdPersonnel,
-			String email, Departement Departement, int nombre) {
-		super(nom, prenom, sexe, dateNaissance, email, Departement);
+	public Emprunt(int nombre, Personnel emprunteur, HashMap<Integer, Produit> hashMap) {
 		this.nombre = nombre;
+		this.emprunteur = emprunteur;
+		this.materiel = materiel;
 	}
 	
-	/*
-	  public String getEmprunteur() {
-			return nom;
+	  public Personnel getEmprunteur() {
+			return emprunteur;
 	  }
 
-	  public void setEmprunteur(String nom) {
-			this.nom = nom;
+	  public void setEmprunteur(Personnel emprunter) {
+			this.emprunteur = emprunteur;
 	  }
 
-	  public String getMateriel() {
-			return Materiel;
+	  public Produit getMateriel() {
+			return materiel;
 	  }
 	  
-	  public String getArticle() {
-			return Article;
-	  }
+	  /*public Produit getArticle() {
+			return article;
+	  }*/
 	  
-	  public String getNombre() {
+	  public int getNombre() {
 			return nombre;
 	  }
 
 	  @Override
 	  public String toString() {
-			return String.format(
-					this.nom,
-	                this.description );
-	  }*/
+		  return String.format(
+				  "Id : " + getEmprunteur().getIdPersonnel() +
+				  " " + getEmprunteur().getNom() +
+				  " " + getEmprunteur().getPrenom() +
+				  " sexe : " + getEmprunteur().getSexe() + // à modifier pour avoir label correct !
+				  " date de naissance : " + getEmprunteur().getDateddMMyyyy() +
+				  ". Email : " + getEmprunteur().getEmail() +
+				  " Département : " + getEmprunteur().getDepartement()
+				  + "   " + getMateriel()
+				   );
+	  }
 
 
 }

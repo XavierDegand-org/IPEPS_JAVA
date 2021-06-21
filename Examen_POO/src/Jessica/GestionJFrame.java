@@ -28,6 +28,7 @@ public class GestionJFrame extends JFrame {
 	private static ArrayList<Personnel> Person = new ArrayList<>();
 	private static ArrayList<Magasin> mag = new ArrayList<>();
 	private static Magasin magasin = new Magasin();
+	private static ArrayList<Emprunt> pret = new ArrayList<>();
 	
 	private static int tailleNom = 30;
 	
@@ -56,8 +57,8 @@ public class GestionJFrame extends JFrame {
 		btnLoad.addActionListener(new btnLoadListener());
 		btnAffichage.addActionListener(new btnAffichageListener());
 		btnMag.addActionListener(new btnMagasinListener());
-		btnPret.addActionListener(new Emprunt());
-		btnRetour.addActionListener(new RetourEmprunt());
+		btnPret.addActionListener(new btnPretListener());
+		btnRetour.addActionListener(new btnRetourListener());
 		btnPersonnel.addActionListener(new GestionPersonnel());
 		btnSauvegarde.addActionListener(new Sauvegarde());
 		btnClose.addActionListener(new ActionListener() {
@@ -87,7 +88,6 @@ public class GestionJFrame extends JFrame {
 	public void LoadPersonnel() {
 		// charger l'arraylist personnel
 		try{
-			Person.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
 			Person.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
 			Person.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@test.be", Departement.HR));
 			Person.add(new Personnel("Janssens","Sarah",Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Janssens@test",Departement.Compta));
@@ -191,7 +191,7 @@ public class GestionJFrame extends JFrame {
 		magasin.AjouterProduit(4,"Dell","XPS 13");
 		magasin.AjouterProduit(5,"Dell","XPS 15");
 		magasin.AjouterProduit(6,"Lenovo","Thinkpad E15 G2");
-		magasin.AjouterProduit(7,"Lenovo","IdeaPad 3 14IIL05 81WD00B2MH ");
+		magasin.AjouterProduit(7,"Lenovo","IdeaPad 3 14IIL05 81WD00B2MH");
 		}
 		catch (NullPointerException err) {
 			err.printStackTrace(); //- if the given pattern is null
@@ -201,7 +201,24 @@ public class GestionJFrame extends JFrame {
 			}
 		
 		// afficher listeMap dans l'ordre
-		magasin.listeMap();
+		//magasin.listeMap();
+		
+		// afficher produit spécifique
+		System.out.println("Le magasin est composé de " + Magasin.produits.size()+" articles");
+		magasin.getProduit(6);
+		System.out.println("");
+		magasin.getProduit(7);
+		System.out.println("");
+		magasin.getProduit(4);
+		System.out.println("");
+		magasin.getProduit(5);
+		System.out.println("");
+		magasin.getProduit(2);
+		System.out.println("");
+		magasin.getProduit(3);
+		System.out.println("");
+		magasin.getProduit(1);
+		
 	}
 			
 		
@@ -213,12 +230,39 @@ public class GestionJFrame extends JFrame {
         return btnPret;
         }
 	
-	public class Emprunt implements ActionListener {
+	public class btnPretListener implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			System.out.println("Prêt de matériel");
+			Emprunt();
 		}
+		
+	}
+	
+	public void Emprunt() {
+		
+		// charger l'arraylist pret
+		if(Person.size() < 1) {
+			System.out.println("Veuillez d'abord charger le personnel.");
+		}
+		else if (magasin.isEmpty()) {
+			System.out.println("Le magassin est vide, veuillez d'abord créer le magasin.");
+		}
+		else {
+			pret.add(new Emprunt(1, Person.get(0), magasin.getProduit(1)));
+			pret.add(new Emprunt(2, Person.get(1), magasin.getProduit(3)));
+			pret.add(new Emprunt(3, Person.get(2), magasin.getProduit(4)));
+			pret.add(new Emprunt(4, Person.get(3), magasin.getProduit(6)));
+			pret.add(new Emprunt(5, Person.get(6), magasin.getProduit(7)));
+			}
+
+		// afficher prêt de matériel
+		/*for (Emprunt emprunt : pret)
+		{
+		System.out.println(emprunt);
+		}*/
+		
+					
 		
 	}
 	
@@ -228,12 +272,16 @@ public class GestionJFrame extends JFrame {
         return btnRetour;
         }
 	
-	public class RetourEmprunt implements ActionListener {
+	public class btnRetourListener implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
 			System.out.println("Retour matériel");
 		}
+		
+	}
+	
+	public void RetourEmprunt() {
 		
 	}
 	
