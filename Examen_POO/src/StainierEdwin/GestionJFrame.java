@@ -95,7 +95,15 @@ public class GestionJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println(((JButton)e.getSource()).getText());
+				if (isPersonnelLoad)
+				{
+					if (mag != null)
+						PretMateriel();
+					else
+						System.out.println("Impossible, le magasin n'existe pas !");
+				}
+				else
+					System.out.println("Impossible, pas de personnel !");
 			}
 		});
 		
@@ -105,7 +113,15 @@ public class GestionJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println(((JButton)e.getSource()).getText());
+				if (isPersonnelLoad)
+				{
+					if (mag != null)
+						RetourMateriel();
+					else
+						System.out.println("Impossible, le magasin n'existe pas !");
+				}
+				else
+					System.out.println("Impossible, pas de personnel !");
 			}
 		});
 		
@@ -364,7 +380,7 @@ public class GestionJFrame extends JFrame {
 	}
 	
 	// Créer le magasin	
-	public void CreationMagasin()
+	private void CreationMagasin()
 	{	
 		// Créer le magasin si il n'existe pas
 		if (mag == null)
@@ -379,6 +395,48 @@ public class GestionJFrame extends JFrame {
 		}
 	}
 	
+	// Prêt de matériel
+	private void PretMateriel()
+	{
+		StringBuilder list = new StringBuilder();
+		for (int i = 0; i < mag.listEmprunt.size(); i++)
+		{
+			list.append("Id : " + mag.listEmprunt.get(i).GetNombre() + " ");
+			list.append(mag.listEmprunt.get(i).GetEmprunteur().getNom() + " " + mag.listEmprunt.get(i).GetEmprunteur().getPrenom());
+			list.append(" sexe : " + mag.listEmprunt.get(i).GetEmprunteur().getSexe());
+			list.append(" date de naissance : " + mag.listEmprunt.get(i).GetEmprunteur().getDateddMMyyyy() + ".");
+			list.append(" Email : " + mag.listEmprunt.get(i).GetEmprunteur().personnel.GetEmail());
+			list.append(" Département : " + mag.listEmprunt.get(i).GetEmprunteur().personnel.GetDepartement());
+			list.append(" Produit ");
+			list.append("[ " + mag.listEmprunt.get(i).GetProduit().GetNom() + ", ");
+			list.append(mag.listEmprunt.get(i).GetProduit().GetDescription() + " ]\n\n");			
+		}
+		System.out.println(list.toString());
+	}
+	
+	// Retour de matériel
+	private void RetourMateriel()
+	{
+		AfficherListeEmprunt();
+		System.out.println("Introduire le numéro d'emprunt à annuler : ");		
+		int num = Lire.nbre();
+		mag.listEmprunt.remove(num-1);
+		AfficherListeEmprunt();		
+	}
+	
+	// Afficher la liste des emprunts
+	private void AfficherListeEmprunt()
+	{
+		String espace = "                            ";		
+		StringBuilder list1 = new StringBuilder();
+		for (Emprunt emprunt : mag.listEmprunt)
+		{
+			list1.append("\nN°" + emprunt.GetNombre() + " " + emprunt.GetEmprunteur().getNom());
+			list1.append(espace, emprunt.GetEmprunteur().getNom().length(), 10);
+			list1.append(emprunt.GetProduit().GetNom() + "  " + emprunt.GetProduit().GetDescription());
+		}
+		System.out.println(list1.toString());
+	}
 	
 	
 }
