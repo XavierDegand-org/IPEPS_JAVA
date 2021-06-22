@@ -5,35 +5,37 @@ import java.util.Map;
 
 
 public class Magasin  {
-	
-	HashMap<Integer,Produit> listeProduit;  // Clé = id du produit / Contenu = objets de la classe Produit ( Nom et description )
+
+	Map<Integer,Produit> produits;  // Clé = id du produit afin de le retrouver / Contenu = objets de la classe Produit ( Nom et description )
 	Produit produit;
-	
+
 	public Magasin() {
-		this.listeProduit = new HashMap <Integer,Produit>();
+		this.produits = new HashMap <Integer,Produit>();
 	}
-	
+
 	public void ajouterProduit (String nom,String description) {
 		Produit produit = new Produit(nom, description);
-		listeProduit.put(listeProduit.size()+1, produit); // l'id est attribué en fonction de la taille de la liste
+		produits.put(produits.size()+1, produit); // l'id est attribué en fonction de la taille de la liste qui augmente
 	}
-	
 
-	
+
+
 	public void listeMap() {
-		
-		System.out.println("Le magasin est composé de : " + listeProduit.size() + " articles");
-		for (int CompteurListe=1;CompteurListe<=listeProduit.size();CompteurListe++) {
-			System.out.println(""+ CompteurListe +" "+  listeProduit.get(CompteurListe).toString());
+
+		System.out.println("Le magasin est composé de " + produits.size() + " articles");
+		for (int CompteurList=1;CompteurList<=produits.size();CompteurList++) { // boucle pour afficher les différents articles du magasin
+			System.out.println(""+ CompteurList +" "+  produits.get(CompteurList).toString());
 		}
-		
+
+	}
+
+	public Map<Integer,Produit> getProduit () { // permet de retourner l'objet sous forme de hashmap
+		return produits;
 	}
 	
-	public Map<Integer,Produit> getProduit () { // permet de retourner l'objet sous forme de hashmap
-		return listeProduit;
-	}
-	public boolean isEmpty () {
-		if (listeProduit.size()== 0 ) {
+	
+	public boolean isEmpty () { // Si aucun produits n'a été ajouté
+		if (produits.size()== 0 ) {
 			return true;
 		}
 		return false;
