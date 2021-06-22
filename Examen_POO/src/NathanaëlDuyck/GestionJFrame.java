@@ -28,13 +28,15 @@ public class GestionJFrame extends JFrame {
 	 private static String nom;
 	 private static String fichier;
 	 private static int tailleNom = 30;
+	 private static boolean initialisationEmprunt = false;
 	 
 	 private static ArrayList<Personnel> Person = new ArrayList<>();
 	 private static ArrayList<Emprunt> pret = new ArrayList<>();
 	 private static ArrayList<Magasin> mag = new ArrayList<>();
-	 private static boolean initialisation = false;
+	
 	 
 	 public GestionJFrame() {
+		
 		 super( "Gestion Personnel & prêt matériel" );
 		 this.setDefaultCloseOperation( DISPOSE_ON_CLOSE );
 		 
@@ -199,13 +201,13 @@ public class GestionJFrame extends JFrame {
 		if((Person.isEmpty()) || (mag.isEmpty())) {
 			System.out.println("Veuillez charger le personnel et créer le magasin\n");
 		}
-		else if ((pret.isEmpty())&& (!initialisation)) {
+		else if ((pret.isEmpty())&& (!initialisationEmprunt)) {
 			pret.add(new Emprunt(1,new Personnel(1,"Collon","Albert",Sexe.HOMME,new MyDate(10,8,1990),"Collon.a@test.be",Departement.HR),new Produit("HP","Elitebook 850 G7")));	
 			pret.add(new Emprunt(2,new Personnel(2,"Peeters","Marie",Sexe.FEMME,new MyDate(1,5,1995),"Peeters_M@@test.be",Departement.HR),new Produit("Dell","Inspiron 15 3000")));	
 			pret.add(new Emprunt(3,new Personnel(3,"Janssens","Sarah",Sexe.FEMME,new MyDate(23,5,1999),"Sarah.Janssens@test",Departement.Compta),new Produit("Dell","XPS 13")));	
 			pret.add(new Emprunt(4,new Personnel(4,"Jacobs","Charles",Sexe.HOMME,new MyDate(10,8,1990),"Charles.j#test.be",Departement.SEC),new Produit("Lenovo","Thinkpad E15 G2")));	
 			pret.add(new Emprunt(5,new Personnel(7,"Willems","Francois-Xavier",Sexe.HOMME,new MyDate(28,10,1996),"Willems.F-X@test.be",Departement.Prod),new Produit("Lenovo","IdeaPad 3 14IIL05 81WD00B2MH ")));	
-			initialisation = true;
+			initialisationEmprunt = true;
 			for (Emprunt emprunt : pret)
 			{
 			System.out.println(emprunt);
@@ -256,56 +258,39 @@ public class GestionJFrame extends JFrame {
 		String nomChangement;
 		String prenomChangement;
 		String mailChangement;
-		if(Person.size() ==0) {
-			System.out.println("Affichage impossible, pas de personnel !");
-		}
-		else {
-			System.out.println("+-----------------------+-----------------------------+-----------------------------+--------+----------------+---------------------------------------+");
-			System.out.println("| Département           | Prénom                      | Nom                         | Sexe   |  Naissance     | Email                                 |");
-			System.out.println("+-----------------------+-----------------------------+-----------------------------+--------+----------------+---------------------------------------+");
-			StringBuilder sb = new StringBuilder();
-			for (Personnel personnel : Person) {
-				sb.append(" ");
-				sb.append(setFixedLength(personnel.getDepartement(),25));
-				sb.append(setFixedLength(personnel.getPrenom(),tailleNom));
-				sb.append(setFixedLength(personnel.getNom(),tailleNom));		
-				sb.append(setFixedLength(personnel.getSexe(),10));
-				sb.append(setFixedLength(personnel.getDateddMMyyyy(),16));
-				sb.append(setFixedLength(personnel.getEmail(),10));
-				sb.append("\n");
-				}	
-			System.out.println(sb.toString());
-			System.out.println("Introduire le nom de la personne à modifier :");
-			System.out.println("Entrer un nom : ");
-			nom=Lire.texte();
-			while(!nomValide) {
+		Affichage();
+		System.out.println("Introduire le nom de la personne à modifier :");
+		System.out.println("Entrer un nom : ");
+		nom=Lire.texte();
+		while(!nomValide) {
 			for (Personnel personnel : Person) {
 				if(nom.equals(personnel.getNom())) {
 					System.out.println(personnel.getIdPersonnel()+"  "+personnel.getNom()+"--"+personnel.getPrenom()+"--"+personnel.getSexe()+"--"+personnel.getEmail()+"--"+personnel.getDepartement());
 					nomValide=true;
 				}
 			}
-			if(!nomValide) { 
+			if(nomValide) { 
+				System.out.println("Introduire les nouvelles valeurs:");
+				nomChangement = InputData.inputNomPrenom("Nom");
+				prenomChangement = InputData.inputNomPrenom("Prénom");
+				mailChangement = InputData.inputEmail();
+				for (Personnel personnel : Person) {
+					if(nom.equals(personnel.getNom())) {
+						personnel.setNom(nomChangement);
+						personnel.setPrenom(prenomChangement);
+						personnel.setEmail(mailChangement);
+					}
+			}
+			}
+			else {
 				System.out.println("Le nom que vous avez tapé n'est pas dans la liste du personnel ");
 				System.out.println("Introduire le nom de la personne à modifier :");
 				System.out.println("Essayer à nouveau d'entrer un nom : ");
 				nom=Lire.texte();
-			}
-			}
-			System.out.println("Introduire les nouvelles valeurs:");
-			nomChangement = InputData.inputNomPrenom("Nom");
-			prenomChangement = InputData.inputNomPrenom("Prénom");
-			mailChangement = InputData.inputEmail();
-			for (Personnel personnel : Person) {
-				if(nom.equals(personnel.getNom())) {
-					personnel.setNom(nomChangement);
-					personnel.setPrenom(prenomChangement);
-					personnel.setEmail(mailChangement);
-				}
-				
+			}	
 			}
 		}
-	}
+	
 	public static void Sauvegarde() {
 		if((Person.isEmpty()) || (pret.isEmpty()) || (mag.isEmpty()))   {
 			System.out.println("Affichage impossible, vous n'avez pas chargé toutes les données !");
@@ -339,7 +324,7 @@ public class GestionJFrame extends JFrame {
 			sbpret.append("\n");
 			compteur++;
 		}	
-		try (BufferedWriter bufWrite = new BufferedWriter (new FileWriter(new File("./src/NathanaëlDuyck",fichier)))){
+		try (BufferedWriter bufWrite = new BufferedWriter (new FileWriter(new File("./src/NathanaëlDuyck/Fichier",fichier)))){
 			
 			bufWrite.write("+-----------------------+-----------------------------+-----------------------------+--------+----------------+---------------------------------------+");
 			bufWrite.newLine();
