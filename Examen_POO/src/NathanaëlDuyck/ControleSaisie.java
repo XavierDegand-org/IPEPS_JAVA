@@ -10,12 +10,6 @@ public class ControleSaisie {
 	private static Pattern pattern =Pattern.compile(
 			"\\p{L}*(-\\p{L}*)*");
 	
-	public static boolean valideEmail(final String email) {
-		
-		Matcher matcher = EMAIL_PATTERN.matcher(email);
-	     return matcher.matches();
-		
-	}
 
 	 public static boolean valideNom(String text) {
 		 String nullString = null;
@@ -42,7 +36,33 @@ public class ControleSaisie {
 	 }
 	
 	public static boolean valideNomFichier(String result) {
+		String nullString = null;
+		 String vide = new String();
+		 boolean estNull = result.equals(nullString);
+		 boolean estVide = result.equals(vide);
+		 Pattern fichierpattern = Pattern.compile("^[a-zA-Z_0-9]+[^ / \\ : * ? \" < > |]+(.txt)$");
+		 Matcher match = fichierpattern.matcher(result);
+		 boolean isMatch = match.matches();
+		 if(estNull || estVide){
+			System.out.println("Valeur null ou vide !");
+			 return false;
+		 }
+		 else {	if (isMatch) { 
+				return true;
+			}
+			else {
+				System.out.println("Valeur hors contraintes !");
+			}
+		}
 		return false;
+	       
+	 }
+	
+	
+	public static boolean valideEmail(final String email) {
+		
+		Matcher matcher = EMAIL_PATTERN.matcher(email);
+	     return matcher.matches();
 		
 	}
 }

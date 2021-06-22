@@ -29,8 +29,5 @@ public class Magasin {
 	
 	public HashMap<Integer, Produit> getProduits() {
 		return produits;
-	}
-	public  boolean isEmpty() {  
-        return produits.size() == 0;  
-    }  
+	} 
 }

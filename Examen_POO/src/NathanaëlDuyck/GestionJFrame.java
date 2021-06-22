@@ -3,12 +3,10 @@ package NathanaëlDuyck;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -106,7 +104,8 @@ public class GestionJFrame extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					GestionPersonnel();		
+					GestionPersonnel();	
+					Affichage();
 				} 
 		 });
 		 
@@ -114,7 +113,7 @@ public class GestionJFrame extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("sauvegarde");		
+					Sauvegarde();		
 				} 
 		 });
 		 
@@ -167,33 +166,32 @@ public class GestionJFrame extends JFrame {
 			System.out.println("Affichage impossible, pas de personnel !");
 		}
 		else {
-			System.out.println("+----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
-			System.out.println("| Département                | Prénom                      | Nom                         | Sexe                        | Naissance                   | Email                       |");
-			System.out.println("+----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
+			System.out.println("+-----------------------+-----------------------------+-----------------------------+--------+----------------+---------------------------------------+");
+			System.out.println("| Département           | Prénom                      | Nom                         | Sexe   |  Naissance     | Email                                 |");
+			System.out.println("+-----------------------+-----------------------------+-----------------------------+--------+----------------+---------------------------------------+");
 			StringBuilder sb = new StringBuilder();
-			for (int temp = 0; temp < Person.size();temp++) {
+			for (Personnel personnel : Person) {
 				sb.append(" ");
-				sb.append(setFixedLength(Person.get(temp).getDepartement()));
-				sb.append(setFixedLength(Person.get(temp).getPrenom()));
-				sb.append(setFixedLength(Person.get(temp).getNom()));		
-				sb.append(setFixedLength(Person.get(temp).getSexe()));
-				sb.append(setFixedLength(Person.get(temp).getDateddMMyyyy()));
-				sb.append(setFixedLength(Person.get(temp).getEmail()));
+				sb.append(setFixedLength(personnel.getDepartement(),25));
+				sb.append(setFixedLength(personnel.getPrenom(),tailleNom));
+				sb.append(setFixedLength(personnel.getNom(),tailleNom));		
+				sb.append(setFixedLength(personnel.getSexe(),10));
+				sb.append(setFixedLength(personnel.getDateddMMyyyy(),16));
+				sb.append(setFixedLength(personnel.getEmail(),10));
 				sb.append("\n");
-				
 				}	
 			System.out.println(sb.toString());
 			}
 		}
 	
-	public static String setFixedLength(String s) {
+	public static String setFixedLength(String s,int taille) {
 		StringBuilder ss = new StringBuilder(s);
-		while(ss.length() < tailleNom) {
+		while(ss.length() < taille) {
 			String d =" ";
 			char c1 = d.charAt(0);
 			ss.insert(s.length(),c1);
 		}
-		String c = ss.substring(0,tailleNom);
+		String c = ss.substring(0,taille);
 		return c;
 	}
 
@@ -247,7 +245,7 @@ public class GestionJFrame extends JFrame {
 			 nombreValide=true;
 		}
 		catch( java.lang.IndexOutOfBoundsException e) {
-			 System.out.println("erreur,veuillez rentre un nombre proposé dans la liste d'emprunt");
+			 System.out.println("erreur,veuillez rentrer un nombre proposé dans la liste d'emprunt");
 		}
 		}
 	}
@@ -262,20 +260,19 @@ public class GestionJFrame extends JFrame {
 			System.out.println("Affichage impossible, pas de personnel !");
 		}
 		else {
-			System.out.println("+----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
-			System.out.println("| Département                | Prénom                      | Nom                         | Sexe                        | Naissance                   | Email                       |");
-			System.out.println("+----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
+			System.out.println("+-----------------------+-----------------------------+-----------------------------+--------+----------------+---------------------------------------+");
+			System.out.println("| Département           | Prénom                      | Nom                         | Sexe   |  Naissance     | Email                                 |");
+			System.out.println("+-----------------------+-----------------------------+-----------------------------+--------+----------------+---------------------------------------+");
 			StringBuilder sb = new StringBuilder();
-			for (int temp = 0; temp < Person.size();temp++) {
+			for (Personnel personnel : Person) {
 				sb.append(" ");
-				sb.append(setFixedLength(Person.get(temp).getDepartement()));
-				sb.append(setFixedLength(Person.get(temp).getPrenom()));
-				sb.append(setFixedLength(Person.get(temp).getNom()));		
-				sb.append(setFixedLength(Person.get(temp).getSexe()));
-				sb.append(setFixedLength(Person.get(temp).getDateddMMyyyy()));
-				sb.append(setFixedLength(Person.get(temp).getEmail()));
+				sb.append(setFixedLength(personnel.getDepartement(),25));
+				sb.append(setFixedLength(personnel.getPrenom(),tailleNom));
+				sb.append(setFixedLength(personnel.getNom(),tailleNom));		
+				sb.append(setFixedLength(personnel.getSexe(),10));
+				sb.append(setFixedLength(personnel.getDateddMMyyyy(),16));
+				sb.append(setFixedLength(personnel.getEmail(),10));
 				sb.append("\n");
-				
 				}	
 			System.out.println(sb.toString());
 			System.out.println("Introduire le nom de la personne à modifier :");
@@ -288,10 +285,10 @@ public class GestionJFrame extends JFrame {
 					nomValide=true;
 				}
 			}
-			if(!nomValide) {
-				System.out.println("Le nom que vous avez taper n'est pas dans la liste du personnel ");
+			if(!nomValide) { 
+				System.out.println("Le nom que vous avez tapé n'est pas dans la liste du personnel ");
 				System.out.println("Introduire le nom de la personne à modifier :");
-				System.out.println("Ressayer d'entrer un nom : ");
+				System.out.println("Essayer à nouveau d'entrer un nom : ");
 				nom=Lire.texte();
 			}
 			}
@@ -309,9 +306,62 @@ public class GestionJFrame extends JFrame {
 			}
 		}
 	}
-	
-	}
-
+	public static void Sauvegarde() {
+		if((Person.isEmpty()) || (pret.isEmpty()) || (mag.isEmpty()))   {
+			System.out.println("Affichage impossible, vous n'avez pas chargé toutes les données !");
+		}
+		else{
+		System.out.println("Introduire le nom du fichier extension .txt! ");
+		fichier=InputData.inputNomFichier();
+		StringBuilder sb = new StringBuilder();
+		for (Personnel personnel : Person) {
+				sb.append(" ");
+				sb.append(setFixedLength(personnel.getDepartement(),25));
+				sb.append(setFixedLength(personnel.getPrenom(),tailleNom));
+				sb.append(setFixedLength(personnel.getNom(),tailleNom));		
+				sb.append(setFixedLength(personnel.getSexe(),10));
+				sb.append(setFixedLength(personnel.getDateddMMyyyy(),16));
+				sb.append(setFixedLength(personnel.getEmail(),10));
+				sb.append("\n");
+				}	
+		int compteur=1;
+		StringBuilder sbpret = new StringBuilder();
+		for (Emprunt emprunt : pret)
+		 {
+			sbpret.append("  ");
+			sbpret.append(compteur);
+			sbpret.append("          ");
+			sbpret.append(setFixedLength(emprunt.getEmprunteur().getNom(),tailleNom));
+			sbpret.append(setFixedLength(emprunt.getEmprunteur().getPrenom(),tailleNom));
+			sbpret.append("    ");
+			sbpret.append(setFixedLength(emprunt.getMateriel().getNom(),7));
+			sbpret.append(setFixedLength(emprunt.getMateriel().getDescription(),tailleNom));
+			sbpret.append("\n");
+			compteur++;
+		}	
+		try (BufferedWriter bufWrite = new BufferedWriter (new FileWriter(new File("./src/NathanaëlDuyck",fichier)))){
+			
+			bufWrite.write("+-----------------------+-----------------------------+-----------------------------+--------+----------------+---------------------------------------+");
+			bufWrite.newLine();
+			bufWrite.write("| Département           | Prénom                      | Nom                         | Sexe   |  Naissance     | Email                                 |");
+			bufWrite.newLine();
+			bufWrite.write("+-----------------------+-----------------------------+-----------------------------+--------+----------------+---------------------------------------+");																														
+			bufWrite.newLine();
+			bufWrite.write(sb.toString());
+			bufWrite.write("+----------+--------------------------------------------------------------+-----------------------------------------+");
+			bufWrite.newLine();
+			bufWrite.write("| N°       | Nom - Prénom                                                 |  Matériel                               |");
+			bufWrite.newLine();
+			bufWrite.write("+----------+--------------------------------------------------------------+-----------------------------------------+");
+			bufWrite.newLine();
+			bufWrite.write(sbpret.toString());
+			
+		} catch (IOException io) {
+			System.err.println("Une erreur est survenue : "+io.getMessage());
+		}
+		}
+		}
+}
 
 	 
 

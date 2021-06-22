@@ -5,7 +5,8 @@ public class Emprunt {
 	private int nombre;
 	private Personnel emprunteur;
 	private Produit materiel;
-	
+
+
 	public Emprunt(int nombre,Personnel emprunteur, Produit materiel) {
 		this.nombre=nombre;
 		this.emprunteur = emprunteur;
@@ -34,6 +35,4 @@ public class Emprunt {
 	public int getNombre() {
 		return nombre;
 	}
-	
-	
 }

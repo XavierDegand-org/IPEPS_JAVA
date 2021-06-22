@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 public class Personnel extends Individu {
 	
 	private int IdPersonnel;
-	private static int id = 0;
 	private String email;
 	private static final Pattern EMAIL_PATTERN = Pattern.compile( 
 			"^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
@@ -16,7 +15,6 @@ public class Personnel extends Individu {
 		this.IdPersonnel = idPersonnel;
 		this.email = email;
 		this.departement=depart;
-		id++;
 	}
 
 	@Override
@@ -38,11 +36,18 @@ public class Personnel extends Individu {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	
-	
-	
-	
+		   if ( email == null ) {
+	            throw new NullPointerException( "email cannot be null" );
+	        }
+	        if ( ! EMAIL_PATTERN.matcher( email ).matches() ) {
+	            throw new RuntimeException( "Le format de l'email ne coorespond pas aux patterns." );
+	        }
+	        this.email = email;
+	    }
 }
+	
+	
+	
+	
+	
+
