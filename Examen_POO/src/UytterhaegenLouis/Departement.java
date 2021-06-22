@@ -1,18 +1,18 @@
 package UytterhaegenLouis;
 
 public enum Departement {
-	
-	 Compta("Comptabilité"),
-	 HR("Ressources Humaines"),
-	 Prod("Production"),
-	 SEC("Sécurité"),;
-	 private final String DeptNom;
-	
-	 Departement(String DeptNom) {
-		this.DeptNom = DeptNom;
+
+	Compta("Comptabilité"),
+	HR("Ressources Humaines"),
+	Prod("Production"),
+	SEC("Sécurité"),;
+	private final String deptNom;
+
+	Departement(String deptNom) {
+		this.deptNom = deptNom;
 	}
 
-	 public  String getDeptNom() {
-	        return DeptNom;
-	 }
+	public  String getDeptNom() {
+		return deptNom;
+	}
 }
