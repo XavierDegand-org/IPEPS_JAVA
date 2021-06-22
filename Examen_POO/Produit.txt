@@ -1,0 +1,8 @@
+Liste produits
+HP1;Elitebook 850 G7 
+HP2;Elitebook 830 G7 X360
+Dell1;Inspiron 15 3000
+Dell2;XPS 13
+Dell3;XPS 15
+Lenovo1;Thinkpad E15 G2
+Lenovo2;IdeaPad 3 14IIL05 81WD00B2MH 
