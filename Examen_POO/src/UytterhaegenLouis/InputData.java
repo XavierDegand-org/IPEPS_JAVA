@@ -1,9 +1,9 @@
 package UytterhaegenLouis;
 
 public class InputData {
-	
+
 	private static String email;
-	
+
 	public static String inputEmail() {
 		boolean arret = false;
 		while (!arret) {
@@ -31,7 +31,21 @@ public class InputData {
 			}
 		}
 		return result;
-		
+
+	}
+	public static String inputNomFichier() {
+		boolean arret = false;
+		String result = null;
+		while (!arret) {
+			System.out.println("Introduire le nom du fichier extension .txt !");
+			result = Lire.texte();
+			if (ControleSaisie.valideNomFichier(result, GestionJFrame.tailleNom)) {
+				return result;
+			}else {
+				arret = false;
+			}
+		}
+		return result;
 	}
 
 }
