@@ -3,7 +3,7 @@ package Jessica;
 public class Individu {
 	  private String nom;
 	  private String prenom;
-	  private Sexe sexe;
+	  Sexe sexe;
 	  private MyDate dateNaissance;
 
 	  public Individu(String nom, String prenom, Sexe sexe, MyDate dateNaissance) {

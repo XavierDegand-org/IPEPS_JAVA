@@ -16,15 +16,18 @@ import java.awt.event.ActionListener;
 
 public class GestionJFrame extends JFrame {
 	
-	 private JButton btnLoad = new JButton( "Chargement du personnel" );
-	 private JButton btnAffichage = new JButton( "Affichage liste du personnel" );
-	 private JButton btnMag = new JButton( "Création du magasin" );
-	 private JButton btnPret = new JButton( "Prêt de matériel" );
-	 private JButton btnRetour = new JButton( "Retour de matériel" );
-	 private JButton btnPersonnel = new JButton( "Modification données personnel" );
-	 private JButton btnSauvegarde = new JButton( "Sauvegarde" );
-	 private JButton btnClose = new JButton( "Fermer" );
+	
+	// variables boutons
+	private JButton btnLoad = new JButton( "Chargement du personnel" );
+	private JButton btnAffichage = new JButton( "Affichage liste du personnel" );
+	private JButton btnMag = new JButton( "Création du magasin" );
+	private JButton btnPret = new JButton( "Prêt de matériel" );
+	private JButton btnRetour = new JButton( "Retour de matériel" );
+	private JButton btnPersonnel = new JButton( "Modification données personnel" );
+	private JButton btnSauvegarde = new JButton( "Sauvegarde" );
+	private JButton btnClose = new JButton( "Fermer" );
 	 
+	// variables listes
 	private static ArrayList<Personnel> Person = new ArrayList<>();
 	private static ArrayList<Magasin> mag = new ArrayList<>();
 	private static Magasin magasin = new Magasin();
@@ -59,8 +62,8 @@ public class GestionJFrame extends JFrame {
 		btnMag.addActionListener(new btnMagasinListener());
 		btnPret.addActionListener(new btnPretListener());
 		btnRetour.addActionListener(new btnRetourListener());
-		btnPersonnel.addActionListener(new GestionPersonnel());
-		btnSauvegarde.addActionListener(new Sauvegarde());
+		btnPersonnel.addActionListener(new btnPersonnelListener());
+		btnSauvegarde.addActionListener(new btnSauvegardeListener());
 		btnClose.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed (ActionEvent e) {
@@ -72,7 +75,7 @@ public class GestionJFrame extends JFrame {
 		this.setLocationRelativeTo( null );
 	}
 	
-	//***************************** PARTIE LOAD *****************************//
+	//***************************** PARTIE CHARGEMENT PERSONNEL *****************************//
 	
 	public JButton getBtnLoad() {
 	        return btnLoad;
@@ -114,7 +117,7 @@ public class GestionJFrame extends JFrame {
 		
 	}
 	
-	//***************************** PARTIE AFFICHAGE *****************************//
+	//***************************** PARTIE AFFICHAGE PERSONNEL *****************************//
 	
 	public JButton getBtnAffichage() {
         return btnAffichage;
@@ -129,17 +132,16 @@ public class GestionJFrame extends JFrame {
 	}
 	
 	//fonction permettant de calibrer la taille des strings
-	public static String setFixedLength(String s){
+	public static String setFixedLength(String s, int largeur){
 		        StringBuilder ss = new StringBuilder(s);
-		        // tant que la taille de ss est inférieure à 25 on ajoute un caractère blanc
-		        while (ss.length() < 25) {
+		        // tant que la taille de ss est inférieure à largeur définie on ajoute un caractère blanc
+		        while (ss.length() < largeur) {
 		                String d = " ";
 		                char c1 = d.charAt(0);
 		                ss.insert(s.length(),c1);
 		            }
-		        String c = ss.substring(0, 25);
+		        String c = ss.substring(0, largeur);
 		        return c;
-
 		    }
 	
 	public void Affichage() {
@@ -148,17 +150,17 @@ public class GestionJFrame extends JFrame {
 			System.out.println("Affichage impossible, pas de personnel !");
 		}
 		else {
-		System.out.println("+-----------------------+------------------------+------------------------+------------------------+------------------------+------------------------+");
-		System.out.println("| Département           | Prénom                 | Nom                    | Sexe                   | Naissance              | Email                  |");
-		System.out.println("+-----------------------+------------------------+------------------------+------------------------+------------------------+------------------------+");
+		System.out.println("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
+		System.out.println("| Département           | Prénom            | Nom              | Sexe     | Naissance       | Email                  |");
+		System.out.println("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
 		StringBuilder sb = new StringBuilder();
 		    for (int temp = 0; temp < Person.size(); temp++) {
-		    	sb.append(setFixedLength(Person.get(temp).getDepartement()));
-		    	sb.append(setFixedLength(Person.get(temp).getPrenom()));
-		    	sb.append(setFixedLength(Person.get(temp).getNom()));
-		    	sb.append(setFixedLength(Person.get(temp).getSexe()));
-		    	sb.append(setFixedLength(Person.get(temp).getDateddMMyyyy()));
-		    	sb.append(setFixedLength(Person.get(temp).getEmail()));
+		    	sb.append(setFixedLength(Person.get(temp).getDepartement(), 25));
+		    	sb.append(setFixedLength(Person.get(temp).getPrenom(), 20));
+		    	sb.append(setFixedLength(Person.get(temp).getNom(), 20));
+		    	sb.append(setFixedLength(Person.get(temp).getSexe(), 11));
+		    	sb.append(setFixedLength(Person.get(temp).getDateddMMyyyy(), 18));
+		    	sb.append(setFixedLength(Person.get(temp).getEmail(), 25));
                 sb.append("\n");
 		    		}		
 		    // on affiche le contenu
@@ -167,7 +169,7 @@ public class GestionJFrame extends JFrame {
 	}
 			
 	
-	//***************************** PARTIE MAGASIN *****************************//
+	//***************************** PARTIE CRÉATION MAGASIN *****************************//
 	
 	public JButton getBtnMag() {
         return btnMag;
@@ -177,12 +179,10 @@ public class GestionJFrame extends JFrame {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			
 			Magasin();
 		}
 	
 	public void Magasin() {
-	
 		// charger le magasin/les produits
 		try{
 		magasin.AjouterProduit(1,"HP","Elitebook 850 G7");
@@ -200,10 +200,10 @@ public class GestionJFrame extends JFrame {
 			err.printStackTrace(); //- if the given pattern is invalid)
 			}
 		
-		// afficher listeMap dans l'ordre
+		// pour afficher listeMap dans l'ordre
 		//magasin.listeMap();
 		
-		// afficher produit spécifique
+		// pour afficher produit spécifique
 		System.out.println("Le magasin est composé de " + Magasin.produits.size()+" articles");
 		magasin.getProduit(6);
 		System.out.println("");
@@ -224,7 +224,7 @@ public class GestionJFrame extends JFrame {
 		
 	}
 	
-	//***************************** PARTIE PRÊT *****************************//
+	//***************************** PARTIE PRÊT DE MATÉRIEL *****************************//
 
 	public JButton getBtnPret() {
         return btnPret;
@@ -241,12 +241,14 @@ public class GestionJFrame extends JFrame {
 	
 	public void Emprunt() {
 		
+		System.out.println(magasin.getProduit(7));
+		
 		// charger l'arraylist pret
 		if(Person.size() < 1) {
 			System.out.println("Veuillez d'abord charger le personnel.");
 		}
 		else if (magasin.isEmpty()) {
-			System.out.println("Le magassin est vide, veuillez d'abord créer le magasin.");
+			System.out.println("Le magasin est vide, veuillez d'abord créer le magasin.");
 		}
 		else {
 			pret.add(new Emprunt(1, Person.get(0), magasin.getProduit(1)));
@@ -257,16 +259,15 @@ public class GestionJFrame extends JFrame {
 			}
 
 		// afficher prêt de matériel
-		/*for (Emprunt emprunt : pret)
+		for (Emprunt emprunt : pret)
 		{
 		System.out.println(emprunt);
-		}*/
-		
+		}
 					
 		
 	}
 	
-	//***************************** PARTIE RETOUR *****************************//
+	//***************************** PARTIE RETOUR MATÉRIEL *****************************//
 	
 	public JButton getBtnRetour() {
         return btnRetour;
@@ -276,12 +277,28 @@ public class GestionJFrame extends JFrame {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			System.out.println("Retour matériel");
+			RetourEmprunt();
 		}
-		
 	}
 	
 	public void RetourEmprunt() {
+		
+		if(Person.size() < 1) {
+			System.out.println("Veuillez d'abord charger le personnel.");
+		}
+		else if (magasin.isEmpty()) {
+			System.out.println("Le magasin est vide, veuillez d'abord créer le magasin.");
+		}
+		else if (pret.isEmpty()) {
+			System.out.println("Pas d'emprunt effectué, retour impossible.");
+		}
+		else {
+			System.out.println("Liste des emprunts");
+			System.out.println("N° "+ Emprunt.getNombre()+ " " + Emprunt.getEmprunteur().getNom() + Emprunt.getMateriel(1));
+		
+			System.out.println("Introduire le numéro d'emprunt à annuler :");
+			int nbremprunt = Lire.nbre();
+		}
 		
 	}
 	
@@ -291,26 +308,33 @@ public class GestionJFrame extends JFrame {
         return btnPersonnel;
         }
 	
-	public class GestionPersonnel implements ActionListener {
+	public class btnPersonnelListener implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
 			Affichage();
 			
+			GestionPersonnel();
+		}
+	}
+	
+	public void GestionPersonnel() {
+			
 			if(Person.size() < 1) {
-				System.out.println(" ");
+				System.out.println("Veuillez d'abord charger le personnel.");
 			}
 			else {
 			System.out.println("\n");
 			System.out.println("Introduire le nom de la personne à modifier :");
 			System.out.println("Entrer un nom :");
+			String nom = InputData.inputNomPrenom("Nom");
+			
 			System.out.println("Introduire les nouvelles valeurs :");
 			System.out.println("Entrer un nom :");
 			System.out.println("Entrer un prénom :");
 			System.out.println("Entrer une adresse mail :");
 		}
 		
-		}
 	}
 	
 	//***************************** PARTIE SAUVEGARDE *****************************//
@@ -319,13 +343,17 @@ public class GestionJFrame extends JFrame {
         return btnSauvegarde;
         }
 	
-	public class Sauvegarde implements ActionListener {
+	public class btnSauvegardeListener implements ActionListener {
 		
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			System.out.println("Sauvegarde");
+			Sauvegarde();
 		}
 		
+	}
+	
+	public void Sauvegarde() {
+		System.out.println("Sauvegarde");
 	}
 	
 	//***************************** PARTIE FERMER *****************************//
