@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 
 public class Lire {
-	
-	
+
+
 	static Scanner clavier = new Scanner(System.in);
-	
+
 	public static String texte() {
 		String texte = ""; // Variable pour éviter la double saisie
 		try {
@@ -22,9 +22,9 @@ public class Lire {
 			System.out.println("Scanner is closed");
 		}
 		return texte;
-				
+
 	}	
-	 
+
 	public static int nbre() {
 		int result = 0; // Variable pour éviter la double saisie
 		boolean loop = false;						
@@ -44,12 +44,12 @@ public class Lire {
 				vider();
 				System.out.println("This scanner is closed");
 			}
-			
+
 		}
 		return result;
-										
+
 	}
-	
+
 	public static void vider() {
 		try {
 			clavier.nextLine();
@@ -61,5 +61,5 @@ public class Lire {
 			System.out.println("This scanner is closed");
 		}
 	}
-	
+
 }
