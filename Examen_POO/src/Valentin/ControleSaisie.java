@@ -9,7 +9,7 @@ public class ControleSaisie {
 	private static final String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 	private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 	
-	public static boolean valideNom(String text) {
+	public static boolean valideNom(String text, int tailleNom) {
 		 int taille = 30;
 		 String nullString = null;
 		 String vide = new String();
@@ -40,7 +40,7 @@ public class ControleSaisie {
 
 	public static boolean valideNomFichier(String result) {
 		
-		return false;
+		return true;
 	}
 	
 }

@@ -1,17 +1,27 @@
 package Valentin;
 
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GestionJFrame extends JFrame implements ActionListener { // il implémentes le ActionListener qui estg une interface qui va recevoir des évenements
+public class GestionJFrame extends JFrame  { /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+// il implémentes le ActionListener qui estg une interface qui va recevoir des évenements
 	
 	/****************************************
 	 *********Création de boutons************ 
@@ -27,10 +37,11 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 	
 	private static String nom;
 	private static String fichier;
-	private static int tailleNom = 30;
+	public static int tailleNom = 30;
 	
 	private static ArrayList<Personnel> Person = new ArrayList<>();
-	private static final Magasin mag = new Magasin();
+	private static Magasin mag = new Magasin();
+	private static ArrayList<Emprunt> pret = new ArrayList<>();
 	
 		
 	// Création du constructeur GestionJFrame
@@ -55,6 +66,8 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 		btnAffichage.addActionListener(new btnAffichageListener());
 		btnPersonnel.addActionListener(new GestionPersonnel());
 		btnMag.addActionListener(new btnMagListener());
+		btnPret.addActionListener(new GestionEmprunt());
+		btnSauvegarde.addActionListener(new Sauvegarde());
 		btnClose.addActionListener(new ActionListener() {
 			
 			@Override
@@ -107,7 +120,7 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 	public class btnAffichageListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Affichage();
+			System.out.println(Affichage().toString());
 			
 		}
 	}
@@ -118,41 +131,46 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 	}
 	
 	
-	public static void Affichage() {
+	public StringBuilder Affichage() {
 	
+		StringBuilder builder = new StringBuilder();
 		
 		if(Person.isEmpty()) {
 			System.out.println("Affichage impossible , pas de personnel !");
 		}
 		else {
-			System.out.println("+-----------------------+-------------------+--------------------+--------+--------------+-------------------------+");
-			System.out.println("| Département           | Prénom            | Nom                | Sexe   | Naissance    | Email                   |");
-			System.out.println("+-----------------------+-------------------+--------------------+--------+--------------+-------------------------+");
+			builder.append("+------------------------+-----------------------------+--------------------+--------+--------------+-------------------------+");
+			builder.append("\n");
+			builder.append("| Département            | Prénom                      | Nom                | Sexe   | Naissance    | Email                   |");
+			builder.append("\n");
+			builder.append("+------------------------+-----------------------------+--------------------+--------+--------------+-------------------------+");
+			builder.append("\n");
 			
-			StringBuilder builder = new StringBuilder(); // permet de concaténer des chaînes de caractères
+			 // permet de concaténer des chaînes de caractères
 			
 			for(Personnel person : Person) {
 				builder.append(" ");
-				builder.append(setFixedLength(person.getDepartement()));
-				builder.append(setFixedLength(person.getPrenom()));
-				builder.append(setFixedLength(person.getNom()));
-				builder.append(setFixedLength(person.getSexe()));
-				builder.append(setFixedLength(person.getDateddMMyyyy()));
-				builder.append(setFixedLength(person.getEmail()));
+				builder.append(setFixedLength(person.getDepartement(),27));
+				builder.append(setFixedLength(person.getPrenom(),30));
+				builder.append(setFixedLength(person.getNom(),20));
+				builder.append(setFixedLength(person.getSexe(),10));
+				builder.append(setFixedLength(person.getDateddMMyyyy(),15));
+				builder.append(setFixedLength(person.getEmail(),30));
 				builder.append("\n");
 			}
-			System.out.println(builder);
+			
 		}
+		return builder;
 	}
 	
-	public static String setFixedLength(String s ) {
+	public String setFixedLength(String s, int taille ) {
 		StringBuilder build = new StringBuilder(s);
-		while(build.length()< tailleNom) {
+		while(build.length()< taille) {
 			String d = " ";
 			char c = d.charAt(0);
 			build.insert(s.length(), c);
 		}
-		String c = build.substring(0,tailleNom);
+		String c = build.substring(0,taille);
 		return c;
 	}
 	
@@ -191,6 +209,48 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 	
 	
 	/****************************************
+	 *****************Pret******************* 
+	 ****************************************/
+	
+	public JButton getBtnPret(){
+		return btnPret;
+	}
+	
+	public static class GestionEmprunt implements ActionListener{
+
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if(Person.isEmpty()) {
+				System.out.println("Veuilez charger le personnel");
+			}
+			else if(mag.getProduit().isEmpty() ){
+				System.out.println("Veuillez créer le magasin");
+			}
+			else {
+				pret.add(new Emprunt(1,Person.get(1),mag.produits.get(1)));
+				
+				
+				
+				
+			}
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/****************************************
 	 *********Modification Personnel********* 
 	 ****************************************/
 	
@@ -200,7 +260,7 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 	
 
 	
-	public static class GestionPersonnel implements ActionListener{
+	public class GestionPersonnel implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -225,15 +285,12 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 									+" -- "+Person.get(compteur).getSexe()+" -- "+Person.get(compteur).getEmail()+" -- "+Person.get(compteur).getDepartement());
 							System.out.println("Introduire les nouvelles valeurs :");
 							
-							System.out.println("Entrer un nom : ");
-							Person.get(compteur).setNom(InputData.inputNomPrenom());
-							System.out.println("Entrer un prenom : ");
-							Person.get(compteur).setPrenom(InputData.inputNomPrenom());
-							System.out.println("Entrer une adresse mail ");
+							Person.get(compteur).setNom(InputData.inputNomPrenom("nom"));
+							Person.get(compteur).setPrenom(InputData.inputNomPrenom("prénom"));
 							Person.get(compteur).setEmail(InputData.inputEmail());
 							
 							arret = true;
-							Affichage();
+							Affichage().toString();
 							return;
 						}
 						else {
@@ -246,16 +303,36 @@ public class GestionJFrame extends JFrame implements ActionListener { // il impl
 			}
 		
 		}
-		
-			
-		
 
 		}
+	
+	
+	public JButton getBtnSauvegarde() {
+		return btnSauvegarde;
+	}
+	public class Sauvegarde implements ActionListener{
 
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH-mm-ss");
+			Date date = new Date();
+			fichier = InputData.inputNomFichier();
+			
+			try(BufferedWriter bufferwrite = new BufferedWriter(new FileWriter(new File("./src/Valentin/Fichier",fichier)))) {
+				bufferwrite.write("DTG de la sauvegarde : "+format.format(date));
+				bufferwrite.newLine();
+				bufferwrite.write(Affichage().toString());
+				System.out.println("Sauvegarde réussie");
+				
+			}catch(IOException io) {
+				System.out.println("Une erreur est survenue : "+io.getMessage());
+			}
+			
+		}
 		
 	}
+
+
+	
 }

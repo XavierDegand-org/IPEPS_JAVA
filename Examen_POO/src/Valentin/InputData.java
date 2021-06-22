@@ -2,12 +2,13 @@ package Valentin;
 
 public class InputData {
 	
-	public static String inputNomPrenom() {
+	public static String inputNomPrenom(String libelle) {
 		boolean arret = false;
 		String nomPrenom = null;
 		while (!arret) {
+			System.out.println("Entrer un : "+libelle);
 			nomPrenom = Lire.texte();
-			if (ControleSaisie.valideNom(nomPrenom)){
+			if (ControleSaisie.valideNom(libelle,GestionJFrame.tailleNom)){
 				return nomPrenom;
 			}else {
 				System.out.print("Erreur de saisie !  ");
@@ -22,6 +23,7 @@ public class InputData {
 		boolean arret = false;
 		//String result = null;
 		while (!arret) {
+			System.out.println("Entrer une adresse mail :");
 			 email = Lire.texte();
 			if (ControleSaisie.valideEmail(email)){
 				return email;

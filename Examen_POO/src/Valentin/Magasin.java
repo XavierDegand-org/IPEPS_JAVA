@@ -8,7 +8,7 @@ public class Magasin  {
 	HashMap<Integer, Produit> produits;
 	
 	public Magasin() {
-		produits = new HashMap<Integer,Produit>();
+		this.produits = new HashMap<Integer,Produit>();
 	}
 	
 	public void AjouterProduit(Integer id,String nom, String description) {
@@ -28,7 +28,11 @@ public class Magasin  {
 		return produits;
 	}
 	
-	public void isEmpty() {
+	public boolean isEmpty() {
+		if(produits.size() == 0) {
+			return true;
+		}
+		return false;
 		
 	}
 	
