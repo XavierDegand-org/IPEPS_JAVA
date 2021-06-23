@@ -19,8 +19,9 @@ public class Emprunt {
     public void getEmprunteur(){
 
     }
-    public void setEmprunteur(){
+    public Produit setEmprunteur(){
 
+        return null;
     }
     public void getMateriel(){
 

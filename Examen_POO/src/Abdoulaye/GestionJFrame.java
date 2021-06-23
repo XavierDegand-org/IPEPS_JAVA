@@ -180,11 +180,9 @@ public class GestionJFrame extends JFrame {
                     System.out.println(produit);
                 }
 
-
             } catch (NullPointerException | IllegalArgumentException e1) {
                 e1.printStackTrace();
             }
-
         }
     }
     //Prêt matériel
@@ -196,11 +194,17 @@ public class GestionJFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnPret works");
+            Magasin magasin = new Magasin();
 
+            try {
+                produit.add(new Emprunt().setEmprunteur());
+
+            } catch (NullPointerException | IllegalArgumentException e1) {
+                e1.printStackTrace();
 
             }
-
         }
+    }
 
 
     //Retour matériel

@@ -6,6 +6,7 @@ public class Produit {
      private String description = " ";
      private int identifiant = 0;
 
+    // constructeur du Produit
     public Produit(String nom, String description) {
         this.identifiant = id++;
         this.nom = nom;
