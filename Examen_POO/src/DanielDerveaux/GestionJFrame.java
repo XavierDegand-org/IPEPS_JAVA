@@ -161,7 +161,7 @@ public class GestionJFrame extends JFrame {
 			mag.ajouterProduit(4, "Dell", "XPS 13");
 			mag.ajouterProduit(5, "Dell", "XPS 15");
 			mag.ajouterProduit(6, "Lenovo", "Thinkpad E15 G2");
-			mag.ajouterProduit(7, "Lenovo", "IdeaPad 3 14IIL05");
+			mag.ajouterProduit(7, "Lenovo", "IdeaPad 3 14IIL05 81WD00B2MH");
 
 			mag.listeMap();
 		}
@@ -206,24 +206,59 @@ public class GestionJFrame extends JFrame {
 		private void Emprunt() throws IOException {
 			if(Person.isEmpty() && mag.isEmpty()) {
 				System.out.println("Veuillez charger le personnel et le magasin !");
+				return;
 			} else if(Person.isEmpty() && mag.isEmpty() == false) {
 				System.out.println("Veuillez charger le personnel !");
+				return;
 			} else if(Person.isEmpty() == false && mag.isEmpty()) {
 				System.out.println("Veuillez charger le magasin !");
+				return;
 			} else if(pret.isEmpty()) {
-				pret.add(new Emprunt(1, Person.get(1), mag.produits.get(1)));
-			} else {
-				System.out.println("Les emprunts ont déjà été chargés !");
+				pret.add(new Emprunt(1, Person.get(0), mag.produits.get(1)));
+				pret.add(new Emprunt(2, Person.get(1), mag.produits.get(3)));
+				pret.add(new Emprunt(3, Person.get(2), mag.produits.get(4)));
+				pret.add(new Emprunt(4, Person.get(3), mag.produits.get(6)));
+				pret.add(new Emprunt(5, Person.get(6), mag.produits.get(7)));
+			}
+			for (int CompteurList = 0; CompteurList < pret.size(); CompteurList++) {
+				System.out.println("\n" + pret.get(CompteurList).toString());
 			}
 		}
 		
 		/* Retour de matériel */
 		private void RetourEmprunt() throws IOException {
+			StringBuilder builder = new StringBuilder();
+			int numero_emprunt = 0;
 			if(pret.isEmpty()) {
 				System.out.println("Veuillez charger les emprunts !");
 			} else {
-				System.out.println("En cours");
+				for(Emprunt Pret : pret) {
+					builder.append("N° ");
+					builder.append(setFixedLength(String.valueOf(Pret.getNombre()), 3));
+					builder.append(setFixedLength(String.valueOf(Pret.getEmprunteur().getNom()), 10));
+					builder.append(setFixedLength(Pret.getMateriel(), 10));
+					builder.append(setFixedLength(Pret.getArticle(), 30));
+					builder.append("\n");
+				}
+				System.out.println("Liste des emprunts");
+				System.out.println(builder);
+				System.out.println(pret);
+				
+				System.out.println("Introduire le numéro d'emprunt à annuler : ");
+				numero_emprunt = Lire.nbre();
+				pret.remove(numero_emprunt-1); // l'index commençant à zéro, on soustrait 1 à la valeur entrée
+				builder.setLength(0); // on vide le builder pour le recréer sans l'emprunt retiré
+				for(Emprunt Pret : pret) {
+					builder.append("N° ");
+					builder.append(setFixedLength(String.valueOf(Pret.getNombre()), 3));
+					builder.append(setFixedLength(String.valueOf(Pret.getEmprunteur().getNom()), 10));
+					builder.append(setFixedLength(Pret.getMateriel(), 10));
+					builder.append(setFixedLength(Pret.getArticle(), 30));
+					builder.append("\n");
+				}
+				System.out.println(builder);
 			}
+			return;
 		}
 		
 		/* Modification données Personnel */
@@ -248,6 +283,7 @@ public class GestionJFrame extends JFrame {
 				}
 				System.out.println("Le nom n'existe pas dans la base de donnée !");
 			}
+			return;
 		}
 
 		/* Sauvegarde */
@@ -259,6 +295,12 @@ public class GestionJFrame extends JFrame {
 				bufWrite.write("DTG de la sauvegarde : " + format.format(date));
 				bufWrite.newLine();
 				bufWrite.write(Affichage().toString());
+				bufWrite.newLine();
+				bufWrite.newLine();
+				bufWrite.write("+------+-------------------------+----------------------------------------+\n");
+				bufWrite.write("| N°   | Nom - Prénom            | Matériel                               |\n");
+				bufWrite.write("+------+-------------------------+----------------------------------------+\n");
+				bufWrite.write(pret.toString()); // Test de sauvegarde de la liste, la mise en forme n'est pas conforme à l'entête
 				System.out.println("Sauvegarde réussie !\n");
 			} catch (IOException io) {
 				System.err.println("Une erreur est survenue : " + io.getMessage());
@@ -269,6 +311,6 @@ public class GestionJFrame extends JFrame {
 			for (String element : Lignes) {
 				System.out.println(element);
 			}
-			
+			return;
 		}
 }

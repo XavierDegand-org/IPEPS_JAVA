@@ -21,15 +21,16 @@ public class Emprunt {
 
 	  @Override
 	  public String toString() {
-			return String.format("Id : %i %s %s sexe : %s date de naissance : %s. Email : %s Département : %s",
-					getEmprunteur().getIdPersonnel(),
-					getEmprunteur().getNom(),
-					getEmprunteur().getPrenom(),
-					getEmprunteur().getSexe(),
-					getEmprunteur().getDateddMMyyyy(),
-					getEmprunteur().getEmail(),
-					getEmprunteur().getDepartement()
-					);
+		  return String.format( "Id : %s %s %s sexe : %s date de naissance : %s. Email : %s Département : %s    Produit [nom = %s, description = %s]",
+				  emprunteur.getIdPersonnel(),
+				  emprunteur.getNom(),
+				  emprunteur.getPrenom(),
+				  emprunteur.getSexe(),
+				  emprunteur.getDateddMMyyyy(),
+				  emprunteur.getEmail(),
+				  emprunteur.getDepartement(),
+				  materiel.getNom(),
+				  materiel.getDescription());
 	  }
 	  
 	  public String getMateriel() {
