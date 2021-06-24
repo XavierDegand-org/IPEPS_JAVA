@@ -2,13 +2,13 @@ package Valentin;
 
 public class InputData {
 	
-	public static String inputNomPrenom(String libelle) {
+	public static String inputNomPrenom(String libelle) {  //
 		boolean arret = false;
 		String nomPrenom = null;
 		while (!arret) {
-			System.out.println("Entrer un : "+libelle);
+			System.out.println("Entrer un "+libelle+ " :");
 			nomPrenom = Lire.texte();
-			if (ControleSaisie.valideNom(libelle,GestionJFrame.tailleNom)){
+			if (ControleSaisie.valideNom(nomPrenom,GestionJFrame.tailleNom)){
 				return nomPrenom;
 			}else {
 				System.out.print("Erreur de saisie !  ");
@@ -38,17 +38,14 @@ public class InputData {
 		boolean arret = false;
 		String nomFichier = null;
 		while (!arret) {
-			System.out.print("Entrer un nom de fichier :  ");
 			nomFichier = Lire.texte();
-			if (ControleSaisie.valideNomFichier(nomFichier)){
-				return nomFichier;
-			}else {
-				System.out.print("Erreur de saisie !  ");
+			if (ControleSaisie.valideNomFichier(nomFichier)) {
+				arret = true;
+			} else {
 				arret = false;
 			}
 		}
 		return nomFichier;
-		
 	}
 
 }

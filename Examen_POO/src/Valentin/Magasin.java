@@ -5,7 +5,8 @@ import java.util.HashMap;
 
 public class Magasin  {
 
-	HashMap<Integer, Produit> produits;
+	HashMap<Integer, Produit> produits; // Integer : c'est la clé maintenu par la carte 
+										// Produit : c'est le type de valeurs mappées
 	
 	public Magasin() {
 		this.produits = new HashMap<Integer,Produit>();
