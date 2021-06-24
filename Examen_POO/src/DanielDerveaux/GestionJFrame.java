@@ -95,6 +95,7 @@ public class GestionJFrame extends JFrame {
 		btnPret.addActionListener( (e) -> {
 			try {
 				Emprunt();
+				System.out.println(Emprunt());
 			} catch (IOException io) {
 				System.err.println("Une erreur est survenue : " + io.getMessage());
 			}
@@ -203,16 +204,14 @@ public class GestionJFrame extends JFrame {
 	        }
 		
 		/* Prêt de matériel */
-		private void Emprunt() throws IOException {
+		private StringBuilder Emprunt() throws IOException {
+			StringBuilder builder = new StringBuilder();
 			if(Person.isEmpty() && mag.isEmpty()) {
-				System.out.println("Veuillez charger le personnel et le magasin !");
-				return;
+				return builder.append("Veuillez charger le personnel et le magasin !");
 			} else if(Person.isEmpty() && mag.isEmpty() == false) {
-				System.out.println("Veuillez charger le personnel !");
-				return;
+				return builder.append("Veuillez charger le personnel !");
 			} else if(Person.isEmpty() == false && mag.isEmpty()) {
-				System.out.println("Veuillez charger le magasin !");
-				return;
+				return builder.append("Veuillez charger le magasin !");
 			} else if(pret.isEmpty()) {
 				pret.add(new Emprunt(1, Person.get(0), mag.produits.get(1)));
 				pret.add(new Emprunt(2, Person.get(1), mag.produits.get(3)));
@@ -220,9 +219,19 @@ public class GestionJFrame extends JFrame {
 				pret.add(new Emprunt(4, Person.get(3), mag.produits.get(6)));
 				pret.add(new Emprunt(5, Person.get(6), mag.produits.get(7)));
 			}
-			for (int CompteurList = 0; CompteurList < pret.size(); CompteurList++) {
-				System.out.println("\n" + pret.get(CompteurList).toString());
+			
+			builder.append("+------+-----------------------------+----------------------------------------+\n");
+			builder.append("| N°   | Nom - Prénom                | Matériel                               |\n");
+			builder.append("+------+-----------------------------+----------------------------------------+\n");
+			
+			for(Emprunt Pret : pret) {
+				builder.append("  ");
+				builder.append(setFixedLength(String.valueOf(Pret.getNombre()), 7));
+				builder.append(setFixedLength(Pret.getEmprunteur().getNom() + " " + Pret.getEmprunteur().getPrenom(), 30));
+				builder.append(setFixedLength(Pret.getMateriel() + " " + Pret.getArticle(), 30));
+				builder.append("\n");
 			}
+			return builder;
 		}
 		
 		/* Retour de matériel */
@@ -235,19 +244,21 @@ public class GestionJFrame extends JFrame {
 				for(Emprunt Pret : pret) {
 					builder.append("N° ");
 					builder.append(setFixedLength(String.valueOf(Pret.getNombre()), 3));
-					builder.append(setFixedLength(String.valueOf(Pret.getEmprunteur().getNom()), 10));
+					builder.append(setFixedLength(Pret.getEmprunteur().getNom(), 10));
 					builder.append(setFixedLength(Pret.getMateriel(), 10));
 					builder.append(setFixedLength(Pret.getArticle(), 30));
 					builder.append("\n");
 				}
 				System.out.println("Liste des emprunts");
 				System.out.println(builder);
-				System.out.println(pret);
 				
 				System.out.println("Introduire le numéro d'emprunt à annuler : ");
 				numero_emprunt = Lire.nbre();
-				pret.remove(numero_emprunt-1); // l'index commençant à zéro, on soustrait 1 à la valeur entrée
+				pret.remove(numero_emprunt-1); // l'index commençant à zéro, on soustrait 1 à la valeur entrée pour retirer le bon emprunt
 				builder.setLength(0); // on vide le builder pour le recréer sans l'emprunt retiré
+				for(int Compteur = 0; Compteur < pret.size(); Compteur++) {
+					pret.set(Compteur, new Emprunt(Compteur + 1, pret.get(Compteur).emprunteur, pret.get(Compteur).materiel));
+				}
 				for(Emprunt Pret : pret) {
 					builder.append("N° ");
 					builder.append(setFixedLength(String.valueOf(Pret.getNombre()), 3));
@@ -297,10 +308,7 @@ public class GestionJFrame extends JFrame {
 				bufWrite.write(Affichage().toString());
 				bufWrite.newLine();
 				bufWrite.newLine();
-				bufWrite.write("+------+-------------------------+----------------------------------------+\n");
-				bufWrite.write("| N°   | Nom - Prénom            | Matériel                               |\n");
-				bufWrite.write("+------+-------------------------+----------------------------------------+\n");
-				bufWrite.write(pret.toString()); // Test de sauvegarde de la liste, la mise en forme n'est pas conforme à l'entête
+				bufWrite.write(Emprunt().toString());
 				System.out.println("Sauvegarde réussie !\n");
 			} catch (IOException io) {
 				System.err.println("Une erreur est survenue : " + io.getMessage());
