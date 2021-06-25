@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class ControleSaisie {
 	
 	
-	private static final String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+	private static final String EMAIL_PATTERN = "^[a-zA-Z0-9_+&*-]+(?:\\."+"[a-zA-Z0-9_+&*-]+)*@"+"(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 	private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 	
 	public static boolean valideNom(String text, int tailleNom) {
@@ -23,7 +23,7 @@ public class ControleSaisie {
 				return true;																	// mais aussi que la longueur du text est inférieure ou égale à 30
 				}
 				else {
-				System.out.println("Valeur hors contraintes !");
+				System.out.println("Erreur, valeur hors contraintes ! Veuillez réessayer !");
 				}
 		}
 		return false;
@@ -41,8 +41,10 @@ public class ControleSaisie {
 		String vide = new String();
 		boolean estNull = text.equals(nullString);
 		boolean estVide = text.equals(vide);
+		
 		if (estNull || estVide) {
 			System.out.println("Valeur null ou vide !");
+			return false;
 		} else {
 			if (text.matches("^[a-zA-Z_0-9]+(.txt)$")) { 
 				return true;

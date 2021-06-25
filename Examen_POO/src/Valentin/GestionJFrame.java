@@ -36,7 +36,7 @@ public class GestionJFrame extends JFrame  { /**
 	private JButton btnClose = new JButton("Fermer"); // Les boutons sont des objets
 	
 	private  String nom;
-	private  String fichier;
+	private  String fichier ="";
 	public static int tailleNom = 30;
 	
 	private static ArrayList<Personnel> Person = new ArrayList<>(); // création d'une ArrayList de Personnel 
@@ -369,22 +369,24 @@ public class GestionJFrame extends JFrame  { /**
 				System.out.println("Erreur, veuillez charger le prêt");
 			}
 			else {
+				
 				SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss a"); // Utilisation de la classe SimpleDateFormat qui permet de formater les dates
 				Date date = new Date();		// utilisation de la classe Date 
 				System.out.println("Introduire le nom du fichier extension .txt ! ");
 				fichier = InputData.inputNomFichier();
 				
+				
 				StringBuilder builderpret = new StringBuilder();
 				
-				builderpret.append("+-------+----------------------------+-----------------------------+\n");
-				builderpret.append("| N°    | Nom  - Prénom              | Matériel                    |\n");
-				builderpret.append("+-------+----------------------------+-----------------------------+\n");
+				builderpret.append("+-------+----------------------------+-----------------------------------------+\n");
+				builderpret.append("| N°    | Nom  - Prénom              | Matériel                                |\n");
+				builderpret.append("+-------+----------------------------+-----------------------------------------+\n");
 				
 				for(int compteur = 0; compteur < pret.size();compteur++) {
 					builderpret.append(" ");
 					builderpret.append(setFixedLength(String.valueOf(compteur+1),9));  // renvoie la représentation sous forme de chaîne de caractères 
 					builderpret.append(setFixedLength(pret.get(compteur).getEmprunteur().getNom() +" "+pret.get(compteur).getEmprunteur().getPrenom(), 30)); // récuperation du nom et prénom de l'emprunteur
-					builderpret.append(setFixedLength(pret.get(compteur).getMateriel() +" "+pret.get(compteur).getArticle(),15)); // récuperation du matériel 
+					builderpret.append(setFixedLength(pret.get(compteur).getMateriel() +" "+pret.get(compteur).getArticle(),40)); // récuperation du matériel 
 					builderpret.append("\n");
 				}
 				

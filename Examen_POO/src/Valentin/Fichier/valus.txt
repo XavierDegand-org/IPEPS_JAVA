@@ -1,0 +1,27 @@
+DTG de la sauvegarde : 06-25-2021 09:18:35 AM
++------------------------+-----------------------------+--------------------+--------+--------------+-------------------------+
+| Département            | Prénom                      | Nom                | Sexe   | Naissance    | Email                   |
++------------------------+-----------------------------+--------------------+--------+--------------+-------------------------+
+ Ressources Humaines        Albert                        Collon              Garçon    10-8-1990      Collon.a@test.be              
+ Ressources Humaines        Marie                         Peeters             Fille     8-5-1985       Peeters_M@test.be             
+ Comptabilité               Sarah                         Jannsens            Fille     23-5-1999      Sarah.Janssens@test.be        
+ Production                 Charles                       Jacobs              Garçon    12-12-2009     Charles.j@test.be             
+ Comptabilité               Henri                         Maes                Garçon    14-9-2009      MaesHenri@test.be             
+ Production                 Floriane                      Mertens             Fille     20-8-1996      FloFlo.M@test.be              
+ Production                 Francois-Xavier               Willems             Garçon    28-10-1996     Willems.FX@test.be            
+ Production                 Shan                          O'Neil              Garçon    1-7-2001       ONeil.sh@test.be              
+ Ressources Humaines        Stéphanie                     Goossen             Fille     25-10-2008     NieNieG@test.be               
+ Ressources Humaines        Charles                       Dumont              Garçon    1-4-1969       dumont.c@test.be              
+ Comptabilité               Wilfrid                       Van Moore           Garçon    25-2-1998      vanmoore.w@test.be            
+ Production                 Nathalie                      Herman              Fille     26-7-2001      herman.n@test.be              
+ Production                 Annie                         Bontemps            Fille     23-9-1998      bontemps.a@test.be            
+
+
++-------+----------------------------+-----------------------------------------+
+| N°    | Nom  - Prénom              | Matériel                                |
++-------+----------------------------+-----------------------------------------+
+ 1        Collon Albert                 HP Elitebook 850 G7                     
+ 2        Peeters Marie                 Dell Inspiron 15 3000                   
+ 3        Jannsens Sarah                Dell XPS 15                             
+ 4        Jacobs Charles                Lenovo Thinkpad E15 G2                  
+ 5        Willems Francois-Xavier       Lenovo IdeaPad 3 14IIL05 81WD00B2MH     
