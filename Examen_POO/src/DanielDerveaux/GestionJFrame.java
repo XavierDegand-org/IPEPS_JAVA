@@ -95,7 +95,9 @@ public class GestionJFrame extends JFrame {
 		btnPret.addActionListener( (e) -> {
 			try {
 				Emprunt();
-				System.out.println(Emprunt());
+				for(Emprunt Pret : pret) {
+					System.out.println(Pret.toString() + "\n");
+				}
 			} catch (IOException io) {
 				System.err.println("Une erreur est survenue : " + io.getMessage());
 			}
@@ -228,7 +230,7 @@ public class GestionJFrame extends JFrame {
 				builder.append("  ");
 				builder.append(setFixedLength(String.valueOf(Pret.getNombre()), 7));
 				builder.append(setFixedLength(Pret.getEmprunteur().getNom() + " " + Pret.getEmprunteur().getPrenom(), 30));
-				builder.append(setFixedLength(Pret.getMateriel() + " " + Pret.getArticle(), 30));
+				builder.append(setFixedLength(Pret.getMateriel() + "  " + Pret.getArticle(), 30));
 				builder.append("\n");
 			}
 			return builder;
@@ -254,6 +256,12 @@ public class GestionJFrame extends JFrame {
 				
 				System.out.println("Introduire le numéro d'emprunt à annuler : ");
 				numero_emprunt = Lire.nbre();
+				
+				if(numero_emprunt > pret.size() || numero_emprunt <= 0) {
+					System.out.println("Le numéro n'est pas valide");
+					return;
+				}
+				
 				pret.remove(numero_emprunt-1); // l'index commençant à zéro, on soustrait 1 à la valeur entrée pour retirer le bon emprunt
 				builder.setLength(0); // on vide le builder pour le recréer sans l'emprunt retiré
 				for(int Compteur = 0; Compteur < pret.size(); Compteur++) {
