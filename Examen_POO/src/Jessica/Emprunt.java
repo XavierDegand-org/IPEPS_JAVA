@@ -6,9 +6,9 @@ public class Emprunt {
 
 	private static int nombre;
 	private static Personnel emprunteur;
-	private static HashMap<Integer, Produit> materiel;
+	private static Produit materiel;
 
-	public Emprunt(int nombre, Personnel emprunteur, HashMap<Integer, Produit> materiel) {
+	public Emprunt(int nombre, Personnel emprunteur, Produit materiel) {
 		this.nombre = nombre;
 		this.emprunteur = emprunteur;
 		this.materiel = materiel;
@@ -21,24 +21,14 @@ public class Emprunt {
 	  public void setEmprunteur(Personnel emprunter) {
 			this.emprunteur = emprunteur;
 	  }
-
-	 /*public HashMap<Integer, Produit> getMateriel() {
-			return materiel;
-	  }*/
 	  
-	  public static HashMap<Integer, Produit> getMateriel(int nbr) {
-			
-		  for(HashMap.Entry<Integer, Produit> pair: materiel.entrySet()) {
-				if(pair.getKey().equals(nbr)) {
-					System.out.println("Id_" + pair.getKey() + " --- " + pair.getValue());
-				}
-			}
-			return materiel;
-		}
+	  public static String getMateriel() {
+		  return materiel.getNom();
+	  }
 	  
-	  /*public Produit getArticle() {
-			return article;
-	  }*/
+	  public static String getArticle() {
+		  return materiel.getDescription();
+	  }
 	  
 	  public static int getNombre() {
 			return nombre;
@@ -53,15 +43,11 @@ public class Emprunt {
 				  " sexe : " + getEmprunteur().sexe +
 				  " date de naissance : " + getEmprunteur().getDateddMMyyyy() +
 				  ". Email : " + getEmprunteur().getEmail() +
-				  " Département : " + getEmprunteur().getDepartement()
-				  + "   " + getMateriel(nombre)
+				  " Département : " + getEmprunteur().getDepartement() +
+				  "   Produit [ nom = " + getMateriel() + 
+				  ", description = " + getArticle() + " ]"
 				   ;
 	  }
-
-	/*public static HashMap<Integer, Produit> getMateriel(int nbr) {
-		// TODO Auto-generated method stub
-		return materiel;
-	}*/
 
 
 }

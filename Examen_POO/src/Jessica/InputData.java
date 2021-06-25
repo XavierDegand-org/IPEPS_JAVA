@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class InputData {
 	
-	private static String nom;
-	private static String prenom;
-	private static String email;
-	private static String nomFichier;
+	static String nom;
+	static String prenom;
+	static String email;
+	static String nomFichier;
 	private static int tailleNom = 30;
 
 	public static void main( String [] args ) {

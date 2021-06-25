@@ -30,18 +30,7 @@ public class Magasin {
 		}
 		
 		
-		public HashMap<Integer, Produit> getProduit(int nbr) {
-			
-			if (produits.isEmpty()) {
-				System.out.println("Le magasin est vide, impossible à charger.");
-			}
-			else {
-				for(HashMap.Entry<Integer, Produit> pair: produits.entrySet()) {
-					if(pair.getKey().equals(nbr)) {
-						System.out.println("Id_" + pair.getKey() + " --- " + pair.getValue());
-					}
-			}
-			}
+		public HashMap<Integer, Produit> getProduit() {
 			return produits;
 		}
 		

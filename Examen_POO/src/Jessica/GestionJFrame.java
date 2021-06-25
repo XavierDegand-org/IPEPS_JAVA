@@ -29,11 +29,8 @@ public class GestionJFrame extends JFrame {
 	 
 	// variables listes
 	private static ArrayList<Personnel> Person = new ArrayList<>();
-	private static ArrayList<Magasin> mag = new ArrayList<>();
-	private static Magasin magasin = new Magasin();
 	private static ArrayList<Emprunt> pret = new ArrayList<>();
-	
-	private static int tailleNom = 30;
+	Magasin mag = new Magasin();
 	
 	//***************************** DEBUT GESTIONJFRAME *****************************//
 					
@@ -185,13 +182,13 @@ public class GestionJFrame extends JFrame {
 	public void Magasin() {
 		// charger le magasin/les produits
 		try{
-		magasin.AjouterProduit(1,"HP","Elitebook 850 G7");
-		magasin.AjouterProduit(2,"HP","Elitebook 830 G7 X360");
-		magasin.AjouterProduit(3,"Dell","Inspiron 15 3000");
-		magasin.AjouterProduit(4,"Dell","XPS 13");
-		magasin.AjouterProduit(5,"Dell","XPS 15");
-		magasin.AjouterProduit(6,"Lenovo","Thinkpad E15 G2");
-		magasin.AjouterProduit(7,"Lenovo","IdeaPad 3 14IIL05 81WD00B2MH");
+			mag.AjouterProduit(1,"HP","Elitebook 850 G7");
+			mag.AjouterProduit(2,"HP","Elitebook 830 G7 X360");
+			mag.AjouterProduit(3,"Dell","Inspiron 15 3000");
+			mag.AjouterProduit(4,"Dell","XPS 13");
+			mag.AjouterProduit(5,"Dell","XPS 15");
+			mag.AjouterProduit(6,"Lenovo","Thinkpad E15 G2");
+			mag.AjouterProduit(7,"Lenovo","IdeaPad 3 14IIL05 81WD00B2MH");
 		}
 		catch (NullPointerException err) {
 			err.printStackTrace(); //- if the given pattern is null
@@ -201,23 +198,17 @@ public class GestionJFrame extends JFrame {
 			}
 		
 		// pour afficher listeMap dans l'ordre
-		//magasin.listeMap();
+		//mag.listeMap();
 		
 		// pour afficher produit spécifique
 		System.out.println("Le magasin est composé de " + Magasin.produits.size()+" articles");
-		magasin.getProduit(6);
-		System.out.println("");
-		magasin.getProduit(7);
-		System.out.println("");
-		magasin.getProduit(4);
-		System.out.println("");
-		magasin.getProduit(5);
-		System.out.println("");
-		magasin.getProduit(2);
-		System.out.println("");
-		magasin.getProduit(3);
-		System.out.println("");
-		magasin.getProduit(1);
+		System.out.println("Id_6 --- " + mag.produits.get(6) +"\n");
+		System.out.println("Id_7 --- " + mag.produits.get(7) +"\n");
+		System.out.println("Id_4 --- " + mag.produits.get(4) +"\n");
+		System.out.println("Id_5 --- " + mag.produits.get(5) +"\n");
+		System.out.println("Id_2 --- " + mag.produits.get(2) +"\n");
+		System.out.println("Id_3 --- " + mag.produits.get(3) +"\n");
+		System.out.println("Id_1 --- " + mag.produits.get(1) +"\n");
 		
 	}
 			
@@ -241,30 +232,27 @@ public class GestionJFrame extends JFrame {
 	
 	public void Emprunt() {
 		
-		System.out.println(magasin.getProduit(7));
-		
 		// charger l'arraylist pret
 		if(Person.size() < 1) {
 			System.out.println("Veuillez d'abord charger le personnel.");
 		}
-		else if (magasin.isEmpty()) {
+		else if (mag.isEmpty()) {
 			System.out.println("Le magasin est vide, veuillez d'abord créer le magasin.");
 		}
-		else {
-			pret.add(new Emprunt(1, Person.get(0), magasin.getProduit(1)));
-			pret.add(new Emprunt(2, Person.get(1), magasin.getProduit(3)));
-			pret.add(new Emprunt(3, Person.get(2), magasin.getProduit(4)));
-			pret.add(new Emprunt(4, Person.get(3), magasin.getProduit(6)));
-			pret.add(new Emprunt(5, Person.get(6), magasin.getProduit(7)));
+		else if (pret.isEmpty()) {
+			pret.add(new Emprunt(1, Person.get(0), mag.produits.get(1)));
+			pret.add(new Emprunt(2, Person.get(1), mag.produits.get(3)));
+			pret.add(new Emprunt(3, Person.get(2), mag.produits.get(4)));
+			pret.add(new Emprunt(4, Person.get(3), mag.produits.get(6)));
+			pret.add(new Emprunt(5, Person.get(6), mag.produits.get(7)));
 			}
-
+		
 		// afficher prêt de matériel
-		for (Emprunt emprunt : pret)
+		/*for (Emprunt emprunt : pret)
 		{
 		System.out.println(emprunt);
-		}
-					
-		
+		}*/
+
 	}
 	
 	//***************************** PARTIE RETOUR MATÉRIEL *****************************//
@@ -286,7 +274,7 @@ public class GestionJFrame extends JFrame {
 		if(Person.size() < 1) {
 			System.out.println("Veuillez d'abord charger le personnel.");
 		}
-		else if (magasin.isEmpty()) {
+		else if (mag.isEmpty()) {
 			System.out.println("Le magasin est vide, veuillez d'abord créer le magasin.");
 		}
 		else if (pret.isEmpty()) {
@@ -294,10 +282,11 @@ public class GestionJFrame extends JFrame {
 		}
 		else {
 			System.out.println("Liste des emprunts");
-			System.out.println("N° "+ Emprunt.getNombre()+ " " + Emprunt.getEmprunteur().getNom() + Emprunt.getMateriel(1));
+			System.out.println("N° "+ Emprunt.getNombre()+ " " + Emprunt.getEmprunteur().getNom() + " " + Emprunt.getMateriel() + " " + Emprunt.getArticle());
 		
 			System.out.println("Introduire le numéro d'emprunt à annuler :");
 			int nbremprunt = Lire.nbre();
+				
 		}
 		
 	}
@@ -326,13 +315,24 @@ public class GestionJFrame extends JFrame {
 			else {
 			System.out.println("\n");
 			System.out.println("Introduire le nom de la personne à modifier :");
-			System.out.println("Entrer un nom :");
-			String nom = InputData.inputNomPrenom("Nom");
+			InputData.nom = InputData.inputNomPrenom("nom");
+			String nom = Lire.texte();
 			
-			System.out.println("Introduire les nouvelles valeurs :");
-			System.out.println("Entrer un nom :");
-			System.out.println("Entrer un prénom :");
-			System.out.println("Entrer une adresse mail :");
+			for (int i = 0; i < Person.size(); i++) {
+			
+			if (Person.get(i).getNom() == nom) {
+				
+				System.out.println(i + 1 + "  " + Person.get(i).getNom() + " -- " + Person.get(i).getPrenom()
+						+ " -- " + Person.get(i).getSexe() + " -- " + Person.get(i).getEmail() + " -- "
+						+ Person.get(i).getDepartement());
+				
+				System.out.println("Introduire les nouvelles valeurs :");
+				System.out.println("Entrer un nom :");
+			
+				System.out.println("Entrer un prénom :");
+				System.out.println("Entrer une adresse mail :");}
+			}
+
 		}
 		
 	}
