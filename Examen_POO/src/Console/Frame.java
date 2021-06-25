@@ -1,13 +1,19 @@
 package Console;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Actions.EditPersonnel;
 import Actions.LoadPersonnel;
-import Actions.LoadProduit;
+import Actions.PreterPersonnel;
+import Actions.RetourMateriel;
+import Actions.Sauvegarder;
+import Actions.LoadMagasin;
 import Actions.ShowPersonnel;
 
 public class Frame extends JFrame {
@@ -18,7 +24,7 @@ public class Frame extends JFrame {
 	
 	
 	private JButton btnMag = new JButton("Création du magasin");
-	private JButton btnPret = new JButton("Prêt de matériel");
+	private JButton btnPret = new JButton("Prét de matériel");
 	private JButton btnRetour = new JButton("Retour de matériel");
 	private JButton btnSauvegarde = new JButton("Sauvegarde");
 	private JButton btnClose = new JButton("Fermer");
@@ -51,7 +57,23 @@ public class Frame extends JFrame {
 		EditPersonnel editPersonnel = new EditPersonnel(personnelLoader);
 		btnPersonnel.addActionListener(editPersonnel);
 		
-		LoadProduit produitLoader = new LoadProduit();
-		btnMag.addActionListener(produitLoader);
+		LoadMagasin magasinLoader = new LoadMagasin();
+		btnMag.addActionListener(magasinLoader);
+		
+		PreterPersonnel preterPersonnel = new PreterPersonnel(personnelLoader, magasinLoader);
+		btnPret.addActionListener(preterPersonnel);
+		
+		RetourMateriel retourMateriel = new RetourMateriel(preterPersonnel);
+		btnRetour.addActionListener(retourMateriel);
+		
+		Sauvegarder sauvegarder = new Sauvegarder(personnelLoader, preterPersonnel);
+		btnSauvegarde.addActionListener(sauvegarder);
+		
+		btnClose.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed (ActionEvent e) {
+				System.exit(0);
+			}
+		});
 	}
 }

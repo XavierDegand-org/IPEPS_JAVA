@@ -3,6 +3,7 @@ package Actions;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Console.InputData;
 import Console.Lire;
 import Console.Personnel;
 
@@ -11,9 +12,8 @@ public class EditPersonnel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Indroduire le nom de la personne à modifier:\n");
-		Lire.vider();
-		String nom = Lire.texte();
+		System.out.println("Indroduire le nom de la personne à modifier:");
+		String nom = InputData.inputNomPrenom();
 		Personnel personne = null;
 		int position = 1;
 		for (Personnel p : LoadPersonnel.personnels) {
@@ -30,13 +30,13 @@ public class EditPersonnel implements ActionListener {
 					" -- "+personne.getEmail()+" -- "+personne.getDepartement().getDeptNom());
 			System.out.println("Introduire les nouvelles valeurs :");
 			System.out.print("Entrer un nom : ");
-			personne.setNom(Lire.texte());
+			personne.setNom(InputData.inputNomPrenom());
 			System.out.print("");
 			System.out.print("Entrer un prénom : ");
-			personne.setPrenom(Lire.texte());
+			personne.setPrenom(InputData.inputNomPrenom());
 			System.out.print("");
 			System.out.print("Entrer un email : ");
-			personne.setEmail(Lire.texte());
+			personne.setEmail(InputData.inputEmail());
 			System.out.print("");
 		}
 	}

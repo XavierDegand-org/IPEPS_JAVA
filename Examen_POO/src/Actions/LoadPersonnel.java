@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 import Console.Departement;
@@ -19,11 +20,13 @@ public class LoadPersonnel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
-			File file = new File(
+			FileReader file = new FileReader(
 					System.getProperty("user.dir") + System.getProperty("file.separator") + "Personnel.txt");
 			Scanner myReader = new Scanner(file);
 			while (myReader.hasNextLine()) {
-				String[] data = myReader.nextLine().split(",");
+				String line = myReader.nextLine();
+				String[] data = line.split(",");
+				
 				String nom = data[0];
 				String prenom = data[1];
 				Sexe sexe = Sexe.valueOf(data[2]);
