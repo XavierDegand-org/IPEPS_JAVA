@@ -13,9 +13,7 @@ public class Produit {
         this.description = description;
     }
 
-    public String getNom() {
-        return nom;
-    }
+    public String getNom() { return nom; }
 
     public void setNom(String nom) {
         this.nom = nom;
@@ -28,6 +26,8 @@ public class Produit {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public int getIdentifiant() { return identifiant; }
 
     @Override
     public String toString() {

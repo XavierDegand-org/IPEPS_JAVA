@@ -3,37 +3,42 @@ import java.util.HashMap;
 
     public class Magasin {
 
-        HashMap<String, Produit> liste;
+        public static HashMap<Integer, Produit> produits;
 
         public Magasin() {
-            liste = new HashMap<String, Produit>();
+            produits = new HashMap<>();
         }
-        public void ajouterProduit( String nom, String description){
+
+        public void ajouterProduit(int identifiant, String nom, String description) {
             Produit produit = new Produit(nom, description);
-            liste.put(nom, produit);
+            produits.put(identifiant, produit);
         }
 
         public void listeHashMap() {
-            System.out.println("Le magasin est composé de " + liste.size() + "articles");
-            System.out.println("Produits =" + liste.values());
+
+            if (produits.isEmpty()) {
+                System.out.println("le chargement des produits n'est pas possible !!!");
+            } else {
+
+            }
         }
 
-        public void  getProduit() {
-            if(liste.isEmpty()){
-                System.out.println("Magasin vide!!!");
-            }
-            else{
+            public void getProduit () {
+                if (produits.isEmpty()) {
+                    System.out.println("Magasin vide!!!");
+                } else {
+
+                }
 
             }
 
-        }
+            public boolean isEmpty () {
 
-        public boolean isEmpty() {
+                if (produits.size() == 0) {
+                    return true;
+                }
+                return false;
 
-            if(liste.size()==0) {
-                return true;
             }
-            return false;
-
         }
     }

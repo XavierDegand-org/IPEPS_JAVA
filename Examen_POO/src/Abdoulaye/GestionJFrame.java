@@ -17,9 +17,10 @@ public class GestionJFrame extends JFrame {
     private JButton btnPersonnel = new JButton("Modification données Personnel");
     private JButton btnSauvegarde = new JButton("Sauvegarde");
     private JButton btnClose = new JButton("Fermer");
+
     private static ArrayList<Personnel> Person = new ArrayList<>();
-    private static ArrayList<Produit> produit = new ArrayList<>();
-    private static final Magasin magasin = new Magasin();
+    private static Magasin magasin = new Magasin();
+
 
 
 
@@ -43,7 +44,7 @@ public class GestionJFrame extends JFrame {
 
         btnLoad.addActionListener(new LoadPersonnel());
         btnAffichage.addActionListener(new Affichage());
-        btnMag.addActionListener(new Magasin());
+        btnMag.addActionListener(new Magasin ());
         /*btnPret.addActionListener(new Emprunt());
         btnRetour.addActionListener(new RetourEmprunt());
         btnPersonnel.addActionListener(new GestionPersonnel());
@@ -165,24 +166,34 @@ public class GestionJFrame extends JFrame {
     public static class Magasin implements ActionListener {
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed (ActionEvent e) {
+            Magasin();
 
-            try {
-                produit.add(new Produit("Lenovo", "ThinkPad E15 G2"));
-                produit.add(new Produit("Dell", "IdeaPad 3 14IIL05 81WD00B2MH"));
-                produit.add(new Produit("Dell", "XPS 13"));
-                produit.add(new Produit("Dell", "XPS 15"));
-                produit.add(new Produit("HP", "Elitebook 830 G7 X360"));
-                produit.add(new Produit("Dell", "Inspiron 15 3000"));
-                produit.add(new Produit("HP", "Elitebook 850 G7"));
+        }
 
-                for (Produit produit : produit) {
-                    System.out.println(produit);
-                }
+        public void Magasin(){
 
+            try { // chargement des produits du magasin avec leur ajout par la methode ajouterProduit
+                magasin.ajouterProduit(1,"Lenovo", "ThinkPad E15 G2");
+                magasin.ajouterProduit(2, "Dell", "IdeaPad 3 14IIL05 81WD00B2MH");
+                magasin.ajouterProduit(3, "Dell", "XPS 13");
+                magasin.ajouterProduit(4,"Dell", "XPS 15");
+                magasin.ajouterProduit(5,"HP", "Elitebook 830 G7 X360");
+                magasin.ajouterProduit(6,"Dell", "Inspiron 15 3000");
+                magasin.ajouterProduit(7,"HP", "Elitebook 850 G7");
             } catch (NullPointerException | IllegalArgumentException e1) {
                 e1.printStackTrace();
             }
+            //Affichage du nombre de produits
+            System.out.println("Le magasin est composé de "+Magasin.produits.size()+" articles");
+            magasin.getProduit(6);
+            magasin.getProduit(7);
+            magasin.getProduit(4);
+            magasin.getProduit(5);
+            magasin.getProduit(2);
+            magasin.getProduit(3);
+            magasin.getProduit(1);
+
         }
     }
     //Prêt matériel
@@ -194,15 +205,7 @@ public class GestionJFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnPret works");
-            Magasin magasin = new Magasin();
 
-            try {
-                produit.add(new Emprunt().setEmprunteur());
-
-            } catch (NullPointerException | IllegalArgumentException e1) {
-                e1.printStackTrace();
-
-            }
         }
     }
 
