@@ -44,7 +44,7 @@ public class InputData {
 		
 	}
 	
-	private String inputEmail() {
+	public static String inputEmail() {
 		boolean arret = false;
 		//String result = null;
 		while (!arret) {
@@ -61,7 +61,7 @@ public class InputData {
 	}
 	
 	
-	private String inputNomFichier() {
+	public static String inputNomFichier() {
 		boolean arret = false;
 		//String result = null;
 		while (!arret) {

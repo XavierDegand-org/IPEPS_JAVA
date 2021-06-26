@@ -22,10 +22,11 @@ public class GestionJFrame extends JFrame {
 	private JButton btnSauvegarde = new JButton( "Sauvegarde" );
 	private JButton btnClose = new JButton( "Fermer" );
 	 
-	// variables listes
+	// variables listes, compteur
 	private static ArrayList<Personnel> Person = new ArrayList<>();
 	private static ArrayList<Emprunt> pret = new ArrayList<>();
 	Magasin mag = new Magasin();
+	int i; // compteur pour boucle for
 	
 	//***************************** DEBUT GESTIONJFRAME *****************************//
 					
@@ -146,13 +147,13 @@ public class GestionJFrame extends JFrame {
 			System.out.println("| Département           | Prénom            | Nom              | Sexe     | Naissance       | Email                  |");
 			System.out.println("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
 			StringBuilder sb = new StringBuilder();
-			    for (int temp = 0; temp < Person.size(); temp++) {
-			    	sb.append(setFixedLength(Person.get(temp).getDepartement(), 25));
-			    	sb.append(setFixedLength(Person.get(temp).getPrenom(), 20));
-			    	sb.append(setFixedLength(Person.get(temp).getNom(), 20));
-			    	sb.append(setFixedLength(Person.get(temp).getSexe(), 11));
-			    	sb.append(setFixedLength(Person.get(temp).getDateddMMyyyy(), 18));
-			    	sb.append(setFixedLength(Person.get(temp).getEmail(), 25));
+			    for (i = 0; i < Person.size(); i++) {
+			    	sb.append(setFixedLength(Person.get(i).getDepartement(), 25));
+			    	sb.append(setFixedLength(Person.get(i).getPrenom(), 20));
+			    	sb.append(setFixedLength(Person.get(i).getNom(), 20));
+			    	sb.append(setFixedLength(Person.get(i).getSexe(), 11));
+			    	sb.append(setFixedLength(Person.get(i).getDateddMMyyyy(), 18));
+			    	sb.append(setFixedLength(Person.get(i).getEmail(), 25));
 	                sb.append("\n");
 			    		}		
 			    // on affiche le contenu
@@ -280,20 +281,45 @@ public class GestionJFrame extends JFrame {
 				// mettre un stringbuilder pour aligner les colonnes
 				
 				StringBuilder pretcol = new StringBuilder();
-			    for (int temp = 0; temp < pret.size(); temp++) {
+			    for (i = 1; i < pret.size(); i++) {
 			    	pretcol.append("N° ");
-			    	pretcol.append(setFixedLength(String.valueOf(pret.get(temp).getNombre()), 3));
-			    	pretcol.append(setFixedLength(String.valueOf(pret.get(temp).getEmprunteur().getNom()), 12));
-			    	pretcol.append(setFixedLength(String.valueOf(pret.get(temp).getMateriel()), 8));
-			    	pretcol.append(setFixedLength(String.valueOf(pret.get(temp).getArticle()), 30));
+			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
+			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getEmprunteur().getNom()), 12));
+			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getMateriel()), 8));
+			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getArticle()), 30));
 	                pretcol.append("\n");
 			    		}		
 			    // on affiche le contenu
 			    System.out.println(pretcol.toString());
-			    	}
 					
-					System.out.println("Introduire le numéro d'emprunt à annuler : ");
-					int nbremprunt = Lire.nbre();
+				System.out.println("Introduire le numéro d'emprunt à annuler : ");
+				int nbremprunt = Lire.nbre();
+	
+				try { 
+					
+					for(i = 1; i < Person.size(); i++) {
+						//si nombre de l'emprunt = nombre saisi
+						if(pret.get(i).getNombre() == nbremprunt) {
+							pret.remove(nbremprunt);
+							
+							pretcol.append("N° ");
+					    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
+						   	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getEmprunteur().getNom()), 12));
+						   	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getMateriel()), 8));
+						   	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getArticle()), 30));
+				            pretcol.append("\n");
+						}
+						else {
+							System.out.println("Le nombre saisi n'est pas correct, veuillez ressaisir un nombre correct");
+						}
+			
+					 }
+					}
+				catch (IndexOutOfBoundsException e) {
+					 System.out.println("Erreur, le numéro n'est pas dans la liste d'emprunt, entrez un numéro correct.");
+				}
+			}
+						
 					
 			
 		}
@@ -309,13 +335,15 @@ public class GestionJFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed (ActionEvent e) {
-				Affichage();
+				Affichage(); // affiche la liste du personnel sans modifications d'abord
 				
 				GestionPersonnel();
 			}
 		}
 		
 		public void GestionPersonnel() {
+			
+			String nom;
 				
 				if(Person.size() < 1) {
 					System.out.println("Veuillez d'abord charger le personnel.");
@@ -324,21 +352,28 @@ public class GestionJFrame extends JFrame {
 				System.out.println("\n");
 				System.out.println("Introduire le nom de la personne à modifier :");
 				InputData.nom = InputData.inputNomPrenom("nom");
-				String nom = Lire.texte();
+				nom = Lire.texte();
 				
-				for (int i = 0; i < Person.size(); i++) {
-				
-				if (Person.get(i).getNom() == nom) {
-					
-					System.out.println(i + 1 + "  " + Person.get(i).getNom() + " -- " + Person.get(i).getPrenom()
-							+ " -- " + Person.get(i).getSexe() + " -- " + Person.get(i).getEmail() + " -- "
-							+ Person.get(i).getDepartement());
-					
-					System.out.println("Introduire les nouvelles valeurs :");
-					System.out.println("Entrer un nom :");
-				
-					System.out.println("Entrer un prénom :");
-					System.out.println("Entrer une adresse mail :");}
+				for(i = 1; i < Person.size(); i++) {
+					//si nom = nom saisi
+					if(Person.get(i).getNom().equals(nom)) {
+						
+						//montrer les données liées au nom saisi
+						System.out.println(Person.get(i).getIdPersonnel() + " -- " + Person.get(i).getNom() + " -- " + Person.get(i).getPrenom() 
+						+ " -- " + Person.get(i).getSexe() + " -- " + Person.get(i).getEmail() + " -- " + Person.get(i).getDepartement());
+						System.out.println("Introduire les nouvelles valeurs :");
+						
+						// on remplace les données via les setters
+						Person.get(i).setNom(InputData.inputNomPrenom("nom"));
+						Person.get(i).setPrenom(InputData.inputNomPrenom("prénom"));
+						Person.get(i).setEmail(InputData.inputEmail());
+						System.out.println("Nouvelles valeurs :");
+						System.out.println(Person.get(i).getIdPersonnel() + " -- " + Person.get(i).getNom() + " -- " + Person.get(i).getPrenom() + " -- " + Person.get(i).getSexe() + " -- " + Person.get(i).getEmail() + " -- " + Person.get(i).getDepartement());
+						return;
+					}
+					else {
+						System.out.println("Le nom n'est pas dans la liste du personnel, saisissez un autre nom.");
+					}
 				}
 
 			}
@@ -361,7 +396,19 @@ public class GestionJFrame extends JFrame {
 		}
 		
 		public void Sauvegarde() {
-			System.out.println("Sauvegarde");
+			if(Person.size() < 1) {
+				System.out.println("Impossible de sauvegarder, veuillez d'abord charger le personnel.");
+			}
+			else if (mag.isEmpty()) {
+				System.out.println("Impossible de sauvegarder, veuillez d'abord créer le magasin.");
+			}
+			else if (pret.isEmpty()) {
+				System.out.println("Impossible de sauvegarder, veuillez d'abord effectuer des emprunts.");
+			}
+			else {
+				System.out.println("Veuillez introduire le nom du fichier en extension .txt !");
+				InputData.nomFichier = Lire.texte();
+			}
 		}
 		
 		//***************************** PARTIE FERMER *****************************//
