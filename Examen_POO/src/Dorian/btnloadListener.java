@@ -22,23 +22,25 @@ public class btnloadListener implements ActionListener
 	static ArrayList<String> Tableau_personal_brihday_y = new ArrayList<String>(0);
 	static ArrayList<String> Tableau_personal_email     = new ArrayList<String>(0);
 	static ArrayList<String> Tableau_personal_prod      = new ArrayList<String>(0);
-	
 	static Individu[] Personne = new Individu[13];
-	
 	static String pwd = System.getProperty("user.dir");
 	static File file_personal = new File(pwd + "/" +"src"+ "/" + "Dorian" + "/" +  "Personnel.txt");
 
 	public void actionPerformed(ActionEvent e) 
 	{
+		
 		try 
 		{
-			FileInputStream file = new FileInputStream(file_personal);   
-		    Scanner scanner = new Scanner(file);  	    
-		    while( scanner.hasNextLine() )
+			if(Tableau_personal_name.size() == 0) // lance si tableau et vide
+			{
+				
+			FileInputStream file = new FileInputStream(file_personal);   // une nouvelle variable avec les information du fichier 
+		    Scanner scanner = new Scanner(file);  // scanne le ficher file 	    
+		    while( scanner.hasNextLine() ) // ligne par ligne
 		    {
 		    	final String separateur = ",";
-		    	String mots[] = scanner.nextLine().split(separateur);
-		    	for ( int i = 0; i < mots.length; i ++)
+		    	String mots[] = scanner.nextLine().split(separateur);//separe dans les ligne a chaque ;
+		    	for ( int i = 0; i < mots.length; i ++)//boucle pour entre les informatons dans les tableau 
 		    	{
 		    		switch ( i ) 
 		    		{
@@ -85,15 +87,16 @@ public class btnloadListener implements ActionListener
 		    		}	
 		    	}
 		    }
-		    scanner.close(); 
+		    scanner.close(); //ferme la recherche d'information dans le doc 
 		   
-
-		  for(int i= 0; i < btnloadListener.Tableau_personal_name.size(); i++)
+		  
+		    	
+		  for(int i= 0; i < btnloadListener.Tableau_personal_name.size(); i++)// boucle sur la taille de name
 		  {
 			  
 			  int ID = i ; 
 			  
-		Personne[i] = new Individu
+		Personne[i] = new Individu // créer les individu avec les information
 				(
 				  
 				  Departement.valueOf( btnloadListener.Tableau_personal_prod.get(ID) ),
@@ -111,9 +114,19 @@ public class btnloadListener implements ActionListener
 		
 		  }
 		  
+		  
+		   
 
 		    System.out.println("le ficher est chargé en mémoire\n");
 
+	     }else
+	     {
+	    	 
+	    	 System.out.println("le ficher est deja chargé en mémoire");
+	    	 
+	     }
+		    
+		    
  
 		} catch (IOException e1) 
 		{

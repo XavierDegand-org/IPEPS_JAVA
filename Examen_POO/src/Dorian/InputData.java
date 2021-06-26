@@ -9,7 +9,7 @@ public class InputData
 	
 	
 	
-	public static String inputEmail() 
+	public static String inputEmail()  //Entre un email + controle de saisie
 	{
 		boolean arret = false;
 		//String result = null;
@@ -26,7 +26,7 @@ public class InputData
 		return email;
 	}
 
-	public static String inputNomPrenom(String libelle) 
+	public static String inputNomPrenom(String libelle)  //entre non ou prénom avec controle de saisie 
 	{
 		boolean arret = false;
 		String result = null;
@@ -42,6 +42,27 @@ public class InputData
 		}
 		return result;
 		
+	}
+	
+	
+	
+	public static String Nom_Fichier() //entre le nom de ficher avec controle de saisie
+	{
+		boolean arret = false;
+		//String result = null;
+		String Nom_Fichier = null;
+		
+		while (!arret) {
+			System.out.print("Entrer un Nom de Fichier :  ");
+			Nom_Fichier = Lire.texte();
+			if (ControleSaisie.valide_Fichier(Nom_Fichier,30)){
+				return Nom_Fichier;
+			}else {
+				System.out.print("Saisie non valide !  ");
+				arret = false;
+			}
+		}
+		return Nom_Fichier;
 	}
 	
 	

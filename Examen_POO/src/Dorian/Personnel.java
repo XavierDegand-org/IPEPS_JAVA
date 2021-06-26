@@ -12,11 +12,11 @@ public class Personnel  {
 	 private String email;
 	 private Departement departement;
 	 private String nom;
-	 private String Id;
+	 private  String Id;
 	 
 
 	 
-	public Personnel( Departement departement,String nom, String email) 
+	public Personnel( Departement departement,String nom, String email) //constructeur de personnel
 	{
 	       
 		   this.identification = id++;
@@ -27,12 +27,12 @@ public class Personnel  {
 	}
 	
 	
-	public int getidentification() 
+	public int getidentification() // get l'identification
 	{
         return identification;
     }
     
-	public void setidentification( int identification ) 
+	public void setidentification( int identification )  //set identification 
 	{
         if ( identification < 0 )  
         {
@@ -43,29 +43,29 @@ public class Personnel  {
 	
 
 	
-	public int getIdPersonnel() 
+	public String getIdPersonnel()  //get ID personnel de l'object
 	{
-      return identification;
+      return Id;
 	}
 	
-	public String getDepartement() 
+	public String getDepartement() //get Departement via l'enum
 	{
       return departement.getLabelD();
 	} 
 	
 	
-	public void setDepartement(Departement departement) 
+	public void setDepartement(Departement departement) //set departement de l'object
 	{
-		this.departement = departement;
+		this.departement = departement;  
 	} 
 	
 	
-	public String getnom() 
+	public String getnom() // get le nom de l'object
 	{
       return nom;
 	}
 	
-	public void setEmail( String email ) 
+	public void setEmail( String email )  // set email + pattern et vérification
 	{
 	    if ( email == null ) 
 	        {
@@ -79,14 +79,14 @@ public class Personnel  {
 	}
 	
 	
-	public String getEmail() 
+	public String getEmail() // get Email de l'object
 	{
 	  return email;
 	}
 	
    
 	    @Override 
-	    public String toString() 
+	    public String toString() // affichage de base avec des séperation fixe 
 	    {
 	        return String.format
 	        		( "%s :  département : %s nom :  %s  @mail :  %s",
@@ -96,7 +96,7 @@ public class Personnel  {
 	        		setfixedLength(this.email,20)); 
 	    }
    
-	    static String setfixedLength(String s, int taille){
+	    static String setfixedLength(String s, int taille){ // fixe l'espace entre les String
 			StringBuilder ss= new StringBuilder(s);
 			
 			while ( ss.length() < taille ) 
@@ -115,7 +115,7 @@ public class Personnel  {
 	    	
 	    }
 	    
-	    static String setfixedLength2(String s, int taille){
+	    static String setfixedLength2(String s, int taille){//ajoute un zero a la date  
 			
 	    	
 	    	String resul = "";
@@ -132,11 +132,6 @@ public class Personnel  {
 	    }
 
 
-		public void set(int i, String string) {
-			
-		}
-	    
-	    
 }
 
 

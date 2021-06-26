@@ -14,19 +14,19 @@ public class btnPersonnelListener implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if (btnAffichageListener.Perso.size() != 0 )
+		if (btnAffichageListener.Perso.size() != 0 ) // permet de ne pas utilise le button sans rien 
 		{
 			
 		  
 		  System.out.println("Introduire les information de la persone à modifier :");
 		  
-		  String personne_a_modifier = InputData.inputNomPrenom("nom");
+		  String personne_a_modifier = InputData.inputNomPrenom("nom"); // demande le nom de la personne a modifier avec un controle de saisie
 		    
 		    
 		  
-		  for(int i=0; i < btnAffichageListener.Perso.size(); i++)
+		  for(int i=0; i < btnAffichageListener.Perso.size(); i++) // boucle sur la taille de perso 
 		    {
-		        if( btnloadListener.Personne[i].getNom().equalsIgnoreCase(personne_a_modifier) )
+		        if( btnloadListener.Personne[i].getNom().equalsIgnoreCase(personne_a_modifier) ) // vérifie si la personne existe dans le personnel
 		        {
 		        	ID_a_modifier =  i ;
 		        	personne_trouve = 1 ;
@@ -38,15 +38,15 @@ public class btnPersonnelListener implements ActionListener
 
 		    }
 
-		  if ( personne_trouve != 0)
+		  if ( personne_trouve != 0) // si trouve effectue la suite 
 		  {
-			int ID_a_afficher = ID_a_modifier +1;
+			int ID_a_afficher = ID_a_modifier +1; //pour respecte les tableau
 			
 			
-			System.out.print(ID_a_afficher+" ");
+			System.out.print(ID_a_afficher+" "); //affiche 
 				
 				
-			System.out.println( btnAffichageListener.AffichageResume(ID_a_modifier) );
+			System.out.println( btnAffichageListener.AffichageResume(ID_a_modifier) ); // affiche un résumé
 		
 
 			System.out.println("Introduire les nouvelle valeur: ");

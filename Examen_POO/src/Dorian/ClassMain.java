@@ -9,6 +9,8 @@ public class ClassMain {
 	public static void main(String[] args) throws Exception
 	{
 	
+		//lancement de base de l'appication 
+		
       UIManager.setLookAndFeel(new NimbusLookAndFeel());
 				
       JFrameInterface demo = new JFrameInterface ();

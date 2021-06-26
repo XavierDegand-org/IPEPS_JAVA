@@ -20,6 +20,10 @@ public class btnMagListener implements ActionListener
 	static ArrayList<String> Tableau_Mag_puissance = new ArrayList<String>(0);
 	static ArrayList<String> Tableau_Mag_ID = new ArrayList<String>(0);
 	
+	static HashMap< Integer, String> Magasin = new HashMap < Integer, String>();
+	static Produit[] Produit = new Produit[7];
+	static Emprunt[] Article = new Emprunt[7];
+	
 	
 	static String pwd = System.getProperty("user.dir");
 	static File file_Mag = new File(pwd + "/" +"src"+ "/" + "Dorian" + "/" +  "Produit.txt");
@@ -30,13 +34,16 @@ public class btnMagListener implements ActionListener
 		
 		try 
 		{
-			FileInputStream file = new FileInputStream(file_Mag);   
-		    Scanner scanner = new Scanner(file);  	    
-		    while( scanner.hasNextLine() )
+			if(Tableau_Mag_name.size() == 0)  // lance si tableau et à zérp
+			{
+			
+			FileInputStream file = new FileInputStream(file_Mag);  // une nouvelle variable avec les information du fichier 
+		    Scanner scanner = new Scanner(file); // scanne le ficher file 
+		    while( scanner.hasNextLine() ) // ligne par ligne 
 		    {
 		    	final String separateur = ";";
-		    	String mots[] = scanner.nextLine().split(separateur);
-		    	for ( int i = 0; i < mots.length; i ++)
+		    	String mots[] = scanner.nextLine().split(separateur); //separe dans les ligne a chaque ;
+		    	for ( int i = 0; i < mots.length; i ++) //boucle pour entre les informatons dans les tableau 
 		    	{	
 		    		switch ( i ) 
 		    		{
@@ -52,35 +59,53 @@ public class btnMagListener implements ActionListener
 		        } 
 	
 		    }
-		    scanner.close(); 
+		    scanner.close(); //ferme la recherche d'information dans le doc 
 		    
-		   for( int i = 0; i < Tableau_Mag_name.size(); i++ )
-		   {
-			   
-			   String ID = Integer.toString(i+1);
-			   
-			   Tableau_Mag_ID.add(ID);
-	 
-		   }
 		    
-		   System.out.println("le magasin est composé de 7 articles");
-		   
+		    //Magasin.clear();
+		    		    
+		    System.out.println("le magasin est composé de "+ Tableau_Mag_name.size()+" articles");
+	    
+		    for(int i= 0; i < Tableau_Mag_name.size(); i++)// boucle sur la taille de name
+			  {
+				  
+				  
+			Produit[i] = new Produit( Integer.toString(i),Tableau_Mag_name.get(i), Tableau_Mag_puissance.get(i) ); //créer les produit avec les information 
+			
+			 //System.out.println( Produit[i] );
+			
+			  }
+		    
+		    
 
-		    List<Produit> Magasin = new ArrayList<>();
-		    Magasin.add(new Produit(  Tableau_Mag_ID.get(0),Tableau_Mag_name.get(0),Tableau_Mag_puissance.get(0) ) );
-		    Magasin.add(new Produit(  Tableau_Mag_ID.get(1),Tableau_Mag_name.get(1),Tableau_Mag_puissance.get(1) ) );
-		    Magasin.add(new Produit(  Tableau_Mag_ID.get(2),Tableau_Mag_name.get(2),Tableau_Mag_puissance.get(2) ) );
-		    Magasin.add(new Produit(  Tableau_Mag_ID.get(3),Tableau_Mag_name.get(3),Tableau_Mag_puissance.get(3) ) );
-		    Magasin.add(new Produit(  Tableau_Mag_ID.get(4),Tableau_Mag_name.get(4),Tableau_Mag_puissance.get(4) ) );
-		    Magasin.add(new Produit(  Tableau_Mag_ID.get(5),Tableau_Mag_name.get(5),Tableau_Mag_puissance.get(5) ) );
-		    Magasin.add(new Produit(  Tableau_Mag_ID.get(6),Tableau_Mag_name.get(6),Tableau_Mag_puissance.get(6) ) );
-	
 		   
-		    for (Produit Produit : Magasin)
-		    {
-		    	System.out.println(Produit.toString());
-	
+		    for(int i=0; i < Tableau_Mag_name.size(); i++) // add les information dans magasin
+		    {	    	
+			  Magasin.put(i,Produit[i].toString());
+			 
+			}
+		    
+		    
+		    for(int i= 0; i < Tableau_Mag_name.size(); i++) // affichage 
+			{
+		    System.out.println(Magasin.get(i));
 		    }
+		    
+		    
+		    for(int i= 0; i < Tableau_Mag_name.size(); i++) // créer les emprunt avec Zéro pour dire dispo
+			  {
+				
+		    	
+			Article[i] = new Emprunt(i, 0 , btnMagListener.Produit[i].getIDProduit() );
+			
+			  }
+		    
+
+		    
+		}else
+		{
+			 System.out.println("le Magasin est deja chargé en mémoire");
+		}
 		    
 
     
@@ -92,5 +117,5 @@ public class btnMagListener implements ActionListener
 			
 			}
 	
+  }
 }
-	}

@@ -10,11 +10,11 @@ public enum Departement {
 		 
 		 private final String label;
 		
-		 Departement(String label) {
+		 Departement(String label) { // constructeur avec label
 		        this.label = label;
 		 }
 
-		 public String getLabelD() {
+		 public String getLabelD() { // get le label de département
 		        return label;
 		 }
 	}

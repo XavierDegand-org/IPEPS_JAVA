@@ -9,7 +9,8 @@ public class btnCloseListener implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		System.out.println("btnSauvegarde");
+		
+		System.exit(0); // ferme l'application 
     }
 	
 	

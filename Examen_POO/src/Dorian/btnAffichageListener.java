@@ -13,7 +13,7 @@ public  class btnAffichageListener implements ActionListener
 	
 	{   
 	  
-	   if(btnloadListener.Tableau_personal_name.size() != 0)
+	   if(btnloadListener.Tableau_personal_name.size() != 0) // Empeche de l'utilise si égale a Zéro
 	   {
 	   
 	    System.out.println("+------------------------------+------------------------------+------------------------------+---------------+--------------+----------------------------+");	
@@ -22,17 +22,17 @@ public  class btnAffichageListener implements ActionListener
 		
         Perso.clear();
              
-		for(int i=0; i < btnloadListener.Tableau_personal_name.size(); i++)
+		for(int i=0; i < btnloadListener.Tableau_personal_name.size(); i++) // ajoute Personne a perso
 	    {
 		  Perso.add(btnloadListener.Personne[i]);
 		}
 		
 		
 		
-	    for(int i=0; i < Perso.size(); i++)
+	    for(int i=0; i < Perso.size(); i++) //boucle sur taille de pers
 	    {
 	        
-	    		System.out.println( Perso.get(i) );	
+	    		System.out.println( Perso.get(i) );	 //affiche 
 		
 	    }
 
@@ -47,7 +47,7 @@ public  class btnAffichageListener implements ActionListener
    
    
    
-   public static String AffichageResume(int ID)
+   public static String AffichageResume(int ID) //information rapide 
 {
 	  
 	  return String.format("%s -- %s -- %s -- %s -- %s"
