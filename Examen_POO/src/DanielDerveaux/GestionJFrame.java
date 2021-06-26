@@ -309,8 +309,9 @@ public class GestionJFrame extends JFrame {
 		private void Sauvegarde() throws IOException {
 			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 			Date date = new Date();
+			new File("./src/DanielDerveaux/Fichier").mkdir();
 			fichier = InputData.inputNomFichier();
-			try(BufferedWriter bufWrite = new BufferedWriter(new FileWriter(new File("./src/DanielDerveaux/" + fichier)))) {
+			try(BufferedWriter bufWrite = new BufferedWriter(new FileWriter(new File("./src/DanielDerveaux/Fichier", fichier)))) {
 				bufWrite.write("DTG de la sauvegarde : " + format.format(date));
 				bufWrite.newLine();
 				bufWrite.write(Affichage().toString());
@@ -322,7 +323,7 @@ public class GestionJFrame extends JFrame {
 				System.err.println("Une erreur est survenue : " + io.getMessage());
 			}
 			
-			Path path = Paths.get("./src", "DanielDerveaux", fichier);
+			Path path = Paths.get("./src", "DanielDerveaux", "Fichier", fichier);
 			List<String> Lignes = Files.readAllLines(path,Charset.forName("utf-8"));
 			for (String element : Lignes) {
 				System.out.println(element);
