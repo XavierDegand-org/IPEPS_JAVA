@@ -1,12 +1,10 @@
 package Jessica;
 
-import java.util.HashMap;
-
 public class Emprunt {
 
-	private static int nombre;
-	private static Personnel emprunteur;
-	private static Produit materiel;
+	private int nombre;
+	private Personnel emprunteur;
+	private Produit materiel;
 
 	public Emprunt(int nombre, Personnel emprunteur, Produit materiel) {
 		this.nombre = nombre;
@@ -14,7 +12,7 @@ public class Emprunt {
 		this.materiel = materiel;
 	}
 	
-	  public static Personnel getEmprunteur() {
+	  public Personnel getEmprunteur() {
 			return emprunteur;
 	  }
 
@@ -22,15 +20,15 @@ public class Emprunt {
 			this.emprunteur = emprunteur;
 	  }
 	  
-	  public static String getMateriel() {
+	  public String getMateriel() {
 		  return materiel.getNom();
 	  }
 	  
-	  public static String getArticle() {
+	  public String getArticle() {
 		  return materiel.getDescription();
 	  }
 	  
-	  public static int getNombre() {
+	  public int getNombre() {
 			return nombre;
 	  }
 
