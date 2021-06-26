@@ -3,16 +3,17 @@ package StainierEdwin;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.BufferedWriter;
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 
 public class GestionJFrame extends JFrame {
 
@@ -73,7 +74,7 @@ public class GestionJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				if (isPersonnelLoad)
-					AffichagePersonnel();
+					System.out.println(AffichagePersonnel());
 				else
 					System.out.println("Impossible, pas de personnel !");
 			}
@@ -133,7 +134,7 @@ public class GestionJFrame extends JFrame {
 			{
 				if (isPersonnelLoad)
 				{					
-					AffichagePersonnel();
+					System.out.println(AffichagePersonnel());
 					GestionPersonnel();
 				}					
 				else
@@ -147,7 +148,23 @@ public class GestionJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println(((JButton)e.getSource()).getText());
+				try
+				{
+					if (isPersonnelLoad)
+					{
+						if (mag != null)
+							Sauvegarder();
+						else
+							System.out.println("Impossible, le magasin n'existe pas !");
+							
+					}
+					else
+						System.out.println("Impossible, pas de personnel !");
+				} 
+				catch (IOException ex)
+				{
+					ex.printStackTrace();
+				}
 			}
 		});
 		
@@ -190,7 +207,7 @@ public class GestionJFrame extends JFrame {
 	}
 	
 	// Afficher personnel
-	private void AffichagePersonnel()
+	private String AffichagePersonnel()
 	{		
 		// Définir la taille des string dans la list pour l'affichage
 		int dptLength = 17;
@@ -236,6 +253,7 @@ public class GestionJFrame extends JFrame {
 		String espace = "                                              ";
 		
 		StringBuilder buildTab = new StringBuilder();
+		buildTab.append("\n");
 		
 		try {
 			// Ligne 1
@@ -305,14 +323,13 @@ public class GestionJFrame extends JFrame {
 				buildTab.append(individu.personnel.GetEmail());
 				buildTab.append("\n");
 			}
-			System.out.println(buildTab.toString());
+			return buildTab.toString();
 		}
 		catch (IndexOutOfBoundsException ex)
 		{
 			System.out.println(ex.toString());
 		}
-		// Afficher le tableau
-		
+		return "";
 	}
 	
 	// Modifier le personnel
@@ -321,7 +338,6 @@ public class GestionJFrame extends JFrame {
 		boolean isEqual = false;
 		int pass = 0;
 		String texte = "";
-		int individuActuel = 0;
 		
 		while(!isEqual)
 		{
@@ -331,8 +347,6 @@ public class GestionJFrame extends JFrame {
 			System.out.println("\nIntroduire le nom de la personne à modifier : ");
 			System.out.println("Entrer un nom : ");
 			texte = Lire.texte();
-			System.out.println(texte);
-			
 			
 			for (Individu individu : listIndividu)
 			{
@@ -373,7 +387,6 @@ public class GestionJFrame extends JFrame {
 					}
 					individu.personnel.SetEmail(texte);					
 				}	
-				individuActuel++;
 			}
 			pass++;
 		}						
@@ -436,6 +449,124 @@ public class GestionJFrame extends JFrame {
 			list1.append(emprunt.GetProduit().GetNom() + "  " + emprunt.GetProduit().GetDescription());
 		}
 		System.out.println(list1.toString());
+	}
+	
+	// Sauvegarder
+	private void Sauvegarder() throws IOException
+	{		
+		String fileName = "";
+		String pathName = "Fichier/";
+		String appendText = "";
+		boolean isInput = false;
+						
+		while(!ControleSaisie.ValideNom(fileName, isInput))
+		{
+			isInput = true;
+			System.out.println("Introduire le nom du fichier : ");
+			fileName = Lire.texte();
+		}
+		
+		String dtgSave = "DTG de la sauvegarde : " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+		appendText = dtgSave + "\n" + AffichagePersonnel() + "\n\n" + RecupererPret() + "\n\n";
+		
+		try 
+		{
+			String finalName = pathName + fileName + ".txt";
+			File file = new File(finalName);
+			if (!file.exists())
+				file.createNewFile();
+			
+			FileWriter fw = new FileWriter(file, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(appendText);
+			
+			bw.close();
+			fw.close();
+			
+			if (file.exists())
+				System.out.println(file.getAbsolutePath());
+			else
+				System.out.println("Ce fichier n'existe pas");			
+		}
+		catch (IOException ex)
+		{
+			System.out.println(ex.toString());
+		}
+		
+	}
+	
+	// Afficher les prêts pour la sauvegarde
+	private String RecupererPret()
+	{		
+		int nomTemp = 0;
+		int nomLength = 0;				
+		int materielTemp = 0;
+		int materielLength = 0;
+		
+		for (int i = 0; i < mag.listEmprunt.size() - 1; i++)
+		{
+			if (mag.listEmprunt.get(i+1).GetEmprunteur().getNom().length() + 1 + mag.listEmprunt.get(i+1).GetEmprunteur().getPrenom().length() > mag.listEmprunt.get(i).GetEmprunteur().getNom().length() + 1 + mag.listEmprunt.get(i).GetEmprunteur().getPrenom().length())
+			{
+				nomLength = mag.listEmprunt.get(i+1).GetEmprunteur().getNom().length() + 1 + mag.listEmprunt.get(i+1).GetEmprunteur().getPrenom().length();
+				if (nomLength > nomTemp)
+					nomTemp = nomLength;
+			}
+			
+			if (mag.listEmprunt.get(i+1).GetProduit().GetNom().length() + 1 + mag.listEmprunt.get(i+1).GetProduit().GetDescription().length() > mag.listEmprunt.get(i).GetProduit().GetNom().length() + 1 + mag.listEmprunt.get(i).GetProduit().GetDescription().length())
+			{
+				materielLength = mag.listEmprunt.get(i+1).GetProduit().GetNom().length() + 1 + mag.listEmprunt.get(i+1).GetProduit().GetDescription().length();
+				if (materielLength > materielTemp)
+					materielTemp = materielLength;
+			}
+		}
+		
+		String tiret = "---------------------------------------------------------------------------------------";
+		String espace = "                                                                                       ";
+		StringBuilder builder = new StringBuilder();
+		
+		int numLength = 6;
+		try 
+		{
+			builder.append("+");
+			builder.append(tiret, 0, numLength + 1);
+			builder.append("+");
+			builder.append(tiret, 0, nomLength + 1);
+			builder.append("+");
+			builder.append(tiret, 0, materielLength + 1);
+			builder.append("+\n");
+			builder.append("| N°");
+			builder.append(espace, 0, numLength-2);
+			builder.append("| Nom - Prénom");
+			builder.append(espace, 0, nomLength-12);
+			builder.append("| Matériel");
+			builder.append(espace, 0, materielLength-8);
+			builder.append("|\n");
+			builder.append("+");
+			builder.append(tiret, 0, numLength + 1);
+			builder.append("+");
+			builder.append(tiret, 0, nomLength + 1);
+			builder.append("+");
+			builder.append(tiret, 0, materielLength + 1);
+			builder.append("+\n");
+			
+			for (int i = 0; i < mag.listEmprunt.size(); i++)
+			{
+				builder.append(" " + mag.listEmprunt.get(i).GetNombre());
+				builder.append(espace, 0, numLength);
+				builder.append(" " + mag.listEmprunt.get(i).GetEmprunteur().getNom() + " " + mag.listEmprunt.get(i).GetEmprunteur().getPrenom());
+				builder.append(espace, 0, nomLength - (mag.listEmprunt.get(i).GetEmprunteur().getNom().length() +  mag.listEmprunt.get(i).GetEmprunteur().getPrenom().length()) + 1);
+				builder.append(" " + mag.listEmprunt.get(i).GetProduit().GetNom() + " " + mag.listEmprunt.get(i).GetProduit().GetDescription());
+				builder.append("\n");
+			}
+					
+			return builder.toString();
+		}
+		catch (IndexOutOfBoundsException ex)
+		{
+			System.out.println(ex.toString());
+		}
+				
+		return "";
 	}
 	
 	
