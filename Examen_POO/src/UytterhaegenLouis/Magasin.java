@@ -14,18 +14,8 @@ public class Magasin  {
 	}
 
 	public void ajouterProduit (String nom,String description) {
-		try {
 			Produit produit = new Produit(nom, description);
 			produits.put(produits.size()+1, produit); // l'id est attribué en fonction de la taille de la liste qui augmente
-		}catch (UnsupportedOperationException e) {
-			System.err.println("Une erreur est survenue : "+e.getMessage());
-		}catch (ClassCastException e){
-			System.err.println("Une erreur est survenue : "+e.getMessage());
-		}catch (NullPointerException e){
-			System.err.println("Une erreur est survenue : "+e.getMessage());
-		}catch (IllegalArgumentException e) {
-			System.err.println("Une erreur est survenue : "+e.getMessage());
-		}
 	}
 
 

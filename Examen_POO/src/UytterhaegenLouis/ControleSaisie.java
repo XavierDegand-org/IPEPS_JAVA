@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class ControleSaisie {
 
 	private static final String EMAIL_PATTERN
-	= "^[\\w._-]{2,64}@[\\w.-]{2,292}.[a-zA-Z]{2,64}$"; // Accepte les lettres, points et tirets de 1 à 64 caractères/Obligation de mettre un @ 
+	= "^[\\w._-]{2,64}@[\\w.-]{2,292}.[a-zA-Z]{2,64}$"; // Accepte les lettres, points et tirets de 1 à 64 caractères/Obligation de mettre un @ / accepte les lettres, . , tirets / obligation de mettre un point suivi de minimum 2 lettres
 
 	private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
@@ -43,7 +43,7 @@ public class ControleSaisie {
 			return false;
 		} 
 		else{
-			if (nomFichier.matches("^[^/<>*:\\?\"|]{2,}(.txt)$") && nomFichier.length() <= taille) { // vérifie que le nom du fichier est correct( qu'il ne contient pas de caractères interdit ) et qu'il ne dépasse pas la taille limite
+			if (nomFichier.matches("^[^/<>*:\\\\?\"|]{1,}(.txt)$") && nomFichier.length() <= taille) { // vérifie que le nom du fichier est correct( qu'il ne contient pas de caractères interdit ) et qu'il ne dépasse pas la taille limite
 		        return true;
 			}
 			else {
@@ -54,7 +54,7 @@ public class ControleSaisie {
 
 	}
 
-	public static boolean valideEmail( String hex) {
+	public static boolean valideEmail( String hex) { // Vérifie que le pattern de l'email est correct
 
 		Matcher matcher = pattern.matcher(hex);
 		return matcher.matches();

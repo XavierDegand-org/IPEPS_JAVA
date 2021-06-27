@@ -51,7 +51,7 @@ public class Lire {
 
 	}
 
-	public static void vider() {
+	public static void vider() { // méthode qui permet de vider le scanner
 		try {
 			clavier.nextLine();
 		} catch (NoSuchElementException e) {

@@ -4,7 +4,7 @@ public class InputData {
 
 	private static String email;
 
-	public static String inputEmail() {
+	public static String inputEmail() { // permet de vérifier que l'email introduit est valide
 		boolean arret = false;
 		while (!arret) {
 			System.out.print("Entrer une adresse mail  :  ");
@@ -17,7 +17,7 @@ public class InputData {
 		}
 		return email;
 	}
-	public static String inputNomPrenom(String libelle) {
+	public static String inputNomPrenom(String libelle) { // permet de vérifier que le nom ou le prénom introduit est valide
 		boolean arret = false;
 		String result = null;
 		while (!arret) {
@@ -30,7 +30,7 @@ public class InputData {
 		return result;
 
 	}
-	public static String inputNomFichier() {
+	public static String inputNomFichier() { // permet de vérifier que le nom du fichier introduit est valide
 		boolean arret = false;
 		String result = null;
 		while (!arret) {
