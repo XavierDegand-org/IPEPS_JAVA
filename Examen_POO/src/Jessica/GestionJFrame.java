@@ -33,7 +33,7 @@ public class GestionJFrame extends JFrame {
 	private static ArrayList<Emprunt> pret = new ArrayList<>();
 	Magasin mag = new Magasin();
 	int i; // compteur pour boucle for
-	private static String fichier;
+	private String fichier = "";
 	
 	//***************************** DEBUT GESTIONJFRAME *****************************//
 					
@@ -106,10 +106,13 @@ public class GestionJFrame extends JFrame {
 				Person.add(new Personnel("Bontemps","Annie",Sexe.FEMME, new MyDate(23,9,1998), "bontemps.a@test.be",Departement.Prod));
 				}
 				catch (NullPointerException err) {
-					err.printStackTrace(); //- if the given pattern is null
+					System.out.println("L'entrée ne peut être nulle.");
 				}
 				catch (IllegalArgumentException err) {
-					err.printStackTrace(); //- if the given pattern is invalid)
+					System.out.println("L'entrée est invalide.");
+				}
+				catch (IndexOutOfBoundsException err) {
+				System.out.println("Valeur en-dehors des limites autorisées.");
 				}
 				System.out.println("Personnel bien chargé");
 				
@@ -127,7 +130,7 @@ public class GestionJFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed (ActionEvent e) {
-				Affichage();
+				System.out.println(Affichage());
 			}
 		}
 		
@@ -144,8 +147,9 @@ public class GestionJFrame extends JFrame {
 			        return c;
 			    }
 		
-		public void Affichage() {
+		public StringBuilder Affichage() {
 			//si liste personnel est vide/strictement inférieure à 1
+			StringBuilder sb = new StringBuilder();
 			if(Person.size() < 1) {
 				System.out.println("Affichage impossible, pas de personnel !");
 			}
@@ -153,7 +157,7 @@ public class GestionJFrame extends JFrame {
 			System.out.println("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
 			System.out.println("| Département           | Prénom            | Nom              | Sexe     | Naissance       | Email                  |");
 			System.out.println("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
-			StringBuilder sb = new StringBuilder();
+			
 			    for (i = 0; i < Person.size(); i++) {
 			    	sb.append(setFixedLength(Person.get(i).getDepartement(), 25));
 			    	sb.append(setFixedLength(Person.get(i).getPrenom(), 20));
@@ -163,9 +167,9 @@ public class GestionJFrame extends JFrame {
 			    	sb.append(setFixedLength(Person.get(i).getEmail(), 25));
 	                sb.append("\n");
 			    		}		
-			    // on affiche le contenu
-			    System.out.println(sb.toString());
-			    	}
+			}
+			// on affiche le contenu
+			return sb;
 		}
 		
 		//***************************** PARTIE CRÉATION MAGASIN *****************************//
@@ -193,11 +197,14 @@ public class GestionJFrame extends JFrame {
 				mag.AjouterProduit(7,"Lenovo","IdeaPad 3 14IIL05 81WD00B2MH");
 			}
 			catch (NullPointerException err) {
-				err.printStackTrace(); //- if the given pattern is null
-				}
+				System.out.println("L'entrée ne peut être nulle.");
+			}
 			catch (IllegalArgumentException err) {
-				err.printStackTrace(); //- if the given pattern is invalid)
-				}
+				System.out.println("L'entrée est invalide.");
+			}
+			catch (IndexOutOfBoundsException err) {
+			System.out.println("Valeur en-dehors des limites autorisées.");
+			}
 			
 			// pour afficher listeMap dans l'ordre
 			//mag.listeMap();
@@ -242,12 +249,23 @@ public class GestionJFrame extends JFrame {
 				System.out.println("Le magasin est vide, veuillez d'abord créer le magasin.");
 			}
 			else if (pret.isEmpty()) {
+				try {
 				pret.add(new Emprunt(1, Person.get(0), mag.produits.get(1)));
 				pret.add(new Emprunt(2, Person.get(1), mag.produits.get(3)));
 				pret.add(new Emprunt(3, Person.get(2), mag.produits.get(4)));
 				pret.add(new Emprunt(4, Person.get(3), mag.produits.get(6)));
 				pret.add(new Emprunt(5, Person.get(6), mag.produits.get(7)));
 				}
+				catch (NullPointerException err) {
+					System.out.println("L'entrée ne peut être nulle.");
+				}
+				catch (IllegalArgumentException err) {
+					System.out.println("L'entrée est invalide.");
+				}
+				catch (IndexOutOfBoundsException err) {
+				System.out.println("Valeur en-dehors des limites autorisées.");
+				}
+			}
 			
 			// afficher prêt de matériel
 			for (Emprunt emprunt : pret)
@@ -287,50 +305,43 @@ public class GestionJFrame extends JFrame {
 				System.out.println("Liste des emprunts");
 				// mettre un stringbuilder pour aligner les colonnes
 				
+				System.out.println(listeEmprunt());
+					
+				System.out.println("Introduire le numéro d'emprunt à annuler : ");
+				int nbremprunt = Lire.nbre();
+	
+				try { 
+						//si nombre de l'emprunt = nombre saisi
+						if(pret.get(i).getNombre() == nbremprunt-1) {
+							pret.remove(nbremprunt-1);
+							
+							System.out.println(listeEmprunt());
+				   
+						}
+						else {
+							System.out.println("Le nombre saisi n'est pas correct, veuillez ressaisir un nombre correct");
+						}
+					 }
+				catch (IndexOutOfBoundsException e) {
+					 System.out.println("Erreur, le numéro n'est pas dans la liste d'emprunt, entrez un numéro correct.");
+				}
+			}
+		}
+			
+			public StringBuilder listeEmprunt() {
 				StringBuilder pretcol = new StringBuilder();
 			    for (i = 1; i < pret.size(); i++) {
-			    	pretcol.append("N° ");
 			    	pretcol.append("N° ");
 			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
 				   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom(), 12));
 				   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
 	                pretcol.append("\n");
-			    		}		
-			    // on affiche le contenu
-			    System.out.println(pretcol.toString());
-					
-				//System.out.println("Introduire le numéro d'emprunt à annuler : ");
-				int nbremprunt = Lire.nbre();
-	
-			/*	try { 
-					
-					for(i = 1; i < pret.size(); i++) {
-						//si nombre de l'emprunt = nombre saisi
-						if(pret.get(i).getNombre() == nbremprunt) {
-							pret.remove(nbremprunt);
-							
-				            pretcol.append("N° ");
-					    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
-						   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom(), 12));
-						   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
-				            pretcol.append("\n");
-				            
-				            pret.get(i).getNombre()--;
-						}
-						else {
-							System.out.println("Le nombre saisi n'est pas correct, veuillez ressaisir un nombre correct");
-						}
-			
-					 }
-					}
-				catch (IndexOutOfBoundsException e) {
-					 System.out.println("Erreur, le numéro n'est pas dans la liste d'emprunt, entrez un numéro correct.");
-				}*/
+			    		}
+			    // on affiche lecontenu
+			   return pretcol;
+				
 			}
 						
-					
-			
-		}
 		
 		
 		//***************************** PARTIE MODIFICATION PERSONNEL *****************************//
@@ -343,7 +354,7 @@ public class GestionJFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed (ActionEvent e) {
-				Affichage(); // affiche la liste du personnel sans modifications d'abord
+				System.out.println(Affichage()); // affiche la liste du personnel sans modifications d'abord
 				
 				GestionPersonnel();
 			}
@@ -398,12 +409,31 @@ public class GestionJFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed (ActionEvent e) {
-				Sauvegarde();
+				
+					Sauvegarde();
 			}
 			
 		}
 		
+		public StringBuilder listeEmprunt2() {
+			StringBuilder pretcol = new StringBuilder();
+		    for (i = 0; i < pret.size(); i++) {
+		    	pretcol.append("N° ");
+		    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 5));
+			   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom()+" "+pret.get(i).getEmprunteur().getPrenom(), 32));
+			   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
+	            pretcol.append("\n");
+		    		}
+		    // on affiche lecontenu
+		   return pretcol;
+			
+		}
+		
 		public void Sauvegarde() {
+			
+			SimpleDateFormat DTG = new SimpleDateFormat("MM/dd/yyyy HH:mm:s");
+			Date date = new Date();
+		    
 			if(Person.size() < 1) {
 				System.out.println("Impossible de sauvegarder, veuillez d'abord charger le personnel.");
 			}
@@ -418,61 +448,54 @@ public class GestionJFrame extends JFrame {
 				InputData.nomFichier = Lire.texte();
 				fichier = InputData.inputNomFichier();
 				
-				try(BufferedWriter bufWrite = new BufferedWriter (new FileWriter(new File("./src/Jessica/Fichier", fichier)))) {
-					
-					SimpleDateFormat DTG = new SimpleDateFormat("MM/dd/yyyy HH:mm:s");
-					Date date = new Date();
-					
-					// stringbuilder et tableau "personnel"
-					StringBuilder sb = new StringBuilder();
-				    for (i = 0; i < Person.size(); i++) {
-				    	sb.append(setFixedLength(Person.get(i).getDepartement(), 25));
-				    	sb.append(setFixedLength(Person.get(i).getPrenom(), 20));
-				    	sb.append(setFixedLength(Person.get(i).getNom(), 20));
-				    	sb.append(setFixedLength(Person.get(i).getSexe(), 11));
-				    	sb.append(setFixedLength(Person.get(i).getDateddMMyyyy(), 18));
-				    	sb.append(setFixedLength(Person.get(i).getEmail(), 25));
-		                sb.append("\n");
-				    		}
-				    
-				    // stringbuilder et tableau "prêt"
-				    StringBuilder pretcol = new StringBuilder();
-				    for (i = 0; i < pret.size(); i++) {
-				    	pretcol.append("N° ");
-				    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 5));
-					   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom()+" "+pret.get(i).getEmprunteur().getPrenom(), 32));
-					   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
-			            pretcol.append("\n");
-				    		}	
+				try {
+			
+					String path = "./src/Jessica/Fichier/";			
+					String content = path + fichier;	
+						
+					 File file = new File(content);
 
-					bufWrite.newLine();
-					// affiche date de la sauvegarde
-					bufWrite.write("DTG de la sauvegarde : "+ DTG.format(date));
-					bufWrite.newLine();
-					bufWrite.write("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
-					bufWrite.newLine();
-					bufWrite.write("| Département           | Prénom            | Nom              | Sexe     | Naissance       | Email                  |");
-					bufWrite.newLine();
-					bufWrite.write("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
-					bufWrite.newLine();
-					// on affiche le contenu de personnel
-					bufWrite.write(sb.toString());
-					bufWrite.newLine();
+				    	// crée le fichier si pas encore présent
+				    	if(!file.exists()){
+				    	   file.createNewFile();
+				    	}
+
+				    	//true pour ajouter du contenu au fichier
+				    	FileWriter fw = new FileWriter(fichier,true);
+				    	BufferedWriter bw = new BufferedWriter(fw);
+				
+				    	
+			    	//affiche date de la sauvegarde
+			    	bw.newLine();
+					bw.write("DTG de la sauvegarde : "+ DTG.format(date));
+					bw.newLine();
+					bw.write("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
+					bw.newLine();
+					bw.write("| Département           | Prénom            | Nom              | Sexe     | Naissance       | Email                  |");
+					bw.newLine();
+					bw.write("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
+					bw.newLine();
+					//on affiche le contenu de personnel
+					bw.write(Affichage().toString());
+					bw.newLine();
 					
-					bufWrite.write("+-----+-------------------------------+----------------------------------------+");
-					bufWrite.newLine();
-					bufWrite.write("| N°  | Nom - Prénom                  | Matériel                               |");
-					bufWrite.newLine();
-					bufWrite.write("+-----+-------------------------------+----------------------------------------+");
-					bufWrite.newLine();
+					bw.write("+-----+-------------------------------+----------------------------------------+");
+					bw.newLine();
+					bw.write("| N°  | Nom - Prénom                  | Matériel                               |");
+					bw.newLine();
+					bw.write("+-----+-------------------------------+----------------------------------------+");
+					bw.newLine();
 					// on affiche le contenu de prêt
-					bufWrite.write(pretcol.toString());
-					    
-					bufWrite.close();
-				}
-				catch (IOException io) {
-					System.err.print("Une erreur est survenue : "+io.getMessage());				
-				}
+					bw.write(listeEmprunt2().toString());
+					
+			    	bw.close();
+
+				System.out.println("Sauvegarde bien effectuée.");
+				
+			      }
+			catch(IOException io){
+			         System.err.print("Une erreur est survenue : "+io.getMessage());
+			       }
 				
 			}
 		}
