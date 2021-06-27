@@ -1,4 +1,4 @@
-package master;
+package PierreGrulois;
 
 public class MyDate {
 	private int jour;

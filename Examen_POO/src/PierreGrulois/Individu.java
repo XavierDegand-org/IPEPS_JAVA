@@ -1,4 +1,4 @@
-package master;
+package PierreGrulois;
 
 public class Individu {
 	 private String nom;
@@ -46,12 +46,22 @@ public class Individu {
 	  }
 
 	  public String getDateddMMyyyy() {
-			return String.format("%d-%d-%d", dateNaissance.getJour(),dateNaissance.getMois(),dateNaissance.getAnnee());
+			
+			try{
+				return String.format("%d-%d-%d", dateNaissance.getJour(),dateNaissance.getMois(),dateNaissance.getAnnee());
+			}catch(java.util.IllegalFormatException e) {
+				return ("Une ou plusieurs entrées ne sont pas valide.");
+			} 
 	  }
 
 	  @Override
 	  public String toString() {
+			
+		try{
 			return String.format("%s %s sexe : %s date de naissance : %d-%d-%d."
 					,nom,prenom,sexe,dateNaissance.getJour(),dateNaissance.getMois(),dateNaissance.getAnnee());
+		}catch(java.util.IllegalFormatException e) {
+			return ("Une ou plusieurs entrées ne sont pas valide.");
+		} 
 	  }
 }

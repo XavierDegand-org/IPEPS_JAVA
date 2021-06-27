@@ -21,7 +21,7 @@ public class GestionJFrame extends JFrame {
 	private static ArrayList<Personnel> Person = new ArrayList<Personnel>();
 	private static ArrayList<Emprunt> pret = new ArrayList<Emprunt>();
 	private Magasin mag =  new Magasin();
-	private static StringBuilder Afficher = new StringBuilder();
+	private  StringBuilder Afficher = new StringBuilder();
 	private int nombre;
 	
 	 private JButton btnLoad = new JButton( "Chargement du personnel" );  // Création et texte des bouttons
@@ -77,6 +77,28 @@ public class GestionJFrame extends JFrame {
 	 public int getNombre() {
 		 
 		  return nombre;
+		 
+	 }
+	 
+	 public void Affiche() {
+		 Afficher.append("+------------------+------------------------------+------------------------------+--------+---------------+---------------------+");
+		 Afficher.append("\n");
+		 Afficher.append("| Département      | Prénom                       | Nom                          | Sexe   | Naissance     | Email               |");
+		 Afficher.append("\n");
+		 Afficher.append("+------------------+------------------------------+------------------------------+--------+---------------+---------------------+");
+		 Afficher.append("\n");
+		 for(int cpt=0 ; cpt<Person.size(); cpt++) {
+			 
+			 Afficher.append(" ");
+			 Afficher.append(setFixedLenght(Person.get(cpt).getDepartement(),19," "));
+			 Afficher.append(setFixedLenght(Person.get(cpt).getPrenom(),31," "));
+			 Afficher.append(setFixedLenght(Person.get(cpt).getNom(),31," "));
+			 Afficher.append(setFixedLenght(Person.get(cpt).getSexe(),9," "));
+			 Afficher.append(setFixedLenght(Person.get(cpt).getDateddMMyyyy(),16," "));
+			 Afficher.append(setFixedLenght(Person.get(cpt).getEmail(),22," "));
+			 Afficher.append("\n");
+		 
+		 }
 		 
 	 }
 	 
@@ -166,27 +188,14 @@ public class GestionJFrame extends JFrame {
 				 System.out.println("Veuillez charger la liste du personnel pour effectuer cette action! ");
 			 }
 			 else {
-				 System.out.println("+------------------+------------------------------+------------------------------+--------+---------------+---------------------+");
-				 System.out.println("| Département      | Prénom                       | Nom                          | Sexe   | Naissance     | Email               |");
-				 System.out.println("+------------------+------------------------------+------------------------------+--------+---------------+---------------------+");
-				 for(int cpt=0 ; cpt<Person.size(); cpt++) {
-					 
-					 Afficher.append(" ");
-					 Afficher.append(setFixedLenght(Person.get(cpt).getDepartement(),19," "));
-					 Afficher.append(setFixedLenght(Person.get(cpt).getPrenom(),31," "));
-					 Afficher.append(setFixedLenght(Person.get(cpt).getNom(),31," "));
-					 Afficher.append(setFixedLenght(Person.get(cpt).getSexe(),9," "));
-					 Afficher.append(setFixedLenght(Person.get(cpt).getDateddMMyyyy(),16," "));
-					 Afficher.append(setFixedLenght(Person.get(cpt).getEmail(),22," "));
-					 Afficher.append("\n");
-				 
-				 }
+				 Affiche();		
 				 System.out.println(Afficher.toString());
-				 
+				 Afficher.setLength(0);
 			 }
 			 
 		 }
-			 
+
+				 
 	 }
 
 	 static String setFixedLenght(String element, int longueur, String caractere) {  //fonction permettant de calibrer la taille des strings à 20 caractères
@@ -274,42 +283,39 @@ public class GestionJFrame extends JFrame {
 				 	System.out.println("Veuillez charger la liste des emprunts pour effectuer cette action! \n");
 			 }
 			 else {
-				 boolean verrif = false;
-				 int indice = 0;
+				 int indice;
 				 
 				 System.out.println("liste des emprunts");
 				 for (int cpt = 0; cpt < pret.size(); cpt++) {
 					 
-					 Afficher.append("N° "+(cpt+1));
-					 Afficher.append(setFixedLenght(pret.get(cpt).getEmprunteur().getNom(),30,"."));
-					 Afficher.append(setFixedLenght(pret.get(cpt).getMateriel(),15," "));
+					 Afficher.append("N° "+(cpt+1)+"   ");
+					 Afficher.append(setFixedLenght(pret.get(cpt).getEmprunteur().getNom(),15," "));
+					 Afficher.append(setFixedLenght(pret.get(cpt).getMateriel(),8," "));
 					 Afficher.append(pret.get(cpt).getArticle()+"\n");
 				 }
 				 System.out.println(Afficher.toString());
 				 Afficher.setLength(0);
 				 System.out.println("introduire le numéro d'emprunt à annuler:");
-			
-				 
-				 while(verrif != true) {
-					 indice=Lire.nbre();
-					 if(indice<1 || indice>pret.size()) {
-						 System.out.println("L'indice entré est inexistant. Veuillez recommencer:");
-					 }
-					 else {
-						verrif=true;
-					 }
-				 }	 
+				 indice=Lire.nbre();
+				 if(indice<1 || indice>pret.size()) {
+					 System.out.println("L'indice entré est inexistant. Modification annulèe!");
+					 
+				 }
+				 else {
 					 pret.remove(indice-1);
 					 Lire.vider();
 					 for (int cpt = 0; cpt < pret.size(); cpt++) {
 					 
-						 Afficher.append("N° "+(cpt+1));
-						 Afficher.append(setFixedLenght(pret.get(cpt).getEmprunteur().getNom(), 15,"."));
-						 Afficher.append(setFixedLenght(pret.get(cpt).getMateriel(), 15, " "));
+						 Afficher.append("N° "+(cpt+1)+"   ");
+						 Afficher.append(setFixedLenght(pret.get(cpt).getEmprunteur().getNom(), 15," "));
+						 Afficher.append(setFixedLenght(pret.get(cpt).getMateriel(), 8, " "));
 						 Afficher.append(pret.get(cpt).getArticle()+"\n");
 					 }
 					 System.out.println(Afficher.toString());
 					 Afficher.setLength(0);
+				 }
+				 
+					 
 			}		
 		 }
 	 }
@@ -332,9 +338,12 @@ public class GestionJFrame extends JFrame {
 			 else {
 				 String individu;
 				 boolean trouver= false;
+				 
+				 Affiche();
 				 System.out.println(Afficher.toString());
+				 Afficher.setLength(0);;
 				 System.out.println("Intriduire le nom de la personne a modifier:");
-				 System.out.println("Entrer un nom");
+				 System.out.println("Entrer un nom:");
 				 individu = Lire.texte();
 				 for (int cpt = 0; cpt < getNombre();cpt++) {
 					 if(Person.get(cpt).getNom().equals(individu)) {
@@ -352,10 +361,10 @@ public class GestionJFrame extends JFrame {
 					 Person.get(indiceIndividu).setNom(InputData.InputNom());
 					 Person.get(indiceIndividu).setPrenom(InputData.InputPrenom());
 					 Person.get(indiceIndividu).setEmail(InputData.InputEmail());
-					 
+					 System.out.println("Modification effectué avec succés");
 					 
 				 }
-				 System.out.println("Modification effectué avec succés");
+				 
 				 
 			 }
 			 
@@ -376,8 +385,7 @@ public class GestionJFrame extends JFrame {
 		 
 		 @Override
 			public void actionPerformed (ActionEvent e) {
-			 System.out.println( Afficher.toString());
-			 			 
+			 			 			 
 			 if(Person.isEmpty()==true){
 				 System.out.println("Veuillez charger la liste du personnel pour effectuer cette action! \n");
 			 }
@@ -419,25 +427,8 @@ public class GestionJFrame extends JFrame {
 							 }
 							
 							buffWrite.newLine();
-							buffWrite.write("+------------------+------------------------------+------------------------------+--------+---------------+---------------------+");
-							buffWrite.newLine();
-							buffWrite.write("| Département      | Prénom                       | Nom                          | Sexe   | Naissance     | Email               |");
-							buffWrite.newLine();
-							buffWrite.write("+------------------+------------------------------+------------------------------+--------+---------------+---------------------+");
-							buffWrite.newLine();
 							
-							for(int cpt=0 ; cpt<Person.size(); cpt++) {
-								 
-								 Afficher.append("  ");
-								 Afficher.append(setFixedLenght(Person.get(cpt).getDepartement(),19," "));
-								 Afficher.append(setFixedLenght(Person.get(cpt).getPrenom(),31," "));
-								 Afficher.append(setFixedLenght(Person.get(cpt).getNom(),31," "));
-								 Afficher.append(setFixedLenght(Person.get(cpt).getSexe(),9," "));
-								 Afficher.append(setFixedLenght(Person.get(cpt).getDateddMMyyyy(),16," "));
-								 Afficher.append(setFixedLenght(Person.get(cpt).getEmail(),22," "));
-								 Afficher.append("\n");
-							 
-							 }
+							Affiche();							
 							buffWrite.append(Afficher.toString());
 							Afficher.setLength(0);
 							buffWrite.newLine();
@@ -456,6 +447,7 @@ public class GestionJFrame extends JFrame {
 								 Afficher.append(pret.get(cpt).getArticle()+"\n");
 							 }
 							buffWrite.append(Afficher.toString());
+							Afficher.setLength(0);
 							buffWrite.close();
 							System.out.println("Sauvegade effectué avec succés.");
 								

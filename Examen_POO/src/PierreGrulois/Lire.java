@@ -10,7 +10,7 @@ public class Lire {
 	
 	
 	public static String texte() {
-		String saisie = "";  // j'utilise une variable pour éviter la double saisie. 
+		String saisie="";  // j'utilise une variable pour éviter la double saisie. 
 		try {
 			saisie = clavier.nextLine();
 		}catch (java.util.NoSuchElementException e) {
@@ -23,7 +23,7 @@ public class Lire {
 	
 	
 	public static int nbre() {
-		int saisie = 0;    // j'utilise une variable pour éviter la double saisie. 
+		int saisie = 0;    // une variable pour éviter la double saisie. 
 		try { 
 			saisie = clavier.nextInt();
 		}catch (java.util.InputMismatchException e) {
@@ -36,14 +36,16 @@ public class Lire {
 		return saisie;
 	}
 
-	public static void vider() {
-		try{
-			clavier.nextLine();
-		}catch(NoSuchElementException e) {
-			System.out.println("Aucune ligne n'a été trouvée.");
-		}catch(IllegalStateException e) {
-			System.out.println("Le scanner est fermé.");
-		}
+	public static String vider() {
+		try {
+			return clavier.nextLine();
+		}catch(NoSuchElementException e){
+			return "Aucune ligne n'a été trouvée.";
+		}catch(IllegalStateException e){
+			return "le scanner est fermé.";
+	    }
 	}
 	
+	
+		
 }

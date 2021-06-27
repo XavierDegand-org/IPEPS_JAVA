@@ -65,5 +65,5 @@ public class InputData {
 		}while(valideNomFile == false);
 		return newNomFile;
 	}
-
+	
 }

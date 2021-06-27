@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Personnel extends Individu{
 	private int idPersonnel;
-	private static int id=0;
+	private static int id=1;
 	private String email;
 	boolean verrifMail;
 	private Departement departement;

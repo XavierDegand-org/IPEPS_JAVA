@@ -7,6 +7,7 @@ public class ControleSaisie {
     = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-][a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9-]+\\.[a-z]{2,}$";	
 	final static String regNom = "^[A-Z][a-zA-Z' -]{1,29}$";
 	final static String regNomFile =  "^[a-zA-Z0-9_!#$&'+=`{}~^. -]{1,30}$";
+	final static String regInt = "^[0-9]+$";
 	
 	
 	public static boolean valideNom(String nom) {
@@ -38,4 +39,5 @@ public class ControleSaisie {
 			return false;
 		}
 	}
+	
 }
