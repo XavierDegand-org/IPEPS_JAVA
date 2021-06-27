@@ -33,13 +33,13 @@ public class ControleSaisie {
 		 String vide = new String();
 		 boolean estNull = text.equals(nullString);
 		 boolean estVide = text.equals(vide);
-		 Pattern rule = Pattern.compile("\\p{L}*(-\\p{L}*)*");
+		 Pattern rule = Pattern.compile("^(?:[a-z]:|\\\\|\\.{1,2})(?:\\\\[^<>:\"/\\\\|?*.]+)+(?:\\.txt)?$");
 		 if(estNull || estVide){
 			System.out.println("Valeur nulle ou vide !");
 			 return false;
 		 } 
 		else{
-			if (text.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-])+$")) { 
+			if (text.matches(rule.toString())) { 
 				return true;
 			}
 			else {

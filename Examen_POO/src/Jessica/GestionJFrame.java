@@ -3,7 +3,13 @@ package Jessica;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,6 +33,7 @@ public class GestionJFrame extends JFrame {
 	private static ArrayList<Emprunt> pret = new ArrayList<>();
 	Magasin mag = new Magasin();
 	int i; // compteur pour boucle for
+	private static String fichier;
 	
 	//***************************** DEBUT GESTIONJFRAME *****************************//
 					
@@ -283,31 +290,32 @@ public class GestionJFrame extends JFrame {
 				StringBuilder pretcol = new StringBuilder();
 			    for (i = 1; i < pret.size(); i++) {
 			    	pretcol.append("N° ");
+			    	pretcol.append("N° ");
 			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
-			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getEmprunteur().getNom()), 12));
-			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getMateriel()), 8));
-			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getArticle()), 30));
+				   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom(), 12));
+				   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
 	                pretcol.append("\n");
 			    		}		
 			    // on affiche le contenu
 			    System.out.println(pretcol.toString());
 					
-				System.out.println("Introduire le numéro d'emprunt à annuler : ");
+				//System.out.println("Introduire le numéro d'emprunt à annuler : ");
 				int nbremprunt = Lire.nbre();
 	
-				try { 
+			/*	try { 
 					
-					for(i = 1; i < Person.size(); i++) {
+					for(i = 1; i < pret.size(); i++) {
 						//si nombre de l'emprunt = nombre saisi
 						if(pret.get(i).getNombre() == nbremprunt) {
 							pret.remove(nbremprunt);
 							
-							pretcol.append("N° ");
+				            pretcol.append("N° ");
 					    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
-						   	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getEmprunteur().getNom()), 12));
-						   	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getMateriel()), 8));
-						   	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getArticle()), 30));
+						   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom(), 12));
+						   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
 				            pretcol.append("\n");
+				            
+				            pret.get(i).getNombre()--;
 						}
 						else {
 							System.out.println("Le nombre saisi n'est pas correct, veuillez ressaisir un nombre correct");
@@ -317,7 +325,7 @@ public class GestionJFrame extends JFrame {
 					}
 				catch (IndexOutOfBoundsException e) {
 					 System.out.println("Erreur, le numéro n'est pas dans la liste d'emprunt, entrez un numéro correct.");
-				}
+				}*/
 			}
 						
 					
@@ -408,6 +416,64 @@ public class GestionJFrame extends JFrame {
 			else {
 				System.out.println("Veuillez introduire le nom du fichier en extension .txt !");
 				InputData.nomFichier = Lire.texte();
+				fichier = InputData.inputNomFichier();
+				
+				try(BufferedWriter bufWrite = new BufferedWriter (new FileWriter(new File("./src/Jessica/Fichier", fichier)))) {
+					
+					SimpleDateFormat DTG = new SimpleDateFormat("MM/dd/yyyy HH:mm:s");
+					Date date = new Date();
+					
+					// stringbuilder et tableau "personnel"
+					StringBuilder sb = new StringBuilder();
+				    for (i = 0; i < Person.size(); i++) {
+				    	sb.append(setFixedLength(Person.get(i).getDepartement(), 25));
+				    	sb.append(setFixedLength(Person.get(i).getPrenom(), 20));
+				    	sb.append(setFixedLength(Person.get(i).getNom(), 20));
+				    	sb.append(setFixedLength(Person.get(i).getSexe(), 11));
+				    	sb.append(setFixedLength(Person.get(i).getDateddMMyyyy(), 18));
+				    	sb.append(setFixedLength(Person.get(i).getEmail(), 25));
+		                sb.append("\n");
+				    		}
+				    
+				    // stringbuilder et tableau "prêt"
+				    StringBuilder pretcol = new StringBuilder();
+				    for (i = 0; i < pret.size(); i++) {
+				    	pretcol.append("N° ");
+				    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 5));
+					   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom()+" "+pret.get(i).getEmprunteur().getPrenom(), 32));
+					   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
+			            pretcol.append("\n");
+				    		}	
+
+					bufWrite.newLine();
+					// affiche date de la sauvegarde
+					bufWrite.write("DTG de la sauvegarde : "+ DTG.format(date));
+					bufWrite.newLine();
+					bufWrite.write("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
+					bufWrite.newLine();
+					bufWrite.write("| Département           | Prénom            | Nom              | Sexe     | Naissance       | Email                  |");
+					bufWrite.newLine();
+					bufWrite.write("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
+					bufWrite.newLine();
+					// on affiche le contenu de personnel
+					bufWrite.write(sb.toString());
+					bufWrite.newLine();
+					
+					bufWrite.write("+-----+-------------------------------+----------------------------------------+");
+					bufWrite.newLine();
+					bufWrite.write("| N°  | Nom - Prénom                  | Matériel                               |");
+					bufWrite.newLine();
+					bufWrite.write("+-----+-------------------------------+----------------------------------------+");
+					bufWrite.newLine();
+					// on affiche le contenu de prêt
+					bufWrite.write(pretcol.toString());
+					    
+					bufWrite.close();
+				}
+				catch (IOException io) {
+					System.err.print("Une erreur est survenue : "+io.getMessage());				
+				}
+				
 			}
 		}
 		
