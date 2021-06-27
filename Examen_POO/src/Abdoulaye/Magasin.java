@@ -1,17 +1,19 @@
 package Abdoulaye;
-import java.util.HashMap;
 
-    public class Magasin {
+import java.util.HashMap;
+import java.util.Map;
+
+public class Magasin {
 
         public static HashMap<Integer, Produit> produits;
 
-        public Magasin() {
+        public void mag() {
             produits = new HashMap<>();
         }
 
-        public void ajouterProduit(int identifiant, String nom, String description) {
+        public void ajouterProduit(int id, String nom, String description) {
             Produit produit = new Produit(nom, description);
-            produits.put(identifiant, produit);
+            produits.put(id, produit);
         }
 
         public void listeHashMap() {
@@ -23,11 +25,14 @@ import java.util.HashMap;
             }
         }
 
-            public void getProduit () {
+            public void getProduit (int nombre) {
                 if (produits.isEmpty()) {
                     System.out.println("Magasin vide!!!");
                 } else {
 
+                    for (Map.Entry liste : produits.entrySet()) {
+                        System.out.println("Id_"+liste.getKey()+liste.getValue().toString());
+                    }
                 }
 
             }
@@ -41,4 +46,4 @@ import java.util.HashMap;
 
             }
         }
-    }
+

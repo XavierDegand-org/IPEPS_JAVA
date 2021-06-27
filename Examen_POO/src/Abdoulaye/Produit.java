@@ -1,10 +1,11 @@
 package Abdoulaye;
 
 public class Produit {
-    public static int id = 1;
+     private static int id = 1;
+     private int identifiant = 0;
      private String nom =" ";
      private String description = " ";
-     private int identifiant = 0;
+
 
     // constructeur du Produit
     public Produit(String nom, String description) {
@@ -32,9 +33,7 @@ public class Produit {
     @Override
     public String toString() {
 
-        return "Id_"+identifiant +" --- Produit [" +
-                "nom= " + nom +
-                ", description = " + description  +
-                ']';
+        return String.format("Produit [nom = %s, Description = %s ]",
+                this.nom, this.description);
     }
 }

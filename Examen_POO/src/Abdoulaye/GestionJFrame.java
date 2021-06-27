@@ -44,18 +44,12 @@ public class GestionJFrame extends JFrame {
 
         btnLoad.addActionListener(new LoadPersonnel());
         btnAffichage.addActionListener(new Affichage());
-        btnMag.addActionListener(new Magasin ());
+        btnMag.addActionListener(new magasin ());
         /*btnPret.addActionListener(new Emprunt());
         btnRetour.addActionListener(new RetourEmprunt());
         btnPersonnel.addActionListener(new GestionPersonnel());
         btnSauvegarde.addActionListener(new Sauvegarde());*/
-        btnClose.addActionListener(new ActionListener(){
-
-            @Override
-        public void actionPerformed (ActionEvent e){
-            System.exit(0);
-        }
-    });
+        btnClose.addActionListener(e -> System.exit(0));
 
         this.setSize(800, 400);
         this.setLocationRelativeTo(null);
@@ -163,15 +157,14 @@ public class GestionJFrame extends JFrame {
         return btnMag;
     }
 
-    public static class Magasin implements ActionListener {
+    private static class magasin implements ActionListener {
 
         @Override
         public void actionPerformed (ActionEvent e) {
             Magasin();
-
         }
 
-        public void Magasin(){
+    public void Magasin(){
 
             try { // chargement des produits du magasin avec leur ajout par la methode ajouterProduit
                 magasin.ajouterProduit(1,"Lenovo", "ThinkPad E15 G2");
@@ -181,11 +174,13 @@ public class GestionJFrame extends JFrame {
                 magasin.ajouterProduit(5,"HP", "Elitebook 830 G7 X360");
                 magasin.ajouterProduit(6,"Dell", "Inspiron 15 3000");
                 magasin.ajouterProduit(7,"HP", "Elitebook 850 G7");
+
             } catch (NullPointerException | IllegalArgumentException e1) {
                 e1.printStackTrace();
             }
             //Affichage du nombre de produits
             System.out.println("Le magasin est composé de "+Magasin.produits.size()+" articles");
+
             magasin.getProduit(6);
             magasin.getProduit(7);
             magasin.getProduit(4);
@@ -208,7 +203,6 @@ public class GestionJFrame extends JFrame {
 
         }
     }
-
 
     //Retour matériel
     public JButton getBtnRetour() {
