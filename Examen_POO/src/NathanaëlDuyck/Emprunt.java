@@ -6,12 +6,13 @@ public class Emprunt {
 	private Personnel emprunteur;
 	private Produit materiel;
 
-
+	
 	public Emprunt(int nombre,Personnel emprunteur, Produit materiel) {
 		this.nombre=nombre;
 		this.emprunteur = emprunteur;
 		this.materiel = materiel;
 	}
+	
 	
 	public  Personnel getEmprunteur() {
 		return emprunteur;
@@ -27,7 +28,7 @@ public class Emprunt {
 	public String toString() {
 		return "Id : " + getEmprunteur().getIdPersonnel() +" "+getEmprunteur().getNom()+" "+getEmprunteur().getSexe()+" "+getEmprunteur().getDateddMMyyyy()+" "+getEmprunteur().getEmail()+" "+getEmprunteur().getDepartement()+"  "+getMateriel().toString();
 	}
-
+	
 	public Produit getMateriel() {
 		return materiel;
 	}

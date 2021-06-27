@@ -1,9 +1,10 @@
 package NathanaëlDuyck;
 
 public enum Sexe {
-	 HOMME("Garçon"),
-	 FEMME("Fille"),;
-	 private final String label;
+	 
+	HOMME("Garçon"),
+	FEMME("Fille"),;
+	private final String label;
 	
 	 Sexe(String label) {
 	        this.label = label;

@@ -6,6 +6,7 @@ public class Personnel extends Individu {
 	
 	private int IdPersonnel;
 	private String email;
+	//Pattern pour les emails
 	private static final Pattern EMAIL_PATTERN = Pattern.compile( 
 			"^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
 	private Departement departement;
@@ -37,10 +38,10 @@ public class Personnel extends Individu {
 
 	public void setEmail(String email) {
 		   if ( email == null ) {
-	            throw new NullPointerException( "email cannot be null" );
+	            throw new NullPointerException( "email ne peut pas être null" );
 	        }
 	        if ( ! EMAIL_PATTERN.matcher( email ).matches() ) {
-	            throw new RuntimeException( "Le format de l'email ne coorespond pas aux patterns." );
+	            throw new RuntimeException( "Le format de l'email ne correspond pas au pattern." );
 	        }
 	        this.email = email;
 	    }
