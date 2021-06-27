@@ -1,0 +1,28 @@
+DTG de la sauvegarde : 26/06/2021 19:12:07
++------------------+----------------+----------+---------+------------+----------------------+
+| Département      | Prénom         | Nom      | Sexe    | Naissance  | Email                | 
++------------------+----------------+----------+---------+------------+----------------------+
+ Ressource humaine  Albert           Collon     Garçon    10-8-1990    Collon.a@test.be
+ Ressource humaine  Marie            Peeters    Fille     1-5-1985     Peeters_M@@test.be
+ Comptabilité       Sarah            Janssens   Fille     23-5-1999    Sarah.Janssens@test
+ Comptabilité       Henri            Maes       Garçon    14-9-2009    MaesHenri#test.be
+ Securité           Charles          Jacobs     Garçon    12-12-2009   Charles.j#test.be
+ Securité           Floriane         Mertens    Fille     20-8-1996    FloFlo.M@test
+ Production         Francois-Xavier  Willems    Garçon    28-10-1996   Willems.F-X@test.be
+ Production         Shan             O'Neil     Garçon    1-7-2001     ONeil.sh@test.be
+ Ressource humaine  Stéphanie        Goossen    Fille     25-10-2008   NieNie@test.be
+ Ressource humaine  edwin            stainier   Garçon    1-4-1969     stainieredwin@test.be
+ Comptabilité       Wilfrid          Van Moore  Garçon    25-2-1998    vanmoore.w@test.be
+ Production         Nathalie         Herman     Fille     26-7-2001    herman.n@test.be
+ Production         Annie            Bontemps   Fille     23-9-1998    bontemps.a@test.be
+
+
++-------+------------------------+------------------------------------+
+| N°    | Nom - Prénom           | Matériel                           |
++-------+------------------------+------------------------------------+
+ 1       Collon Albert             HP Elitebook 850 G7
+ 2       Peeters Marie             Dell Inspiron 15 3000
+ 4       Jacobs Charles            Lenovo Thinkpad E15 G2
+ 5       Willems Francois-Xavier   Lenovo IdeaPad 3 14IIL05 81WD00B2MH
+
+

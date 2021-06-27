@@ -221,6 +221,7 @@ public class GestionJFrame extends JFrame {
 		int nomTemp = 0;
 		int mailTemp = 0;
 		
+		// Récupérer la taille du plus grand prenom, nom et de la plus grande adresse mail
 		for (int i = 0; i < listIndividu.size() - 1; i++)
 		{
 			if (listIndividu.get(i+1).getPrenom().length() > listIndividu.get(i).getPrenom().length())
@@ -359,6 +360,7 @@ public class GestionJFrame extends JFrame {
 					texte = "";					
 					boolean isInput = false;
 					
+					// Demander le nom
 					while (!ControleSaisie.ValideNom(texte, isInput))
 					{
 						isInput = true;
@@ -369,6 +371,7 @@ public class GestionJFrame extends JFrame {
 					texte = "";
 					isInput = false;
 					
+					// Demander le prénom
 					while(!ControleSaisie.ValideNom(texte, isInput))
 					{
 						isInput = true;
@@ -379,6 +382,7 @@ public class GestionJFrame extends JFrame {
 					texte = "";
 					isInput = false;
 
+					// Demander adresse mail
 					while (!ControleSaisie.valideEmail(texte, isInput))
 					{
 						isInput = true;
@@ -481,12 +485,7 @@ public class GestionJFrame extends JFrame {
 			bw.write(appendText);
 			
 			bw.close();
-			fw.close();
-			
-			if (file.exists())
-				System.out.println(file.getAbsolutePath());
-			else
-				System.out.println("Ce fichier n'existe pas");			
+			fw.close();		
 		}
 		catch (IOException ex)
 		{
