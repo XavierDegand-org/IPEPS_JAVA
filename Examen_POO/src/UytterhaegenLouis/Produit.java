@@ -15,11 +15,11 @@ public class Produit {
 	}
 	public void setNom (String nom) {
 		if ( nom == null ) {
-			throw new NullPointerException( "nom cannot be null" );
+			throw new NullPointerException( "Le nom ne peut être nul !" );
 		}
 		nom = nom.trim();  
 		if ( nom.equals( "" ) ) {
-			throw new RuntimeException( "nom cannot be empty" );
+			throw new RuntimeException( "Le nom ne peut être vide !" );
 		}
 
 		this.nom = nom;
@@ -30,11 +30,11 @@ public class Produit {
 
 	public void setDescription(String nom) {
 		if ( nom == null ) {
-			throw new NullPointerException( "nom cannot be null" );
+			throw new NullPointerException( "La descrpition ne peut être nulle !" );
 		}
 		nom = nom.trim();  
 		if ( nom.equals( "" ) ) {
-			throw new RuntimeException( "nom cannot be empty" );
+			throw new RuntimeException( "La description ne peut être vide !" );
 		}
 
 		this.nom = nom;

@@ -30,20 +30,21 @@ public class GestionJFrame extends JFrame  {
 	private JButton btnSauvegarde = new JButton( "Sauvegarde" );
 	private JButton btnClose = new JButton( "Fermer" );
 
-	public final static int tailleNom = 30;
-	private String fichier;
-	private String nom;
+	public static final int tailleNom = 30; // délimite la taille maximale des noms et prénoms lors de la saisie
+	public static final int tailleFichier = 260; // délimite la taille maximale du nom d'un fichier lors de la saisie
+	private static String fichier; // Variable pour attribuer un nom de fichier lors de la création de celui-ci
+	private static String nom; // variable pour récupérer le nom d'une personne présent dans le personnel
 
 
 	/* ******************************************************* 
 	 *************Initialisation des listes,....************** */
 
-	private  ArrayList<Personnel> Person = new ArrayList<>(); // initialisation de la liste Personnel
-	private Magasin mag =  new Magasin(); ; // initialisation du Magasin
-	private ArrayList<Emprunt> pret = new ArrayList<>(); // initialisation de la liste Emprunt
+	private static ArrayList<Personnel> Person = new ArrayList<>(); // initialisation de la liste Personnel
+	private static Magasin mag =  new Magasin(); ; // initialisation du Magasin
+	private static ArrayList<Emprunt> pret = new ArrayList<>(); // initialisation de la liste Emprunt
 
 
-	
+
 
 
 	public GestionJFrame() {
@@ -80,8 +81,8 @@ public class GestionJFrame extends JFrame  {
 		btnPret.addActionListener(new btnLoadEmprunt());
 		btnRetour.addActionListener(new btnRetourEmprunt());
 		btnPersonnel.addActionListener(new btnGestionPersonnel());
-		btnSauvegarde.addActionListener(new btnSauvegarde());
-		btnClose.addActionListener(new btnClose());
+		btnSauvegarde.addActionListener(new btnSauvegardeFichier());
+		btnClose.addActionListener(new btnCloseApp());
 
 	}
 
@@ -101,7 +102,7 @@ public class GestionJFrame extends JFrame  {
 	/* *******************************************************************
 	 *******************Fonction Chargement Personnel******************* */
 
-	private void LoadPersonnel () {
+	private static void LoadPersonnel () {
 		// Ajout des différents membres du personnel Si  la liste est vide au départ
 		if (Person.isEmpty()) {
 			Person.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
@@ -129,7 +130,7 @@ public class GestionJFrame extends JFrame  {
 	 *********************Bouton Affichage Personnel******************** */
 
 	private class btnAffichagePersonnel implements ActionListener{ // Mise en place d'une classe interne pour l'affichage qui possède les fonctions implémenter par la classe ActionListener
-		 
+
 		@Override
 		public void actionPerformed (ActionEvent e) {  // Action lors de l'appui sur le bouton AffichagePersonnel
 
@@ -143,23 +144,23 @@ public class GestionJFrame extends JFrame  {
 	/* *******************************************************************
 	 ********************Fonction Affichage Personnel******************* */
 
-	private  StringBuilder  Affichage() { // Fonction permettant d'afficher tout le personnel sous forme d'un tableau 
+	private static StringBuilder  Affichage() { // Fonction permettant d'afficher tout le personnel sous forme d'un tableau 
 
 		StringBuilder SB = new StringBuilder(); // permet de concaténer des String de manière optimisé et d'allouer de l'espace en fonction de la taille des String
 
 		if (Person.isEmpty()) { // si la liste du personnel est vide
-			return SB.append("Affichage impossible, pas de personnel !");
+			return SB.append("Affichage impossible, pas de personnel !\n");
 		}
 		else { // si la liste du personnel n'est pas vide
 
-			SB.append("+---------------------+------------------------------+------------------------------+--------+------------+---------------------------+\n");
-			SB.append("| Département         | Prénom                       | Nom                          | Sexe   | Naissance  | Email                     |\n");
-			SB.append("+---------------------+------------------------------+------------------------------+--------+------------+---------------------------+\n");
+			SB.append("+---------------------+------------------------------+------------------------------+--------+------------+------------------------------+\n");
+			SB.append("| Département         | Prénom                       | Nom                          | Sexe   | Naissance  | Email                        |\n");
+			SB.append("+---------------------+------------------------------+------------------------------+--------+------------+------------------------------+\n");
 			for (Personnel personne : Person) { // Boucle pour afficher les membres du personnel avec leurs attributs / Type objet   objet courant  : Arraylist 
 				SB.append("  ");
 				SB.append(setFixedLength(personne.getDepartement(),20) + "  ");
-				SB.append(setFixedLength(personne.getPrenom(),30)+ " ");
-				SB.append(setFixedLength(personne.getNom(),30)+ " ");
+				SB.append(setFixedLength(personne.getPrenom(),tailleNom)+ " ");
+				SB.append(setFixedLength(personne.getNom(),tailleNom)+ " ");
 				SB.append(setFixedLength(personne.getSexe(),8)+ " ");
 				SB.append(setFixedLength(personne.getDateddMMyyyy(),12)+ " ");
 				SB.append(setFixedLength(personne.getEmail(),30)+ " ");
@@ -175,7 +176,7 @@ public class GestionJFrame extends JFrame  {
 	/* ******************************************************************
 	 **************Permet de calibrer la taille des Strings************ */
 
-	private String setFixedLength(String s, int taille) { // fonction permettant de mettre une taille fixe pour un String pour permettre une mise en page correcte
+	private static String setFixedLength(String s, int taille) { // fonction permettant de mettre une taille fixe pour un String pour permettre une mise en page correcte
 
 		StringBuilder stringtest= new StringBuilder(s);
 		while (stringtest.length()< taille) { 	// Rajouter des espaces jusqu'à ce qu'on atteigne le nombre de caractères demandés pour l'affichage 									
@@ -190,9 +191,9 @@ public class GestionJFrame extends JFrame  {
 
 
 	private class btnLoadMagasin implements ActionListener{ // Mise en place d'une classe interne  pour la création du mag qui possède les fonctions implémenter par la classe ActionListener
-		 // Action lors de l'appui sur le bouton Création du Magasin
+		// Action lors de l'appui sur le bouton Création du Magasin
 		@Override
-		public void actionPerformed (ActionEvent e) {  // Lorsque l'on appuie sur le bouton création du mag
+		public void actionPerformed (ActionEvent e) {  // Action lors de l'appui sur le bouton création du Magasin
 
 			LoadMagasin();
 
@@ -202,10 +203,10 @@ public class GestionJFrame extends JFrame  {
 	/* *******************************************************************
 	 **********************Fonction Création Magasin******************** */
 
-	private void LoadMagasin () {
+	private static void LoadMagasin () {
 
 		if (mag.isEmpty()) {	// Si le mag est vide
-			mag.ajouterProduit("HP1", "Elitebook 850 G7");
+			mag.ajouterProduit("HP1", "Elitebook 850 G7"); // ajout des produits dans le magasin
 			mag.ajouterProduit("HP2", "Elitebook 830 G7 X360");
 			mag.ajouterProduit("Dell1", "Inspiron 15 3000");
 			mag.ajouterProduit("Dell2", "XPS 13");
@@ -214,11 +215,11 @@ public class GestionJFrame extends JFrame  {
 			mag.ajouterProduit("Lenovo", "IdeaPad 3 14IIL05 81WD00B2MH");
 			System.out.println("   Magasin créé!   ");
 			System.out.println("-------------------");
-			mag.listeMap();
+			mag.listeMap(); // affichage des produits du magasin
 			System.out.println("\n");
 		}
 		else {	// Si le mag a déjà été créé
-			System.out.println("Magasin déjà chargé !");
+			System.out.println("Magasin déjà chargé !\n");
 		}
 
 	}
@@ -226,62 +227,59 @@ public class GestionJFrame extends JFrame  {
 	/* *******************************************************************
 	 ***********************Bouton Prêt du Matériel********************* */
 
-	private class btnLoadEmprunt implements ActionListener{   // Action lors de l'appui sur le bouton Prêt du Matériel
+	private class btnLoadEmprunt implements ActionListener{   
 
 		@Override
-		public void actionPerformed (ActionEvent e) {
+		public void actionPerformed (ActionEvent e) { // Action lors de l'appui sur le bouton Prêt du Matériel
 
-			LoadEmprunt();
+			Emprunt();
 
 		}
 	}
 
 	/* *******************************************************************
-	 ****************Fonction Création prêt et affichage**************** */
+	 ****************Fonction Création prêt de matériel***************** */
 
-	private void LoadEmprunt () {
-
-		if (Person.isEmpty()){
-			System.out.println("Le personnel n'a pas encore été chargé. Veuillez le charger d'abord !");
+	private static void Emprunt () {
+		if (Person.isEmpty()){  // si la liste du personnel est vide
+			System.out.println("Le personnel n'a pas encore été chargé. Veuillez le charger d'abord !\n");
 		}
-		else if(mag.isEmpty()) {
-			System.out.println("Le magasin n'a pas encore été chargé. Veuillez le charger d'abord !");
+		else if(mag.isEmpty()) { // si le magasin est vide
+			System.out.println("Le magasin n'a pas encore été chargé. Veuillez le charger d'abord !\n");
 		}
-		else if (pret.isEmpty()) {
-
-			pret.add(new Emprunt(Person.get(0),mag.produits.get(1)));
+		else if (pret.isEmpty()) { // Si la liste des prêts n'a pas été chargée
+			pret.add(new Emprunt(Person.get(0),mag.produits.get(1))); // Ajout des emprunts
 			pret.add(new Emprunt(Person.get(1),mag.produits.get(3)));
 			pret.add(new Emprunt(Person.get(2),mag.produits.get(4)));
 			pret.add(new Emprunt(Person.get(3),mag.produits.get(6)));
 			pret.add(new Emprunt(Person.get(6),mag.produits.get(7)));
-			AffichagePret();
-
+			System.out.println("   Prêt de Matériel   ");
+			System.out.println("----------------------");
+			for (int CompteurList = 0; CompteurList < pret.size(); CompteurList++) { // boucle pour l'affichage de la liste des emprunts nom prénom,..
+				System.out.println(pret.get(CompteurList).toString());
+			}
+			System.out.println("\n");
 		}
-		else
+		else // si la liste des prêts a été chargée
 		{
-			AffichagePret();	
+			System.out.println("   Prêt de Matériel   ");
+			System.out.println("----------------------");
+			for (int CompteurList = 0; CompteurList < pret.size(); CompteurList++) { // affichage de la liste des emprunts nom prénom,..
+				System.out.println(pret.get(CompteurList).toString());
+			}
+			System.out.println("\n");	
 		}
 
 	}
-	/* *******************************************************************
-	 ***************Fonction Affichage prêt du matériel***************** */
 
-	private void AffichagePret () { // Fonction permettant l'affichage des différents emprunts
-		System.out.println("   Prêt de Matériel   ");
-		System.out.println("----------------------");
-		for (int CompteurList = 0; CompteurList < pret.size(); CompteurList++) {
-			System.out.println(pret.get(CompteurList).toString());
-		}
-		System.out.println("\n");
-	}
 
 	/* *******************************************************************
 	 ********************Bouton Retour Emprunt************************** */
 
-	private class btnRetourEmprunt implements ActionListener{  // Action lors de l'appui sur le bouton Retour Emprunt
+	private class btnRetourEmprunt implements ActionListener{ 
 
 		@Override
-		public void actionPerformed (ActionEvent e) {
+		public void actionPerformed (ActionEvent e) { // Action lors de l'appui sur le bouton Retour Emprunt
 
 			RetourEmprunt();
 
@@ -291,16 +289,19 @@ public class GestionJFrame extends JFrame  {
 	/* ******************************************************************
 	 ******************Fonction retour des emprunts********************** */
 
-	private void RetourEmprunt() {
-
-		if(pret.isEmpty()) {
-			System.out.println("Aucun prêt n'a été chargé !");
+	private static void RetourEmprunt() {
+		int CompteurEmprunt = 1; // utilisé comme compteur dans la boucle
+		if(pret.isEmpty()) { // si aucun prêt de matériel n'a été encodé
+			System.out.println("Aucun prêt en cours actuellement !\n");
 		}
 		else {
 			System.out.println("   Liste des emprunts   ");
 			System.out.println("------------------------");
-			AffichageListeEmprunt();
-			System.out.println("Introduire le numéro d'emprunt à annuler");
+			for (Emprunt emprunt : pret) { // boucle pour afficher la liste d'emprunt
+				System.out.println("N° "+(CompteurEmprunt)+" "+emprunt.getEmprunteur().getNom()+" "+emprunt.getMateriel()+" "+emprunt.getArticle());
+				CompteurEmprunt++;
+			}
+			System.out.println("\nIntroduire le numéro d'emprunt à annuler :");
 			int inputEmpruntToRemove=0; // j'initialise la variable pour ne pas qu'elle garde la dernière valeure enregistrée
 			Boolean loop = false;
 			while (!loop) {
@@ -309,44 +310,39 @@ public class GestionJFrame extends JFrame  {
 					System.out.println("Veuillez entrer un numéro d'emprunt existant");
 				}
 				else {
-					loop = true;
-					pret.remove(inputEmpruntToRemove-1);
+					loop = true; // si le numéro introduit correspond à un numéro d'emprunt existant
+					pret.remove(inputEmpruntToRemove-1); // Retirer l'emprunt de la liste
 				}
 			}
-			AffichageListeEmprunt();
-			System.out.println("--------------------------");
-			System.out.println("  Modifications validées  ");
+			CompteurEmprunt = 1;
+			for (Emprunt emprunt : pret) { // boucle pour afficher la liste d'emprunt
+				System.out.println("N° "+(CompteurEmprunt)+" "+emprunt.getEmprunteur().getNom()+" "+emprunt.getMateriel()+" "+emprunt.getArticle());
+				CompteurEmprunt++;
+			}
+			System.out.println("------------------------");
+			System.out.println("  Modification validée  ");
 		}
 
-	}
-
-	/* ******************************************************************
-	 ********Fonction Affichage Emprunt pour le retour matériel******** */
-
-	private void AffichageListeEmprunt() { 
-		for (int CompteurList = 0 ; CompteurList < pret.size(); CompteurList++) {
-			Emprunt emprunteur = pret.get(CompteurList); // création d'un objet de type Emprunt pour récupérer les informations dans la liste
-			System.out.println("N° "+(CompteurList+1)+" "+emprunteur.getEmprunteur().getNom()+" "+emprunteur.getMateriel()+" "+emprunteur.getArticle());
-		}
 	}
 
 	/* ******************************************************************
 	 ********Fonction Affichage Emprunt pour la sauvegarde************* */
 
-	private StringBuilder AffichageEmpruntSauvegarde () {
-		StringBuilder SB = new StringBuilder(); 
+	private static StringBuilder AffichageEmpruntSauvegarde () {
+		int CompteurEmprunt =0; // utilisé comme numéro pour le numéro d'emprunt
+		StringBuilder SB = new StringBuilder(); //permet de concaténer des String de manière optimisé et d'allouer de l'espace en fonction de la taille des String
 		SB.append("+------+------------------------------------------------------------+----------------------------------------------+\n");
 		SB.append("| N°   | Nom-Prénom                                                 | Matériel                                     |\n");
 		SB.append("+------+------------------------------------------------------------+----------------------------------------------+\n");
-		for (int CompteurList = 0 ; CompteurList < pret.size(); CompteurList++) { // Boucle pour afficher les différents emprunts
-			Emprunt emprunteur = pret.get(CompteurList); // création d'un objet de type Emprunt pour récupérer les informations dans la liste
+		for (Emprunt emprunteur : pret) { // Boucle pour afficher les différents emprunts // création d'un objet de type Emprunt pour récupérer les informations dans la liste
 			SB.append("  ");
-			SB.append((CompteurList+1) + "      ");
-			SB.append(setFixedLength(emprunteur.getEmprunteur().getNom(),30)+ " ");
-			SB.append(setFixedLength(emprunteur.getEmprunteur().getPrenom(),30)+ " ");
-			SB.append(setFixedLength(emprunteur.getMateriel(),8 )+ " ");
-			SB.append(setFixedLength(emprunteur.getArticle(),30)+ " ");
+			SB.append((CompteurEmprunt+1) + "      "); // affichage du N°
+			SB.append(setFixedLength(emprunteur.getEmprunteur().getNom(),tailleNom)+ " "); // Affichage du nom
+			SB.append(setFixedLength(emprunteur.getEmprunteur().getPrenom(),tailleNom)+ " "); // affichage du préonom
+			SB.append(setFixedLength(emprunteur.getMateriel(),8 )+ " "); // affichage du nom du matériel
+			SB.append(setFixedLength(emprunteur.getArticle(),30)+ " "); // affichage de la description du matériel
 			SB.append("\n");
+			CompteurEmprunt++;
 		}	
 		return SB;	
 	}
@@ -354,11 +350,11 @@ public class GestionJFrame extends JFrame  {
 	/* ******************************************************************
 	 ********************Bouton Modification Personnel***************** */
 
-	private class btnGestionPersonnel implements ActionListener{ // Action lors de l'appui sur le bouton Gestion Personel
+	private class btnGestionPersonnel implements ActionListener{ 
 
 
 		@Override
-		public void actionPerformed (ActionEvent e) {
+		public void actionPerformed (ActionEvent e) { // Action lors de l'appui sur le bouton Gestion Personel
 
 			GestionPersonnel();
 
@@ -368,21 +364,21 @@ public class GestionJFrame extends JFrame  {
 	/* ******************************************************************
 	 ******************Fonction Modification Personnel***************** */
 
-	private void GestionPersonnel() {
+	private static void GestionPersonnel() {
 
-		if (Person.isEmpty())
+		if (Person.isEmpty()) // si la liste du personne est vide
 		{
-			System.out.println("Vous ne pouvez pas modifier le personnel tant que vous n'avez pas charger celui-ci");
+			System.out.println("Vous ne pouvez pas modifier le personnel tant que vous n'avez pas charger celui-ci !\n");
 		}
 		else
 		{
-			System.out.println(Affichage().toString());
+			System.out.println(Affichage().toString()); // affiche la liste du personnel
 			System.out.println("Introduire le nom de la personne à modifier :");
 			// On demande le nom de la personne à modifier
-			nom = InputData.inputNomPrenom("Nom");
 			Boolean loop = false;
-			int indice = 0;
+			int indice = 0; // permet de récupérer l'indice de la personne dont on voudra changer le nom, le prénom, l'adresse e-mail
 			while (!loop) { // Boucle pour trouver dans la boucle si le nom se trouve dans la liste et à quel indice
+				nom = InputData.inputNomPrenom("Nom"); // Vérifie que le nom correspond à un nom correct
 				for (int CompteurList=0;CompteurList<Person.size();CompteurList++){
 					if (Person.get(CompteurList).getNom().equals(nom)){ // Si le nom à l'indice X est égal au nom introduit 
 						loop = true;
@@ -391,7 +387,6 @@ public class GestionJFrame extends JFrame  {
 				}
 				if (!loop) { // Si le nom introduit n'existe pas dans la liste
 					System.out.println("Il n'existe personne ayant ce nom. Veuillez entrer un nom correct existant");
-					nom = InputData.inputNomPrenom("Nom");
 				}
 			}
 			Personnel personne = Person.get(indice); // création d'un objet de type Personnel pour récupérer les informations dans la liste à l'indice (indice)
@@ -399,11 +394,11 @@ public class GestionJFrame extends JFrame  {
 			System.out.println(personne.getIdPersonnel()+"   "+personne.getNom()+" -- "+personne.getPrenom()+" -- "+personne.getSexe()+" -- "+personne.getEmail()+" -- "+personne.getDepartement());
 			System.out.println("Introduire les nouvelles valeurs :");
 			// On Demande le Nom
-			personne.setNom(InputData.inputNomPrenom("Nom"));
+			personne.setNom(InputData.inputNomPrenom("Nom")); // Changement du nom et vérification de celui-ci
 			// On Demande le Prénom
-			personne.setPrenom(InputData.inputNomPrenom("Prénom"));
+			personne.setPrenom(InputData.inputNomPrenom("Prénom")); // Changement du prénom et vérification de celui-ci
 			// On Demande l'adresse mail
-			personne.setEmail(InputData.inputEmail());
+			personne.setEmail(InputData.inputEmail()); // Changement de l'email et vérification de celui-ci
 			System.out.println("--------------------------");
 			System.out.println("  Modifications validées  ");
 		}
@@ -413,10 +408,10 @@ public class GestionJFrame extends JFrame  {
 	/* ******************************************************************
 	 *************************Bouton Sauvegarde************************ */
 
-	private class btnSauvegarde implements ActionListener{ // Action lors de l'appui sur le bouton Sauvegarde
+	private class btnSauvegardeFichier implements ActionListener{ 
 
 		@Override
-		public void actionPerformed (ActionEvent e) {
+		public void actionPerformed (ActionEvent e) { // Action lors de l'appui sur le bouton Sauvegarde
 
 			Sauvegarde();
 
@@ -426,39 +421,36 @@ public class GestionJFrame extends JFrame  {
 	/* ******************************************************************
 	 *************************Fonction Sauvegarde********************** */
 
-	private void Sauvegarde  () {
-
-		if (Person.isEmpty()) {
-			System.out.println("Le personnel n'a pas encore été chargé. Veuillez le charger d'abord !");
-		}
-		else if(mag.isEmpty()){
-			System.out.println("Le magasin n'a pas encore été chargé. Veuillez le charger d'abord !");
-		}
-		else if(pret.isEmpty()) {
-			System.out.println("Aucun prêt n'a été chargé !");
+	private static void Sauvegarde  () {
+		if (Person.isEmpty()) { // si la liste du personne est vide
+			System.out.println("Le personnel n'a pas encore été chargé. Veuillez le charger d'abord !\n");
 		}
 		else {
 			fichier = InputData.inputNomFichier(); // Verifie que le nom du fichier correspond au format demandé
-			SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			System.out.println("\n");
+			SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"); // permet de formater une date
 			Date date = new Date();
-			try (BufferedWriter bufWrite = new BufferedWriter (new FileWriter(new File("./src/UytterhaegenLouis/fichier",fichier))))
+			try (BufferedWriter bufWrite = new BufferedWriter (new FileWriter(new File("./src/UytterhaegenLouis/fichier",fichier)))) // Chemin d'accès où le fichier doit être créé
 			{
 				bufWrite.newLine();
-				bufWrite.write("DTG de la sauvegarde : "+ formatDate.format(date));
+				bufWrite.write("DTG de la sauvegarde : "+ formatDate.format(date)); // Ecriture de la date et de l'heure actuel dans le fichier
 				bufWrite.newLine();
 				bufWrite.write(Affichage().toString()); // Ecriture du Stringbuilder affichage Personnel dans le fichier
-				bufWrite.newLine();
-				bufWrite.newLine();
-				bufWrite.write(AffichageEmpruntSauvegarde().toString()); // Ecriture du Stringbuilder AffichageEmprunt dans le fichier
-				bufWrite.newLine();
-
+				if (!pret.isEmpty()) { // si aucun prêt n'a été chargé
+					bufWrite.newLine();
+					bufWrite.newLine();
+					bufWrite.write(AffichageEmpruntSauvegarde().toString()); // Ecriture du Stringbuilder AffichageEmprunt dans le fichier
+					bufWrite.newLine();
+					System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+					System.out.println("Sauvegarde Réussie ! La liste du personnel et du matériel emprunté ont bien été enregistrés dans le fichier "+fichier + " !\n");
+				}else {
+					System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+					System.out.println("Sauvegarde Réussie ! Seule la liste du personnel a été enregistré dans le fichier "+fichier +" car il n'y a pas d'emprunt en cours !\n");
+				}
 			} catch (IOException io) {
 				System.err.println("Une erreur est survenue : "+io.getMessage());
 			}
-			System.out.println("---------------------------");
-			System.out.println("Le fichier de nom "+fichier+" a bien été créé !");
-			System.out.println("---------------------------");
-			System.out.println("   Sauvegarde réussite !   ");
+ // Affichage du message de la sauvegarde réussite
 		}
 
 	}
@@ -467,10 +459,10 @@ public class GestionJFrame extends JFrame  {
 	 ***************************Bouton Fermeture*********************** */
 
 
-	private class btnClose implements ActionListener{
+	private class btnCloseApp implements ActionListener{
 
 		@Override
-		public void actionPerformed (ActionEvent e) {
+		public void actionPerformed (ActionEvent e) { // Action lors de l'appui sur le bouton fermer
 			System.exit(0);
 		}
 

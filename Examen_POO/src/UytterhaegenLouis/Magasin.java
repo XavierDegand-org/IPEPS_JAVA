@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Magasin  {
 
-	Map<Integer,Produit> produits;  // Clé = id du produit afin de le retrouver / Contenu = objets de la classe Produit ( Nom et description )
+	public Map<Integer,Produit> produits;  // Clé = id du produit afin de le retrouver / Contenu = objets de la classe Produit ( Nom et description )
 	Produit produit;
 
 	public Magasin() {
@@ -21,7 +21,6 @@ public class Magasin  {
 
 
 	public void listeMap() {
-
 		System.out.println("Le magasin est composé de " + produits.size() + " articles");
 		for (int CompteurList=1;CompteurList<=produits.size();CompteurList++) { // boucle pour afficher les différents articles du magasin
 			System.out.println(""+ CompteurList +" "+  produits.get(CompteurList).toString());

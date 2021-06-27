@@ -1,26 +1,25 @@
 package UytterhaegenLouis;
 
-import java.util.regex.Pattern;
+
 
 public class Personnel extends Individu {
 	private int IdPersonnel;
 	private String email;
-	private static int id=1;
 	private Departement Departement;
+	private static int id=1;
 
-    private static final Pattern EMAIL_PATTERN = Pattern.compile( 
-    		"^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$" 
-    );
+	private static final String EMAIL_PATTERN
+	= "^[\\w._-]{2,64}@[\\w.-]{2,}.[a-zA-Z]{2,}$";	
 
-	public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, String Email, Departement Departement) {
+	public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, String email, Departement departement) {
 		super(nom, prenom, sexe, dateNaissance);
 		this.IdPersonnel = id++;
-		if ( ControleSaisie.valideEmail(Email)) { // Permet qu'en cas de mauvaise écriture de l'email, d'automatiquement écrire le mail dans un bon format
-			this.email = Email;
+		if ( ControleSaisie.valideEmail(email)) { // Permet qu'en cas de mauvaise écriture de l'email, d'automatiquement écrire le mail dans un bon format
+			this.email = email;
 		} else {
 			this.email = nom+"."+prenom.charAt(0) +"@test.be";
 		}
-		this.Departement= Departement;
+		this.Departement= departement;
 	}
 
 
@@ -33,11 +32,11 @@ public class Personnel extends Individu {
 	}
 
 	public void setEmail(String email) {
-		if ( email == null ) {
-            throw new NullPointerException( "email cannot be null" );
+		if ( email == null ) { // si l'email est nul
+            throw new NullPointerException( "L'email ne peut-être nul !" );
         }
-        if ( !EMAIL_PATTERN.matcher( email ).matches() ) {
-            throw new RuntimeException( "Le format de l'email ne coorespond pas aux patterns." );
+        if ( !email.matches(EMAIL_PATTERN) ) { // si le format de l'email ne correspond pas au pattern
+            throw new RuntimeException( "Le format de l'email ne correspond pas à un format d'email !" );
         }
         this.email = email;
     }

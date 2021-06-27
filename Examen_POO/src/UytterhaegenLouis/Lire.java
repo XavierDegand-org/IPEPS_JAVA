@@ -16,10 +16,10 @@ public class Lire {
 			texte = clavier.nextLine();
 		} catch (NoSuchElementException e) {
 			vider();
-			System.out.println("No line was found ");
+			System.out.println("Erreur, Aucune ligne n'a été trouvée");
 		}catch(IllegalStateException e) {
 			vider();
-			System.out.println("Scanner is closed");
+			System.out.println("Erreur, le Scanner est fermé");
 		}
 		return texte;
 
@@ -29,20 +29,21 @@ public class Lire {
 		int result = 0; // Variable pour éviter la double saisie
 		boolean loop = false;						
 		while (!loop) {										
-			try {									
+			try {				// tente de convertir le result en int					
 				result = clavier.nextInt();
 				loop = true;
+				vider();
 			}
 			catch(InputMismatchException e) {		
 				vider();
-				System.out.println("Error, Enter a new number please !");
+				System.out.println("Erreur ! Veuillez entrer un nombre !");
 			}		
 			catch (NoSuchElementException e) {
 				vider();
-				System.out.println("No line was found ");
+				System.out.println("Erreur, Aucune ligne n'a été trouvée");
 			}catch(IllegalStateException e) {
 				vider();
-				System.out.println("This scanner is closed");
+				System.out.println("Erreur, le Scanner est fermé");
 			}
 
 		}
@@ -55,10 +56,10 @@ public class Lire {
 			clavier.nextLine();
 		} catch (NoSuchElementException e) {
 			vider();
-			System.out.println("No line was found ");
+			System.out.println("Erreur, Aucune ligne n'a été trouvée");
 		}catch(IllegalStateException e) {
 			vider();
-			System.out.println("This scanner is closed");
+			System.out.println("Erreur, le Scanner est fermé");
 		}
 	}
 

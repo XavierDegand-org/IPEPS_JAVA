@@ -12,8 +12,7 @@ public class InputData {
 			if (ControleSaisie.valideEmail(email)){
 				return email;
 			}else {
-				System.out.print("Saisie non valide !  ");
-				arret = false;
+				System.out.print("Adresse mail non valide ! ");
 			}
 		}
 		return email;
@@ -26,8 +25,6 @@ public class InputData {
 			result = Lire.texte();
 			if (ControleSaisie.valideNom(result, GestionJFrame.tailleNom)){
 				return result;
-			}else {
-				arret = false;
 			}
 		}
 		return result;
@@ -39,10 +36,8 @@ public class InputData {
 		while (!arret) {
 			System.out.println("Introduire le nom du fichier extension .txt !");
 			result = Lire.texte();
-			if (ControleSaisie.valideNomFichier(result, GestionJFrame.tailleNom)) {
+			if (ControleSaisie.valideNomFichier(result, GestionJFrame.tailleFichier)) {
 				return result;
-			}else {
-				arret = false;
 			}
 		}
 		return result;

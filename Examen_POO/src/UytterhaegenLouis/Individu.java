@@ -18,14 +18,6 @@ public class Individu {
 	}
 
 	public void setNom(String nom) {
-		if ( nom == null ) {
-			throw new NullPointerException( "nom cannot be null" );
-		}
-		nom = nom.trim();  
-		if ( nom.equals( "" ) ) {
-			throw new RuntimeException( "nom cannot be empty" );
-		}
-
 		this.nom = nom;
 	}
 
@@ -34,13 +26,6 @@ public class Individu {
 	}
 
 	public void setPrenom(String prenom) {
-		if ( prenom == null ) {
-			throw new NullPointerException( "prenom cannot be null" );
-		}
-		prenom = prenom.trim(); 
-		if ( prenom.equals( "" ) ) {
-			throw new RuntimeException( "prenom cannot be empty" );
-		}
 		this.prenom = prenom;
 	}
 

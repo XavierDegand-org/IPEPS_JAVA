@@ -2,7 +2,6 @@ package UytterhaegenLouis;
 
 public class Emprunt {
 
-
 	Produit produit;
 	Personnel personnel;
 
@@ -38,6 +37,7 @@ public class Emprunt {
 	public String getArticle() {
 		return produit.getDescription();
 	}
+	
 
 
 }
