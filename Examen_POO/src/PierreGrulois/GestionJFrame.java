@@ -2,7 +2,13 @@ package PierreGrulois;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,8 +18,11 @@ public class GestionJFrame extends JFrame {
 	
 	
 	private static final long serialVersionUID = 8342878258434229124L;
-	private static ArrayList<Personnel> Pers = new ArrayList<Personnel>();
-	private int listeCharger = 0;
+	private static ArrayList<Personnel> Person = new ArrayList<Personnel>();
+	private static ArrayList<Emprunt> pret = new ArrayList<Emprunt>();
+	private Magasin mag =  new Magasin();
+	private static StringBuilder Afficher = new StringBuilder();
+	private int nombre;
 	
 	 private JButton btnLoad = new JButton( "Chargement du personnel" );  // Création et texte des bouttons
 	 private JButton btnAffichage = new JButton( "Affichage liste du personnel" );
@@ -55,8 +64,8 @@ public class GestionJFrame extends JFrame {
 			
 			btnLoad.addActionListener(new LoadPersonnel());
 			btnAffichage.addActionListener(new Affichage());
-			btnMag.addActionListener(new Magasin());
-			btnPret.addActionListener(new Emprunt());
+			btnMag.addActionListener(new Shop());                // nom changé pour éviter le conflit avec la classe Magasin()
+			btnPret.addActionListener(new Emprunter());
 			btnRetour.addActionListener(new RetourEmprunt());
 			btnPersonnel.addActionListener(new GestionPersonnel());
 			btnSauvegarde.addActionListener(new Sauvegarde());
@@ -65,9 +74,9 @@ public class GestionJFrame extends JFrame {
 			this.setSize( 775, 496 );
 	 }
 
-	 public void getnombre() {
+	 public int getNombre() {
 		 
-		  
+		  return nombre;
 		 
 	 }
 	 
@@ -85,21 +94,25 @@ public class GestionJFrame extends JFrame {
 			public void actionPerformed (ActionEvent e) {
 			 
 			 
+			if(Person.isEmpty()==true) {
+				
+			
+				 Person.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
+				 Person.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@@test.be", Departement.HR));	
+				 Person.add(new Personnel("Janssens","Sarah",Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Janssens@test",Departement.Compta));
+				 Person.add(new Personnel("Maes","Henri",Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri#test.be",Departement.Compta));
+				 Person.add(new Personnel("Jacobs","Charles",Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j#test.be",Departement.SEC));
+				 Person.add(new Personnel("Mertens","Floriane",Sexe.FEMME, new MyDate(20, 8, 1996), "FloFlo.M@test.be",Departement.SEC));
+				 Person.add(new Personnel("Willems","Francois-Xavier",Sexe.HOMME, new MyDate(28, 10, 1996), "Willems.F-X@test.be", Departement.Prod));
+				 Person.add(new Personnel("O'Neil","Shan",Sexe.HOMME, new MyDate(1, 7, 2001), "ONeil.sh@test.be",Departement.Prod));
+				 Person.add(new Personnel("Goossen","Stéphanie",Sexe.FEMME, new MyDate(25, 10, 2008), "NieNieG@test.be",Departement.HR));
+				 Person.add(new Personnel("Dumont","Charles",Sexe.HOMME, new MyDate(1, 4, 1969), "dumont.c@test.be",Departement.HR));
+				 Person.add(new Personnel("Van Moore","Wilfrid",Sexe.HOMME,new MyDate(25, 2, 1998), "vanmoore.w@test.te",Departement.Compta));
+				 Person.add(new Personnel("Herman","Nathalie",Sexe.FEMME, new MyDate(26, 7, 2001), "herman.n@test,be",Departement.Prod)); //adresse Mail non valide
+				 Person.add(new Personnel("Bontemps","Annie",Sexe.FEMME, new MyDate(23,9,1998), "bontemps.a@test.be",Departement.Prod));
+				 nombre=Person.size();
 			 
-			 Pers.add(new Personnel("Collon","Albert",Sexe.HOMME, new MyDate(10, 8, 1990), "Collon.a@test.be",Departement.HR));
-			 Pers.add(new Personnel("Peeters","Marie",Sexe.FEMME, new MyDate(01, 5, 1985), "Peeters_M@@test.be", Departement.HR));	
-			 Pers.add(new Personnel("Janssens","Sarah",Sexe.FEMME, new MyDate(23, 5, 1999), "Sarah.Janssens@test",Departement.Compta));
-			 Pers.add(new Personnel("Maes","Henri",Sexe.HOMME, new MyDate(14, 9, 2009), "MaesHenri#test.be",Departement.Compta));
-			 Pers.add(new Personnel("Jacobs","Charles",Sexe.HOMME, new MyDate(12, 12, 2009), "Charles.j#test.be",Departement.SEC));
-			 Pers.add(new Personnel("Mertens","Floriane",Sexe.FEMME, new MyDate(20, 8, 1996), "FloFlo.M@test.be",Departement.SEC));
-			 Pers.add(new Personnel("Willems","Francois-Xavier",Sexe.HOMME, new MyDate(28, 10, 1996), "Willems.F-X@test.be", Departement.Prod));
-			 Pers.add(new Personnel("O'Neil","Shan",Sexe.HOMME, new MyDate(1, 7, 2001), "ONeil.sh@test.be",Departement.Prod));
-			 Pers.add(new Personnel("Goossen","Stéphanie",Sexe.FEMME, new MyDate(25, 10, 2008), "NieNieG@test.be",Departement.HR));
-			 Pers.add(new Personnel("Dumont","Charles",Sexe.HOMME, new MyDate(1, 4, 1969), "dumont.c@test.be",Departement.HR));
-			 Pers.add(new Personnel("Van Moore","Wilfrid",Sexe.HOMME,new MyDate(25, 2, 1998), "vanmoore.w@test.te",Departement.Compta));
-			 Pers.add(new Personnel("Herman","Nathalie",Sexe.FEMME, new MyDate(26, 7, 2001), "herman.n@test,be",Departement.Prod));
-			 Pers.add(new Personnel("Bontemps","Annie",Sexe.FEMME, new MyDate(23,9,1998), "bontemps.a@test.be",Departement.Prod));
-			 listeCharger = 1;
+			 }
 		 }
 	 }
 	 
@@ -111,12 +124,30 @@ public class GestionJFrame extends JFrame {
 		 return btnMag;
 	 }
 	 
-	 private class Magasin implements ActionListener{
+	 private class Shop implements ActionListener{
 		 
 		 @Override
 			public void actionPerformed (ActionEvent e) {
-			 System.exit(0);
+			 
+			 if (mag.isEmpty()){
+				 
+				mag.AjouterProduit("HP","Elitebook 850 G7");
+				mag.AjouterProduit("HP","Elitebook 830 G7 X360");
+				mag.AjouterProduit("Dell","Inspiron 15 3000");
+				mag.AjouterProduit("Dell","XPS 13");
+				mag.AjouterProduit("Dell","XPS 15");
+				mag.AjouterProduit("Lenovo","Thinkpad E15 G2");
+				mag.AjouterProduit("Lenovo","IdeaPad 3 14IIL05 81WD00B2MH");
+				mag.ListeMap();
+				
+			 }
+			 else {
+				 System.out.println("Vous avez déjà charger le magasin");
+			 }
+			 	
+			 
 			}
+			
 	 }
 	 
 	 /*************************************************
@@ -131,45 +162,48 @@ public class GestionJFrame extends JFrame {
 		 
 		 @Override
 			public void actionPerformed (ActionEvent e) {
-			 
-			 switch (listeCharger) {
-			 
-			 case 0:
+			 if(Person.isEmpty()==true) {
 				 System.out.println("Veuillez charger la liste du personnel pour effectuer cette action! ");
-				 break;
-			 case 1:
-				 System.out.println("+-------------------+-------------------+-------------------+-------------------+-------------------+---------------------+");
-				 System.out.println("| Département       | Prénom            | Nom               | Sexe              | Naissance         | Email               |");
-				 System.out.println("+-------------------+-------------------+-------------------+-------------------+-------------------+---------------------+");
-				 StringBuilder Afficher = new StringBuilder();
-				 for(int cpt=0 ; cpt<Pers.size(); cpt++) {
+			 }
+			 else {
+				 System.out.println("+------------------+------------------------------+------------------------------+--------+---------------+---------------------+");
+				 System.out.println("| Département      | Prénom                       | Nom                          | Sexe   | Naissance     | Email               |");
+				 System.out.println("+------------------+------------------------------+------------------------------+--------+---------------+---------------------+");
+				 for(int cpt=0 ; cpt<Person.size(); cpt++) {
 					 
-					 Afficher.append(setFixedLenght(Pers.get(cpt).getDepartement()));
-					 Afficher.append(setFixedLenght(Pers.get(cpt).getPrenom()));
-					 Afficher.append(setFixedLenght(Pers.get(cpt).getNom()));
-					 Afficher.append(setFixedLenght(Pers.get(cpt).getSexe()));
-					 Afficher.append(setFixedLenght(Pers.get(cpt).getDateddMMyyyy()));
-					 Afficher.append(setFixedLenght(Pers.get(cpt).getEmail()));
+					 Afficher.append(" ");
+					 Afficher.append(setFixedLenght(Person.get(cpt).getDepartement(),19," "));
+					 Afficher.append(setFixedLenght(Person.get(cpt).getPrenom(),31," "));
+					 Afficher.append(setFixedLenght(Person.get(cpt).getNom(),31," "));
+					 Afficher.append(setFixedLenght(Person.get(cpt).getSexe(),9," "));
+					 Afficher.append(setFixedLenght(Person.get(cpt).getDateddMMyyyy(),16," "));
+					 Afficher.append(setFixedLenght(Person.get(cpt).getEmail(),22," "));
 					 Afficher.append("\n");
-					 
+				 
 				 }
 				 System.out.println(Afficher.toString());
 				 
-				}
-			 
 			 }
+			 
+		 }
 			 
 	 }
 
-	 static String setFixedLenght(String element) {  //fonction permettant de calibrer la taille des strings à 20 caractères
+	 static String setFixedLenght(String element, int longueur, String caractere) {  //fonction permettant de calibrer la taille des strings à 20 caractères
 		 
 		 StringBuilder ss= new StringBuilder(element);
-	        while (ss.length() < 20) {  
-	                String d = " ";
-	                char c1 = d.charAt(0);
-	                ss.insert(element.length(),c1);
+	        while (ss.length() < longueur) {  
+	                String d = caractere;
+	                try {
+	                	char c1 = d.charAt(0);
+	                	ss.insert(element.length(),c1);
+	                }catch(IndexOutOfBoundsException e) {
+	                	System.out.println("l'argument index est négatif ou non inférieur à la longueur de cette chaîne.");
+	                }
+	                
+	               
 	            }
-	        String c = ss.substring(0, 20);
+	        String c = ss.substring(0, longueur);
 	        return c;
 		 
 	 } 
@@ -182,11 +216,37 @@ public class GestionJFrame extends JFrame {
 		 return btnPret;
 	 }
 	 
-	 private class Emprunt implements ActionListener{
+	 private class Emprunter implements ActionListener{
 		 
 		 @Override
 			public void actionPerformed (ActionEvent e) {
-			 System.exit(0);
+			 
+			 if(Person.isEmpty()==true){
+				 System.out.println("Veuillez charger la liste du personnel pour effectuer cette action! \n");
+			 }
+			 else if (mag.isEmpty()==true) {
+				 System.out.println("Veuillez charger le magasin pour effectuer cette action! \n");
+			 }
+			 else if (pret.isEmpty()== true) {
+				 
+				 	pret.add(new Emprunt(Person.get(0),mag.map.get(1)));
+				 	pret.add(new Emprunt(Person.get(1),mag.map.get(3)));
+			    	pret.add(new Emprunt(Person.get(2),mag.map.get(4)));
+					pret.add(new Emprunt(Person.get(3),mag.map.get(6)));
+					pret.add(new Emprunt(Person.get(6),mag.map.get(7)));
+					for (int cpt = 0; cpt < pret.size(); cpt++) {
+						System.out.println(pret.get(cpt).toString());
+					}
+				
+				 
+			 }
+			 else {
+				 for (int cpt = 0; cpt < pret.size(); cpt++) {
+						System.out.println(pret.get(cpt).toString());
+				 
+				 }
+			 } 
+			
 			}
 	 }
 	 
@@ -200,10 +260,58 @@ public class GestionJFrame extends JFrame {
 	 
 	 private class RetourEmprunt implements ActionListener{
 		 
+		 
 		 @Override
 			public void actionPerformed (ActionEvent e) {
-			 System.exit(0);
-			}
+			 if(Person.isEmpty()==true){
+				 System.out.println("Veuillez charger la liste du personnel pour effectuer cette action! \n");
+			 }
+			 else if (mag.isEmpty()==true) {
+				 System.out.println("Veuillez charger le magasin pour effectuer cette action! \n");
+			 }
+			 else if (pret.isEmpty()== true) {
+				 
+				 	System.out.println("Veuillez charger la liste des emprunts pour effectuer cette action! \n");
+			 }
+			 else {
+				 boolean verrif = false;
+				 int indice = 0;
+				 
+				 System.out.println("liste des emprunts");
+				 for (int cpt = 0; cpt < pret.size(); cpt++) {
+					 
+					 Afficher.append("N° "+(cpt+1));
+					 Afficher.append(setFixedLenght(pret.get(cpt).getEmprunteur().getNom(),30,"."));
+					 Afficher.append(setFixedLenght(pret.get(cpt).getMateriel(),15," "));
+					 Afficher.append(pret.get(cpt).getArticle()+"\n");
+				 }
+				 System.out.println(Afficher.toString());
+				 Afficher.setLength(0);
+				 System.out.println("introduire le numéro d'emprunt à annuler:");
+			
+				 
+				 while(verrif != true) {
+					 indice=Lire.nbre();
+					 if(indice<1 || indice>pret.size()) {
+						 System.out.println("L'indice entré est inexistant. Veuillez recommencer:");
+					 }
+					 else {
+						verrif=true;
+					 }
+				 }	 
+					 pret.remove(indice-1);
+					 Lire.vider();
+					 for (int cpt = 0; cpt < pret.size(); cpt++) {
+					 
+						 Afficher.append("N° "+(cpt+1));
+						 Afficher.append(setFixedLenght(pret.get(cpt).getEmprunteur().getNom(), 15,"."));
+						 Afficher.append(setFixedLenght(pret.get(cpt).getMateriel(), 15, " "));
+						 Afficher.append(pret.get(cpt).getArticle()+"\n");
+					 }
+					 System.out.println(Afficher.toString());
+					 Afficher.setLength(0);
+			}		
+		 }
 	 }
 	 
 	 /****************************************************
@@ -215,11 +323,43 @@ public class GestionJFrame extends JFrame {
 	 }
 	 
 	 private class GestionPersonnel implements ActionListener{
-		 
+		 int indiceIndividu;
 		 @Override
 			public void actionPerformed (ActionEvent e) {
-			 System.exit(0);
-			}
+			 if(Person.isEmpty()==true){
+				 System.out.println("Veuillez charger la liste du personnel pour effectuer cette action! \n");
+			 }
+			 else {
+				 String individu;
+				 boolean trouver= false;
+				 System.out.println(Afficher.toString());
+				 System.out.println("Intriduire le nom de la personne a modifier:");
+				 System.out.println("Entrer un nom");
+				 individu = Lire.texte();
+				 for (int cpt = 0; cpt < getNombre();cpt++) {
+					 if(Person.get(cpt).getNom().equals(individu)) {
+						 this.indiceIndividu=cpt;
+						 trouver = true;
+					 }
+				 }
+				 individu = Lire.vider();
+				 if(trouver == false) {
+					 System.out.println("Aucune correspndance trouvé!");
+				 }
+				 else {
+					 System.out.println(getNombre());
+					 
+					 Person.get(indiceIndividu).setNom(InputData.InputNom());
+					 Person.get(indiceIndividu).setPrenom(InputData.InputPrenom());
+					 Person.get(indiceIndividu).setEmail(InputData.InputEmail());
+					 
+					 
+				 }
+				 System.out.println("Modification effectué avec succés");
+				 
+			 }
+			 
+		 }
 	 }
 	 
 	 /***************************************************
@@ -236,7 +376,101 @@ public class GestionJFrame extends JFrame {
 		 
 		 @Override
 			public void actionPerformed (ActionEvent e) {
-			 System.exit(0);
+			 System.out.println( Afficher.toString());
+			 			 
+			 if(Person.isEmpty()==true){
+				 System.out.println("Veuillez charger la liste du personnel pour effectuer cette action! \n");
+			 }
+			 else if (mag.isEmpty()==true) {
+				 System.out.println("Veuillez charger le magasin pour effectuer cette action! \n");
+			 }
+			 else if (pret.isEmpty()== true) {
+				 
+				 	System.out.println("Veuillez charger la liste des emprunts pour effectuer cette action! \n");
+			 }
+			 else {
+				 String nomFile = InputData.InputNomFichier();
+				 File folder = new File("src/PierreGrulois/Fichier");
+				 File file= new File("./src/PierreGrulois/Fichier/"+nomFile+".txt");
+				 Date date = new Date();
+				 if (folder.exists()==false) {
+					 folder.mkdir();
+				 }
+				 if (file.exists()==false) {
+					 
+						 try {
+							file.createNewFile();
+						} catch (IOException e1) {
+							System.out.println("une erreur d'entrée/sortie c'est produite");
+						} catch (SecurityException e1) {
+							System.out.println("un gestionnaire de sécurité existe et sa méthode refuse l'accès en écriture au fichier");
+						}
+						 try {
+							FileWriter write = new FileWriter(file);
+							BufferedWriter buffWrite = new BufferedWriter(write);
+							try{
+								 SimpleDateFormat dateSauvegarde = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+								 buffWrite.write("DTG de la sauvegarde : "+ dateSauvegarde.format(date));
+								 
+							 }catch(NullPointerException e1) {
+								 System.out.println("Le motif donné est nul");
+							 }catch(IllegalArgumentException e1) {
+								 System.out.println("Le modèle donné est invalide");
+							 }
+							
+							buffWrite.newLine();
+							buffWrite.write("+------------------+------------------------------+------------------------------+--------+---------------+---------------------+");
+							buffWrite.newLine();
+							buffWrite.write("| Département      | Prénom                       | Nom                          | Sexe   | Naissance     | Email               |");
+							buffWrite.newLine();
+							buffWrite.write("+------------------+------------------------------+------------------------------+--------+---------------+---------------------+");
+							buffWrite.newLine();
+							
+							for(int cpt=0 ; cpt<Person.size(); cpt++) {
+								 
+								 Afficher.append("  ");
+								 Afficher.append(setFixedLenght(Person.get(cpt).getDepartement(),19," "));
+								 Afficher.append(setFixedLenght(Person.get(cpt).getPrenom(),31," "));
+								 Afficher.append(setFixedLenght(Person.get(cpt).getNom(),31," "));
+								 Afficher.append(setFixedLenght(Person.get(cpt).getSexe(),9," "));
+								 Afficher.append(setFixedLenght(Person.get(cpt).getDateddMMyyyy(),16," "));
+								 Afficher.append(setFixedLenght(Person.get(cpt).getEmail(),22," "));
+								 Afficher.append("\n");
+							 
+							 }
+							buffWrite.append(Afficher.toString());
+							Afficher.setLength(0);
+							buffWrite.newLine();
+							buffWrite.newLine();
+							buffWrite.write("+-----+------------------------------+----------------------------------------+");
+							buffWrite.newLine();
+							buffWrite.write("| N°  | Nom - Prénom                 | Matèriel                               |");
+							buffWrite.newLine();
+							buffWrite.write("+-----+------------------------------+----------------------------------------+");
+							buffWrite.newLine();
+							
+							for (int cpt = 0; cpt < pret.size(); cpt++) {
+								 Afficher.append("   "+(cpt+1)+"    ");
+								 Afficher.append(setFixedLenght(pret.get(cpt).getEmprunteur().getNom() + " " + pret.get(cpt).getEmprunteur().getPrenom(), 30," "));
+								 Afficher.append(setFixedLenght(pret.get(cpt).getMateriel(), 8, " "));
+								 Afficher.append(pret.get(cpt).getArticle()+"\n");
+							 }
+							buffWrite.append(Afficher.toString());
+							buffWrite.close();
+							System.out.println("Sauvegade effectué avec succés.");
+								
+							
+						} catch (IOException e1) {
+							System.out.println("Le fichier est un répretoire, n'existe pas , ne peux être créé ou ne peux être ouvert");
+						}
+						 
+					 
+				 }
+				 else {
+					 System.out.println("Le fichier existe déja.");
+				 }
+				 
+			 }
 			}
 	 }
 	 
@@ -256,9 +490,9 @@ public class GestionJFrame extends JFrame {
 				try{
 					System.exit(0);  // forums.commentcamarche.net/forum/affich-3383988-java-fermer-une-fenetre-avec-un-jbutton
 				}catch(SecurityException e1){
-					System.out.println("Un gestionnaire de sécurité existe et sa méthode checkExixt n'autorise pas la sortie avec l'état spécifié.");
+					System.out.println("Un gestionnaire de sécurité existe et sa méthode checkExit n'autorise pas la sortie avec l'état spécifié.");
 				}
-			}
+		 	}
 	 }
 	 
 }
