@@ -2,13 +2,11 @@ package NathanaëlDuyck;
 
 public class Emprunt {
 
-	private int nombre;
 	private Personnel emprunteur;
 	private Produit materiel;
 
 	
-	public Emprunt(int nombre,Personnel emprunteur, Produit materiel) {
-		this.nombre=nombre;
+	public Emprunt(Personnel emprunteur, Produit materiel) {
 		this.emprunteur = emprunteur;
 		this.materiel = materiel;
 	}
@@ -33,7 +31,4 @@ public class Emprunt {
 		return materiel;
 	}
 	
-	public int getNombre() {
-		return nombre;
-	}
 }

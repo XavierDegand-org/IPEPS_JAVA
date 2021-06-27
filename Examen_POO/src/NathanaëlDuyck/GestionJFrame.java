@@ -203,7 +203,7 @@ public class GestionJFrame extends JFrame {
 				sb.append(setFixedLength(personnel.getNom(),tailleNom));		
 				sb.append(setFixedLength(personnel.getSexe(),10));
 				sb.append(setFixedLength(personnel.getDateddMMyyyy(),16));
-				sb.append(setFixedLength(personnel.getEmail(),10));
+				sb.append(setFixedLength(personnel.getEmail(),30));
 				sb.append("\n");
 				}	
 			System.out.println(sb.toString());
@@ -229,13 +229,13 @@ public class GestionJFrame extends JFrame {
 		if((Person.isEmpty()) || (mag.isEmpty())) {//On ne peut pas faire un emprunt si la liste du personnel et la liste du magasin sont vide
 			System.out.println("Veuillez charger le personnel et créer le magasin\n");
 		}
-		else if ((pret.isEmpty())&& (!initialisationEmprunt)) {//Verifie que la liste de prêt est vide et qu'on a pas déjà initialiser l'emprunt
+		else if ((pret.isEmpty())&& (!initialisationEmprunt)) {//Verifie que la liste de prêt est vide et qu'on a pas déjà initialiser.L'initialisation empêche de recharger les emprunts quand tous les emprunts ont été retourner
 			//Ajoute l'emprunteur et le matériel emprunté à la liste des emprunts
-			pret.add(new Emprunt(1,new Personnel(1,"Collon","Albert",Sexe.HOMME,new MyDate(10,8,1990),"Collon.a@test.be",Departement.HR),new Produit("HP","Elitebook 850 G7")));	
-			pret.add(new Emprunt(2,new Personnel(2,"Peeters","Marie",Sexe.FEMME,new MyDate(1,5,1995),"Peeters_M@@test.be",Departement.HR),new Produit("Dell","Inspiron 15 3000")));	
-			pret.add(new Emprunt(3,new Personnel(3,"Janssens","Sarah",Sexe.FEMME,new MyDate(23,5,1999),"Sarah.Janssens@test",Departement.Compta),new Produit("Dell","XPS 13")));	
-			pret.add(new Emprunt(4,new Personnel(4,"Jacobs","Charles",Sexe.HOMME,new MyDate(10,8,1990),"Charles.j#test.be",Departement.SEC),new Produit("Lenovo","Thinkpad E15 G2")));	
-			pret.add(new Emprunt(5,new Personnel(7,"Willems","Francois-Xavier",Sexe.HOMME,new MyDate(28,10,1996),"Willems.F-X@test.be",Departement.Prod),new Produit("Lenovo","IdeaPad 3 14IIL05 81WD00B2MH ")));	
+			pret.add(new Emprunt(Person.get(0),new Produit("HP","Elitebook 850 G7")));	
+			pret.add(new Emprunt(Person.get(1),new Produit("Dell","Inspiron 15 3000")));	
+			pret.add(new Emprunt(Person.get(2),new Produit("Dell","XPS 13")));	
+			pret.add(new Emprunt(Person.get(3),new Produit("Lenovo","Thinkpad E15 G2")));	
+			pret.add(new Emprunt(Person.get(6),new Produit("Lenovo","IdeaPad 3 14IIL05 81WD00B2MH ")));	
 			initialisationEmprunt = true;//on a initialiser l'emprunt
 			//Affichage de la liste de prêt
 			for (Emprunt emprunt : pret)
@@ -272,6 +272,7 @@ public class GestionJFrame extends JFrame {
 		try { 
 			int nbemprunt = Lire.nbre()-1;//on lit le nombre,on retire -1 car la liste d'emprunt commence à 0 et le nombre d'emprunt à 1
 			pret.remove(nbemprunt);//on retire l'emprunt si le chiffre est dans la liste sinon IndexOutOfBoundsException est lancé
+			Lire.vider();
 			compteur=1;
 			//Affichage de la liste après suppression du retour
 			for (Emprunt emprunt : pret)
@@ -296,9 +297,10 @@ public class GestionJFrame extends JFrame {
 		String prenomChangement;//variable pour le prénom qui va remplacer le prénom de la personne qu'on va modifier
 		String mailChangement;//variable pour l'email qui va remplacer l'email de la personne qu'on va modifier
 		Affichage();//Affichage de la liste du personnel
-		System.out.println("Introduire le nom de la personne à modifier :");
-		System.out.println("Entrer un nom : ");
-		nom=Lire.texte();//On lit le nom de la personne qu'on veut modifier
+		if(Person.size() !=0) {//vérifie que le personnel a été chargé 
+			System.out.println("Introduire le nom de la personne à modifier :");
+			System.out.println("Entrer un nom : ");
+			nom=Lire.texte();//On lit le nom de la personne qu'on veut modifier
 		while(!nomValide) {
 			for (Personnel personnel : Person) {
 				if(nom.equals(personnel.getNom())) {//On verifie que le nom rentré est bien dans la liste et si c'est le cas on affiche ces données et on sort du tant que
@@ -328,7 +330,7 @@ public class GestionJFrame extends JFrame {
 			}
 			Affichage();//afficahge de la liste après les changements
 		}
-	
+	}
 /* **************************************************Sauvegarde du personnel et des emprunts  ************************************************************ */
 	
 	public static void Sauvegarde() {
@@ -349,7 +351,7 @@ public class GestionJFrame extends JFrame {
 				sb.append(setFixedLength(personnel.getNom(),tailleNom));		
 				sb.append(setFixedLength(personnel.getSexe(),10));
 				sb.append(setFixedLength(personnel.getDateddMMyyyy(),16));
-				sb.append(setFixedLength(personnel.getEmail(),10));
+				sb.append(setFixedLength(personnel.getEmail(),30));
 				sb.append("\n");
 				}	
 		int compteur=1;
