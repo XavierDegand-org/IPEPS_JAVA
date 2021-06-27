@@ -33,7 +33,7 @@ public class ControleSaisie {
 		 String vide = new String();
 		 boolean estNull = text.equals(nullString);
 		 boolean estVide = text.equals(vide);
-		 Pattern rule = Pattern.compile("^(?:[a-z]:|\\\\|\\.{1,2})(?:\\\\[^<>:\"/\\\\|?*.]+)+(?:\\.txt)?$");
+		 Pattern rule = Pattern.compile(".*\\.txt");
 		 if(estNull || estVide){
 			System.out.println("Valeur nulle ou vide !");
 			 return false;
