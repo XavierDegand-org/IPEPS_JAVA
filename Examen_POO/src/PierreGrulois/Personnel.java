@@ -1,27 +1,38 @@
 package PierreGrulois;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Personnel extends Individu{
 	private int idPersonnel;
-	private int id=1;
+	private static int id=0;
 	private String email;
+	boolean verrifMail;
 	private Departement departement;
-	private static final Pattern EMAIL_PATTERN = Pattern.compile("^[\\w.-]+@[\\w.-]+[a-z]{2,}$");
+	private static final String EMAIL_PATTERN = "^[\\w.-]+@[\\w.-]+[a-z]{2,}$";
+	private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 		
 	public Personnel(String nom, String prenom, Sexe sexe, MyDate dateNaissance, String email, Departement departement) {
 		super (nom, prenom, sexe, dateNaissance);
-		this.idPersonnel= id;
+		this.idPersonnel= id++;
+		Matcher matcher = pattern.matcher(email);
+		verrifMail = matcher.matches();
+		if(verrifMail == true) {
+			this.email=email;
+		}
+		else {
+			email = "E-mail non valide.";
+		}
 		this.email= email;
 		this.departement = departement;
-		id++;
+		
 		
 		
 	}
 	
 	@Override public String toString() {;
 		
-		//try{
+		try{
 			return String.format( "%s %s %s %s %s %s",
 		
                 this.getDepartement(),
@@ -30,9 +41,9 @@ public class Personnel extends Individu{
                 this.getSexe(),
                 this.getDateNaissance(),
                 this.getEmail() );
-		/*}catch(java.util.IllegalFormatException e) {
-			System.out.println("Une ou plusieurs entrées ne sont pas valide.");
-		} */
+		}catch(java.util.IllegalFormatException e) {
+			return ("Une ou plusieurs entrées ne sont pas valide.");
+		} 
 	}
 	
 	public int getIdPersonnel() {
