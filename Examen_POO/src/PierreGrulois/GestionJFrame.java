@@ -355,7 +355,7 @@ public class GestionJFrame extends JFrame {
 						 trouver = true;
 					 }
 				 }
-				 individu = Lire.vider();
+				 
 				 if(trouver == false) {
 					 System.out.println("Aucune correspndance trouvé!");
 				 }
@@ -368,7 +368,8 @@ public class GestionJFrame extends JFrame {
 					 System.out.println("Modification effectué avec succés");
 					 
 				 }
-				 
+				 System.out.println("Appyer sur 'Enter'.");
+				 individu = Lire.vider();
 				 
 			 }
 			 
