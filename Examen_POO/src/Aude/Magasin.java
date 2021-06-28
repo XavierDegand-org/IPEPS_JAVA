@@ -12,10 +12,10 @@ public class Magasin {
 		this.liste = new HashMap<Integer, Produit>();
 	}
 	
-	public void AjouterProduit(int identifiant, String nom, String description) { // rajouter id dans variables du Produit
+	public void AjouterProduit(int id, String nom, String description) { // rajouter id dans variables du Produit
 		//int id = liste.size()+1;
 		Produit produit = new Produit(nom, description);
-		liste.put(identifiant,produit);
+		liste.put(id,produit);
 	}
 	
 	// ------ Afficher la liste des articles composant le magasin ------
@@ -23,22 +23,29 @@ public class Magasin {
 	public void ListeMap() {
 			
 			System.out.println("Le magasin comprend : " + liste.size()+" articles.");
-			for (int elementListe = 1; elementListe <= liste.size(); elementListe++) { 
+			/*for (int elementListe = 1; elementListe <= liste.size(); elementListe++) { 
 				
 				System.out.println("Id_"+ elementListe +liste.get(elementListe).toString()+"\n");
-			}
+			}*/
 			
 			/*for (Map.Entry entreeListe : liste.entrySet()) {
 				System.out.println("Id_"+entreeListe.getKey()+entreeListe.getValue().toString());
 				
 			}*/
+		
 			
 		}
 	
 	
 	
-	public HashMap<Integer, Produit> getProduit(int nbr) { // sert pour les emprunts 
-		return liste;
+	public void getProduit(int nbre) {  
+		for (HashMap.Entry entreeListe : liste.entrySet()) {
+			if(entreeListe.getKey().equals(nbre)) {
+			System.out.println("Id_"+entreeListe.getKey()+entreeListe.getValue().toString());
+			}
+		}
+		
+		return; 
 	}
 	
 	public boolean isEmpty() {

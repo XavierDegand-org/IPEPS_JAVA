@@ -2,10 +2,13 @@ package Aude;
 
 public class Produit {
 	
+	private static int id;
+	private int identifiant = 0;
 	private String nom;
 	private String description;
 	
 	public Produit (String nom, String description) {
+		this.identifiant = id++;
 		this.nom = nom;
 		this.description= description;
 	}
