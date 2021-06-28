@@ -17,7 +17,7 @@ public class ControleSaisie {
 			 return false;
 		 } 
 		else{
-			if (text.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-])+$") && text.length() <= taille) { 
+			if (text.matches(rule.toString()) && text.length() <= taille) { 
 				return true;
 			}
 			else {

@@ -28,12 +28,15 @@ public class GestionJFrame extends JFrame {
 	private JButton btnSauvegarde = new JButton( "Sauvegarde" );
 	private JButton btnClose = new JButton( "Fermer" );
 	 
-	// variables listes, compteur
+	// variables listes, compteur, etc.
 	private static ArrayList<Personnel> Person = new ArrayList<>();
 	private static ArrayList<Emprunt> pret = new ArrayList<>();
 	Magasin mag = new Magasin();
+	
 	int i; // compteur pour boucle for
 	private String fichier = "";
+	private String nom;
+	private int tailleNom = 30;
 	
 	//***************************** DEBUT GESTIONJFRAME *****************************//
 					
@@ -41,6 +44,7 @@ public class GestionJFrame extends JFrame {
 		
 		//***************************** PARTIE BOUTONS *****************************//
 		
+		// titre de la fenêtre
 		super( "Gestion personnel & prêt matériel" );
 		this.setDefaultCloseOperation( DISPOSE_ON_CLOSE );
      
@@ -48,6 +52,7 @@ public class GestionJFrame extends JFrame {
 		// GridLayout pour afficher 3 boutons sur 3 lignes
 		contentPane.setLayout (new GridLayout(3,3));
 		
+		// chargement des boutons
 		contentPane.add( btnLoad );
 		contentPane.add( btnAffichage );
 		contentPane.add( btnMag );
@@ -57,6 +62,7 @@ public class GestionJFrame extends JFrame {
 		contentPane.add( btnSauvegarde );
 		contentPane.add( btnClose );
 		
+		// actions des boutons
 		btnLoad.addActionListener(new btnLoadListener());
 		btnAffichage.addActionListener(new btnAffichageListener());
 		btnMag.addActionListener(new btnMagasinListener());
@@ -81,8 +87,7 @@ public class GestionJFrame extends JFrame {
 		        return btnLoad;
 		     }
 		
-		public class btnLoadListener implements ActionListener {
-			
+		public class btnLoadListener implements ActionListener {			
 			@Override
 			public void actionPerformed (ActionEvent e) {
 				LoadPersonnel();
@@ -116,8 +121,7 @@ public class GestionJFrame extends JFrame {
 				}
 				System.out.println("Personnel bien chargé");
 				
-				}
-			
+				}			
 		}
 		
 		//***************************** PARTIE AFFICHAGE PERSONNEL *****************************//
@@ -126,8 +130,7 @@ public class GestionJFrame extends JFrame {
 	        return btnAffichage;
 	        }
 		
-		public class btnAffichageListener implements ActionListener {
-			
+		public class btnAffichageListener implements ActionListener {		
 			@Override
 			public void actionPerformed (ActionEvent e) {
 				System.out.println(Affichage());
@@ -147,6 +150,7 @@ public class GestionJFrame extends JFrame {
 			        return c;
 			    }
 		
+		// méthode pour afficher personnel
 		public StringBuilder Affichage() {
 			//si liste personnel est vide/strictement inférieure à 1
 			StringBuilder sb = new StringBuilder();
@@ -154,14 +158,14 @@ public class GestionJFrame extends JFrame {
 				System.out.println("Affichage impossible, pas de personnel !");
 			}
 			else {
-			System.out.println("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
-			System.out.println("| Département           | Prénom            | Nom              | Sexe     | Naissance       | Email                  |");
-			System.out.println("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
+			System.out.println("+-----------------------+-----------------------------+----------------------------+----------+-----------------+------------------------+");
+			System.out.println("| Département           | Prénom                      | Nom                        | Sexe     | Naissance       | Email                  |");
+			System.out.println("+-----------------------+-----------------------------+----------------------------+----------+-----------------+------------------------+");
 			
 			    for (i = 0; i < Person.size(); i++) {
 			    	sb.append(setFixedLength(Person.get(i).getDepartement(), 25));
-			    	sb.append(setFixedLength(Person.get(i).getPrenom(), 20));
-			    	sb.append(setFixedLength(Person.get(i).getNom(), 20));
+			    	sb.append(setFixedLength(Person.get(i).getPrenom(), tailleNom));
+			    	sb.append(setFixedLength(Person.get(i).getNom(), tailleNom));
 			    	sb.append(setFixedLength(Person.get(i).getSexe(), 11));
 			    	sb.append(setFixedLength(Person.get(i).getDateddMMyyyy(), 18));
 			    	sb.append(setFixedLength(Person.get(i).getEmail(), 25));
@@ -178,12 +182,12 @@ public class GestionJFrame extends JFrame {
 	        return btnMag;
 	        }
 		
-		public class btnMagasinListener implements ActionListener {
-			
+		public class btnMagasinListener implements ActionListener {		
 			@Override
-			public void actionPerformed (ActionEvent e) {
+			public void actionPerformed (ActionEvent e) {				
 				Magasin();
 			}
+		}
 		
 		public void Magasin() {
 			// charger le magasin/les produits
@@ -218,11 +222,8 @@ public class GestionJFrame extends JFrame {
 			System.out.println("Id_2 --- " + mag.produits.get(2) +"\n");
 			System.out.println("Id_3 --- " + mag.produits.get(3) +"\n");
 			System.out.println("Id_1 --- " + mag.produits.get(1) +"\n");
-			
-		}
+			}
 				
-			
-		}
 		
 		//***************************** PARTIE PRÊT DE MATÉRIEL *****************************//
 
@@ -230,17 +231,14 @@ public class GestionJFrame extends JFrame {
 	        return btnPret;
 	        }
 		
-		public class btnPretListener implements ActionListener {
-			
+		public class btnPretListener implements ActionListener {		
 			@Override
 			public void actionPerformed (ActionEvent e) {
 				Emprunt();
-			}
-			
+			}	
 		}
 		
 		public void Emprunt() {
-			
 			// charger l'arraylist pret
 			if(Person.size() < 1) {
 				System.out.println("Veuillez d'abord charger le personnel.");
@@ -271,6 +269,7 @@ public class GestionJFrame extends JFrame {
 			for (Emprunt emprunt : pret)
 			{
 			System.out.println(emprunt);
+			System.out.println("");
 			}
 
 		}
@@ -282,8 +281,7 @@ public class GestionJFrame extends JFrame {
 	        return btnRetour;
 	        }
 		
-		public class btnRetourListener implements ActionListener {
-			
+		public class btnRetourListener implements ActionListener {		
 			@Override
 			public void actionPerformed (ActionEvent e) {
 				RetourEmprunt();
@@ -304,8 +302,16 @@ public class GestionJFrame extends JFrame {
 			else {
 				System.out.println("Liste des emprunts");
 				// mettre un stringbuilder pour aligner les colonnes
-				
-				System.out.println(listeEmprunt());
+				StringBuilder pretcol = new StringBuilder();
+			    for (i = 1; i < pret.size(); i++) {
+			    	pretcol.append("N° ");
+			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
+				   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom(), 12));
+				   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
+	                pretcol.append("\n");
+			    		}
+			    // on affiche les emprunts
+			   System.out.println(pretcol.toString());
 					
 				System.out.println("Introduire le numéro d'emprunt à annuler : ");
 				int nbremprunt = Lire.nbre();
@@ -315,7 +321,20 @@ public class GestionJFrame extends JFrame {
 						if(pret.get(i).getNombre() == nbremprunt-1) {
 							pret.remove(nbremprunt-1);
 							
-							System.out.println(listeEmprunt());
+							/*for (i = 1; i< pret.size(); i++) {
+							pret.get(i).setNombre(i);
+							i--;
+							}*/
+
+							for (i = 1; i < pret.size(); i++) {
+						    	pretcol.append("N° ");
+						    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
+							   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom(), 12));
+							   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
+				                pretcol.append("\n");
+						    		}
+						    // on affiche lecontenu
+						   System.out.println(pretcol.toString());
 				   
 						}
 						else {
@@ -327,21 +346,6 @@ public class GestionJFrame extends JFrame {
 				}
 			}
 		}
-			
-			public StringBuilder listeEmprunt() {
-				StringBuilder pretcol = new StringBuilder();
-			    for (i = 1; i < pret.size(); i++) {
-			    	pretcol.append("N° ");
-			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
-				   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom(), 12));
-				   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
-	                pretcol.append("\n");
-			    		}
-			    // on affiche lecontenu
-			   return pretcol;
-				
-			}
-						
 		
 		
 		//***************************** PARTIE MODIFICATION PERSONNEL *****************************//
@@ -350,8 +354,7 @@ public class GestionJFrame extends JFrame {
 	        return btnPersonnel;
 	        }
 		
-		public class btnPersonnelListener implements ActionListener {
-			
+		public class btnPersonnelListener implements ActionListener {			
 			@Override
 			public void actionPerformed (ActionEvent e) {
 				System.out.println(Affichage()); // affiche la liste du personnel sans modifications d'abord
@@ -361,8 +364,6 @@ public class GestionJFrame extends JFrame {
 		}
 		
 		public void GestionPersonnel() {
-			
-			String nom;
 				
 				if(Person.size() < 1) {
 					System.out.println("Veuillez d'abord charger le personnel.");
@@ -370,6 +371,7 @@ public class GestionJFrame extends JFrame {
 				else {
 				System.out.println("\n");
 				System.out.println("Introduire le nom de la personne à modifier :");
+				// on lit le nom avec méthode InputNomPrenom qui fait appel à un contrôle la saisie
 				InputData.nom = InputData.inputNomPrenom("nom");
 				nom = Lire.texte();
 				
@@ -406,33 +408,28 @@ public class GestionJFrame extends JFrame {
 	        }
 		
 		public class btnSauvegardeListener implements ActionListener {
-			
 			@Override
 			public void actionPerformed (ActionEvent e) {
 				
 					Sauvegarde();
 			}
-			
-		}
-		
-		public StringBuilder listeEmprunt2() {
-			StringBuilder pretcol = new StringBuilder();
-		    for (i = 0; i < pret.size(); i++) {
-		    	pretcol.append("N° ");
-		    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 5));
-			   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom()+" "+pret.get(i).getEmprunteur().getPrenom(), 32));
-			   	pretcol.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
-	            pretcol.append("\n");
-		    		}
-		    // on affiche lecontenu
-		   return pretcol;
-			
 		}
 		
 		public void Sauvegarde() {
 			
+			// format de la date
 			SimpleDateFormat DTG = new SimpleDateFormat("MM/dd/yyyy HH:mm:s");
 			Date date = new Date();
+			
+			// liste des emprunts
+	    	StringBuilder listpret = new StringBuilder();
+		    for (i = 0; i < pret.size(); i++) {
+		    	listpret.append("N° ");
+		    	listpret.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 5));
+			   	listpret.append(setFixedLength(pret.get(i).getEmprunteur().getNom()+" "+pret.get(i).getEmprunteur().getPrenom(), 32));
+			   	listpret.append(setFixedLength(pret.get(i).getMateriel()+"   "+pret.get(i).getArticle(), 40));
+	            listpret.append("\n");
+		    		}
 		    
 			if(Person.size() < 1) {
 				System.out.println("Impossible de sauvegarder, veuillez d'abord charger le personnel.");
@@ -451,9 +448,9 @@ public class GestionJFrame extends JFrame {
 				try {
 			
 					String path = "./src/Jessica/Fichier/";			
-					String content = path + fichier;	
+					String nomcomplet = path + fichier;	
 						
-					 File file = new File(content);
+					 File file = new File(nomcomplet);
 
 				    	// crée le fichier si pas encore présent
 				    	if(!file.exists()){
@@ -463,17 +460,16 @@ public class GestionJFrame extends JFrame {
 				    	//true pour ajouter du contenu au fichier
 				    	FileWriter fw = new FileWriter(fichier,true);
 				    	BufferedWriter bw = new BufferedWriter(fw);
-				
-				    	
-			    	//affiche date de la sauvegarde
+				    			    	
 			    	bw.newLine();
+			    	//affiche date de la sauvegarde
 					bw.write("DTG de la sauvegarde : "+ DTG.format(date));
 					bw.newLine();
-					bw.write("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
+					bw.write("+-----------------------+-----------------------------+----------------------------+----------+-----------------+------------------------+");
 					bw.newLine();
-					bw.write("| Département           | Prénom            | Nom              | Sexe     | Naissance       | Email                  |");
+					bw.write("| Département           | Prénom                      | Nom                        | Sexe     | Naissance       | Email                  |");
 					bw.newLine();
-					bw.write("+-----------------------+-------------------+------------------+----------+-----------------+------------------------+");
+					bw.write("+-----------------------+-----------------------------+----------------------------+----------+-----------------+------------------------+");
 					bw.newLine();
 					//on affiche le contenu de personnel
 					bw.write(Affichage().toString());
@@ -486,8 +482,9 @@ public class GestionJFrame extends JFrame {
 					bw.write("+-----+-------------------------------+----------------------------------------+");
 					bw.newLine();
 					// on affiche le contenu de prêt
-					bw.write(listeEmprunt2().toString());
+					bw.write(listpret.toString());
 					
+					// ferme le bufferwriter
 			    	bw.close();
 
 				System.out.println("Sauvegarde bien effectuée.");

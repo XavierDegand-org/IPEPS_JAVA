@@ -12,11 +12,19 @@ public class Emprunt {
 		this.materiel = materiel;
 	}
 	
+	 public int getNombre() {
+		return nombre;
+		}
+	 
+	 /*public void setNombre(int nombre) {
+		 this.nombre = nombre;
+	 }*/
+	
 	  public Personnel getEmprunteur() {
 			return emprunteur;
 	  }
 
-	  public void setEmprunteur(Personnel emprunter) {
+	  public void setEmprunteur(Personnel emprunteur) {
 			this.emprunteur = emprunteur;
 	  }
 	  
@@ -26,10 +34,6 @@ public class Emprunt {
 	  
 	  public String getArticle() {
 		  return materiel.getDescription();
-	  }
-	  
-	  public int getNombre() {
-			return nombre;
 	  }
 
 	  @Override
