@@ -5,6 +5,7 @@ public class Individu {
 	  private String prenom;
 	  private Sexe sexe;
 	  private MyDate dateNaissance;
+	  
 
 	  public Individu(String nom, String prenom, Sexe sexe, MyDate dateNaissance) {
 			this.nom = nom;
@@ -51,7 +52,7 @@ public class Individu {
 
 	  @Override
 	  public String toString() {
-			return String.format("%s %s sexe : %s date de naissance : %d-%d-%d."
+			return String.format("%s  %s , %s sexe : %s date de naissance : %d-%d-%d."
 					,nom,prenom,sexe,dateNaissance.getJour(),dateNaissance.getMois(),dateNaissance.getAnnee());
 	  }
 }
