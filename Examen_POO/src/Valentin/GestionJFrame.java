@@ -17,11 +17,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GestionJFrame extends JFrame  { /**
-	 * 
-	 */
+public class GestionJFrame extends JFrame  { 
+	
 	private static final long serialVersionUID = 1L;
-// il implémentes le ActionListener qui estg une interface qui va recevoir des évenements
+	// il implémente le ActionListener qui estg une interface qui va recevoir des évenements
 	
 	/****************************************
 	 *********Création de boutons************ 
@@ -36,7 +35,7 @@ public class GestionJFrame extends JFrame  { /**
 	private JButton btnClose = new JButton("Fermer"); // Les boutons sont des objets
 	
 	private  String nom;
-	private  String fichier ="";
+	private  String fichier;
 	public static int tailleNom = 30;
 	
 	private static ArrayList<Personnel> Person = new ArrayList<>(); // création d'une ArrayList de Personnel 
@@ -134,19 +133,19 @@ public class GestionJFrame extends JFrame  { /**
 			System.out.println("Affichage impossible , pas de personnel !"); 
 		}
 		else {
-			builder.append("+------------------------+-----------------------------+--------------------+--------+--------------+-------------------------+");
+			builder.append("+------------------------+-------------------------------+-------------------------------+--------+--------------+-------------------------+");
 			builder.append("\n");
-			builder.append("| Département            | Prénom                      | Nom                | Sexe   | Naissance    | Email                   |");
+			builder.append("| Département            | Prénom                        | Nom                           | Sexe   | Naissance    | Email                   |");
 			builder.append("\n");
-			builder.append("+------------------------+-----------------------------+--------------------+--------+--------------+-------------------------+");
+			builder.append("+------------------------+-------------------------------+-------------------------------+--------+--------------+-------------------------+");
 			builder.append("\n");
 			// .append permet de d'ajouter les éléments spécifiés à la chaîne existante 
 			
 			for(Personnel person : Person) {   					// utilisation de la boucle for pour permettre d'afficher les membres du personnel avec leurs différents attributs 
 				builder.append(" ");
 				builder.append(setFixedLength(person.getDepartement(),27));
-				builder.append(setFixedLength(person.getPrenom(),30));
-				builder.append(setFixedLength(person.getNom(),20));
+				builder.append(setFixedLength(person.getPrenom(),31));
+				builder.append(setFixedLength(person.getNom(),31));
 				builder.append(setFixedLength(person.getSexe(),10));
 				builder.append(setFixedLength(person.getDateddMMyyyy(),15));
 				builder.append(setFixedLength(person.getEmail(),30));
@@ -243,6 +242,8 @@ public class GestionJFrame extends JFrame  { /**
 				}
 			}
 			
+			System.out.println("\n");
+			
 		}
 		
 		
@@ -273,9 +274,10 @@ public class GestionJFrame extends JFrame  { /**
 				int NumeroEmpruntAnnuler = 0;
 				Boolean arret = false;
 				do {
-					NumeroEmpruntAnnuler = Lire.nbre() - 1;
+					
 					
 					try {
+						NumeroEmpruntAnnuler = Lire.nbre() - 1;
 						pret.remove(NumeroEmpruntAnnuler); // remove permet de retirer le numéro introduit 
 						for(int compteur=0; compteur<pret.size();compteur++) {
 							System.out.println("N° "+(compteur+1)+" "+pret.get(compteur).getEmprunteur().getNom()+"  "+pret.get(compteur).getMateriel()+
@@ -292,6 +294,7 @@ public class GestionJFrame extends JFrame  { /**
 					
 				}while(!arret);
 				
+				System.out.println("\n");
 			}
 			
 		}
@@ -378,14 +381,14 @@ public class GestionJFrame extends JFrame  { /**
 				
 				StringBuilder builderpret = new StringBuilder();
 				
-				builderpret.append("+-------+----------------------------+-----------------------------------------+\n");
-				builderpret.append("| N°    | Nom  - Prénom              | Matériel                                |\n");
-				builderpret.append("+-------+----------------------------+-----------------------------------------+\n");
+				builderpret.append("+-------+-----------------------------------------------------------+-----------------------------------------+\n");
+				builderpret.append("| N°    | Nom  - Prénom                                             | Matériel                                |\n");
+				builderpret.append("+-------+-----------------------------------------------------------+-----------------------------------------+\n");
 				
 				for(int compteur = 0; compteur < pret.size();compteur++) {
 					builderpret.append(" ");
 					builderpret.append(setFixedLength(String.valueOf(compteur+1),9));  // renvoie la représentation sous forme de chaîne de caractères 
-					builderpret.append(setFixedLength(pret.get(compteur).getEmprunteur().getNom() +" "+pret.get(compteur).getEmprunteur().getPrenom(), 30)); // récuperation du nom et prénom de l'emprunteur
+					builderpret.append(setFixedLength(pret.get(compteur).getEmprunteur().getNom() +" "+pret.get(compteur).getEmprunteur().getPrenom(), 60)); // récuperation du nom et prénom de l'emprunteur
 					builderpret.append(setFixedLength(pret.get(compteur).getMateriel() +" "+pret.get(compteur).getArticle(),40)); // récuperation du matériel 
 					builderpret.append("\n");
 				}

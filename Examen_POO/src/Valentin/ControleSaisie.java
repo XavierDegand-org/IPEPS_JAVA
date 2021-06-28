@@ -14,6 +14,7 @@ public class ControleSaisie {
 		 String vide = new String();
 		 boolean estNull = text.equals(stringNull);
 		 boolean estVide = text.equals(vide);
+		 text = text.trim();
 		 if(estNull || estVide){                         	// on vérifie si le String est null ou vide 
 			System.out.println("Valeur null ou vide !");
 			 return false;
@@ -23,7 +24,7 @@ public class ControleSaisie {
 				return true;																	// mais aussi que la longueur du text est inférieure ou égale à 30
 				}
 				else {
-				System.out.println("Erreur, valeur hors contraintes ! Veuillez réessayer !");
+				System.out.println("Erreur de saisie ! Veuillez réessayer !");
 				}
 		}
 		return false;
@@ -36,17 +37,17 @@ public class ControleSaisie {
 	     return matcher.matches();
 	}
 
-	public static boolean valideNomFichier(String text) {
+	public static boolean valideNomFichier(String nomFichier) {
 		String nullString = null;
 		String vide = new String();
-		boolean estNull = text.equals(nullString);
-		boolean estVide = text.equals(vide);
+		boolean estNull = nomFichier.equals(nullString);
+		boolean estVide = nomFichier.equals(vide);
 		
 		if (estNull || estVide) {
 			System.out.println("Valeur null ou vide !");
 			return false;
 		} else {
-			if (text.matches("^[a-zA-Z_0-9]+(.txt)$")) { 
+			if (nomFichier.matches("^[^\\/:*?<>|]+[a-zA-Z_0-9_-]+(.txt)$")) { 
 				return true;
 			} 
 			else {

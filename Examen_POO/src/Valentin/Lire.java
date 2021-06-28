@@ -42,6 +42,7 @@ public class Lire {
 				vider();
 				System.out.println("if this scanner is closed");
 			}
+			vider();
 			
 		}while(!loop);
 		return result;
