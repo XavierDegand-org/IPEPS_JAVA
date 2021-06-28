@@ -284,6 +284,7 @@ public class GestionJFrame extends JFrame {
 			 }
 			 else {
 				 int indice;
+				 boolean verrif = false;
 				 
 				 System.out.println("liste des emprunts");
 				 for (int cpt = 0; cpt < pret.size(); cpt++) {
@@ -296,26 +297,29 @@ public class GestionJFrame extends JFrame {
 				 System.out.println(Afficher.toString());
 				 Afficher.setLength(0);
 				 System.out.println("introduire le numéro d'emprunt à annuler:");
-				 indice=Lire.nbre();
-				 if(indice<1 || indice>pret.size()) {
-					 System.out.println("L'indice entré est inexistant. Modification annulèe!");
-					 
-				 }
-				 else {
-					 pret.remove(indice-1);
-					 Lire.vider();
-					 for (int cpt = 0; cpt < pret.size(); cpt++) {
-					 
-						 Afficher.append("N° "+(cpt+1)+"   ");
-						 Afficher.append(setFixedLenght(pret.get(cpt).getEmprunteur().getNom(), 15," "));
-						 Afficher.append(setFixedLenght(pret.get(cpt).getMateriel(), 8, " "));
-						 Afficher.append(pret.get(cpt).getArticle()+"\n");
+				 do {
+					 indice=Lire.nbre();
+					 if(indice > pret.size() ) {
+						 System.out.println("L'indice est trop grand, veuillez recommencer:");
 					 }
-					 System.out.println(Afficher.toString());
-					 Afficher.setLength(0);
-				 }
-				 
-					 
+					 else if (indice == 0) {
+						 System.out.println("L'indice entré est inexistant. Modification annulèe!");
+						 verrif = true;
+					 }
+					 else {
+						 pret.remove(indice-1);
+						 Lire.vider();
+						 for (int cpt = 0; cpt < pret.size(); cpt++) {
+						 
+							 Afficher.append("N° "+(cpt+1)+"   ");
+							 Afficher.append(setFixedLenght(pret.get(cpt).getEmprunteur().getNom(), 15," "));
+							 Afficher.append(setFixedLenght(pret.get(cpt).getMateriel(), 8, " "));
+							 Afficher.append(pret.get(cpt).getArticle()+"\n");
+						 }
+						 System.out.println(Afficher.toString());
+						 Afficher.setLength(0);
+					 }
+				 }while(verrif == false);	 
 			}		
 		 }
 	 }
