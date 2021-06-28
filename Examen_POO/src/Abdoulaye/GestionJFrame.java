@@ -44,7 +44,7 @@ public class GestionJFrame extends JFrame {
 
         btnLoad.addActionListener(new LoadPersonnel());
         btnAffichage.addActionListener(new Affichage());
-        btnMag.addActionListener(new magasin ());
+        btnMag.addActionListener(new magasin());
         /*btnPret.addActionListener(new Emprunt());
         btnRetour.addActionListener(new RetourEmprunt());
         btnPersonnel.addActionListener(new GestionPersonnel());
@@ -204,6 +204,7 @@ public class GestionJFrame extends JFrame {
         }
     }
 
+
     //Retour matériel
     public JButton getBtnRetour() {
         return btnRetour;
@@ -224,11 +225,6 @@ public class GestionJFrame extends JFrame {
     // Sauvegarde
     public JButton getBtnSauvegarde() {
         return btnSauvegarde;
-    }
-
-    //Close App
-    public JButton getBtnClose() {
-        return btnClose;
     }
 
 }
