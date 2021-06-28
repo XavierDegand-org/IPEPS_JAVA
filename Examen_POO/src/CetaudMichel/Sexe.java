@@ -1,16 +1,15 @@
 package CetaudMichel;
 
 public enum Sexe {
-	 HOMME("Garçon"),
-	 FEMME("Fille"),;
-	
-	 private final String label;
-	
-	 Sexe(String label) {
-	        this.label = label;
-	 }
+	HOMME("Garçon"), FEMME("Fille"),;
 
-	 public String getLabel() {
-	        return label;
-	 }
+	private final String label;
+
+	Sexe(String label) {
+		this.label = label;
+	}
+
+	public String getLabel() {
+		return label;
+	}
 }

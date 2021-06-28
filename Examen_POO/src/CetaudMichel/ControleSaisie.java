@@ -48,11 +48,11 @@ public class ControleSaisie {
 		if (estNull || estVide) {
 			System.out.println("Valeur null ou vide !");
 			return false;
-		} else if(text.equals("fichier")){
+		} else if (text.equals("fichier")) {
 			System.out.print("Le fichier ne peut pas s'appeler 'Fichier' !\nRenomer le : ");
 			return false;
 		}
-		
+
 		else {
 			if (text.matches("^([a-zA-Z0-9.'\\-])+$") && text.length() <= taille) {
 				return true;

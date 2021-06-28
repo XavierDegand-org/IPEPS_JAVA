@@ -93,6 +93,12 @@ public class GestionJFrame extends JFrame {
 	}
 
 	private void RetourEmprunt() {
+		
+		if (personnel.isEmpty() || emprunt.isEmpty()) {
+			System.out.println("Vous devez d'abord charger le personnel et créer le magasin !");
+			return;
+		}
+		
 		System.out.println("Liste des emprunts");
 		int item;
 		for (item = 0; item < emprunt.size(); item++) {
@@ -105,7 +111,7 @@ public class GestionJFrame extends JFrame {
 
 			int input = Lire.nbre();
 
-			if (input < item + 1) {
+			if (input < item + 1 && input > 0) {
 				emprunt.remove(input - 1);
 
 				for (item = 0; item < emprunt.size(); item++) {
@@ -126,6 +132,8 @@ public class GestionJFrame extends JFrame {
 		if (!personnel.isEmpty()) {
 			System.out.println("La liste personnel est déjà chargée !");
 			return;
+		}else {
+			System.out.println("Liste Chargée !");
 		}
 
 		File file = new File(System.getProperty("user.dir") + "/Sources/Personnel.txt");
@@ -242,34 +250,21 @@ public class GestionJFrame extends JFrame {
 
 		System.out.print("Introduire le nom du fichier ! : ");
 		String name = InputData.inputNomFichier();
-		
-		if(name.contains(".txt")) {
-			 name = name.replaceAll(".txt","");
-			 
+
+		if (name.contains(".txt")) {
+			name = name.replaceAll(".txt", "");
+
 		}
-		
-		File file = new File(System.getProperty("user.dir") + "/Saves/Log.txt");
-		Scanner scan = new Scanner(file);
-		
-		StringBuilder oldFiles = new StringBuilder();
-		
-		while (scan.hasNextLine()) {
-			oldFiles.append(scan.nextLine()+"\n");
-		}
-		
-		
-		FileWriter writer = new FileWriter(
-				System.getProperty("user.dir") + "/Saves/" + name + ".txt");
-		
-		FileWriter writerLog = new FileWriter(
-				System.getProperty("user.dir") + "/Saves/Log.txt");
-		
-		writerLog.append(oldFiles);
-		writerLog.append("\n\n\n");
+
+		FileWriter writer = new FileWriter(System.getProperty("user.dir") + "/Saves/" + name + ".txt");
+
+		FileWriter writerLog = new FileWriter(System.getProperty("user.dir") + "/Saves/Log.txt", true);
 
 		writer.append("DTG de la sauvegarde : " + format.format(date));
 		writer.append("\n");
 		writer.append(Affichage());
+		
+		writerLog.append("\n\n\n");
 		writerLog.append("DTG de la sauvegarde : " + format.format(date));
 		writerLog.append("\n");
 		writerLog.append(Affichage());

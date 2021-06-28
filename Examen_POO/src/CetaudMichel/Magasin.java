@@ -37,7 +37,7 @@ public class Magasin {
 	public void listeMap() {
 		System.out.println("Le magasin est composé de " + listProduit.size() + " artichle(s)");
 		for (int key : listProduit.keySet()) {
-			System.out.println("Id_" + key + " --- Produit " +listProduit.get(key));
+			System.out.println("Id_" + key + " --- Produit " + listProduit.get(key));
 		}
 
 	}
