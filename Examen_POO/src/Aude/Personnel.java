@@ -1,12 +1,15 @@
 package Aude;
 
+import java.util.regex.Pattern;
+
 public class Personnel extends Individu {
 	 private static int id = 1;
 	 private int idPersonnel;
 	 private String email;
 	 private Departement departement;
+	 //private static final Pattern EMAIL_PATTERN = Pattern.compile("^[\\w.-]+@[\\w.-]+[a-z]{2,}$");
 	
-	 public Personnel (String nom, String prenom, Sexe sexe, MyDate dateNaissance,int idPersonnel, int id, String email,Departement departement) {
+	 public Personnel (String nom, String prenom, Sexe sexe, MyDate dateNaissance, String email,Departement departement) {
 		 super (nom, prenom, sexe, dateNaissance);
 		 this.idPersonnel = idPersonnel;
 		 this.id = id;
@@ -27,7 +30,17 @@ public class Personnel extends Individu {
 		 return departement.getdeptNom();
 	 }
 	 
-	 public String getEmail() {
+	 public String getEmail() { // Controle de la validité de l'email 
+		 boolean arret = false;
+			while (!arret) {
+				email = Lire.texte();
+				if (ControleSaisie.valideEmail(email)){
+					return email;
+				}else {
+					System.out.print("L'email n'est pas correct !");
+					arret = false;
+				}
+			}
 			return email;
 	  }
 	 

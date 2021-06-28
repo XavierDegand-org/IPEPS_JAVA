@@ -28,7 +28,7 @@ public class Produit {
 	
 	@Override public String toString() {;
 	
-			return String.format( "%s %s", this.getNom(), this.getDescription() ); // getnom ou nom?? 
+			return String.format( " --- Produit [nom =  %s , description : %s ]", this.getNom(), this.getDescription() );  
  
 	}
 	

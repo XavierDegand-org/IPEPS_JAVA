@@ -2,7 +2,6 @@ package Aude;
 
 import javax.swing.JFrame;
 
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -48,14 +47,14 @@ public class GestionJFrame extends JFrame implements ActionListener {
 				System.out.println("Il n'y a pas de contenu");
 			}
 		
-		btnLoad.addActionListener(this);
-		btnAffichage.addActionListener(this);
-		btnMag.addActionListener(this);
-		btnPret.addActionListener(this);
-		btnRetour.addActionListener(this);
+		btnLoad.addActionListener(new LoadPersonnel());
+		btnAffichage.addActionListener(new Affichage());
+		btnMag.addActionListener(new magasin());
+		btnPret.addActionListener(new Emprunt());
+		btnRetour.addActionListener(new RetourEmprunt());
 		btnPersonnel.addActionListener(this);
 		btnSauvegarde.addActionListener(this);
-		btnClose.addActionListener(this);
+		btnClose.addActionListener(e -> System.exit(0));
 		
 		// ---Définition de l'emplacement et de la taille des boutons //
 		
@@ -125,14 +124,16 @@ public class GestionJFrame extends JFrame implements ActionListener {
 				StringBuilder stringBuilder = new StringBuilder(); 
 				
 				for(int compteurListePerson=0 ; compteurListePerson<Person.size(); compteurListePerson++) {
-					stringBuilder.append(setFixedLenght(Person.get(compteurListePerson).getDepartement()));
-					stringBuilder.append(setFixedLenght(Person.get(compteurListePerson).getPrenom()));
-					stringBuilder.append(setFixedLenght(Person.get(compteurListePerson).getNom()));
-					stringBuilder.append(setFixedLenght(Person.get(compteurListePerson).getSexe()));
-					stringBuilder.append(setFixedLenght(Person.get(compteurListePerson).getDateddMMyyyy()));
-					stringBuilder.append(setFixedLenght(Person.get(compteurListePerson).getEmail()));
+					stringBuilder.append(setFixedLenght("  "+Person.get(compteurListePerson).getDepartement()));
+					stringBuilder.append(setFixedLenght("  "+Person.get(compteurListePerson).getPrenom()));
+					stringBuilder.append(setFixedLenght("  "+Person.get(compteurListePerson).getNom()));
+					stringBuilder.append(setFixedLenght("  "+Person.get(compteurListePerson).getSexe()));
+					stringBuilder.append(setFixedLenght("  "+Person.get(compteurListePerson).getDateddMMyyyy()));
+					stringBuilder.append(setFixedLenght("  "+Person.get(compteurListePerson).getEmail()));
 					stringBuilder.append("\n");
 				}
+				
+				System.out.println(stringBuilder);
 				 
 			}
 		}
@@ -157,12 +158,6 @@ public class GestionJFrame extends JFrame implements ActionListener {
 	
 	
 	
-	
-	
-	
-	
-	
-	
 	//------ Création du bouton magasin------// 
 	
 	public JButton Magasin(){
@@ -173,17 +168,18 @@ public class GestionJFrame extends JFrame implements ActionListener {
 		 
 		 @Override
 			public void actionPerformed (ActionEvent e) {
-			 
+			 // --- import des éléments dans le magasin
 			 if (mag.isEmpty()){
 				 
-					mag.AjouterProduit("HP","Elitebook 850 G7");
-					mag.AjouterProduit("HP","Elitebook 830 G7 X360");
-					mag.AjouterProduit("Dell","Inspiron 15 3000");
-					mag.AjouterProduit("Dell","XPS 13");
-					mag.AjouterProduit("Dell","XPS 15");
-					mag.AjouterProduit("Lenovo","Thinkpad E15 G2");
-					mag.AjouterProduit("Lenovo","IdeaPad 3 14IIL05 81WD00B2MH");
+					mag.AjouterProduit(1,"HP","Elitebook 850 G7");
+					mag.AjouterProduit(2,"HP","Elitebook 830 G7 X360");
+					mag.AjouterProduit(3,"Dell","Inspiron 15 3000");
+					mag.AjouterProduit(4,"Dell","XPS 13");
+					mag.AjouterProduit(5,"Dell","XPS 15");
+					mag.AjouterProduit(6,"Lenovo","Thinkpad E15 G2");
+					mag.AjouterProduit(7,"Lenovo","IdeaPad 3 14IIL05 81WD00B2MH");
 					mag.ListeMap();
+					//System.out.println(mag.getProduit(1));
 				
 			 }
 			 else {
@@ -194,5 +190,39 @@ public class GestionJFrame extends JFrame implements ActionListener {
 			}
 			
 	 }
+	 
+	//------ Création du bouton emprunt du matériel ------// 
+	 
+	 public JButton Emprunt() {
+		 return btnPret;
+	 }
+	 
+	 private class Emprunt implements ActionListener{
+		 
+		 @Override
+			public void actionPerformed (ActionEvent e) {
+			 
+			}
+	 }
 		
+	//------ Création du bouton de retour d'un article ------// 
+	 
+	 public JButton RetourEmprunt() {
+		 return btnRetour;
+	 }
+	 
+	 private class RetourEmprunt implements ActionListener{
+		 
+		 @Override
+			public void actionPerformed (ActionEvent e) {
+			 
+			}
+	 }
+	 
+	//------ Création du bouton de fermeture de la fenêtre ------//
+	 
+	 /*public JButton Fermer() {		//--- n'est pas nécessaire 
+		 return btnClose;
+	 }*/
+	 
 }
