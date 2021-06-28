@@ -16,9 +16,9 @@ public class Emprunt {
 		return nombre;
 		}
 	 
-	 /*public void setNombre(int nombre) {
+	 public void setNombre(int nombre) {
 		 this.nombre = nombre;
-	 }*/
+	 }
 	
 	  public Personnel getEmprunteur() {
 			return emprunteur;

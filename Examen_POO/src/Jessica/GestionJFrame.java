@@ -303,7 +303,7 @@ public class GestionJFrame extends JFrame {
 				System.out.println("Liste des emprunts");
 				// mettre un stringbuilder pour aligner les colonnes
 				StringBuilder pretcol = new StringBuilder();
-			    for (i = 1; i < pret.size(); i++) {
+			    for (i = 0; i < pret.size(); i++) {
 			    	pretcol.append("N° ");
 			    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
 				   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom(), 12));
@@ -312,21 +312,21 @@ public class GestionJFrame extends JFrame {
 			    		}
 			    // on affiche les emprunts
 			   System.out.println(pretcol.toString());
-					
-				System.out.println("Introduire le numéro d'emprunt à annuler : ");
-				int nbremprunt = Lire.nbre();
+			
+			   System.out.println("Introduire le numéro d'emprunt à annuler : ");
+			   int nbremprunt = Lire.nbre();
 	
 				try { 
 						//si nombre de l'emprunt = nombre saisi
-						if(pret.get(i).getNombre() == nbremprunt-1) {
+						if(pret.get(i).getNombre() == nbremprunt) {
 							pret.remove(nbremprunt-1);
 							
-							/*for (i = 1; i< pret.size(); i++) {
-							pret.get(i).setNombre(i);
-							i--;
-							}*/
+							for (i = 1; i< pret.size(); i++) {
+								int id = 1;
+							pret.get(i).setNombre(id);
+							}
 
-							for (i = 1; i < pret.size(); i++) {
+							for (i = 0; i < pret.size(); i++) {
 						    	pretcol.append("N° ");
 						    	pretcol.append(setFixedLength(String.valueOf(pret.get(i).getNombre()), 3));
 							   	pretcol.append(setFixedLength(pret.get(i).getEmprunteur().getNom(), 12));
@@ -342,7 +342,7 @@ public class GestionJFrame extends JFrame {
 						}
 					 }
 				catch (IndexOutOfBoundsException e) {
-					 System.out.println("Erreur, le numéro n'est pas dans la liste d'emprunt, entrez un numéro correct.");
+					 System.out.println("Erreur, le numéro n'est pas dans la liste d'emprunts, entrez un numéro correct.");
 				}
 			}
 		}
